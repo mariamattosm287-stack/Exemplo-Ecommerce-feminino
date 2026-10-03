@@ -2265,3 +2265,14 @@ input, select, textarea {
     font-size: 8px;
   }
 }
+/* ========================================
+   CATEGORY HOVER — PRETO E BRANCO
+   ======================================== */
+
+.category-card img {
+  transition: filter 0.4s ease;
+}
+
+.category-card:hover img {
+  filter: grayscale(100%);
+}
