@@ -7,7 +7,7 @@
   <meta name="description" content="Discover premium activewear that combines elegance and performance. Shop tops, bottoms, and accessories designed for the modern woman.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <style>
@@ -43,6 +43,302 @@
       #hot-right-now .hot-products-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 34px 12px;
+      }
+    }
+
+
+    /* ========================================
+       ESSENCE — EDITORIAL FEATURED PRODUCT
+       ======================================== */
+
+    #feature-banner {
+      width: 100%;
+      background: #f3eee8;
+      padding: 90px 6%;
+      margin: 0;
+    }
+
+    #feature-banner .feature-editorial {
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: center;
+      gap: 72px;
+    }
+
+    /* GALERIA */
+
+    #feature-banner .feature-editorial__gallery {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(0, 0.85fr);
+      gap: 14px;
+      min-width: 0;
+    }
+
+    #feature-banner .feature-editorial__main-image {
+      height: 620px;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 2px;
+      background: #e8e0d8;
+    }
+
+    #feature-banner .feature-editorial__side-images {
+      display: grid;
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      min-width: 0;
+    }
+
+    #feature-banner .feature-editorial__side-image {
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 2px;
+      background: #e8e0d8;
+    }
+
+    #feature-banner .feature-editorial__gallery img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    #feature-banner .feature-editorial__main-image:hover img,
+    #feature-banner .feature-editorial__side-image:hover img {
+      transform: scale(1.025);
+    }
+
+    /* CONTEÚDO */
+
+    #feature-banner .feature-editorial__content {
+      max-width: 600px;
+      padding: 10px 0;
+    }
+
+    #feature-banner .feature-editorial__eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      color: #8c6253;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    #feature-banner .feature-editorial__eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #5a463a;
+      flex-shrink: 0;
+    }
+
+    #feature-banner .feature-editorial__title {
+      margin: 0 0 8px;
+      color: #3e3028;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(38px, 4vw, 58px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+
+    #feature-banner .feature-editorial__subtitle {
+      margin: 0 0 22px;
+      color: #8a7a6f;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: 1px;
+    }
+
+    #feature-banner .feature-editorial__description {
+      max-width: 560px;
+      margin: 0 0 30px;
+      color: #62554c;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    #feature-banner .feature-editorial__price {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    #feature-banner .feature-editorial__price-main {
+      color: #3e3028;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    #feature-banner .feature-editorial__price-installments {
+      color: #8a7a6f;
+      font-size: 12px;
+    }
+
+    #feature-banner .feature-editorial__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    #feature-banner .feature-editorial__button {
+      min-height: 48px;
+      padding: 0 28px;
+      border-radius: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    #feature-banner .feature-editorial__button--primary {
+      background: #4a362c;
+      color: #fff;
+      border: 1px solid #4a362c;
+    }
+
+    #feature-banner .feature-editorial__button--primary:hover {
+      background: #35261f;
+      border-color: #35261f;
+      transform: translateY(-1px);
+    }
+
+    #feature-banner .feature-editorial__button--secondary {
+      background: transparent;
+      color: #3e3028;
+      border: 1px solid #5a463a;
+    }
+
+    #feature-banner .feature-editorial__button--secondary:hover {
+      background: #5a463a;
+      color: #fff;
+    }
+
+    /* TABLET */
+
+    @media (max-width: 1050px) {
+      #feature-banner {
+        padding: 70px 5%;
+      }
+
+      #feature-banner .feature-editorial {
+        gap: 45px;
+      }
+
+      #feature-banner .feature-editorial__main-image {
+        height: 540px;
+      }
+
+      #feature-banner .feature-editorial__title {
+        font-size: clamp(34px, 4vw, 48px);
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 768px) {
+      #feature-banner {
+        padding: 55px 20px;
+      }
+
+      #feature-banner .feature-editorial {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      #feature-banner .feature-editorial__gallery {
+        grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
+        gap: 10px;
+      }
+
+      #feature-banner .feature-editorial__main-image {
+        height: 470px;
+      }
+
+      #feature-banner .feature-editorial__side-images {
+        gap: 10px;
+      }
+
+      #feature-banner .feature-editorial__content {
+        max-width: none;
+        padding: 0;
+      }
+
+      #feature-banner .feature-editorial__title {
+        font-size: 40px;
+      }
+
+      #feature-banner .feature-editorial__description {
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      #feature-banner .feature-editorial__actions {
+        width: 100%;
+      }
+
+      #feature-banner .feature-editorial__button {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #feature-banner {
+        padding: 45px 16px;
+      }
+
+      #feature-banner .feature-editorial {
+        gap: 30px;
+      }
+
+      #feature-banner .feature-editorial__main-image {
+        height: 390px;
+      }
+
+      #feature-banner .feature-editorial__gallery {
+        gap: 8px;
+      }
+
+      #feature-banner .feature-editorial__side-images {
+        gap: 8px;
+      }
+
+      #feature-banner .feature-editorial__eyebrow {
+        font-size: 9px;
+        letter-spacing: 1.4px;
+      }
+
+      #feature-banner .feature-editorial__title {
+        font-size: 34px;
+      }
+
+      #feature-banner .feature-editorial__subtitle {
+        font-size: 14px;
+      }
+
+      #feature-banner .feature-editorial__actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #feature-banner .feature-editorial__button {
+        width: 100%;
       }
     }
   </style>
@@ -595,14 +891,12 @@
       </div>
 
 
-      <!-- PRODUCT GRID -->
       <div class="products-carousel">
 
         <div
           class="hot-products-grid"
           id="products-track"
         >
-
 
           <!-- PRODUCT 1 -->
           <div
@@ -629,7 +923,6 @@
 
               </div>
 
-
               <button
                 class="product-card__quick-add"
                 aria-label="Quick add to cart"
@@ -651,11 +944,9 @@
 
             </div>
 
-
             <h3 class="product-card__title">
               High-Waist Training Leggings
             </h3>
-
 
             <div class="product-card__prices">
 
@@ -668,7 +959,6 @@
               </span>
 
             </div>
-
 
             <div class="product-card__colors">
 
@@ -683,7 +973,6 @@
               ></span>
 
             </div>
-
 
             <div class="product-card__sizes">
 
@@ -720,7 +1009,6 @@
 
               </div>
 
-
               <button
                 class="product-card__quick-add"
                 aria-label="Quick add to cart"
@@ -742,11 +1030,9 @@
 
             </div>
 
-
             <h3 class="product-card__title">
               Ribbed Performance Leggings
             </h3>
-
 
             <div class="product-card__prices">
 
@@ -755,7 +1041,6 @@
               </span>
 
             </div>
-
 
             <div class="product-card__colors">
 
@@ -770,7 +1055,6 @@
               ></span>
 
             </div>
-
 
             <div class="product-card__sizes">
 
@@ -807,7 +1091,6 @@
 
               </div>
 
-
               <button
                 class="product-card__quick-add"
                 aria-label="Quick add to cart"
@@ -829,11 +1112,9 @@
 
             </div>
 
-
             <h3 class="product-card__title">
               High-Rise Athletic Tights
             </h3>
-
 
             <div class="product-card__prices">
 
@@ -842,7 +1123,6 @@
               </span>
 
             </div>
-
 
             <div class="product-card__colors">
 
@@ -857,7 +1137,6 @@
               ></span>
 
             </div>
-
 
             <div class="product-card__sizes">
 
@@ -893,7 +1172,6 @@
 
               </div>
 
-
               <button
                 class="product-card__quick-add"
                 aria-label="Quick add to cart"
@@ -915,11 +1193,9 @@
 
             </div>
 
-
             <h3 class="product-card__title">
               Full-Support Sports Bra
             </h3>
-
 
             <div class="product-card__prices">
 
@@ -928,7 +1204,6 @@
               </span>
 
             </div>
-
 
             <div class="product-card__colors">
 
@@ -943,7 +1218,6 @@
               ></span>
 
             </div>
-
 
             <div class="product-card__sizes">
 
@@ -979,7 +1253,6 @@
 
               </div>
 
-
               <button
                 class="product-card__quick-add"
                 aria-label="Quick add to cart"
@@ -1001,11 +1274,9 @@
 
             </div>
 
-
             <h3 class="product-card__title">
               Breathable Tank Top
             </h3>
-
 
             <div class="product-card__prices">
 
@@ -1018,7 +1289,6 @@
               </span>
 
             </div>
-
 
             <div class="product-card__colors">
 
@@ -1033,7 +1303,6 @@
               ></span>
 
             </div>
-
 
             <div class="product-card__sizes">
 
@@ -1068,7 +1337,6 @@
 
               </div>
 
-
               <button
                 class="product-card__quick-add"
                 aria-label="Quick add to cart"
@@ -1090,11 +1358,9 @@
 
             </div>
 
-
             <h3 class="product-card__title">
               Seamless Yoga Set
             </h3>
-
 
             <div class="product-card__prices">
 
@@ -1103,7 +1369,6 @@
               </span>
 
             </div>
-
 
             <div class="product-card__colors">
 
@@ -1118,7 +1383,6 @@
               ></span>
 
             </div>
-
 
             <div class="product-card__sizes">
 
@@ -1141,48 +1405,118 @@
   </section>
 
 
-  <!-- ===== 6. FEATURE BANNER ===== -->
+  <!-- ===== 6. FEATURED PRODUCT / EDITORIAL ===== -->
   <section
     class="feature-banner fade-in"
     id="feature-banner"
   >
 
-    <div class="feature-banner__image">
+    <div class="feature-editorial">
 
-      <img
-        src="assets/images/feature-banner.jpg"
-        alt="FlexFit Freedom Collection"
-      >
+      <!-- GALERIA DE IMAGENS -->
+      <div class="feature-editorial__gallery">
 
-    </div>
+        <!-- IMAGEM PRINCIPAL -->
+        <div class="feature-editorial__main-image">
 
+          <img
+            src="assets/images/feature-banner.jpg"
+            alt="FlexFit Freedom Collection"
+          >
 
-    <div class="feature-banner__content">
-
-      <span class="feature-banner__label">
-        PERFECT STRETCH, PERFECT FIT
-      </span>
-
-
-      <h2 class="feature-banner__title">
-        DISCOVER<br>
-        FLEXFIT FREEDOM
-      </h2>
+        </div>
 
 
-      <p class="feature-banner__desc">
-        Introducing FlexFit: our breakthrough activewear material.
-        It effortlessly adapts to your form for a tailor-made fit
-        without the squeeze. Move with ease and style in every stride.
-      </p>
+        <!-- DUAS IMAGENS MENORES -->
+        <div class="feature-editorial__side-images">
+
+          <div class="feature-editorial__side-image">
+
+            <img
+              src="assets/images/product-4.jpg"
+              alt="ESSENCE activewear detail"
+            >
+
+          </div>
 
 
-      <a
-        href="collection.html"
-        class="btn btn--dark"
-      >
-        SHOP NOW
-      </a>
+          <div class="feature-editorial__side-image">
+
+            <img
+              src="assets/images/product-6.jpg"
+              alt="ESSENCE activewear collection"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONTEÚDO -->
+      <div class="feature-editorial__content">
+
+        <div class="feature-editorial__eyebrow">
+
+          <span class="feature-editorial__eyebrow-dot"></span>
+
+          DESTAQUE DA SEMANA
+
+        </div>
+
+
+        <h2 class="feature-editorial__title">
+          FlexFit Freedom
+        </h2>
+
+
+        <p class="feature-editorial__subtitle">
+          Performance meets effortless elegance
+        </p>
+
+
+        <p class="feature-editorial__description">
+          Descubra a coleção FlexFit, desenvolvida para acompanhar
+          cada movimento com conforto, sustentação e liberdade.
+          Uma combinação de tecnologia e estética minimalista para
+          você se sentir confiante dentro e fora dos treinos.
+        </p>
+
+
+        <div class="feature-editorial__price">
+
+          <span class="feature-editorial__price-main">
+            $79.00
+          </span>
+
+          <span class="feature-editorial__price-installments">
+            ou 4x sem juros
+          </span>
+
+        </div>
+
+
+        <div class="feature-editorial__actions">
+
+          <a
+            href="product.html"
+            class="feature-editorial__button feature-editorial__button--primary"
+          >
+            COMPRAR AGORA
+          </a>
+
+
+          <a
+            href="product.html"
+            class="feature-editorial__button feature-editorial__button--secondary"
+          >
+            VER DETALHES
+          </a>
+
+        </div>
+
+      </div>
 
     </div>
 
@@ -1227,7 +1561,7 @@
             </svg>
 
             <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
 
             <svg viewBox="0 0 24 24">
@@ -1273,7 +1607,7 @@
           <div class="testimonial-card__stars">
 
             <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
 
             <svg viewBox="0 0 24 24">
@@ -1281,7 +1615,7 @@
             </svg>
 
             <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
 
             <svg viewBox="0 0 24 24">
@@ -1289,7 +1623,7 @@
             </svg>
 
             <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
 
           </div>
@@ -1330,7 +1664,7 @@
           <div class="testimonial-card__stars">
 
             <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
 
             <svg viewBox="0 0 24 24">
@@ -1338,7 +1672,7 @@
             </svg>
 
             <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
 
             <svg viewBox="0 0 24 24">
@@ -1346,7 +1680,7 @@
             </svg>
 
             <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
 
           </div>
