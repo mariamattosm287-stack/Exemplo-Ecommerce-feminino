@@ -913,55 +913,460 @@ input, select, textarea {
 }
 
 /* ========================================
-   6. FEATURE BANNER
+   6. FEATURE BANNER — DESTAQUE DA SEMANA
    ======================================== */
-.feature-banner {
+
+#feature-banner {
+  width: 100%;
+  background: #f3eee8;
+  padding: 88px 6% 92px;
+  margin: 0 0 58px;
+}
+
+#feature-banner .feature-editorial {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 480px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  align-items: center;
+
+  gap: 72px;
 }
 
-.feature-banner__image {
+/* =========================
+   GALERIA
+   ========================= */
+
+#feature-banner .feature-editorial__gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(0, 0.72fr);
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+#feature-banner .feature-editorial__main-image {
+  width: 100%;
+  height: 610px;
+
   overflow: hidden;
+
+  border-radius: 2px;
+
+  background: #e8e0d8;
 }
 
-.feature-banner__image img {
+#feature-banner .feature-editorial__side-images {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+#feature-banner .feature-editorial__side-image {
+  min-height: 0;
+
+  overflow: hidden;
+
+  border-radius: 2px;
+
+  background: #e8e0d8;
+}
+
+#feature-banner .feature-editorial__gallery img {
   width: 100%;
   height: 100%;
+
+  display: block;
+
   object-fit: cover;
+
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.feature-banner__content {
+#feature-banner .feature-editorial__main-image:hover img,
+#feature-banner .feature-editorial__side-image:hover img {
+  transform: scale(1.025);
+}
+
+
+/* =========================
+   CONTEÚDO
+   ========================= */
+
+#feature-banner .feature-editorial__content {
+  width: 100%;
+  max-width: 510px;
+
+  padding: 6px 0;
+}
+
+#feature-banner .feature-editorial__eyebrow {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--space-3xl);
-  background: var(--color-bg-light);
-}
+  align-items: center;
 
-.feature-banner__label {
-  font-size: 12px;
+  gap: 9px;
+
+  margin-bottom: 19px;
+
+  color: #8c6253;
+
+  font-size: 10px;
+  font-weight: 600;
+
   letter-spacing: 2px;
+
   text-transform: uppercase;
-  color: var(--color-text-light);
-  margin-bottom: var(--space-md);
+}
+
+#feature-banner .feature-editorial__eyebrow::before {
+  content: "";
+
+  width: 30px;
+  height: 1px;
+
+  flex-shrink: 0;
+
+  background: #c8b5a3;
+}
+
+#feature-banner .feature-editorial__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #5a463a;
+}
+
+#feature-banner .feature-editorial__title {
+  margin: 0 0 9px;
+
+  color: #3e3028;
+
+  font-family: "Playfair Display", Georgia, serif;
+
+  font-size: clamp(42px, 4.3vw, 62px);
+
   font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: -1.6px;
 }
 
-.feature-banner__title {
-  font-size: clamp(26px, 3.5vw, 40px);
-  font-weight: 700;
-  line-height: 1.15;
-  text-transform: uppercase;
-  margin-bottom: var(--space-lg);
-}
+#feature-banner .feature-editorial__subtitle {
+  margin: 0 0 25px;
 
-.feature-banner__desc {
+  color: #8a7a6f;
+
   font-size: 15px;
-  line-height: 1.7;
-  color: var(--color-text-light);
-  margin-bottom: var(--space-xl);
-  max-width: 420px;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.8px;
+}
+
+#feature-banner .feature-editorial__description {
+  max-width: 500px;
+
+  margin: 0 0 31px;
+
+  color: #62554c;
+
+  font-size: 13px;
+
+  line-height: 1.85;
+}
+
+
+/* =========================
+   PREÇO
+   ========================= */
+
+#feature-banner .feature-editorial__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  padding-top: 19px;
+
+  margin-bottom: 28px;
+
+  border-top: 1px solid rgba(90, 70, 58, 0.16);
+}
+
+#feature-banner .feature-editorial__price-main {
+  color: #3e3028;
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+#feature-banner .feature-editorial__price-installments {
+  color: #8a7a6f;
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   BOTÕES
+   ========================= */
+
+#feature-banner .feature-editorial__actions {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+#feature-banner .feature-editorial__button {
+  min-height: 46px;
+
+  padding: 0 25px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border-radius: 2px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.9px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+#feature-banner .feature-editorial__button--primary {
+  background: #4a362c;
+
+  color: #fff;
+
+  border: 1px solid #4a362c;
+}
+
+#feature-banner .feature-editorial__button--primary:hover {
+  background: #35261f;
+
+  border-color: #35261f;
+
+  transform: translateY(-1px);
+}
+
+#feature-banner .feature-editorial__button--secondary {
+  background: transparent;
+
+  color: #3e3028;
+
+  border: 1px solid #5a463a;
+}
+
+#feature-banner .feature-editorial__button--secondary:hover {
+  background: #5a463a;
+
+  color: #fff;
+}
+
+
+/* ========================================
+   FEATURE BANNER — TABLET
+   ======================================== */
+
+@media (max-width: 1050px) {
+
+  #feature-banner {
+    padding: 72px 5% 78px;
+
+    margin-bottom: 48px;
+  }
+
+  #feature-banner .feature-editorial {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(300px, 0.82fr);
+
+    gap: 48px;
+  }
+
+  #feature-banner .feature-editorial__gallery {
+    grid-template-columns:
+      minmax(0, 1.58fr)
+      minmax(0, 0.72fr);
+  }
+
+  #feature-banner .feature-editorial__main-image {
+    height: 530px;
+  }
+
+  #feature-banner .feature-editorial__title {
+    font-size: clamp(38px, 4vw, 50px);
+  }
+
+}
+
+
+/* ========================================
+   FEATURE BANNER — MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+
+  #feature-banner {
+    padding: 52px 20px 58px;
+
+    margin-bottom: 42px;
+  }
+
+  #feature-banner .feature-editorial {
+    grid-template-columns: 1fr;
+
+    gap: 36px;
+  }
+
+  #feature-banner .feature-editorial__gallery {
+    grid-template-columns:
+      minmax(0, 1.55fr)
+      minmax(0, 0.82fr);
+
+    gap: 9px;
+  }
+
+  #feature-banner .feature-editorial__main-image {
+    height: 470px;
+  }
+
+  #feature-banner .feature-editorial__side-images {
+    gap: 9px;
+  }
+
+  #feature-banner .feature-editorial__content {
+    max-width: none;
+
+    padding: 0;
+  }
+
+  #feature-banner .feature-editorial__eyebrow {
+    margin-bottom: 16px;
+  }
+
+  #feature-banner .feature-editorial__title {
+    font-size: 40px;
+  }
+
+  #feature-banner .feature-editorial__subtitle {
+    margin-bottom: 20px;
+
+    font-size: 14px;
+  }
+
+  #feature-banner .feature-editorial__description {
+    margin-bottom: 28px;
+
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+  #feature-banner .feature-editorial__price {
+    padding-top: 18px;
+
+    margin-bottom: 24px;
+  }
+
+  #feature-banner .feature-editorial__actions {
+    width: 100%;
+  }
+
+  #feature-banner .feature-editorial__button {
+    flex: 1;
+  }
+
+}
+
+
+/* ========================================
+   FEATURE BANNER — MOBILE PEQUENO
+   ======================================== */
+
+@media (max-width: 480px) {
+
+  #feature-banner {
+    padding: 44px 16px 48px;
+
+    margin-bottom: 36px;
+  }
+
+  #feature-banner .feature-editorial {
+    gap: 30px;
+  }
+
+  #feature-banner .feature-editorial__gallery {
+    gap: 7px;
+  }
+
+  #feature-banner .feature-editorial__side-images {
+    gap: 7px;
+  }
+
+  #feature-banner .feature-editorial__main-image {
+    height: 390px;
+  }
+
+  #feature-banner .feature-editorial__eyebrow {
+    font-size: 9px;
+
+    letter-spacing: 1.4px;
+  }
+
+  #feature-banner .feature-editorial__eyebrow::before {
+    width: 22px;
+  }
+
+  #feature-banner .feature-editorial__title {
+    font-size: 34px;
+  }
+
+  #feature-banner .feature-editorial__subtitle {
+    font-size: 14px;
+  }
+
+  #feature-banner .feature-editorial__actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  #feature-banner .feature-editorial__button {
+    width: 100%;
+
+    flex: none;
+  }
+
 }
 
 /* ========================================
