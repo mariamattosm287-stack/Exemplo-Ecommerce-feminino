@@ -2950,3 +2950,62 @@ input, select, textarea {
   min-width: 0 !important;
   max-width: none !important;
 }
+/* =========================================================
+   ESSENCE — HOME / HOT RIGHT NOW
+   3 PRODUTOS GRANDES POR LINHA
+   ========================================================= */
+
+section#hot-right-now .products-carousel {
+  width: 100%;
+  overflow: visible;
+}
+
+section#hot-right-now .products-carousel__track {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 70px 30px !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+section#hot-right-now .product-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+section#hot-right-now .product-card__image {
+  width: 100%;
+  aspect-ratio: 0.78;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  section#hot-right-now .products-carousel__track {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 50px 18px !important;
+  }
+
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  section#hot-right-now .products-carousel__track {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 42px 12px !important;
+  }
+
+}
