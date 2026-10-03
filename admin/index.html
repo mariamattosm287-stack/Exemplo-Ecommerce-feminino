@@ -3825,7 +3825,23 @@
   ></div>
 
   <!-- Mantém o JS original -->
-  <script src="/admin/admin.js"></script>
+  <!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  window.supabaseClient = window.supabase.createClient(
+    "https://gtmjxwcvqvtkuqzkvfsh.supabase.co",
+    "COLE_AQUI_A_PUBLISHABLE_KEY_QUE_VOCE_ME_MANDOU"
+  );
+
+  console.log("Supabase conectado ao Admin ✅");
+</script>
+
+<!-- ADMIN -->
+<script src="/admin/admin.js?v=5"></script>
+
+</body>
+</html>
 
   <!-- =====================================================
        PRODUTOS
