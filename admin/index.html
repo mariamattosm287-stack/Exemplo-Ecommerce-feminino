@@ -6097,59 +6097,264 @@
      SALVAR PRODUTO
      ===================================================== */
 
-  window.saveProduct =
-    async function () {
+ window.saveProduct = async function () {
 
-      if (
-        !window.supabaseClient
-      ) {
+  const payload = basePayload();
 
-        showToastSafe(
-          "Supabase não está conectado. ⚠️"
+  if (!payload) {
+    return;
+  }
+
+  const button =
+    $("produto-save-button");
+
+  const originalText =
+    button?.textContent || "Salvar";
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Salvando...";
+  }
+
+  try {
+
+    /* =========================================
+       EDITANDO PRODUTO
+       ========================================= */
+
+    if (editingId) {
+
+      const currentProduct =
+        products.find(
+          item =>
+            String(item.id) ===
+            String(editingId)
         );
 
-        return;
+      const localUpdated = {
+        ...currentProduct,
+        ...payload.base,
+        ...payload.extras
+      };
+
+      const index =
+        products.findIndex(
+          item =>
+            String(item.id) ===
+            String(editingId)
+        );
+
+      if (index >= 0) {
+        products[index] =
+          localUpdated;
+      }
+
+      /* ATUALIZA O PAINEL NA HORA */
+      renderProducts();
+
+      const {
+        data,
+        error
+      } = await updateProduct(
+        editingId,
+        payload.base,
+        payload.extras,
+        currentProduct
+      );
+
+      if (error) {
+
+        console.error(
+          "Erro Supabase ao editar:",
+          error
+        );
+
+        showToastSafe(
+          "Produto atualizado no painel, mas não sincronizou com o Supabase. ⚠️"
+        );
+
+      } else {
+
+        if (index >= 0) {
+          products[index] = data;
+        }
+
+        renderProducts();
+
+        showToastSafe(
+          "Produto atualizado com sucesso! ✅"
+        );
 
       }
 
+    }
 
-      const payload =
-        basePayload();
+    /* =========================================
+       CRIANDO PRODUTO
+       ========================================= */
+
+    else {
+
+      const temporaryProduct = {
+
+        id:
+          `local-${Date.now()}`,
+
+        sku:
+          makeSku(
+            payload.base.name
+          ),
+
+        ...payload.base,
+        ...payload.extras,
+
+        created_at:
+          new Date().toISOString()
+
+      };
 
 
-      if (!payload) {
+      /* COLOCA NO PAINEL IMEDIATAMENTE */
+      products.unshift(
+        temporaryProduct
+      );
 
-        return;
+      renderProducts();
+
+
+      console.log(
+        "Produto adicionado ao painel ✅",
+        temporaryProduct
+      );
+
+
+      /* AGORA SINCRONIZA COM SUPABASE */
+
+      const {
+        data,
+        error
+      } = await insertProduct(
+        payload.base,
+        payload.extras
+      );
+
+
+      if (error) {
+
+        console.error(
+          "Erro ao salvar no Supabase:",
+          error
+        );
+
+        showToastSafe(
+          "Produto apareceu no painel, mas não sincronizou com o Supabase. ⚠️"
+        );
 
       }
 
+      else {
 
-      const button =
-        $("produto-save-button");
+        /*
+         * Troca o produto temporário
+         * pelo produto verdadeiro vindo do Supabase.
+         */
 
-
-      const originalText =
-
-        button?.textContent
-
-        ||
-
-        "Salvar";
-
-
-      if (button) {
-
-        button.disabled =
-          true;
+        const temporaryIndex =
+          products.findIndex(
+            item =>
+              String(item.id) ===
+              String(temporaryProduct.id)
+          );
 
 
-        button.textContent =
-          "Salvando...";
+        if (
+          temporaryIndex >= 0
+        ) {
+
+          products[
+            temporaryIndex
+          ] = data;
+
+        }
+
+
+        renderProducts();
+
+
+        console.log(
+          "Produto salvo no Supabase ✅",
+          data
+        );
+
+
+        showToastSafe(
+          "Produto criado com sucesso! ✅"
+        );
 
       }
 
+    }
 
-      try {
+
+    /* FECHA MODAL */
+
+    if (
+      typeof window.closeModal
+      ===
+      "function"
+    ) {
+
+      window.closeModal(
+        "modal-produto"
+      );
+
+    }
+
+    else {
+
+      $("modal-produto")
+        ?.classList
+        .remove(
+          "active"
+        );
+
+    }
+
+
+    resetProductForm();
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Erro ao salvar produto:",
+      error
+    );
+
+
+    showToastSafe(
+      "O produto entrou no painel, mas ocorreu um erro na sincronização. ⚠️"
+    );
+
+  }
+
+  finally {
+
+    if (button) {
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        originalText;
+
+    }
+
+  }
+
+};
+
 
         /* ===============================================
            EDITANDO
