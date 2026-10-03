@@ -3417,3 +3417,19 @@ section#hot-right-now .product-card__image {
   }
 
 }
+/* ========================================
+   TIPOGRAFIA GLOBAL — MONTSERRAT
+   ======================================== */
+
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Montserrat", sans-serif;
+}
+
+body * {
+  font-family: inherit;
+}
