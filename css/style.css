@@ -580,37 +580,20 @@ input, select, textarea {
 /* ========================================
    4. SHOP THE ESSENTIALS
    ======================================== */
-.section {
-  padding: var(--space-4xl) 0;
+
+#essentials {
+  padding: 0;
+  width: 100%;
 }
 
-.section__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-xl);
+#essentials .container {
+  max-width: none;
+  width: 100%;
+  padding: 0;
 }
 
-.section__title {
-  font-size: clamp(22px, 3vw, 32px);
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  text-transform: uppercase;
-}
-
-.section__link {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: var(--color-text);
-}
-
-.section__link:hover {
-  color: var(--color-text-light);
+#essentials .section__header {
+  display: none;
 }
 
 /* ========================================
@@ -619,15 +602,15 @@ input, select, textarea {
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
   width: 100%;
 }
 
 .category-card {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 3 / 4.7;
+  aspect-ratio: 3 / 4;
   cursor: pointer;
   background: var(--color-bg-light);
 }
@@ -650,23 +633,23 @@ input, select, textarea {
   background:
     linear-gradient(
       to top,
-      rgba(0,0,0,0.68) 0%,
-      rgba(0,0,0,0.38) 25%,
-      rgba(0,0,0,0.08) 52%,
-      transparent 72%
+      rgba(0,0,0,0.72) 0%,
+      rgba(0,0,0,0.48) 18%,
+      rgba(0,0,0,0.16) 42%,
+      transparent 70%
     );
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 0 20px 38px;
+  padding: 0 20px 55px;
   text-align: center;
 }
 
 .category-card__title {
   color: var(--color-white);
-  font-size: clamp(18px, 2vw, 25px);
-  font-weight: 500;
-  letter-spacing: 2px;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 400;
+  letter-spacing: 1px;
   line-height: 1.2;
   text-transform: uppercase;
   text-shadow: 0 2px 8px rgba(0,0,0,0.25);
@@ -1943,6 +1926,10 @@ input, select, textarea {
   .product-detail__info {
     grid-column: 1 / -1;
   }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -1982,20 +1969,20 @@ input, select, textarea {
   }
 
   .categories-grid {
-    grid-template-columns: 1fr;
-    gap: 4px;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
   }
 
   .category-card {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 4;
   }
 
   .category-card__overlay {
-    padding: 0 20px 28px;
+    padding: 0 16px 30px;
   }
 
   .category-card__title {
-    font-size: 19px;
+    font-size: 17px;
   }
 
   .product-card {
@@ -2070,5 +2057,13 @@ input, select, textarea {
 
   .newsletter__submit {
     padding: 14px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    aspect-ratio: 4 / 5;
   }
 }
