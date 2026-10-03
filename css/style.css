@@ -2930,3 +2930,23 @@ input, select, textarea {
   }
 
 }
+/* =========================================================
+   FORÇAR GRID PREMIUM — 3 PRODUTOS POR LINHA
+   ========================================================= */
+
+#hot-right-now .products-carousel__track {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 70px 30px !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  overflow: visible !important;
+}
+
+#hot-right-now .product-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
