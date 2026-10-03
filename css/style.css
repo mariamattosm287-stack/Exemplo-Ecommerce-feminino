@@ -11,24 +11,24 @@
 
 :root {
   /* Colors */
-  --color-black: #000000;
+  --color-black: #4A392F;
   --color-white: #ffffff;
-  --color-bg: #ffffff;
-  --color-text: #1a1a1a;
-  --color-text-light: #6b6b6b;
-  --color-border: #e5e5e5;
-  --color-border-dark: #d0d0d0;
-  --color-accent: #000000;
-  --color-accent-hover: #333333;
-  --color-red: #e53935;
-  --color-yellow: #fbc02d;
-  --color-blue: #1976d2;
-  --color-green: #43a047;
-  --color-overlay: rgba(0, 0, 0, 0.35);
-  --color-bg-light: #f7f7f7;
-  --color-badge-red: #e53935;
-  --color-badge-blue: #1565c0;
-  --color-star: #fbc02d;
+  --color-bg: #FAF8F5;
+  --color-text: #3F332C;
+  --color-text-light: #8A7A6F;
+  --color-border: #E5DDD5;
+  --color-border-dark: #D3C6BB;
+  --color-accent: #5A463A;
+  --color-accent-hover: #3E3028;
+  --color-red: #B85C52;
+  --color-yellow: #C6A15B;
+  --color-blue: #6E8491;
+  --color-green: #71836D;
+  --color-overlay: rgba(62, 48, 40, 0.35);
+  --color-bg-light: #F3EEE8;
+  --color-badge-red: #A95B51;
+  --color-badge-blue: #6E8491;
+  --color-star: #C6A15B;
 
   /* Typography */
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -55,9 +55,9 @@
   --transition-slow: 0.5s ease;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --shadow-sm: 0 1px 3px rgba(62,48,40,0.08);
+  --shadow-md: 0 4px 12px rgba(62,48,40,0.10);
+  --shadow-lg: 0 8px 30px rgba(62,48,40,0.12);
 }
 
 html {
@@ -388,7 +388,7 @@ input, select, textarea {
   min-height: 500px;
   max-height: 750px;
   overflow: hidden;
-  background: #f0f0f0;
+  background: var(--color-bg-light);
 }
 
 .hero__slides {
@@ -420,8 +420,8 @@ input, select, textarea {
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(0,0,0,0.45) 0%,
-    rgba(0,0,0,0.15) 50%,
+    rgba(62,48,40,0.45) 0%,
+    rgba(62,48,40,0.15) 50%,
     transparent 100%
   );
   display: flex;
@@ -633,9 +633,9 @@ input, select, textarea {
   background:
     linear-gradient(
       to top,
-      rgba(0,0,0,0.72) 0%,
-      rgba(0,0,0,0.48) 18%,
-      rgba(0,0,0,0.16) 42%,
+      rgba(62,48,40,0.78) 0%,
+      rgba(62,48,40,0.50) 18%,
+      rgba(62,48,40,0.18) 42%,
       transparent 70%
     );
   display: flex;
@@ -767,7 +767,7 @@ input, select, textarea {
 
 .badge--popular {
   background: var(--color-yellow);
-  color: var(--color-black);
+  color: var(--color-text);
 }
 
 .product-card__quick-add {
@@ -865,7 +865,7 @@ input, select, textarea {
   position: absolute;
   inset: 1px;
   border-radius: 50%;
-  border: 1.5px solid rgba(0,0,0,0.08);
+  border: 1.5px solid rgba(62,48,40,0.08);
 }
 
 .product-card__sizes {
@@ -1378,7 +1378,7 @@ input, select, textarea {
   position: absolute;
   inset: 2px;
   border-radius: 50%;
-  border: 1.5px solid rgba(0,0,0,0.08);
+  border: 1.5px solid rgba(62,48,40,0.08);
 }
 
 .product-detail__size-header {
@@ -1661,7 +1661,7 @@ input, select, textarea {
 .cart-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(62,48,40,0.5);
   z-index: 200;
   opacity: 0;
   visibility: hidden;
@@ -1840,7 +1840,7 @@ input, select, textarea {
 .search-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: rgba(62,48,40,0.88);
   z-index: 200;
   display: flex;
   align-items: flex-start;
@@ -2067,6 +2067,7 @@ input, select, textarea {
     aspect-ratio: 4 / 5;
   }
 }
+
 /* ========================================
    ESSENCE — BENEFITS BAR
    ======================================== */
@@ -2107,7 +2108,7 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
 
-  color: #222;
+  color: var(--color-black);
 }
 
 .benefit-item__icon svg {
@@ -2155,7 +2156,6 @@ input, select, textarea {
   flex-shrink: 0;
 }
 
-
 /* ========================================
    BENEFITS BAR — TABLET
    ======================================== */
@@ -2187,7 +2187,6 @@ input, select, textarea {
     font-size: 11px;
   }
 }
-
 
 /* ========================================
    BENEFITS BAR — MOBILE
@@ -2230,7 +2229,6 @@ input, select, textarea {
   }
 }
 
-
 /* ========================================
    BENEFITS BAR — VERY SMALL SCREENS
    ======================================== */
@@ -2265,6 +2263,7 @@ input, select, textarea {
     font-size: 8px;
   }
 }
+
 /* ========================================
    CATEGORY HOVER — PRETO E BRANCO
    ======================================== */
@@ -2276,6 +2275,7 @@ input, select, textarea {
 .category-card:hover img {
   filter: grayscale(100%);
 }
+
 /* =========================================================
    ESSENCE — PREMIUM PRODUCT GRID
    ========================================================= */
@@ -2315,7 +2315,7 @@ input, select, textarea {
   width: 100%;
   aspect-ratio: 0.82;
   overflow: hidden;
-  background: #f5f5f3;
+  background: var(--color-bg-light);
   margin-bottom: 18px;
 }
 
@@ -2371,7 +2371,7 @@ input, select, textarea {
   justify-content: center;
 
   background: rgba(255, 255, 255, 0.96) !important;
-  color: #111 !important;
+  color: var(--color-black) !important;
 
   border: none !important;
   border-radius: 50% !important;
@@ -2391,8 +2391,8 @@ input, select, textarea {
 }
 
 .product-card__quick-add:hover {
-  background: #111 !important;
-  color: #fff !important;
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 .product-card__quick-add svg {
@@ -2411,7 +2411,7 @@ input, select, textarea {
   letter-spacing: 0.35px;
   text-transform: uppercase;
 
-  color: #171717 !important;
+  color: var(--color-text) !important;
 }
 
 /* PREÇOS */
@@ -2425,11 +2425,11 @@ input, select, textarea {
 .product-card__price {
   font-size: 12px !important;
   font-weight: 500 !important;
-  color: #171717 !important;
+  color: var(--color-text) !important;
 }
 
 .product-card__price--original {
-  color: #999 !important;
+  color: var(--color-text-light) !important;
   text-decoration: line-through;
   font-weight: 400 !important;
 }
@@ -2448,13 +2448,13 @@ input, select, textarea {
 
   border-radius: 50% !important;
 
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(62,48,40,0.12) !important;
 
   box-shadow: none !important;
 }
 
 .color-swatch.active {
-  outline: 1px solid #111 !important;
+  outline: 1px solid var(--color-black) !important;
   outline-offset: 2px;
 }
 
@@ -2467,7 +2467,7 @@ input, select, textarea {
 
 .size-option {
   font-size: 9px !important;
-  color: #888 !important;
+  color: var(--color-text-light) !important;
   letter-spacing: 0.8px;
 }
 
@@ -2569,6 +2569,7 @@ input, select, textarea {
   }
 
 }
+
 /* =========================================================
    ESSENCE — PREMIUM FASHION PRODUCT GRID
    ========================================================= */
@@ -2632,7 +2633,7 @@ input, select, textarea {
 
   margin-bottom: 20px;
 
-  background: #f3f3f1;
+  background: var(--color-bg-light);
 }
 
 .product-card__image img {
@@ -2676,8 +2677,8 @@ input, select, textarea {
 
   padding: 6px 9px !important;
 
-  background: #111 !important;
-  color: #fff !important;
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 
   border-radius: 0 !important;
 
@@ -2694,8 +2695,8 @@ input, select, textarea {
 .badge--save,
 .badge--new,
 .badge--popular {
-  background: #111 !important;
-  color: #fff !important;
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 /* =========================================================
@@ -2719,7 +2720,7 @@ input, select, textarea {
   border-radius: 50% !important;
 
   background: rgba(255, 255, 255, 0.96) !important;
-  color: #111 !important;
+  color: var(--color-black) !important;
 
   opacity: 0;
   transform: translateY(10px);
@@ -2739,8 +2740,8 @@ input, select, textarea {
 }
 
 .product-card__quick-add:hover {
-  background: #111 !important;
-  color: #fff !important;
+  background: var(--color-black) !important;
+  color: var(--color-white) !important;
 }
 
 .product-card__quick-add svg {
@@ -2755,7 +2756,7 @@ input, select, textarea {
 .product-card__title {
   margin: 0 0 9px !important;
 
-  color: #111 !important;
+  color: var(--color-text) !important;
 
   font-size: 11px !important;
   font-weight: 500 !important;
@@ -2777,14 +2778,14 @@ input, select, textarea {
 }
 
 .product-card__price {
-  color: #111 !important;
+  color: var(--color-text) !important;
 
   font-size: 12px !important;
   font-weight: 500 !important;
 }
 
 .product-card__price--original {
-  color: #999 !important;
+  color: var(--color-text-light) !important;
 
   font-weight: 400 !important;
 
@@ -2812,13 +2813,13 @@ input, select, textarea {
 
   border-radius: 50% !important;
 
-  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(62,48,40,0.15) !important;
 
   box-shadow: none !important;
 }
 
 .color-swatch.active {
-  outline: 1px solid #111 !important;
+  outline: 1px solid var(--color-black) !important;
   outline-offset: 2px;
 }
 
@@ -2930,6 +2931,7 @@ input, select, textarea {
   }
 
 }
+
 /* =========================================================
    FORÇAR GRID PREMIUM — 3 PRODUTOS POR LINHA
    ========================================================= */
@@ -2950,6 +2952,7 @@ input, select, textarea {
   min-width: 0 !important;
   max-width: none !important;
 }
+
 /* =========================================================
    ESSENCE — HOME / HOT RIGHT NOW
    3 PRODUTOS GRANDES POR LINHA
