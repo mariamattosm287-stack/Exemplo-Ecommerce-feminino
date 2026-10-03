@@ -3823,1758 +3823,2553 @@
       border-left:4px solid #ec4899;
     "
   ></div>
+<!-- =====================================================
+     JAVASCRIPT PRINCIPAL DO ADMIN
+     ===================================================== -->
 
-  <!-- Mantém o JS original -->
-  <!-- SUPABASE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/admin/admin.js?v=6"></script>
+
+
+<!-- =====================================================
+     PRODUTOS
+     CRIAR / EDITAR / SALVAR / EXCLUIR
+     ===================================================== -->
 
 <script>
-  window.supabaseClient = window.supabase.createClient(
-    "https://gtmjxwcvqvtkuqzkvfsh.supabase.co",
-    "sb_publishable_zBG1ioEJeME73TQtHhQnlw_eGhOasAc"
-  );
 
-  console.log("Supabase conectado ao Admin ✅");
-</script>
+(function () {
 
-<!-- ADMIN -->
-<script src="/admin/admin.js?v=5"></script>
+  /*
+   * Aqui vamos continuar usando o navegador
+   * temporariamente.
+   *
+   * Depois que confirmarmos que o painel está
+   * criando os produtos normalmente, trocaremos
+   * esta parte pelo Supabase.
+   */
 
-</body>
-</html>
-
-  <!-- =====================================================
-       PRODUTOS
-       CRIAR / EDITAR / SALVAR / EXCLUIR
-       ===================================================== -->
-
-  <script>
-
-    (function () {
-
-      const STORAGE_KEY = "essence-admin-products-v1";
-
-      let products = [];
-
-      let editingId = null;
-
-      let pendingImage = "";
-
-      const $ = (id) => document.getElementById(id);
+  const STORAGE_KEY = "essence-v3-products";
+  const OLD_STORAGE_KEY = "essence-admin-products-v1";
 
 
-      /* ===============================
-         SEGURANÇA DE TEXTO
-         =============================== */
+  let products = [];
 
-      function escapeHtml(value) {
+  let editingId = null;
 
-        return String(value ?? "")
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-
-      }
+  let pendingImage = "";
 
 
-      /* ===============================
-         DINHEIRO
-         =============================== */
+  const $ = (id) => document.getElementById(id);
 
-      function parseMoney(value) {
 
-        if (typeof value === "number") {
-          return value;
-        }
 
-        const normalized = String(value ?? "")
-          .replace(/[^\d,.-]/g, "")
+  /* =====================================================
+     PROTEÇÃO DE TEXTO
+     ===================================================== */
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+
+      .replace(/&/g, "&amp;")
+
+      .replace(/</g, "&lt;")
+
+      .replace(/>/g, "&gt;")
+
+      .replace(/"/g, "&quot;")
+
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+
+  /* =====================================================
+     VALORES / DINHEIRO
+     ===================================================== */
+
+  function parseMoney(value) {
+
+    if (typeof value === "number") {
+
+      return Number.isFinite(value)
+        ? value
+        : 0;
+
+    }
+
+
+    let text =
+      String(value ?? "")
+        .trim()
+        .replace(/R\$/gi, "")
+        .replace(/\s/g, "");
+
+
+    if (!text) {
+
+      return 0;
+
+    }
+
+
+    /*
+     * Aceita tanto:
+     *
+     * 59.90
+     *
+     * quanto:
+     *
+     * 59,90
+     */
+
+    if (text.includes(",")) {
+
+      text =
+        text
           .replace(/\./g, "")
           .replace(",", ".");
 
-        const number = Number(normalized);
+    }
 
-        return Number.isFinite(number)
-          ? number
-          : 0;
+
+    const number =
+      Number(
+        text.replace(/[^\d.-]/g, "")
+      );
+
+
+    return Number.isFinite(number)
+      ? number
+      : 0;
+
+  }
+
+
+
+  function formatMoney(value) {
+
+    return Number(value || 0)
+
+      .toLocaleString(
+
+        "pt-BR",
+
+        {
+
+          style: "currency",
+
+          currency: "BRL"
+
+        }
+
+      );
+
+  }
+
+
+
+  /* =====================================================
+     CRIAR SKU
+     ===================================================== */
+
+  function makeSku(name, id) {
+
+    const base =
+
+      String(name || "PROD")
+
+        .normalize("NFD")
+
+        .replace(
+          /[\u0300-\u036f]/g,
+          ""
+        )
+
+        .toUpperCase()
+
+        .replace(
+          /[^A-Z0-9]+/g,
+          "-"
+        )
+
+        .replace(
+          /^-|-$/g,
+          ""
+        )
+
+        .slice(
+          0,
+          16
+        )
+
+      ||
+
+      "PROD";
+
+
+    return `${base}-${String(id).slice(-4)}`;
+
+  }
+
+
+
+  /* =====================================================
+     TOAST
+     ===================================================== */
+
+  function showToastSafe(message) {
+
+    /*
+     * Se o admin.js já tiver a função showToast,
+     * utilizamos ela.
+     */
+
+    if (
+      typeof window.showToast
+      ===
+      "function"
+    ) {
+
+      window.showToast(message);
+
+      return;
+
+    }
+
+
+    /*
+     * Caso contrário,
+     * usa nosso próprio toast.
+     */
+
+    const toast =
+      $("toast");
+
+
+    if (!toast) {
+
+      return;
+
+    }
+
+
+    toast.textContent =
+      message;
+
+
+    toast.style.transform =
+      "translateY(0)";
+
+
+    toast.style.opacity =
+      "1";
+
+
+    clearTimeout(
+      window.__produtoToastTimer
+    );
+
+
+    window.__produtoToastTimer =
+
+      setTimeout(
+
+        () => {
+
+          toast.style.transform =
+            "translateY(80px)";
+
+
+          toast.style.opacity =
+            "0";
+
+        },
+
+        2600
+
+      );
+
+  }
+
+
+
+  /* =====================================================
+     NORMALIZAR PRODUTO
+     ===================================================== */
+
+  function normalizeProduct(product) {
+
+    const published =
+
+      product?.published
+
+      ??
+
+      product?.active
+
+      ??
+
+      true;
+
+
+    const salePrice =
+
+      parseMoney(
+
+        product?.salePrice
+
+        ??
+
+        product?.promo
+
+        ??
+
+        0
+
+      );
+
+
+    const id =
+
+      product?.id
+
+      ||
+
+      `prod-${Date.now()}-${Math.random()
+        .toString(16)
+        .slice(2)}`;
+
+
+    return {
+
+      ...product,
+
+
+      id,
+
+
+      name:
+
+        String(
+          product?.name
+          ||
+          "Produto"
+        ),
+
+
+      sku:
+
+        product?.sku
+
+        ||
+
+        makeSku(
+          product?.name || "Produto",
+          id
+        ),
+
+
+      category:
+
+        String(
+          product?.category
+          ||
+          "Tops"
+        ),
+
+
+      price:
+
+        parseMoney(
+          product?.price
+        ),
+
+
+      /*
+       * Salvamos os dois nomes
+       * para manter compatibilidade
+       * com versões anteriores.
+       */
+
+      salePrice,
+
+      promo:
+        salePrice,
+
+
+      stock:
+
+        Math.max(
+
+          0,
+
+          parseInt(
+            product?.stock ?? 0,
+            10
+          )
+
+          ||
+
+          0
+
+        ),
+
+
+      description:
+
+        String(
+          product?.description
+          ||
+          ""
+        ),
+
+
+      image:
+
+        String(
+
+          product?.image
+
+          ||
+
+          product?.image_url
+
+          ||
+
+          ""
+
+        ),
+
+
+      sizes:
+
+        Array.isArray(
+          product?.sizes
+        )
+
+        ?
+
+        product.sizes
+
+        :
+
+        [],
+
+
+      published:
+
+        Boolean(
+          published
+        ),
+
+
+      active:
+
+        Boolean(
+          published
+        )
+
+    };
+
+  }
+
+
+
+  /* =====================================================
+     CARREGAR PRODUTOS SALVOS
+     ===================================================== */
+
+  function loadStorage() {
+
+    try {
+
+      const current =
+        localStorage.getItem(
+          STORAGE_KEY
+        );
+
+
+      const old =
+        localStorage.getItem(
+          OLD_STORAGE_KEY
+        );
+
+
+      const raw =
+        current || old;
+
+
+      if (!raw) {
+
+        return [];
 
       }
 
 
-      function formatMoney(value) {
+      const parsed =
+        JSON.parse(raw);
 
-        return Number(value || 0).toLocaleString(
-          "pt-BR",
-          {
-            style: "currency",
-            currency: "BRL"
-          }
+
+      if (
+        !Array.isArray(parsed)
+      ) {
+
+        return [];
+
+      }
+
+
+      const normalized =
+
+        parsed.map(
+          normalizeProduct
+        );
+
+
+      /*
+       * Migra automaticamente
+       * produtos da versão antiga.
+       */
+
+      if (
+        !current
+        &&
+        old
+      ) {
+
+        localStorage.setItem(
+
+          STORAGE_KEY,
+
+          JSON.stringify(
+            normalized
+          )
+
         );
 
       }
 
 
-      /* ===============================
-         SKU
-         =============================== */
+      return normalized;
 
-      function makeSku(name, id) {
+    }
 
-        const base = String(name || "PROD")
+    catch (error) {
 
-          .normalize("NFD")
+      console.error(
 
-          .replace(
-            /[\u0300-\u036f]/g,
-            ""
-          )
+        "Erro ao carregar produtos:",
 
-          .toUpperCase()
+        error
 
-          .replace(
-            /[^A-Z0-9]+/g,
-            "-"
-          )
-
-          .replace(
-            /^-|-$/g,
-            ""
-          )
-
-          .slice(
-            0,
-            16
-          ) || "PROD";
+      );
 
 
-        return `${base}-${String(id).slice(-4)}`;
+      return [];
 
-      }
+    }
 
-
-      /* ===============================
-         STATUS
-         =============================== */
-
-      function statusFor(product) {
-
-        if (!product.published) {
-
-          return {
-            text: "Rascunho",
-            cls: "badge--gray"
-          };
-
-        }
+  }
 
 
-        if (Number(product.stock) <= 0) {
 
-          return {
-            text: "Sem estoque",
-            cls: "badge--red"
-          };
+  /* =====================================================
+     SALVAR PRODUTOS
+     ===================================================== */
 
-        }
+  function saveStorage() {
 
+    try {
 
-        return {
-          text: "Ativo",
-          cls: "badge--green"
-        };
+      localStorage.setItem(
 
-      }
+        STORAGE_KEY,
 
-
-      /* ===============================
-         LOCAL STORAGE
-         =============================== */
-
-      function saveStorage() {
-
-        try {
-
-          localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(products)
-          );
-
-        } catch (error) {
-
-          console.error(
-            "Não foi possível salvar os produtos:",
-            error
-          );
-
-          showToastSafe(
-            "Não foi possível salvar. Tente uma imagem menor. ⚠️"
-          );
-
-        }
-
-      }
-
-
-      function loadStorage() {
-
-        try {
-
-          const raw =
-            localStorage.getItem(STORAGE_KEY);
-
-
-          if (!raw) {
-            return null;
-          }
-
-
-          const parsed =
-            JSON.parse(raw);
-
-
-          return Array.isArray(parsed)
-            ? parsed
-            : null;
-
-        } catch (error) {
-
-          console.warn(
-            "Dados salvos inválidos:",
-            error
-          );
-
-          return null;
-
-        }
-
-      }
-
-
-      /* ===============================
-         PRODUTOS JÁ EXISTENTES
-         =============================== */
-
-      function readProductsAlreadyRendered() {
-
-        const tbody =
-          $("produtos-tbody");
-
-
-        if (!tbody) {
-
-          return [];
-
-        }
-
-
-        return Array.from(
-          tbody.querySelectorAll("tr")
+        JSON.stringify(
+          products
         )
+
+      );
+
+
+      return true;
+
+    }
+
+    catch (error) {
+
+      console.error(
+
+        "Erro ao salvar produtos:",
+
+        error
+
+      );
+
+
+      showToastSafe(
+
+        "Não foi possível salvar o produto. ⚠️"
+
+      );
+
+
+      return false;
+
+    }
+
+  }
+
+
+
+  /* =====================================================
+     STATUS DO PRODUTO
+     ===================================================== */
+
+  function statusFor(product) {
+
+    const published =
+
+      product.published
+
+      ??
+
+      product.active
+
+      ??
+
+      true;
+
+
+    if (!published) {
+
+      return {
+
+        text:
+          "Rascunho",
+
+        cls:
+          "badge--gray"
+
+      };
+
+    }
+
+
+    if (
+      Number(product.stock)
+      <=
+      0
+    ) {
+
+      return {
+
+        text:
+          "Sem estoque",
+
+        cls:
+          "badge--red"
+
+      };
+
+    }
+
+
+    return {
+
+      text:
+        "Ativo",
+
+      cls:
+        "badge--green"
+
+    };
+
+  }
+
+
+
+  /* =====================================================
+     CONTADORES
+     ===================================================== */
+
+  function updateProductCounters() {
+
+    const count =
+      products.length;
+
+
+    const badge =
+
+      document.querySelector(
+
+        '.sidebar__item[data-page="produtos"] .sidebar__item-badge'
+
+      );
+
+
+    if (badge) {
+
+      badge.textContent =
+        count;
+
+    }
+
+
+    const summary =
+      $("produtos-resumo");
+
+
+    if (summary) {
+
+      if (count) {
+
+        summary.textContent =
+
+          `${count} produto${count === 1 ? "" : "s"} cadastrado${count === 1 ? "" : "s"}`;
+
+      }
+
+      else {
+
+        summary.textContent =
+          "Nenhum produto cadastrado";
+
+      }
+
+    }
+
+  }
+
+
+
+  /* =====================================================
+     RENDERIZAR PRODUTOS
+     ===================================================== */
+
+  function renderProducts() {
+
+    const tbody =
+      $("produtos-tbody");
+
+
+    if (!tbody) {
+
+      return;
+
+    }
+
+
+
+    /*
+     * Nenhum produto
+     */
+
+    if (
+      !products.length
+    ) {
+
+      tbody.innerHTML = `
+
+        <tr>
+
+          <td
+            colspan="8"
+            style="
+              text-align:center;
+              padding:42px 16px;
+              color:var(--text-light);
+            "
+          >
+
+            Nenhum produto cadastrado.
+
+            Clique em
+
+            <strong>
+              + Novo Produto
+            </strong>
+
+            para adicionar o primeiro.
+
+          </td>
+
+        </tr>
+
+      `;
+
+
+      updateProductCounters();
+
+
+      return;
+
+    }
+
+
+
+    /*
+     * Produtos
+     */
+
+    tbody.innerHTML =
+
+      products
 
         .map(
-          (row, index) => {
 
-            const cells =
-              row.querySelectorAll("td");
+          (product) => {
 
 
-            if (cells.length < 7) {
+            const status =
+              statusFor(product);
 
-              return null;
 
-            }
+            const salePrice =
 
+              parseMoney(
 
-            const img =
-              cells[1]?.querySelector("img");
+                product.salePrice
 
+                ??
 
-            const name =
+                product.promo
 
-              cells[1]
-                ?.querySelector("strong")
-                ?.textContent
-                ?.trim()
+                ??
 
-              ||
+                0
 
-              cells[1]
-                ?.querySelector("[class*='name']")
-                ?.textContent
-                ?.trim()
+              );
 
-              ||
 
-              cells[1]
-                ?.textContent
-                ?.trim()
+            const displayPrice =
 
-              ||
+              salePrice > 0
 
-              `Produto ${index + 1}`;
+              ?
 
+              salePrice
 
-            const id =
-              `legacy-${Date.now()}-${index}`;
+              :
 
+              product.price;
 
-            return {
 
-              id,
+            const oldPrice =
 
-              name,
+              salePrice > 0
 
-              sku:
-                cells[2]?.textContent?.trim()
-                ||
-                makeSku(name, id),
+              ?
 
-              category:
-                cells[3]?.textContent?.trim()
-                ||
-                "Tops",
+              `
 
-              price:
-                parseMoney(
-                  cells[4]?.textContent
-                ),
-
-              salePrice: 0,
-
-              stock:
-                parseInt(
-                  cells[5]
-                    ?.textContent
-                    ?.replace(/\D/g, "")
-                  ||
-                  "0",
-                  10
-                ),
-
-              description: "",
-
-              image:
-                img?.getAttribute("src")
-                ||
-                "",
-
-              sizes: [
-                "XS",
-                "S",
-                "M",
-                "L",
-                "XL"
-              ],
-
-              published:
-                !/rascunho/i.test(
-                  cells[6]?.textContent || ""
-                )
-
-            };
-
-          }
-        )
-
-        .filter(Boolean);
-
-      }
-
-
-      /* ===============================
-         CONTADORES
-         =============================== */
-
-      function updateProductCounters() {
-
-        const count =
-          products.length;
-
-
-        const productNav =
-          document.querySelector(
-            '.sidebar__item[data-page="produtos"] .sidebar__item-badge'
-          );
-
-
-        if (productNav) {
-
-          productNav.textContent =
-            count;
-
-        }
-
-
-        const summary =
-          $("produtos-resumo");
-
-
-        if (summary) {
-
-          if (count === 0) {
-
-            summary.textContent =
-              "Nenhum produto cadastrado";
-
-          } else {
-
-            summary.textContent =
-              `${count} produto${count === 1 ? "" : "s"} cadastrado${count === 1 ? "" : "s"}`;
-
-          }
-
-        }
-
-      }
-
-
-      /* ===============================
-         RENDER DA TABELA
-         =============================== */
-
-      function renderProducts() {
-
-        const tbody =
-          $("produtos-tbody");
-
-
-        if (!tbody) {
-
-          return;
-
-        }
-
-
-        if (!products.length) {
-
-          tbody.innerHTML = `
-
-            <tr>
-
-              <td
-                colspan="8"
-                style="
-                  text-align:center;
-                  padding:42px 16px;
-                  color:var(--text-light);
-                "
-              >
-
-                Nenhum produto cadastrado.
-
-                Clique em
-
-                <strong>
-                  + Novo Produto
-                </strong>
-
-                para adicionar o primeiro.
-
-              </td>
-
-            </tr>
-
-          `;
-
-
-          updateProductCounters();
-
-          return;
-
-        }
-
-
-        tbody.innerHTML = products
-
-          .map(
-            (product) => {
-
-              const status =
-                statusFor(product);
-
-
-              const displayPrice =
-                product.salePrice > 0
-                  ? product.salePrice
-                  : product.price;
-
-
-              const oldPrice =
-                product.salePrice > 0
-
-                ?
-
-                `
-
-                  <div
-                    style="
-                      font-size:11px;
-                      color:var(--text-light);
-                      text-decoration:line-through;
-                    "
-                  >
-                    ${formatMoney(product.price)}
-                  </div>
-
-                `
-
-                :
-
-                "";
-
-
-              const image =
-                product.image
-
-                ?
-
-                `
-
-                  <img
-                    src="${escapeHtml(product.image)}"
-                    alt="${escapeHtml(product.name)}"
-                    style="
-                      width:46px;
-                      height:58px;
-                      border-radius:8px;
-                      object-fit:cover;
-                      background:var(--bg);
-                    "
-                  >
-
-                `
-
-                :
-
-                `
-
-                  <div
-                    style="
-                      width:46px;
-                      height:58px;
-                      border-radius:8px;
-                      background:var(--bg);
-                      display:flex;
-                      align-items:center;
-                      justify-content:center;
-                      font-size:20px;
-                    "
-                  >
-                    🛍️
-                  </div>
-
-                `;
-
-
-              return `
-
-                <tr
-                  data-product-id="${escapeHtml(product.id)}"
+                <div
+                  style="
+                    font-size:11px;
+                    color:var(--text-light);
+                    text-decoration:line-through;
+                  "
                 >
 
-                  <td>
-                    <input type="checkbox">
-                  </td>
+                  ${formatMoney(product.price)}
 
-                  <td>
+                </div>
 
-                    <div
-                      style="
-                        display:flex;
-                        align-items:center;
-                        gap:10px;
-                      "
-                    >
+              `
 
-                      ${image}
+              :
 
-                      <div>
-
-                        <strong>
-                          ${escapeHtml(product.name)}
-                        </strong>
+              "";
 
 
-                        ${
-                          product.description
 
-                          ?
+            const image =
 
-                          `
+              product.image
 
-                            <div
-                              style="
-                                font-size:11px;
-                                color:var(--text-light);
-                                max-width:230px;
-                                white-space:nowrap;
-                                overflow:hidden;
-                                text-overflow:ellipsis;
-                              "
-                            >
-                              ${escapeHtml(product.description)}
-                            </div>
+              ?
 
-                          `
+              `
 
-                          :
+                <img
 
-                          ""
-                        }
+                  src="${escapeHtml(product.image)}"
 
-                      </div>
+                  alt="${escapeHtml(product.name)}"
 
-                    </div>
+                  style="
+                    width:46px;
+                    height:58px;
+                    border-radius:8px;
+                    object-fit:cover;
+                    background:var(--bg);
+                  "
 
-                  </td>
+                >
 
-                  <td>
+              `
 
-                    <code style="font-size:11px;">
-                      ${escapeHtml(product.sku)}
-                    </code>
+              :
 
-                  </td>
+              `
 
-                  <td>
-                    ${escapeHtml(product.category)}
-                  </td>
+                <div
 
-                  <td>
+                  style="
+                    width:46px;
+                    height:58px;
+                    border-radius:8px;
+                    background:var(--bg);
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:20px;
+                  "
 
-                    <strong>
-                      ${formatMoney(displayPrice)}
-                    </strong>
+                >
 
-                    ${oldPrice}
+                  🛍️
 
-                  </td>
-
-                  <td>
-                    ${Number(product.stock) || 0}
-                  </td>
-
-                  <td>
-
-                    <span
-                      class="badge ${status.cls}"
-                    >
-                      ${status.text}
-                    </span>
-
-                  </td>
-
-                  <td class="action-btns">
-
-                    <button
-                      class="btn btn--ghost btn--icon"
-                      title="Editar"
-                      onclick="editProduct('${escapeHtml(product.id)}')"
-                    >
-                      ✏️
-                    </button>
-
-                    <button
-                      class="btn btn--ghost btn--icon"
-                      title="Excluir"
-                      onclick="deleteProduct('${escapeHtml(product.id)}')"
-                    >
-                      🗑️
-                    </button>
-
-                  </td>
-
-                </tr>
+                </div>
 
               `;
 
-            }
-          )
-
-          .join("");
 
 
-        updateProductCounters();
+            return `
 
-      }
-
-
-      /* ===============================
-         LIMPAR FORMULÁRIO
-         =============================== */
-
-      function resetProductForm() {
-
-        editingId = null;
-
-        pendingImage = "";
+              <tr
+                data-product-id="${escapeHtml(product.id)}"
+              >
 
 
-        $("produto-nome").value =
-          "";
+                <td>
+
+                  <input type="checkbox">
+
+                </td>
 
 
-        $("produto-preco").value =
-          "";
+                <td>
+
+                  <div
+                    style="
+                      display:flex;
+                      align-items:center;
+                      gap:10px;
+                    "
+                  >
+
+                    ${image}
 
 
-        $("produto-preco-promocional").value =
-          "";
+                    <div>
+
+                      <strong>
+
+                        ${escapeHtml(product.name)}
+
+                      </strong>
 
 
-        $("produto-categoria").value =
-          "Tops";
+                      ${
+
+                        product.description
+
+                        ?
+
+                        `
+
+                          <div
+
+                            style="
+                              font-size:11px;
+                              color:var(--text-light);
+                              max-width:230px;
+                              white-space:nowrap;
+                              overflow:hidden;
+                              text-overflow:ellipsis;
+                            "
+
+                          >
+
+                            ${escapeHtml(product.description)}
+
+                          </div>
+
+                        `
+
+                        :
+
+                        ""
+
+                      }
+
+                    </div>
+
+                  </div>
+
+                </td>
 
 
-        $("produto-estoque").value =
-          "";
+                <td>
+
+                  <code
+                    style="font-size:11px;"
+                  >
+
+                    ${escapeHtml(product.sku)}
+
+                  </code>
+
+                </td>
 
 
-        $("produto-descricao").value =
-          "";
+                <td>
+
+                  ${escapeHtml(product.category)}
+
+                </td>
 
 
-        $("produto-publicado").checked =
-          true;
+                <td>
+
+                  <strong>
+
+                    ${formatMoney(displayPrice)}
+
+                  </strong>
+
+                  ${oldPrice}
+
+                </td>
 
 
-        document
-          .querySelectorAll(".produto-tamanho")
-          .forEach(
-            (checkbox) => {
+                <td>
 
-              checkbox.checked =
-                checkbox.value !== "XXL";
+                  ${Number(product.stock) || 0}
 
-            }
-          );
+                </td>
 
 
-        const input =
-          $("produto-imagem");
+                <td>
+
+                  <span
+                    class="badge ${status.cls}"
+                  >
+
+                    ${status.text}
+
+                  </span>
+
+                </td>
 
 
-        if (input) {
+                <td
+                  class="action-btns"
+                >
 
-          input.value = "";
+                  <button
+
+                    type="button"
+
+                    class="
+                      btn
+                      btn--ghost
+                      btn--icon
+                    "
+
+                    title="Editar"
+
+                    onclick="
+                      editProduct(
+                        '${escapeHtml(product.id)}'
+                      )
+                    "
+
+                  >
+
+                    ✏️
+
+                  </button>
+
+
+                  <button
+
+                    type="button"
+
+                    class="
+                      btn
+                      btn--ghost
+                      btn--icon
+                    "
+
+                    title="Excluir"
+
+                    onclick="
+                      deleteProduct(
+                        '${escapeHtml(product.id)}'
+                      )
+                    "
+
+                  >
+
+                    🗑️
+
+                  </button>
+
+                </td>
+
+
+              </tr>
+
+            `;
+
+          }
+
+        )
+
+        .join("");
+
+
+    updateProductCounters();
+
+  }
+
+
+
+  /* =====================================================
+     PREVIEW DA IMAGEM
+     ===================================================== */
+
+  function updateImagePreview(src) {
+
+    const preview =
+      $("produto-imagem-preview");
+
+
+    const icon =
+      $("produto-image-icon");
+
+
+    const label =
+      $("produto-image-label");
+
+
+    if (
+      !preview
+      ||
+      !icon
+      ||
+      !label
+    ) {
+
+      return;
+
+    }
+
+
+    if (src) {
+
+      preview.src =
+        src;
+
+
+      preview.style.display =
+        "block";
+
+
+      icon.style.display =
+        "none";
+
+
+      label.textContent =
+        "Trocar imagem";
+
+    }
+
+    else {
+
+      preview.removeAttribute(
+        "src"
+      );
+
+
+      preview.style.display =
+        "none";
+
+
+      icon.style.display =
+        "";
+
+
+      label.textContent =
+        "Clique para enviar";
+
+    }
+
+  }
+
+
+
+  /* =====================================================
+     LIMPAR FORMULÁRIO
+     ===================================================== */
+
+  function resetProductForm() {
+
+    editingId =
+      null;
+
+
+    pendingImage =
+      "";
+
+
+    if (
+      $("produto-nome")
+    ) {
+
+      $("produto-nome").value =
+        "";
+
+    }
+
+
+    if (
+      $("produto-preco")
+    ) {
+
+      $("produto-preco").value =
+        "";
+
+    }
+
+
+    if (
+      $("produto-preco-promocional")
+    ) {
+
+      $("produto-preco-promocional").value =
+        "";
+
+    }
+
+
+    if (
+      $("produto-categoria")
+    ) {
+
+      $("produto-categoria").value =
+        "Tops";
+
+    }
+
+
+    if (
+      $("produto-estoque")
+    ) {
+
+      $("produto-estoque").value =
+        "";
+
+    }
+
+
+    if (
+      $("produto-descricao")
+    ) {
+
+      $("produto-descricao").value =
+        "";
+
+    }
+
+
+    if (
+      $("produto-publicado")
+    ) {
+
+      $("produto-publicado").checked =
+        true;
+
+    }
+
+
+    document
+
+      .querySelectorAll(
+        ".produto-tamanho"
+      )
+
+      .forEach(
+
+        (checkbox) => {
+
+          checkbox.checked =
+            checkbox.value !== "XXL";
 
         }
 
-
-        updateImagePreview("");
-
-      }
+      );
 
 
-      /* ===============================
-         PREVIEW IMAGEM
-         =============================== */
-
-      function updateImagePreview(src) {
-
-        const preview =
-          $("produto-imagem-preview");
+    const input =
+      $("produto-imagem");
 
 
-        const icon =
-          $("produto-image-icon");
+    if (input) {
+
+      input.value =
+        "";
+
+    }
 
 
-        const label =
-          $("produto-image-label");
+    updateImagePreview("");
+
+  }
+
+
+
+  /* =====================================================
+     COMPACTAR IMAGEM
+     ===================================================== */
+
+  function compressImage(file) {
+
+    return new Promise(
+
+      (
+        resolve,
+        reject
+      ) => {
 
 
         if (
-          !preview
+          !file
           ||
-          !icon
-          ||
-          !label
+          !file.type.startsWith("image/")
         ) {
+
+          reject(
+            new Error(
+              "Arquivo inválido"
+            )
+          );
+
 
           return;
 
         }
 
 
-        if (src) {
 
-          preview.src =
-            src;
-
-
-          preview.style.display =
-            "block";
+        const reader =
+          new FileReader();
 
 
-          icon.style.display =
-            "none";
+
+        reader.onerror =
+          reject;
 
 
-          label.textContent =
-            "Trocar imagem";
 
-        } else {
+        reader.onload =
 
-          preview.removeAttribute(
-            "src"
-          );
+          () => {
 
 
-          preview.style.display =
-            "none";
+            const img =
+              new Image();
 
 
-          icon.style.display =
-            "";
 
-
-          label.textContent =
-            "Clique para enviar";
-
-        }
-
-      }
-
-
-      /* ===============================
-         COMPACTAR IMAGEM
-         =============================== */
-
-      function compressImage(file) {
-
-        return new Promise(
-          (resolve, reject) => {
-
-            if (
-              !file
-              ||
-              !file.type.startsWith("image/")
-            ) {
-
-              reject(
-                new Error("Arquivo inválido")
-              );
-
-              return;
-
-            }
-
-
-            const reader =
-              new FileReader();
-
-
-            reader.onerror =
+            img.onerror =
               reject;
 
 
-            reader.onload =
+
+            img.onload =
+
               () => {
 
-                const img =
-                  new Image();
+
+                const maxSide =
+                  1000;
 
 
-                img.onerror =
-                  reject;
+                const scale =
+
+                  Math.min(
+
+                    1,
+
+                    maxSide
+                    /
+                    Math.max(
+                      img.width,
+                      img.height
+                    )
+
+                  );
 
 
-                img.onload =
-                  () => {
+                const width =
 
-                    const maxSide =
-                      1000;
+                  Math.max(
 
+                    1,
 
-                    let width =
-                      img.width;
+                    Math.round(
+                      img.width
+                      *
+                      scale
+                    )
 
-
-                    let height =
-                      img.height;
-
-
-                    const scale =
-                      Math.min(
-                        1,
-                        maxSide /
-                        Math.max(
-                          width,
-                          height
-                        )
-                      );
+                  );
 
 
-                    width =
-                      Math.max(
-                        1,
-                        Math.round(
-                          width * scale
-                        )
-                      );
+                const height =
+
+                  Math.max(
+
+                    1,
+
+                    Math.round(
+                      img.height
+                      *
+                      scale
+                    )
+
+                  );
 
 
-                    height =
-                      Math.max(
-                        1,
-                        Math.round(
-                          height * scale
-                        )
-                      );
+
+                const canvas =
+
+                  document.createElement(
+                    "canvas"
+                  );
 
 
-                    const canvas =
-                      document.createElement(
-                        "canvas"
-                      );
+                canvas.width =
+                  width;
 
 
-                    canvas.width =
-                      width;
+                canvas.height =
+                  height;
 
 
-                    canvas.height =
-                      height;
+
+                const ctx =
+
+                  canvas.getContext(
+                    "2d"
+                  );
 
 
-                    const ctx =
-                      canvas.getContext(
-                        "2d"
-                      );
+                ctx.drawImage(
+
+                  img,
+
+                  0,
+
+                  0,
+
+                  width,
+
+                  height
+
+                );
 
 
-                    ctx.drawImage(
-                      img,
-                      0,
-                      0,
-                      width,
-                      height
-                    );
+                resolve(
 
+                  canvas.toDataURL(
 
-                    resolve(
-                      canvas.toDataURL(
-                        "image/jpeg",
-                        0.82
-                      )
-                    );
+                    "image/jpeg",
 
-                  };
+                    0.82
 
+                  )
 
-                img.src =
-                  reader.result;
+                );
 
               };
 
 
-            reader.readAsDataURL(
-              file
-            );
-
-          }
-        );
-
-      }
-
-
-      async function handleImage(file) {
-
-        try {
-
-          pendingImage =
-            await compressImage(file);
-
-
-          updateImagePreview(
-            pendingImage
-          );
-
-        } catch (error) {
-
-          console.error(error);
-
-
-          showToastSafe(
-            "Não consegui processar essa imagem. ⚠️"
-          );
-
-        }
-
-      }
-
-
-      /* ===============================
-         TOAST
-         =============================== */
-
-      function showToastSafe(message) {
-
-        if (
-          typeof window.showToast
-          ===
-          "function"
-        ) {
-
-          window.showToast(
-            message
-          );
-
-          return;
-
-        }
-
-
-        const toast =
-          $("toast");
-
-
-        if (!toast) {
-
-          return;
-
-        }
-
-
-        toast.textContent =
-          message;
-
-
-        toast.style.transform =
-          "translateY(0)";
-
-
-        toast.style.opacity =
-          "1";
-
-
-        clearTimeout(
-          window.__produtoToastTimer
-        );
-
-
-        window.__produtoToastTimer =
-          setTimeout(
-            () => {
-
-              toast.style.transform =
-                "translateY(80px)";
-
-
-              toast.style.opacity =
-                "0";
-
-            },
-            2600
-          );
-
-      }
-
-
-      /* ===============================
-         ABRIR NOVO PRODUTO
-         =============================== */
-
-      window.openNewProductModal =
-        function () {
-
-          resetProductForm();
-
-
-          $("produto-modal-title")
-            .textContent =
-            "Novo Produto";
-
-
-          $("produto-save-button")
-            .textContent =
-            "Criar Produto";
-
-
-          if (
-            typeof window.openModal
-            ===
-            "function"
-          ) {
-
-            window.openModal(
-              "modal-produto"
-            );
-
-          } else {
-
-            $("modal-produto")
-              .classList
-              .add("active");
-
-          }
-
-        };
-
-
-      /* ===============================
-         EDITAR PRODUTO
-         =============================== */
-
-      window.editProduct =
-        function (id) {
-
-          const product =
-            products.find(
-              (item) =>
-                String(item.id)
-                ===
-                String(id)
-            );
-
-
-          if (!product) {
-
-            showToastSafe(
-              "Produto não encontrado. ⚠️"
-            );
-
-            return;
-
-          }
-
-
-          editingId =
-            product.id;
-
-
-          pendingImage =
-            product.image || "";
-
-
-          $("produto-modal-title")
-            .textContent =
-            "Editar Produto";
-
-
-          $("produto-save-button")
-            .textContent =
-            "Salvar Alterações";
-
-
-          $("produto-nome").value =
-            product.name || "";
-
-
-          $("produto-preco").value =
-            product.price || "";
-
-
-          $("produto-preco-promocional").value =
-            product.salePrice || "";
-
-
-          $("produto-categoria").value =
-            product.category || "Tops";
-
-
-          $("produto-estoque").value =
-            product.stock ?? 0;
-
-
-          $("produto-descricao").value =
-            product.description || "";
-
-
-          $("produto-publicado").checked =
-            product.published !== false;
-
-
-          const sizes =
-            Array.isArray(
-              product.sizes
-            )
-
-            ?
-
-            product.sizes
-
-            :
-
-            [];
-
-
-          document
-            .querySelectorAll(
-              ".produto-tamanho"
-            )
-            .forEach(
-              (checkbox) => {
-
-                checkbox.checked =
-                  sizes.includes(
-                    checkbox.value
-                  );
-
-              }
-            );
-
-
-          updateImagePreview(
-            pendingImage
-          );
-
-
-          if (
-            typeof window.openModal
-            ===
-            "function"
-          ) {
-
-            window.openModal(
-              "modal-produto"
-            );
-
-          } else {
-
-            $("modal-produto")
-              .classList
-              .add("active");
-
-          }
-
-        };
-
-
-      /* ===============================
-         SALVAR PRODUTO
-         =============================== */
-
-      window.saveProduct =
-        function () {
-
-          const name =
-            $("produto-nome")
-              .value
-              .trim();
-
-
-          const price =
-            Number(
-              $("produto-preco")
-                .value
-            );
-
-
-          const salePrice =
-            Number(
-              $("produto-preco-promocional")
-                .value
-              ||
-              0
-            );
-
-
-          const stock =
-            Math.max(
-              0,
-              parseInt(
-                $("produto-estoque")
-                  .value
-                ||
-                "0",
-                10
-              )
-            );
-
-
-          if (!name) {
-
-            showToastSafe(
-              "Preencha o nome do produto. ⚠️"
-            );
-
-
-            $("produto-nome")
-              .focus();
-
-
-            return;
-
-          }
-
-
-          if (
-            !Number.isFinite(price)
-            ||
-            price <= 0
-          ) {
-
-            showToastSafe(
-              "Informe um preço válido. ⚠️"
-            );
-
-
-            $("produto-preco")
-              .focus();
-
-
-            return;
-
-          }
-
-
-          if (
-            salePrice < 0
-
-            ||
-
-            (
-              salePrice > 0
-              &&
-              salePrice >= price
-            )
-          ) {
-
-            showToastSafe(
-              "O preço promocional precisa ser menor que o preço normal. ⚠️"
-            );
-
-
-            $("produto-preco-promocional")
-              .focus();
-
-
-            return;
-
-          }
-
-
-          const sizes =
-            Array.from(
-              document.querySelectorAll(
-                ".produto-tamanho:checked"
-              )
-            )
-
-            .map(
-              (checkbox) =>
-                checkbox.value
-            );
-
-
-          const data = {
-
-            name,
-
-            category:
-              $("produto-categoria")
-                .value,
-
-            price,
-
-            salePrice,
-
-            stock,
-
-            description:
-              $("produto-descricao")
-                .value
-                .trim(),
-
-            image:
-              pendingImage,
-
-            sizes,
-
-            published:
-              $("produto-publicado")
-                .checked,
-
-            updatedAt:
-              new Date()
-                .toISOString()
+            img.src =
+              reader.result;
 
           };
 
 
-          /* EDITANDO */
+        reader.readAsDataURL(
+          file
+        );
 
-          if (
-            editingId !== null
-          ) {
+      }
 
-            const index =
-              products.findIndex(
-                (item) =>
-                  String(item.id)
-                  ===
-                  String(editingId)
-              );
+    );
 
+  }
 
-            if (index === -1) {
 
-              showToastSafe(
-                "Produto não encontrado para edição. ⚠️"
-              );
 
-              return;
+  /* =====================================================
+     PROCESSAR IMAGEM
+     ===================================================== */
 
-            }
+  async function handleImage(file) {
 
+    try {
 
-            products[index] = {
+      pendingImage =
+        await compressImage(file);
 
-              ...products[index],
 
-              ...data
+      updateImagePreview(
+        pendingImage
+      );
 
-            };
+    }
 
+    catch (error) {
 
-            showToastSafe(
-              "Produto atualizado com sucesso! ✅"
-            );
+      console.error(
+        error
+      );
 
-          }
 
+      showToastSafe(
 
-          /* CRIANDO */
+        "Não consegui processar essa imagem. ⚠️"
 
-          else {
+      );
 
-            const id =
-              `prod-${Date.now()}`;
+    }
 
+  }
 
-            products.unshift({
 
-              id,
 
-              sku:
-                makeSku(
-                  name,
-                  id
-                ),
+  /* =====================================================
+     UPLOAD DE IMAGEM
+     ===================================================== */
 
-              createdAt:
-                new Date()
-                  .toISOString(),
+  function bindImageUpload() {
 
-              ...data
+    const zone =
+      $("produto-image-upload");
 
-            });
 
+    const input =
+      $("produto-imagem");
 
-            showToastSafe(
-              "Produto criado com sucesso! ✅"
-            );
 
-          }
+    if (
+      !zone
+      ||
+      !input
+    ) {
 
+      return;
 
-          saveStorage();
+    }
 
 
-          renderProducts();
+    /*
+     * Evita adicionar eventos
+     * duplicados.
+     */
 
+    if (
+      zone.dataset.bound
+      ===
+      "true"
+    ) {
 
-          if (
-            typeof window.closeModal
-            ===
-            "function"
-          ) {
+      return;
 
-            window.closeModal(
-              "modal-produto"
-            );
+    }
 
-          } else {
 
-            $("modal-produto")
-              .classList
-              .remove("active");
+    zone.dataset.bound =
+      "true";
 
-          }
 
 
-          resetProductForm();
+    zone.addEventListener(
 
-        };
+      "click",
 
-
-      /* ===============================
-         EXCLUIR PRODUTO
-         =============================== */
-
-      window.deleteProduct =
-        function (id) {
-
-          const product =
-            products.find(
-              (item) =>
-                String(item.id)
-                ===
-                String(id)
-            );
-
-
-          if (!product) {
-
-            return;
-
-          }
-
-
-          const confirmed =
-            window.confirm(
-              `Excluir "${product.name}"?`
-            );
-
-
-          if (!confirmed) {
-
-            return;
-
-          }
-
-
-          products =
-            products.filter(
-              (item) =>
-                String(item.id)
-                !==
-                String(id)
-            );
-
-
-          saveStorage();
-
-
-          renderProducts();
-
-
-          showToastSafe(
-            "Produto excluído. 🗑️"
-          );
-
-        };
-
-
-      /* ===============================
-         UPLOAD DE IMAGEM
-         =============================== */
-
-      function bindImageUpload() {
-
-        const zone =
-          $("produto-image-upload");
-
-
-        const input =
-          $("produto-imagem");
-
+      (event) => {
 
         if (
-          !zone
-          ||
-          !input
+          event.target
+          !==
+          input
         ) {
 
-          return;
+          input.click();
 
         }
 
-
-        zone.addEventListener(
-          "click",
-          (event) => {
-
-            if (
-              event.target
-              !==
-              input
-            ) {
-
-              input.click();
-
-            }
-
-          }
-        );
-
-
-        input.addEventListener(
-          "change",
-          () => {
-
-            if (
-              input.files?.[0]
-            ) {
-
-              handleImage(
-                input.files[0]
-              );
-
-            }
-
-          }
-        );
-
-
-        [
-          "dragenter",
-          "dragover"
-        ]
-
-        .forEach(
-          (eventName) => {
-
-            zone.addEventListener(
-              eventName,
-              (event) => {
-
-                event.preventDefault();
-
-
-                zone.style.borderColor =
-                  "var(--primary)";
-
-              }
-            );
-
-          }
-        );
-
-
-        [
-          "dragleave",
-          "drop"
-        ]
-
-        .forEach(
-          (eventName) => {
-
-            zone.addEventListener(
-              eventName,
-              (event) => {
-
-                event.preventDefault();
-
-
-                zone.style.borderColor =
-                  "";
-
-              }
-            );
-
-          }
-        );
-
-
-        zone.addEventListener(
-          "drop",
-          (event) => {
-
-            const file =
-              event
-                .dataTransfer
-                ?.files
-                ?.[0];
-
-
-            if (file) {
-
-              handleImage(
-                file
-              );
-
-            }
-
-          }
-        );
-
       }
 
-
-      /* ===============================
-         INICIALIZAÇÃO
-         =============================== */
-
-      function initProductManager() {
-
-        bindImageUpload();
+    );
 
 
-        const stored =
-          loadStorage();
 
+    input.addEventListener(
 
-        if (stored) {
+      "change",
 
-          products =
-            stored;
+      () => {
 
+        if (
+          input.files?.[0]
+        ) {
 
-          renderProducts();
-
-
-          return;
+          handleImage(
+            input.files[0]
+          );
 
         }
 
+      }
 
-        /*
-         * Primeiro acesso:
-         * espera o admin.js original
-         * terminar de renderizar os
-         * produtos que já existiam.
-         */
-
-        setTimeout(
-          () => {
-
-            products =
-              readProductsAlreadyRendered();
+    );
 
 
-            if (
-              products.length
-            ) {
 
-              saveStorage();
+    [
+      "dragenter",
+      "dragover"
+    ]
+
+      .forEach(
+
+        (eventName) => {
+
+          zone.addEventListener(
+
+            eventName,
+
+            (event) => {
+
+              event.preventDefault();
+
+
+              zone.style.borderColor =
+                "var(--primary)";
 
             }
 
+          );
 
-            renderProducts();
+        }
 
-          },
-          0
-        );
+      );
+
+
+
+    [
+      "dragleave",
+      "drop"
+    ]
+
+      .forEach(
+
+        (eventName) => {
+
+          zone.addEventListener(
+
+            eventName,
+
+            (event) => {
+
+              event.preventDefault();
+
+
+              zone.style.borderColor =
+                "";
+
+            }
+
+          );
+
+        }
+
+      );
+
+
+
+    zone.addEventListener(
+
+      "drop",
+
+      (event) => {
+
+        const file =
+          event.dataTransfer?.files?.[0];
+
+
+        if (file) {
+
+          handleImage(
+            file
+          );
+
+        }
 
       }
+
+    );
+
+  }
+
+
+
+  /* =====================================================
+     NOVO PRODUTO
+     ===================================================== */
+
+  window.openNewProductModal =
+
+    function () {
+
+
+      resetProductForm();
+
 
 
       if (
-        document.readyState
-        ===
-        "loading"
+        $("produto-modal-title")
       ) {
 
-        document.addEventListener(
-          "DOMContentLoaded",
-          initProductManager
-        );
-
-      } else {
-
-        initProductManager();
+        $("produto-modal-title")
+          .textContent =
+          "Novo Produto";
 
       }
 
-    })();
 
-  </script>
+
+      if (
+        $("produto-save-button")
+      ) {
+
+        $("produto-save-button")
+          .textContent =
+          "Criar Produto";
+
+      }
+
+
+
+      if (
+        typeof window.openModal
+        ===
+        "function"
+      ) {
+
+        window.openModal(
+          "modal-produto"
+        );
+
+      }
+
+      else if (
+        $("modal-produto")
+      ) {
+
+        $("modal-produto")
+          .classList
+          .add(
+            "active"
+          );
+
+      }
+
+    };
+
+
+
+  /* =====================================================
+     EDITAR PRODUTO
+     ===================================================== */
+
+  window.editProduct =
+
+    function (id) {
+
+
+      const product =
+
+        products.find(
+
+          (item) =>
+
+            String(item.id)
+            ===
+            String(id)
+
+        );
+
+
+      if (!product) {
+
+        showToastSafe(
+
+          "Produto não encontrado. ⚠️"
+
+        );
+
+
+        return;
+
+      }
+
+
+
+      editingId =
+        product.id;
+
+
+      pendingImage =
+        product.image
+        ||
+        "";
+
+
+
+      if (
+        $("produto-modal-title")
+      ) {
+
+        $("produto-modal-title")
+          .textContent =
+          "Editar Produto";
+
+      }
+
+
+
+      if (
+        $("produto-save-button")
+      ) {
+
+        $("produto-save-button")
+          .textContent =
+          "Salvar Alterações";
+
+      }
+
+
+
+      $("produto-nome").value =
+
+        product.name
+        ||
+        "";
+
+
+
+      $("produto-preco").value =
+
+        product.price
+        ||
+        "";
+
+
+
+      $("produto-preco-promocional").value =
+
+        product.salePrice
+
+        ||
+
+        product.promo
+
+        ||
+
+        "";
+
+
+
+      $("produto-categoria").value =
+
+        product.category
+        ||
+        "Tops";
+
+
+
+      $("produto-estoque").value =
+
+        product.stock
+        ??
+        0;
+
+
+
+      $("produto-descricao").value =
+
+        product.description
+        ||
+        "";
+
+
+
+      $("produto-publicado").checked =
+
+        product.published
+
+        ??
+
+        product.active
+
+        ??
+
+        true;
+
+
+
+      const sizes =
+
+        Array.isArray(
+          product.sizes
+        )
+
+        ?
+
+        product.sizes
+
+        :
+
+        [];
+
+
+
+      document
+
+        .querySelectorAll(
+          ".produto-tamanho"
+        )
+
+        .forEach(
+
+          (checkbox) => {
+
+            checkbox.checked =
+
+              sizes.includes(
+                checkbox.value
+              );
+
+          }
+
+        );
+
+
+
+      updateImagePreview(
+        pendingImage
+      );
+
+
+
+      if (
+        typeof window.openModal
+        ===
+        "function"
+      ) {
+
+        window.openModal(
+          "modal-produto"
+        );
+
+      }
+
+      else {
+
+        $("modal-produto")
+          ?.classList
+          .add(
+            "active"
+          );
+
+      }
+
+    };
+
+
+
+  /* =====================================================
+     SALVAR PRODUTO
+     ===================================================== */
+
+  window.saveProduct =
+
+    function () {
+
+
+      const name =
+
+        $("produto-nome")
+          ?.value
+          .trim()
+
+        ||
+
+        "";
+
+
+
+      const price =
+
+        parseMoney(
+
+          $("produto-preco")
+            ?.value
+
+        );
+
+
+
+      const salePrice =
+
+        parseMoney(
+
+          $("produto-preco-promocional")
+            ?.value
+
+          ||
+
+          0
+
+        );
+
+
+
+      const stock =
+
+        Math.max(
+
+          0,
+
+          parseInt(
+
+            $("produto-estoque")
+              ?.value
+
+            ||
+
+            "0",
+
+            10
+
+          )
+
+          ||
+
+          0
+
+        );
+
+
+
+      /* NOME */
+
+      if (!name) {
+
+        showToastSafe(
+
+          "Preencha o nome do produto. ⚠️"
+
+        );
+
+
+        $("produto-nome")
+          ?.focus();
+
+
+        return;
+
+      }
+
+
+
+      /* PREÇO */
+
+      if (
+        !Number.isFinite(price)
+        ||
+        price <= 0
+      ) {
+
+        showToastSafe(
+
+          "Informe um preço válido. ⚠️"
+
+        );
+
+
+        $("produto-preco")
+          ?.focus();
+
+
+        return;
+
+      }
+
+
+
+      /* PREÇO PROMOCIONAL */
+
+      if (
+
+        salePrice < 0
+
+        ||
+
+        (
+          salePrice > 0
+          &&
+          salePrice >= price
+        )
+
+      ) {
+
+        showToastSafe(
+
+          "O preço promocional precisa ser menor que o preço normal. ⚠️"
+
+        );
+
+
+        $("produto-preco-promocional")
+          ?.focus();
+
+
+        return;
+
+      }
+
+
+
+      /* TAMANHOS */
+
+      const sizes =
+
+        Array.from(
+
+          document.querySelectorAll(
+
+            ".produto-tamanho:checked"
+
+          )
+
+        )
+
+        .map(
+
+          (checkbox) =>
+            checkbox.value
+
+        );
+
+
+
+      const published =
+
+        $("produto-publicado")
+          ?.checked
+
+        !==
+
+        false;
+
+
+
+      const data = {
+
+        name,
+
+
+        category:
+
+          $("produto-categoria")
+            ?.value
+
+          ||
+
+          "Tops",
+
+
+        price,
+
+
+        salePrice,
+
+
+        /*
+         * Compatibilidade com
+         * outras versões do admin.
+         */
+
+        promo:
+          salePrice,
+
+
+        stock,
+
+
+        description:
+
+          $("produto-descricao")
+            ?.value
+            .trim()
+
+          ||
+
+          "",
+
+
+        image:
+          pendingImage,
+
+
+        sizes,
+
+
+        published,
+
+
+        active:
+          published,
+
+
+        updatedAt:
+
+          new Date()
+            .toISOString()
+
+      };
+
+
+
+      /* =================================================
+         EDITANDO
+         ================================================= */
+
+      if (
+        editingId !== null
+      ) {
+
+
+        const index =
+
+          products.findIndex(
+
+            (item) =>
+
+              String(item.id)
+              ===
+              String(editingId)
+
+          );
+
+
+
+        if (
+          index === -1
+        ) {
+
+          showToastSafe(
+
+            "Produto não encontrado para edição. ⚠️"
+
+          );
+
+
+          return;
+
+        }
+
+
+
+        products[index] =
+
+          normalizeProduct({
+
+            ...products[index],
+
+            ...data
+
+          });
+
+
+
+        showToastSafe(
+
+          "Produto atualizado com sucesso! ✅"
+
+        );
+
+      }
+
+
+
+      /* =================================================
+         CRIANDO
+         ================================================= */
+
+      else {
+
+
+        const id =
+          `prod-${Date.now()}`;
+
+
+
+        const newProduct =
+
+          normalizeProduct({
+
+            id,
+
+
+            sku:
+
+              makeSku(
+                name,
+                id
+              ),
+
+
+            createdAt:
+
+              new Date()
+                .toISOString(),
+
+
+            ...data
+
+          });
+
+
+
+        products.unshift(
+          newProduct
+        );
+
+
+
+        showToastSafe(
+
+          "Produto criado com sucesso! ✅"
+
+        );
+
+      }
+
+
+
+      /*
+       * Salva.
+       */
+
+      saveStorage();
+
+
+
+      /*
+       * Atualiza imediatamente
+       * a tabela do painel.
+       */
+
+      renderProducts();
+
+
+
+      /*
+       * Fecha modal.
+       */
+
+      if (
+        typeof window.closeModal
+        ===
+        "function"
+      ) {
+
+        window.closeModal(
+          "modal-produto"
+        );
+
+      }
+
+      else {
+
+        $("modal-produto")
+          ?.classList
+          .remove(
+            "active"
+          );
+
+      }
+
+
+
+      /*
+       * Limpa formulário.
+       */
+
+      resetProductForm();
+
+    };
+
+
+
+  /* =====================================================
+     EXCLUIR PRODUTO
+     ===================================================== */
+
+  window.deleteProduct =
+
+    function (id) {
+
+
+      const product =
+
+        products.find(
+
+          (item) =>
+
+            String(item.id)
+            ===
+            String(id)
+
+        );
+
+
+      if (!product) {
+
+        return;
+
+      }
+
+
+
+      const confirmed =
+
+        window.confirm(
+
+          `Excluir "${product.name}"?`
+
+        );
+
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+
+      products =
+
+        products.filter(
+
+          (item) =>
+
+            String(item.id)
+            !==
+            String(id)
+
+        );
+
+
+
+      saveStorage();
+
+
+      renderProducts();
+
+
+
+      showToastSafe(
+
+        "Produto excluído. 🗑️"
+
+      );
+
+    };
+
+
+
+  /* =====================================================
+     INICIALIZAÇÃO
+     ===================================================== */
+
+  function initProductManager() {
+
+    products =
+      loadStorage();
+
+
+    bindImageUpload();
+
+
+    renderProducts();
+
+
+
+    console.log(
+
+      "Gerenciador de produtos carregado ✅",
+
+      products
+
+    );
+
+  }
+
+
+
+  if (
+    document.readyState
+    ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+
+      "DOMContentLoaded",
+
+      initProductManager
+
+    );
+
+  }
+
+  else {
+
+    initProductManager();
+
+  }
+
+
+})();
+
+</script>
+
 
 </body>
 </html>
