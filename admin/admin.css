@@ -17,49 +17,54 @@
   --sidebar-w: 240px;
 
   /* ========================================
-     ESSENCE — IDENTIDADE VISUAL
+     ESSENCE — STRONG BROWN PALETTE
      ======================================== */
-  --sidebar-bg: #3e3028;
+
+  /* Sidebar */
+  --sidebar-bg: #2E1D17;
   --sidebar-item-hover: rgba(255, 255, 255, 0.07);
-  --sidebar-item-active: rgba(200, 181, 163, 0.18);
-  --sidebar-active-bar: #c8b5a3;
+  --sidebar-item-active: rgba(90, 58, 46, 0.38);
+  --sidebar-active-bar: #B89580;
   --sidebar-text: rgba(255, 255, 255, 0.68);
-  --sidebar-text-active: #ffffff;
-  --sidebar-logo-gradient: linear-gradient(135deg, #8b7160, #5a463a);
+  --sidebar-text-active: #FFFFFF;
+  --sidebar-logo-gradient: linear-gradient(135deg, #5A3A2E, #8A6250);
 
   /* Main colors */
-  --bg: #f5f1ed;
-  --white: #ffffff;
-  --text: #3e3028;
-  --text-light: #8a7a6f;
-  --border: #e5ddd5;
+  --bg: #F6F2EE;
+  --white: #FFFFFF;
 
-  /* Primary */
-  --primary: #5a463a;
-  --primary-dark: #3e3028;
-  --primary-light: #eee6df;
+  --text: #382821;
+  --text-light: #806F64;
 
-  /* Functional colors */
-  --success: #5f7968;
-  --success-light: #e3ece6;
+  --border: #E2D8D0;
 
-  --warning: #a27d4f;
-  --warning-light: #f3eadc;
+  /* Primary ESSENCE brown */
+  --primary: #5A3A2E;
+  --primary-dark: #3F261E;
+  --primary-light: #EFE4DE;
 
-  --danger: #a45d52;
-  --danger-light: #f3e2df;
+  /* Status colors */
+  --success: #6C7A6B;
+  --success-light: #E4ECE5;
 
-  --info: #746d66;
-  --info-light: #ebe8e4;
+  --warning: #B08B5A;
+  --warning-light: #F3E9D7;
 
-  --purple: #7b6b61;
-  --purple-light: #ebe5e0;
+  --danger: #9A5F50;
+  --danger-light: #F1E1DD;
+
+  --info: #7A6F67;
+  --info-light: #EAE5E1;
+
+  /* Secondary neutral brown */
+  --purple: #8B7465;
+  --purple-light: #EEE7E1;
 
   /* Card */
   --card-radius: 12px;
   --card-shadow:
-    0 1px 3px rgba(62, 48, 40, 0.05),
-    0 4px 16px rgba(62, 48, 40, 0.06);
+    0 1px 3px rgba(63, 38, 30, 0.05),
+    0 4px 16px rgba(63, 38, 30, 0.06);
 
   /* Transition */
   --t: 0.2s ease;
@@ -122,7 +127,7 @@ img {
 
 .sidebar__logo {
   padding: 24px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -151,7 +156,7 @@ img {
 }
 
 .sidebar__logo-sub {
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.35);
   font-size: 10px;
   letter-spacing: 0.5px;
   margin-top: 1px;
@@ -168,7 +173,7 @@ img {
   font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.28);
   font-weight: 500;
 }
 
@@ -210,7 +215,7 @@ img {
 
 .sidebar__item-badge {
   margin-left: auto;
-  background: #8b7160;
+  background: var(--primary);
   color: #fff;
   font-size: 10px;
   font-weight: 600;
@@ -221,7 +226,7 @@ img {
 
 .sidebar__footer {
   padding: 16px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -248,7 +253,7 @@ img {
 }
 
 .sidebar__user-role {
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.35);
   font-size: 11px;
 }
 
@@ -565,9 +570,7 @@ img {
   gap: 20px;
 }
 
-/* ========================================
-   CHART
-   ======================================== */
+/* Chart placeholder */
 
 .chart-area {
   height: 260px;
@@ -603,9 +606,7 @@ img {
   font-weight: 500;
 }
 
-/* ========================================
-   TOP PRODUCTS
-   ======================================== */
+/* Top Products list */
 
 .top-product-item {
   display: flex;
@@ -645,9 +646,7 @@ img {
   color: var(--success);
 }
 
-/* ========================================
-   ORDERS TABLE
-   ======================================== */
+/* Recent orders table */
 
 .orders-table-wrap {
   overflow-x: auto;
@@ -682,7 +681,7 @@ img {
 }
 
 .data-table tbody tr:hover td {
-  background: #faf8f5;
+  background: #F1EBE5;
 }
 
 /* ========================================
@@ -701,32 +700,32 @@ img {
 
 .badge--green {
   background: var(--success-light);
-  color: #486554;
+  color: #526356;
 }
 
 .badge--yellow {
   background: var(--warning-light);
-  color: #80623e;
+  color: #80643A;
 }
 
 .badge--red {
   background: var(--danger-light);
-  color: #8b4d45;
+  color: #75463D;
 }
 
 .badge--blue {
   background: var(--info-light);
-  color: #655e58;
+  color: #655C55;
 }
 
 .badge--gray {
-  background: #eeeae6;
-  color: #655b54;
+  background: #EEEAE6;
+  color: #625A54;
 }
 
 .badge--purple {
   background: var(--purple-light);
-  color: #66574e;
+  color: #695648;
 }
 
 .badge--pink {
@@ -790,7 +789,8 @@ img {
 }
 
 .btn--danger:hover {
-  background: #8e4d45;
+  background: #7F4B40;
+  border-color: #7F4B40;
 }
 
 .btn--ghost {
@@ -869,7 +869,7 @@ img {
 
 select.form-control {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a7a6f' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23806F64' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
   padding-right: 32px;
@@ -893,9 +893,7 @@ select.form-control {
   gap: 16px;
 }
 
-/* ========================================
-   TOGGLE SWITCH
-   ======================================== */
+/* Toggle Switch */
 
 .toggle-wrap {
   display: flex;
@@ -935,7 +933,7 @@ select.form-control {
   border-radius: 50%;
   background: #fff;
   transition: transform var(--t);
-  box-shadow: 0 1px 4px rgba(62, 48, 40, 0.15);
+  box-shadow: 0 1px 4px rgba(63, 38, 30, 0.15);
 }
 
 .toggle input:checked + .toggle-slider {
@@ -1097,7 +1095,7 @@ select.form-control {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(62, 48, 40, 0.45);
+  background: rgba(46, 29, 23, 0.55);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -1120,7 +1118,7 @@ select.form-control {
   max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(62, 48, 40, 0.2);
+  box-shadow: 0 20px 60px rgba(46, 29, 23, 0.22);
   transform: translateY(16px);
   transition: transform var(--t);
 }
