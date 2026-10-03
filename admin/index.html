@@ -6175,19 +6175,69 @@
 
 
         products.unshift(
-          newProduct
-        );
+  newProduct
+);
 
+/* SALVA TAMBÉM NO SUPABASE */
+try {
 
+  const payload = {
+    name: newProduct.name,
+    sku: newProduct.sku,
+    category: newProduct.category,
+    price: newProduct.price,
+    stock: newProduct.stock,
+    description: newProduct.description || "",
+    image_url:
+      newProduct.image &&
+      newProduct.image.startsWith("http")
+        ? newProduct.image
+        : null
+  };
 
-        showToastSafe(
+  const { data, error } =
+    await window.supabaseClient
+      .from("products")
+      .insert([payload])
+      .select()
+      .single();
 
-          "Produto criado com sucesso! ✅"
+  if (error) {
 
-        );
+    console.error(
+      "Erro ao salvar no Supabase:",
+      error
+    );
 
-      }
+    showToastSafe(
+      "Criou no painel, mas não salvou no Supabase. ⚠️"
+    );
 
+  } else {
+
+    console.log(
+      "Produto salvo no Supabase:",
+      data
+    );
+
+    showToastSafe(
+      "Produto criado e salvo no Supabase! ✅"
+    );
+
+  }
+
+} catch (error) {
+
+  console.error(
+    "Erro Supabase:",
+    error
+  );
+
+  showToastSafe(
+    "Criou no painel, mas deu erro no Supabase. ⚠️"
+  );
+
+}
 
 
       /*
