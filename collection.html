@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products — ESSENCE</title>
+  <meta name="description" content="Browse our full collection of premium activewear. Tops, bottoms, accessories and more. Free shipping on orders over $75.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== ANNOUNCEMENT BAR ===== -->
+  <div class="announcement-bar" id="announcement-bar">
+    <button class="announcement-bar__nav announcement-bar__nav--prev" aria-label="Previous">‹</button>
+    <p class="announcement-bar__text" id="announcement-text">NEW ARRIVALS JUST DROPPED ✨</p>
+    <button class="announcement-bar__nav announcement-bar__nav--next" aria-label="Next">›</button>
+  </div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <div class="navbar__left">
+        <button class="navbar__mobile-toggle" id="mobile-toggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="navbar__menu">
+          <li class="navbar__dropdown">
+            <a href="collection.html" class="navbar__link">Shop <span class="chevron">▾</span></a>
+            <div class="navbar__dropdown-menu">
+              <a href="collection.html" class="navbar__dropdown-item">All Products</a>
+              <a href="collection.html" class="navbar__dropdown-item">Tops</a>
+              <a href="collection.html" class="navbar__dropdown-item">Bottoms</a>
+              <a href="collection.html" class="navbar__dropdown-item">Accessories</a>
+              <a href="collection.html" class="navbar__dropdown-item">New Arrivals</a>
+              <a href="collection.html" class="navbar__dropdown-item">Best Sellers</a>
+            </div>
+          </li>
+          <li><a href="#" class="navbar__link">Blog</a></li>
+          <li><a href="#" class="navbar__link">About</a></li>
+          <li><a href="#" class="navbar__link">FAQ</a></li>
+          <li><a href="#" class="navbar__link">Contact</a></li>
+        </ul>
+      </div>
+      <div class="navbar__center">
+        <a href="index.html" class="navbar__logo">ESSENCE</a>
+      </div>
+      <div class="navbar__right">
+        <div class="navbar__currency">
+          <span>🌐</span>
+          <span>USD $</span>
+          <span class="chevron" style="font-size:10px;">▾</span>
+        </div>
+        <button class="navbar__icon-btn" id="search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+        <button class="navbar__icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        <button class="navbar__icon-btn" id="cart-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="navbar__cart-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== COLLECTION HEADER ===== -->
+  <div class="collection-header">
+    <h1 class="collection-header__title">ALL PRODUCTS</h1>
+    <p class="collection-header__count">18 products</p>
+  </div>
+
+  <!-- ===== COLLECTION LAYOUT ===== -->
+  <div class="container">
+    <div class="collection-layout">
+
+      <!-- Filters Sidebar -->
+      <aside class="filters">
+        <div class="filter-group open">
+          <div class="filter-group__header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Category</span>
+            <span class="filter-group__toggle">▾</span>
+          </div>
+          <div class="filter-group__body">
+            <label class="filter-option"><input type="checkbox" checked> All <span class="filter-option__count">(18)</span></label>
+            <label class="filter-option"><input type="checkbox"> Tops <span class="filter-option__count">(6)</span></label>
+            <label class="filter-option"><input type="checkbox"> Bottoms <span class="filter-option__count">(8)</span></label>
+            <label class="filter-option"><input type="checkbox"> Accessories <span class="filter-option__count">(4)</span></label>
+          </div>
+        </div>
+        <div class="filter-group open">
+          <div class="filter-group__header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Size</span>
+            <span class="filter-group__toggle">▾</span>
+          </div>
+          <div class="filter-group__body">
+            <label class="filter-option"><input type="checkbox"> XS <span class="filter-option__count">(12)</span></label>
+            <label class="filter-option"><input type="checkbox"> S <span class="filter-option__count">(16)</span></label>
+            <label class="filter-option"><input type="checkbox"> M <span class="filter-option__count">(18)</span></label>
+            <label class="filter-option"><input type="checkbox"> L <span class="filter-option__count">(15)</span></label>
+            <label class="filter-option"><input type="checkbox"> XL <span class="filter-option__count">(10)</span></label>
+          </div>
+        </div>
+        <div class="filter-group open">
+          <div class="filter-group__header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Color</span>
+            <span class="filter-group__toggle">▾</span>
+          </div>
+          <div class="filter-group__body">
+            <label class="filter-option"><input type="checkbox"> Black <span class="filter-option__count">(8)</span></label>
+            <label class="filter-option"><input type="checkbox"> Gray <span class="filter-option__count">(5)</span></label>
+            <label class="filter-option"><input type="checkbox"> Beige <span class="filter-option__count">(4)</span></label>
+            <label class="filter-option"><input type="checkbox"> Pink <span class="filter-option__count">(3)</span></label>
+            <label class="filter-option"><input type="checkbox"> Blue <span class="filter-option__count">(3)</span></label>
+          </div>
+        </div>
+        <div class="filter-group open">
+          <div class="filter-group__header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Price</span>
+            <span class="filter-group__toggle">▾</span>
+          </div>
+          <div class="filter-group__body">
+            <label class="filter-option"><input type="checkbox"> Under $30 <span class="filter-option__count">(3)</span></label>
+            <label class="filter-option"><input type="checkbox"> $30 - $50 <span class="filter-option__count">(7)</span></label>
+            <label class="filter-option"><input type="checkbox"> $50 - $75 <span class="filter-option__count">(6)</span></label>
+            <label class="filter-option"><input type="checkbox"> Over $75 <span class="filter-option__count">(2)</span></label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Products -->
+      <div>
+        <div class="collection-toolbar">
+          <div class="collection-toolbar__sort">
+            <span>Sort by:</span>
+            <select>
+              <option>Featured</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest</option>
+              <option>Best Selling</option>
+            </select>
+          </div>
+          <div class="collection-toolbar__view">
+            <button class="collection-toolbar__view-btn active" aria-label="Grid view">⊞</button>
+            <button class="collection-toolbar__view-btn" aria-label="List view">☰</button>
+          </div>
+        </div>
+        <div class="collection-grid">
+
+          <!-- Product 1 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-1.jpg" alt="High-Waist Training Leggings">
+              <div class="product-card__badges">
+                <span class="badge badge--save">SAVE $20.00</span>
+                <span class="badge badge--new">NEW</span>
+              </div>
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('High-Waist Training Leggings', 49, 'assets/images/product-1.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">High-Waist Training Leggings</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price product-card__price--sale">$49.00</span>
+              <span class="product-card__price product-card__price--original">$69.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#555"></span>
+              <span class="color-swatch" style="background:#e0d5c1"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span><span class="size-option">XL</span>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-2.jpg" alt="Ribbed Performance Leggings">
+              <div class="product-card__badges">
+                <span class="badge badge--popular">POPULAR</span>
+              </div>
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Ribbed Performance Leggings', 58, 'assets/images/product-2.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">Ribbed Performance Leggings</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price">$58.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#c4b9a8"></span>
+              <span class="color-swatch" style="background:#333"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span><span class="size-option">XL</span>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-3.jpg" alt="High-Rise Athletic Tights">
+              <div class="product-card__badges">
+                <span class="badge badge--popular">POPULAR</span>
+              </div>
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('High-Rise Athletic Tights', 61, 'assets/images/product-3.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">High-Rise Athletic Tights</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price">$61.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#d4956a"></span>
+              <span class="color-swatch" style="background:#333"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span><span class="size-option">XL</span>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-4.jpg" alt="Full-Support Sports Bra">
+              <div class="product-card__badges">
+                <span class="badge badge--new">NEW</span>
+              </div>
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Full-Support Sports Bra', 42, 'assets/images/product-4.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">Full-Support Sports Bra</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price">$42.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#7eb8d8"></span>
+              <span class="color-swatch" style="background:#d18ec2"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span><span class="size-option">XL</span>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-5.jpg" alt="Breathable Tank Top">
+              <div class="product-card__badges">
+                <span class="badge badge--save">SAVE $15.00</span>
+              </div>
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Breathable Tank Top', 35, 'assets/images/product-5.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">Breathable Tank Top</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price product-card__price--sale">$35.00</span>
+              <span class="product-card__price product-card__price--original">$50.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#555"></span>
+              <span class="color-swatch" style="background:#f0a0c0"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-6.jpg" alt="Seamless Yoga Set">
+              <div class="product-card__badges">
+                <span class="badge badge--popular">POPULAR</span>
+              </div>
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Seamless Yoga Set', 79, 'assets/images/product-6.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">Seamless Yoga Set</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price">$79.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#c4b9a8"></span>
+              <span class="color-swatch" style="background:#333"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span><span class="size-option">XL</span>
+            </div>
+          </div>
+
+          <!-- Product 7 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-1.jpg" alt="Compression Training Shorts">
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Compression Training Shorts', 38, 'assets/images/product-1.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">Compression Training Shorts</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price">$38.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#555"></span>
+              <span class="color-swatch" style="background:#8b5a3c"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span>
+            </div>
+          </div>
+
+          <!-- Product 8 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-3.jpg" alt="Flex-Fit Crop Top">
+              <div class="product-card__badges">
+                <span class="badge badge--new">NEW</span>
+              </div>
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Flex-Fit Crop Top', 44, 'assets/images/product-3.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">Flex-Fit Crop Top</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price">$44.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#d4956a"></span>
+              <span class="color-swatch" style="background:#7eb8d8"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span><span class="size-option">XL</span>
+            </div>
+          </div>
+
+          <!-- Product 9 -->
+          <div class="product-card" onclick="window.location='product.html'">
+            <div class="product-card__image">
+              <img src="assets/images/product-2.jpg" alt="Sculpt Seamless Leggings">
+              <div class="product-card__badges">
+                <span class="badge badge--save">SAVE $25.00</span>
+              </div>
+              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Sculpt Seamless Leggings', 52, 'assets/images/product-2.jpg')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <h3 class="product-card__title">Sculpt Seamless Leggings</h3>
+            <div class="product-card__prices">
+              <span class="product-card__price product-card__price--sale">$52.00</span>
+              <span class="product-card__price product-card__price--original">$77.00</span>
+            </div>
+            <div class="product-card__colors">
+              <span class="color-swatch active" style="background:#c4b9a8"></span>
+              <span class="color-swatch" style="background:#555"></span>
+            </div>
+            <div class="product-card__sizes">
+              <span class="size-option">XS</span><span class="size-option">S</span><span class="size-option">M</span><span class="size-option">L</span><span class="size-option">XL</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__brand-name">ESSENCE</div>
+          <p class="footer__brand-desc">Premium activewear designed for the modern woman. Elegance in every movement.</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a href="#" class="footer__social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="#" class="footer__social-link" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">SHOP</h4>
+          <div class="footer__links">
+            <a href="collection.html" class="footer__link">All Products</a>
+            <a href="collection.html" class="footer__link">Tops</a>
+            <a href="collection.html" class="footer__link">Bottoms</a>
+            <a href="collection.html" class="footer__link">Accessories</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">HELP</h4>
+          <div class="footer__links">
+            <a href="#" class="footer__link">FAQ</a>
+            <a href="#" class="footer__link">Shipping & Returns</a>
+            <a href="#" class="footer__link">Size Guide</a>
+            <a href="#" class="footer__link">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">COMPANY</h4>
+          <div class="footer__links">
+            <a href="#" class="footer__link">About Us</a>
+            <a href="#" class="footer__link">Sustainability</a>
+            <a href="#" class="footer__link">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 ESSENCE. All rights reserved. · <a href="admin/index.html" style="opacity:0.4;font-size:11px;">Admin</a></p>
+        <div class="footer__payments">
+          <span class="footer__payment-icon">VISA</span>
+          <span class="footer__payment-icon">MC</span>
+          <span class="footer__payment-icon">AMEX</span>
+          <span class="footer__payment-icon">PAYPAL</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-sidebar__header">
+      <h3 class="cart-sidebar__title">YOUR CART</h3>
+      <button class="cart-sidebar__close" id="cart-close" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-sidebar__body" id="cart-body">
+      <div class="cart-sidebar__empty"><p>Your cart is empty</p></div>
+    </div>
+    <div class="cart-sidebar__footer">
+      <div class="cart-sidebar__subtotal"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+      <button class="btn btn--dark btn--full cart-sidebar__checkout">CHECKOUT</button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu__header">
+      <span class="navbar__logo">ESSENCE</span>
+      <button class="mobile-menu__close" id="mobile-close" aria-label="Close menu">✕</button>
+    </div>
+    <div class="mobile-menu__links">
+      <a href="collection.html" class="mobile-menu__link">Shop</a>
+      <a href="#" class="mobile-menu__link">Blog</a>
+      <a href="#" class="mobile-menu__link">About</a>
+      <a href="#" class="mobile-menu__link">FAQ</a>
+      <a href="#" class="mobile-menu__link">Contact</a>
+    </div>
+  </div>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-overlay__close" id="search-close" aria-label="Close search">✕</button>
+    <div class="search-overlay__inner">
+      <input type="text" class="search-overlay__input" placeholder="Search products..." autofocus>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
