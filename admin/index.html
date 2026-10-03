@@ -3504,7 +3504,7 @@
         <button
           class="btn btn--primary"
           id="produto-save-button"
-          onclick="saveProduct()"
+          onclick="saveProductSupabase()"
         >
           Criar Produto
         </button>
@@ -6430,6 +6430,83 @@ try {
 
 </script>
 
+  <script>
+  window.saveProductSupabase = async function () {
+
+    console.log("SALVAMENTO SUPABASE DISPAROU ✅");
+
+    const nome = document.getElementById("produto-nome")?.value.trim();
+    const preco = Number(document.getElementById("produto-preco")?.value || 0);
+    const estoque = Number(document.getElementById("produto-estoque")?.value || 0);
+    const categoria = document.getElementById("produto-categoria")?.value || "";
+    const descricao = document.getElementById("produto-descricao")?.value.trim() || "";
+
+    if (!nome) {
+      alert("Preencha o nome do produto.");
+      return;
+    }
+
+    if (!preco || preco <= 0) {
+      alert("Informe um preço válido.");
+      return;
+    }
+
+    const sku =
+      nome
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase()
+        .replace(/[^A-Z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")
+        .slice(0, 16)
+      + "-" +
+      Date.now().toString().slice(-6);
+
+    const payload = {
+      name: nome,
+      sku: sku,
+      category: categoria,
+      price: preco,
+      stock: estoque,
+      description: descricao,
+      image_url: null
+    };
+
+    console.log("Enviando para Supabase:", payload);
+
+    const { data, error } = await window.supabaseClient
+      .from("products")
+      .insert([payload])
+      .select()
+      .single();
+
+    if (error) {
+
+      console.error("ERRO SUPABASE ❌", error);
+
+      alert(
+        "O Supabase recusou o produto. Abra o Console para vermos o erro."
+      );
+
+      return;
+    }
+
+    console.log("PRODUTO SALVO NO SUPABASE ✅", data);
+
+    /*
+     * Depois que o Supabase salvar,
+     * usamos o salvamento antigo para
+     * o produto também aparecer no painel.
+     */
+    if (typeof window.saveProduct === "function") {
+      window.saveProduct();
+    }
+
+  };
+</script>
+
+</body>
+</html>
 
 </body>
 </html>
