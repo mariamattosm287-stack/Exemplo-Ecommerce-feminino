@@ -5651,8 +5651,236 @@ aria-label="Remover produto"
    ========================================= */
 
 window.addEssenceProductToCart =
-
 function (id) {
+
+
+const product =
+
+essenceProducts.find(
+
+item =>
+
+String(
+item.id
+)
+
+===
+
+String(
+id
+)
+
+);
+
+
+
+if (!product) {
+
+return;
+
+}
+
+
+
+/* =========================================
+   VERIFICA TAMANHOS
+   ========================================= */
+
+const sizes =
+
+Array.isArray(
+product.sizes
+)
+
+?
+
+product.sizes
+
+:
+
+[];
+
+
+
+/* =========================================
+   VERIFICA CORES
+   ========================================= */
+
+const colors =
+
+Array.isArray(
+product.colors
+)
+
+?
+
+product.colors
+
+:
+
+[];
+
+
+
+/*
+ * Se tiver tamanho ou cor,
+ * manda para a página do produto.
+ *
+ * Assim a cliente não consegue colocar
+ * um produto no carrinho sem escolher
+ * a variação.
+ */
+
+if (
+
+sizes.length
+
+||
+
+colors.length
+
+) {
+
+
+window.location.href =
+
+`product.html?id=${encodeURIComponent(
+String(
+product.id
+)
+)}`;
+
+
+return;
+
+}
+
+
+
+const prices =
+
+getPrices(
+product
+);
+
+
+
+const cart =
+
+getCart();
+
+
+
+const existing =
+
+cart.find(
+
+item =>
+
+String(
+item.id
+)
+
+===
+
+String(
+product.id
+)
+
+&&
+
+String(
+item.size || ""
+)
+
+===
+
+""
+
+&&
+
+String(
+item.color || ""
+)
+
+===
+
+""
+
+);
+
+
+
+if (
+existing
+) {
+
+
+existing.quantity +=
+1;
+
+
+}
+
+else {
+
+
+cart.push({
+
+
+id:
+product.id,
+
+
+name:
+product.name,
+
+
+price:
+prices.current,
+
+
+image:
+productImage(
+product
+),
+
+
+size:
+null,
+
+
+color:
+null,
+
+
+quantity:
+1,
+
+
+stock:
+Number(
+product.stock || 0
+)
+
+
+});
+
+
+}
+
+
+
+saveCart(
+cart
+);
+
+
+
+openCart();
+
+
+};
 
 
 const product =
