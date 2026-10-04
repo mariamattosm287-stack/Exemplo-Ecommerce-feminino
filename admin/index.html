@@ -7090,6 +7090,1623 @@ initAdmin();
 
 </script>
 
+<!-- =========================================
+     PATCH PRODUTOS — MULTIFOTOS + CORES
+     COLE ESTE BLOCO LOGO ANTES DE </body>
+     ========================================= -->
+<script>
+(() => {
 
+  const state = {
+    images: [],
+    colors: []
+  };
+
+
+  const $patch =
+    (id) =>
+      document.getElementById(id);
+
+
+
+  function normalizeArray(value) {
+
+    if (
+      Array.isArray(value)
+    ) {
+
+      return value
+
+        .map(
+          item =>
+            String(
+              item ?? ""
+            )
+              .trim()
+        )
+
+        .filter(
+          Boolean
+        );
+
+    }
+
+
+    if (
+      typeof value === "string"
+      &&
+      value.trim()
+    ) {
+
+      try {
+
+        const parsed =
+          JSON.parse(value);
+
+
+        if (
+          Array.isArray(parsed)
+        ) {
+
+          return normalizeArray(
+            parsed
+          );
+
+        }
+
+      }
+
+      catch (_) {}
+
+
+      return value
+
+        .split(",")
+
+        .map(
+          item =>
+            item.trim()
+        )
+
+        .filter(
+          Boolean
+        );
+
+    }
+
+
+    return [];
+
+  }
+
+
+
+  function escapePatch(value) {
+
+    return String(
+      value ?? ""
+    )
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+
+  /* =========================================
+     CRIA OS CAMPOS NOVOS NO MODAL
+     ========================================= */
+
+  function ensureProductFields() {
+
+    const box =
+      $patch(
+        "produto-image-upload"
+      );
+
+
+    if (!box) {
+      return;
+    }
+
+
+    const group =
+      box.closest(
+        ".form-group"
+      );
+
+
+    if (!group) {
+      return;
+    }
+
+
+    const groupLabel =
+      group.querySelector(
+        ".form-label"
+      );
+
+
+    if (groupLabel) {
+
+      groupLabel.textContent =
+        "Fotos do produto";
+
+    }
+
+
+
+    const oldPreview =
+      $patch(
+        "produto-imagem-preview"
+      );
+
+
+    if (oldPreview) {
+
+      oldPreview.style.display =
+        "none";
+
+    }
+
+
+
+    const label =
+      $patch(
+        "produto-image-label"
+      );
+
+
+    if (label) {
+
+      label.textContent =
+
+        state.images.length
+
+          ?
+
+          `${state.images.length} foto(s) adicionada(s)`
+
+          :
+
+          "Clique para adicionar fotos";
+
+    }
+
+
+
+    const input =
+      $patch(
+        "produto-imagem"
+      );
+
+
+    if (input) {
+
+      input.multiple =
+        true;
+
+    }
+
+
+
+    const helper =
+
+      box
+        .querySelector(
+          "strong"
+        )
+        ?.nextElementSibling;
+
+
+    if (helper) {
+
+      helper.textContent =
+        "Selecione várias imagens de uma vez. A primeira será a capa do produto.";
+
+    }
+
+
+
+    /* GALERIA */
+
+    if (
+      !$patch(
+        "produto-imagens-preview"
+      )
+    ) {
+
+      const gallery =
+        document.createElement(
+          "div"
+        );
+
+
+      gallery.id =
+        "produto-imagens-preview";
+
+
+      gallery.style.cssText = `
+
+        display:grid;
+
+        grid-template-columns:
+          repeat(
+            auto-fill,
+            minmax(110px,1fr)
+          );
+
+        gap:12px;
+
+        margin-top:14px;
+
+      `;
+
+
+      group.appendChild(
+        gallery
+      );
+
+    }
+
+
+
+    /* CORES */
+
+    if (
+      !$patch(
+        "produto-cores-group"
+      )
+    ) {
+
+      const colorsGroup =
+        document.createElement(
+          "div"
+        );
+
+
+      colorsGroup.id =
+        "produto-cores-group";
+
+
+      colorsGroup.className =
+        "form-group form-group--full";
+
+
+      colorsGroup.innerHTML = `
+
+        <label class="form-label">
+          Cores disponíveis
+        </label>
+
+
+        <div
+          style="
+            display:flex;
+            gap:8px;
+            align-items:center;
+          "
+        >
+
+          <input
+            id="produto-cor-input"
+            class="form-control"
+            type="text"
+            placeholder="Ex: Branco"
+          >
+
+
+          <button
+            type="button"
+            class="btn btn--outline"
+            id="produto-cor-add"
+            style="white-space:nowrap"
+          >
+            + Adicionar
+          </button>
+
+        </div>
+
+
+        <div
+          id="produto-cores-list"
+          style="
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:12px;
+          "
+        ></div>
+
+      `;
+
+
+      group.insertAdjacentElement(
+
+        "afterend",
+
+        colorsGroup
+
+      );
+
+
+
+      $patch(
+        "produto-cor-add"
+      )
+
+        ?.addEventListener(
+
+          "click",
+
+          addColor
+
+        );
+
+
+
+      $patch(
+        "produto-cor-input"
+      )
+
+        ?.addEventListener(
+
+          "keydown",
+
+          event => {
+
+            if (
+              event.key ===
+              "Enter"
+            ) {
+
+              event.preventDefault();
+
+              addColor();
+
+            }
+
+          }
+
+        );
+
+    }
+
+
+
+    renderImages();
+
+    renderColors();
+
+  }
+
+
+
+  /* =========================================
+     GALERIA
+     ========================================= */
+
+  function renderImages() {
+
+    const container =
+
+      $patch(
+        "produto-imagens-preview"
+      );
+
+
+    const label =
+
+      $patch(
+        "produto-image-label"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+
+    if (label) {
+
+      label.textContent =
+
+        state.images.length
+
+          ?
+
+          `${state.images.length} foto(s) adicionada(s)`
+
+          :
+
+          "Clique para adicionar fotos";
+
+    }
+
+
+
+    if (
+      !state.images.length
+    ) {
+
+      container.innerHTML =
+        "";
+
+      return;
+
+    }
+
+
+
+    container.innerHTML =
+
+      state.images
+
+        .map(
+
+          (
+            image,
+            index
+          ) => `
+
+
+            <div
+              style="
+                position:relative;
+                border:1px solid #e5e5e5;
+                border-radius:10px;
+                overflow:hidden;
+                background:#fff;
+                min-width:0;
+              "
+            >
+
+
+              <img
+                src="${escapePatch(image)}"
+                alt="Foto ${index + 1}"
+                style="
+                  width:100%;
+                  aspect-ratio:4/5;
+                  object-fit:cover;
+                  display:block;
+                "
+              >
+
+
+
+              ${
+                index === 0
+
+                  ?
+
+                  `
+
+                    <span
+                      style="
+                        position:absolute;
+                        top:7px;
+                        left:7px;
+                        background:#111;
+                        color:#fff;
+                        padding:4px 7px;
+                        border-radius:20px;
+                        font-size:9px;
+                        font-weight:700;
+                      "
+                    >
+                      CAPA
+                    </span>
+
+                  `
+
+                  :
+
+                  `
+
+                    <button
+                      type="button"
+                      data-product-cover="${index}"
+                      style="
+                        position:absolute;
+                        left:7px;
+                        bottom:7px;
+                        border:0;
+                        background:rgba(255,255,255,.94);
+                        border-radius:20px;
+                        padding:5px 8px;
+                        font-size:9px;
+                        cursor:pointer;
+                      "
+                    >
+                      Tornar capa
+                    </button>
+
+                  `
+              }
+
+
+
+              <button
+                type="button"
+                data-product-remove-image="${index}"
+                aria-label="Remover imagem"
+                style="
+                  position:absolute;
+                  top:7px;
+                  right:7px;
+                  width:26px;
+                  height:26px;
+                  border:0;
+                  border-radius:50%;
+                  background:rgba(255,255,255,.95);
+                  cursor:pointer;
+                  font-size:13px;
+                "
+              >
+                ✕
+              </button>
+
+
+            </div>
+
+          `
+
+        )
+
+        .join(
+          ""
+        );
+
+
+
+    /* TORNAR CAPA */
+
+    container
+
+      .querySelectorAll(
+        "[data-product-cover]"
+      )
+
+      .forEach(
+
+        button => {
+
+          button.addEventListener(
+
+            "click",
+
+            event => {
+
+              event.stopPropagation();
+
+
+              const index =
+
+                Number(
+                  button.dataset
+                    .productCover
+                );
+
+
+              const selected =
+
+                state.images.splice(
+                  index,
+                  1
+                )[0];
+
+
+              if (!selected) {
+                return;
+              }
+
+
+              state.images.unshift(
+                selected
+              );
+
+
+              productImageData =
+
+                state.images[0]
+
+                ||
+
+                "";
+
+
+              renderImages();
+
+            }
+
+          );
+
+        }
+
+      );
+
+
+
+    /* REMOVER FOTO */
+
+    container
+
+      .querySelectorAll(
+        "[data-product-remove-image]"
+      )
+
+      .forEach(
+
+        button => {
+
+          button.addEventListener(
+
+            "click",
+
+            event => {
+
+              event.stopPropagation();
+
+
+              const index =
+
+                Number(
+
+                  button.dataset
+                    .productRemoveImage
+
+                );
+
+
+              state.images.splice(
+                index,
+                1
+              );
+
+
+              productImageData =
+
+                state.images[0]
+
+                ||
+
+                "";
+
+
+              renderImages();
+
+            }
+
+          );
+
+        }
+
+      );
+
+  }
+
+
+
+  /* =========================================
+     CORES
+     ========================================= */
+
+  function addColor() {
+
+    const input =
+
+      $patch(
+        "produto-cor-input"
+      );
+
+
+    if (!input) {
+      return;
+    }
+
+
+    const color =
+
+      input.value
+        .trim();
+
+
+    if (!color) {
+      return;
+    }
+
+
+
+    const exists =
+
+      state.colors.some(
+
+        item =>
+
+          item.toLowerCase()
+
+          ===
+
+          color.toLowerCase()
+
+      );
+
+
+
+    if (!exists) {
+
+      state.colors.push(
+        color
+      );
+
+    }
+
+
+    input.value =
+      "";
+
+
+    input.focus();
+
+
+    renderColors();
+
+  }
+
+
+
+  function renderColors() {
+
+    const container =
+
+      $patch(
+        "produto-cores-list"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+
+    if (
+      !state.colors.length
+    ) {
+
+      container.innerHTML = `
+
+        <span
+          style="
+            font-size:11px;
+            color:#999;
+          "
+        >
+          Nenhuma cor cadastrada.
+        </span>
+
+      `;
+
+      return;
+
+    }
+
+
+
+    container.innerHTML =
+
+      state.colors
+
+        .map(
+
+          (
+            color,
+            index
+          ) => `
+
+
+            <span
+              style="
+                display:inline-flex;
+                align-items:center;
+                gap:7px;
+                padding:7px 10px;
+                border-radius:20px;
+                background:#f4f1ef;
+                font-size:11px;
+                color:#443934;
+              "
+            >
+
+              ${escapePatch(color)}
+
+
+              <button
+                type="button"
+                data-product-remove-color="${index}"
+                aria-label="Remover cor"
+                style="
+                  border:0;
+                  background:none;
+                  padding:0;
+                  cursor:pointer;
+                  font-size:12px;
+                "
+              >
+                ✕
+              </button>
+
+            </span>
+
+          `
+
+        )
+
+        .join(
+          ""
+        );
+
+
+
+    container
+
+      .querySelectorAll(
+        "[data-product-remove-color]"
+      )
+
+      .forEach(
+
+        button => {
+
+          button.addEventListener(
+
+            "click",
+
+            () => {
+
+              const index =
+
+                Number(
+
+                  button.dataset
+                    .productRemoveColor
+
+                );
+
+
+              state.colors.splice(
+                index,
+                1
+              );
+
+
+              renderColors();
+
+            }
+
+          );
+
+        }
+
+      );
+
+  }
+
+
+
+  /* =========================================
+     REMOVE O UPLOAD ANTIGO DE UMA FOTO
+     ========================================= */
+
+  function bindMultipleImageInput() {
+
+    const oldInput =
+
+      $patch(
+        "produto-imagem"
+      );
+
+
+    if (!oldInput) {
+      return;
+    }
+
+
+
+    /*
+     * Clona o input para remover o listener
+     * antigo que aceitava apenas 1 imagem.
+     */
+
+    const input =
+
+      oldInput.cloneNode(
+        true
+      );
+
+
+    input.value =
+      "";
+
+
+    input.multiple =
+      true;
+
+
+    oldInput.replaceWith(
+      input
+    );
+
+
+
+    input.addEventListener(
+
+      "change",
+
+      async () => {
+
+
+        const files =
+
+          Array.from(
+
+            input.files
+
+            ||
+
+            []
+
+          );
+
+
+        if (
+          !files.length
+        ) {
+
+          return;
+
+        }
+
+
+
+        try {
+
+
+          for (
+            const file
+            of files
+          ) {
+
+
+            const data =
+
+              await compressImage(
+
+                file,
+
+                900,
+
+                .74
+
+              );
+
+
+            state.images.push(
+              data
+            );
+
+          }
+
+
+
+          productImageData =
+
+            state.images[0]
+
+            ||
+
+            "";
+
+
+
+          input.value =
+            "";
+
+
+          renderImages();
+
+
+        }
+
+        catch (error) {
+
+
+          console.error(
+            error
+          );
+
+
+          showToast(
+
+            error?.message
+
+            ||
+
+            "Erro ao processar as imagens."
+
+          );
+
+
+        }
+
+
+      }
+
+    );
+
+  }
+
+
+
+  /* =========================================
+     CARREGA DADOS AO EDITAR
+     ========================================= */
+
+  function loadProductState(
+    product
+  ) {
+
+
+    state.images =
+
+      normalizeArray(
+        product?.image_urls
+      );
+
+
+
+    if (
+
+      !state.images.length
+
+      &&
+
+      product?.image_url
+
+    ) {
+
+      state.images = [
+
+        product.image_url
+
+      ];
+
+    }
+
+
+
+    state.colors =
+
+      normalizeArray(
+        product?.colors
+      );
+
+
+
+    productImageData =
+
+      state.images[0]
+
+      ||
+
+      "";
+
+
+
+    const colorInput =
+
+      $patch(
+        "produto-cor-input"
+      );
+
+
+    if (colorInput) {
+
+      colorInput.value =
+        "";
+
+    }
+
+
+
+    const oldPreview =
+
+      $patch(
+        "produto-imagem-preview"
+      );
+
+
+    if (oldPreview) {
+
+      oldPreview.style.display =
+        "none";
+
+    }
+
+
+
+    renderImages();
+
+    renderColors();
+
+  }
+
+
+
+  /* =========================================
+     LIMPA PARA NOVO PRODUTO
+     ========================================= */
+
+  function resetProductState() {
+
+    state.images =
+      [];
+
+
+    state.colors =
+      [];
+
+
+    productImageData =
+      "";
+
+
+
+    const colorInput =
+
+      $patch(
+        "produto-cor-input"
+      );
+
+
+    if (colorInput) {
+
+      colorInput.value =
+        "";
+
+    }
+
+
+
+    const oldPreview =
+
+      $patch(
+        "produto-imagem-preview"
+      );
+
+
+    if (oldPreview) {
+
+      oldPreview.style.display =
+        "none";
+
+    }
+
+
+
+    renderImages();
+
+    renderColors();
+
+  }
+
+
+
+  /* =========================================
+     INICIALIZA CAMPOS
+     ========================================= */
+
+  ensureProductFields();
+
+  bindMultipleImageInput();
+
+
+
+  /* =========================================
+     NOVO PRODUTO
+     ========================================= */
+
+  const originalOpenNew =
+
+    window.openNewProductModal;
+
+
+
+  window.openNewProductModal =
+
+    function () {
+
+
+      originalOpenNew?.();
+
+
+      ensureProductFields();
+
+
+      resetProductState();
+
+
+
+      const input =
+
+        $patch(
+          "produto-imagem"
+        );
+
+
+      if (input) {
+
+        input.value =
+          "";
+
+
+        input.multiple =
+          true;
+
+      }
+
+
+    };
+
+
+
+  /* =========================================
+     EDITAR PRODUTO
+     ========================================= */
+
+  const originalEdit =
+
+    window.editProduct;
+
+
+
+  window.editProduct =
+
+    function (id) {
+
+
+      originalEdit?.(
+        id
+      );
+
+
+      ensureProductFields();
+
+
+
+      const product =
+
+        products.find(
+
+          item =>
+
+            String(
+              item.id
+            )
+
+            ===
+
+            String(
+              id
+            )
+
+        );
+
+
+      if (!product) {
+        return;
+      }
+
+
+
+      loadProductState(
+        product
+      );
+
+
+
+      const input =
+
+        $patch(
+          "produto-imagem"
+        );
+
+
+      if (input) {
+
+        input.value =
+          "";
+
+
+        input.multiple =
+          true;
+
+      }
+
+
+    };
+
+
+
+  /* =========================================
+     SALVAR PRODUTO
+     ========================================= */
+
+  const originalSave =
+
+    window.saveProduct;
+
+
+
+  window.saveProduct =
+
+    async function () {
+
+
+      /*
+       * A função original continua salvando
+       * tudo que já funcionava.
+       *
+       * Antes dela rodar, definimos como
+       * image_url a primeira foto da galeria.
+       */
+
+      productImageData =
+
+        state.images[0]
+
+        ||
+
+        "";
+
+
+
+      const editingIdBefore =
+
+        editingProductId;
+
+
+
+      const idsBefore =
+
+        new Set(
+
+          products.map(
+
+            item =>
+              String(
+                item.id
+              )
+
+          )
+
+        );
+
+
+
+      await originalSave?.();
+
+
+
+      let targetId =
+
+        editingIdBefore;
+
+
+
+      /*
+       * Se era produto novo,
+       * procura qual ID entrou depois do save.
+       */
+
+      if (!targetId) {
+
+
+        const created =
+
+          products.find(
+
+            item =>
+
+              !idsBefore.has(
+
+                String(
+                  item.id
+                )
+
+              )
+
+          );
+
+
+        targetId =
+
+          created?.id
+
+          ||
+
+          null;
+
+      }
+
+
+
+      if (!targetId) {
+
+        return;
+
+      }
+
+
+
+      /*
+       * Salva a galeria completa e as cores
+       * nas novas colunas do Supabase.
+       */
+
+      const {
+        data,
+        error
+      } =
+
+        await supabaseClient
+
+          .from(
+            "products"
+          )
+
+          .update({
+
+            image_url:
+
+              state.images[0]
+
+              ||
+
+              null,
+
+
+            image_urls:
+
+              state.images,
+
+
+            colors:
+
+              state.colors
+
+          })
+
+          .eq(
+            "id",
+            targetId
+          )
+
+          .select(
+            "*"
+          )
+
+          .single();
+
+
+
+      if (error) {
+
+
+        console.error(
+          error
+        );
+
+
+        showToast(
+
+          "Produto salvo, mas houve erro ao salvar fotos/cores."
+
+        );
+
+
+        return;
+
+      }
+
+
+
+      /*
+       * Atualiza o produto no painel
+       * sem precisar recarregar a página.
+       */
+
+      const index =
+
+        products.findIndex(
+
+          item =>
+
+            String(
+              item.id
+            )
+
+            ===
+
+            String(
+              targetId
+            )
+
+        );
+
+
+
+      if (
+        index >= 0
+      ) {
+
+        products[index] =
+          data;
+
+      }
+
+
+
+      renderProducts();
+
+
+
+      if (
+
+        typeof
+        renderCollectionProductPicker
+
+        ===
+
+        "function"
+
+      ) {
+
+        renderCollectionProductPicker();
+
+      }
+
+
+    };
+
+
+})();
+</script>
+  
 </body>
 </html>
