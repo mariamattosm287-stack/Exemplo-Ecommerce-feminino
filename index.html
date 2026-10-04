@@ -988,537 +988,56 @@
 
 
   <!-- ===== 5. HOT RIGHT NOW ===== -->
-  <section
-    class="section fade-in"
-    id="hot-right-now"
-  >
+  <!-- ===== 5. HOT RIGHT NOW ===== -->
+<section
+  class="section fade-in"
+  id="hot-right-now"
+>
 
-    <div class="container">
+  <div class="container">
 
-      <div class="section__header">
+    <div class="section__header">
 
-        <h2 class="section__title">
-          HOT RIGHT NOW
-        </h2>
+      <h2 class="section__title">
+        HOT RIGHT NOW
+      </h2>
 
-        <a
-          href="collection.html"
-          class="section__link"
-        >
-          VIEW ALL <span>→</span>
-        </a>
+      <a
+        href="collection.html"
+        class="section__link"
+      >
+        VIEW ALL <span>→</span>
+      </a>
 
-      </div>
+    </div>
 
 
-      <div class="products-carousel">
+    <div class="products-carousel">
+
+      <div
+        class="hot-products-grid"
+        id="products-track"
+      >
 
         <div
-          class="hot-products-grid"
-          id="products-track"
+          style="
+            grid-column:1/-1;
+            text-align:center;
+            padding:50px 20px;
+            color:#777;
+          "
         >
-
-          <div
-            class="product-card"
-            onclick="window.location='product.html'"
-          >
-
-            <div class="product-card__image">
-
-              <img
-                src="assets/images/product-1.jpg"
-                alt="High-Waist Training Leggings"
-              >
-
-              <div class="product-card__badges">
-
-                <span class="badge badge--save">
-                  SAVE $20.00
-                </span>
-
-                <span class="badge badge--new">
-                  NEW
-                </span>
-
-              </div>
-
-              <button
-                class="product-card__quick-add"
-                aria-label="Quick add to cart"
-                onclick="event.stopPropagation(); addToCart('High-Waist Training Leggings', 49, 'assets/images/product-1.jpg')"
-              >
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                  <path d="M3 6h18"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-
-              </button>
-
-            </div>
-
-            <h3 class="product-card__title">
-              High-Waist Training Leggings
-            </h3>
-
-            <div class="product-card__prices">
-
-              <span class="product-card__price product-card__price--sale">
-                $49.00
-              </span>
-
-              <span class="product-card__price product-card__price--original">
-                $69.00
-              </span>
-
-            </div>
-
-            <div class="product-card__colors">
-
-              <span
-                class="color-swatch active"
-                style="background:#333"
-              ></span>
-
-              <span
-                class="color-swatch"
-                style="background:#e0d5c1"
-              ></span>
-
-            </div>
-
-            <div class="product-card__sizes">
-
-              <span class="size-option">XS</span>
-              <span class="size-option">S</span>
-              <span class="size-option">M</span>
-              <span class="size-option">L</span>
-              <span class="size-option">XL</span>
-              <span class="size-option crossed">XXL</span>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="product-card"
-            onclick="window.location='product.html'"
-          >
-
-            <div class="product-card__image">
-
-              <img
-                src="assets/images/product-2.jpg"
-                alt="Ribbed Performance Leggings"
-              >
-
-              <div class="product-card__badges">
-
-                <span class="badge badge--popular">
-                  POPULAR
-                </span>
-
-              </div>
-
-              <button
-                class="product-card__quick-add"
-                aria-label="Quick add to cart"
-                onclick="event.stopPropagation(); addToCart('Ribbed Performance Leggings', 58, 'assets/images/product-2.jpg')"
-              >
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                  <path d="M3 6h18"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-
-              </button>
-
-            </div>
-
-            <h3 class="product-card__title">
-              Ribbed Performance Leggings
-            </h3>
-
-            <div class="product-card__prices">
-
-              <span class="product-card__price">
-                $58.00
-              </span>
-
-            </div>
-
-            <div class="product-card__colors">
-
-              <span
-                class="color-swatch active"
-                style="background:#333"
-              ></span>
-
-              <span
-                class="color-swatch"
-                style="background:#c4b9a8"
-              ></span>
-
-            </div>
-
-            <div class="product-card__sizes">
-
-              <span class="size-option">XS</span>
-              <span class="size-option">S</span>
-              <span class="size-option">M</span>
-              <span class="size-option">L</span>
-              <span class="size-option">XL</span>
-              <span class="size-option crossed">XXL</span>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="product-card"
-            onclick="window.location='product.html'"
-          >
-
-            <div class="product-card__image">
-
-              <img
-                src="assets/images/product-3.jpg"
-                alt="High-Rise Athletic Tights"
-              >
-
-              <div class="product-card__badges">
-
-                <span class="badge badge--popular">
-                  POPULAR
-                </span>
-
-              </div>
-
-              <button
-                class="product-card__quick-add"
-                aria-label="Quick add to cart"
-                onclick="event.stopPropagation(); addToCart('High-Rise Athletic Tights', 61, 'assets/images/product-3.jpg')"
-              >
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                  <path d="M3 6h18"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-
-              </button>
-
-            </div>
-
-            <h3 class="product-card__title">
-              High-Rise Athletic Tights
-            </h3>
-
-            <div class="product-card__prices">
-
-              <span class="product-card__price">
-                $61.00
-              </span>
-
-            </div>
-
-            <div class="product-card__colors">
-
-              <span
-                class="color-swatch active"
-                style="background:#d4956a"
-              ></span>
-
-              <span
-                class="color-swatch"
-                style="background:#333"
-              ></span>
-
-            </div>
-
-            <div class="product-card__sizes">
-
-              <span class="size-option">XS</span>
-              <span class="size-option">S</span>
-              <span class="size-option">M</span>
-              <span class="size-option">L</span>
-              <span class="size-option">XL</span>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="product-card"
-            onclick="window.location='product.html'"
-          >
-
-            <div class="product-card__image">
-
-              <img
-                src="assets/images/product-4.jpg"
-                alt="Full-Support Sports Bra"
-              >
-
-              <div class="product-card__badges">
-
-                <span class="badge badge--new">
-                  NEW
-                </span>
-
-              </div>
-
-              <button
-                class="product-card__quick-add"
-                aria-label="Quick add to cart"
-                onclick="event.stopPropagation(); addToCart('Full-Support Sports Bra', 42, 'assets/images/product-4.jpg')"
-              >
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                  <path d="M3 6h18"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-
-              </button>
-
-            </div>
-
-            <h3 class="product-card__title">
-              Full-Support Sports Bra
-            </h3>
-
-            <div class="product-card__prices">
-
-              <span class="product-card__price">
-                $42.00
-              </span>
-
-            </div>
-
-            <div class="product-card__colors">
-
-              <span
-                class="color-swatch active"
-                style="background:#7eb8d8"
-              ></span>
-
-              <span
-                class="color-swatch"
-                style="background:#d18ec2"
-              ></span>
-
-            </div>
-
-            <div class="product-card__sizes">
-
-              <span class="size-option">XS</span>
-              <span class="size-option">S</span>
-              <span class="size-option">M</span>
-              <span class="size-option">L</span>
-              <span class="size-option">XL</span>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="product-card"
-            onclick="window.location='product.html'"
-          >
-
-            <div class="product-card__image">
-
-              <img
-                src="assets/images/product-5.jpg"
-                alt="Breathable Tank Top"
-              >
-
-              <div class="product-card__badges">
-
-                <span class="badge badge--save">
-                  SAVE $15.00
-                </span>
-
-              </div>
-
-              <button
-                class="product-card__quick-add"
-                aria-label="Quick add to cart"
-                onclick="event.stopPropagation(); addToCart('Breathable Tank Top', 35, 'assets/images/product-5.jpg')"
-              >
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                  <path d="M3 6h18"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-
-              </button>
-
-            </div>
-
-            <h3 class="product-card__title">
-              Breathable Tank Top
-            </h3>
-
-            <div class="product-card__prices">
-
-              <span class="product-card__price product-card__price--sale">
-                $35.00
-              </span>
-
-              <span class="product-card__price product-card__price--original">
-                $50.00
-              </span>
-
-            </div>
-
-            <div class="product-card__colors">
-
-              <span
-                class="color-swatch active"
-                style="background:#5bc0de"
-              ></span>
-
-              <span
-                class="color-swatch"
-                style="background:#f0a0c0"
-              ></span>
-
-            </div>
-
-            <div class="product-card__sizes">
-
-              <span class="size-option">XS</span>
-              <span class="size-option">S</span>
-              <span class="size-option">M</span>
-              <span class="size-option">L</span>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="product-card"
-            onclick="window.location='product.html'"
-          >
-
-            <div class="product-card__image">
-
-              <img
-                src="assets/images/product-6.jpg"
-                alt="Seamless Yoga Set"
-              >
-
-              <div class="product-card__badges">
-
-                <span class="badge badge--popular">
-                  POPULAR
-                </span>
-
-              </div>
-
-              <button
-                class="product-card__quick-add"
-                aria-label="Quick add to cart"
-                onclick="event.stopPropagation(); addToCart('Seamless Yoga Set', 79, 'assets/images/product-6.jpg')"
-              >
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                  <path d="M3 6h18"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-
-              </button>
-
-            </div>
-
-            <h3 class="product-card__title">
-              Seamless Yoga Set
-            </h3>
-
-            <div class="product-card__prices">
-
-              <span class="product-card__price">
-                $79.00
-              </span>
-
-            </div>
-
-            <div class="product-card__colors">
-
-              <span
-                class="color-swatch active"
-                style="background:#c4b9a8"
-              ></span>
-
-              <span
-                class="color-swatch"
-                style="background:#333"
-              ></span>
-
-            </div>
-
-            <div class="product-card__sizes">
-
-              <span class="size-option">XS</span>
-              <span class="size-option">S</span>
-              <span class="size-option">M</span>
-              <span class="size-option">L</span>
-              <span class="size-option">XL</span>
-
-            </div>
-
-          </div>
-
+          Carregando produtos...
         </div>
 
       </div>
 
     </div>
 
-  </section>
+  </div>
 
-
+</section>
+  
   <!-- ===== 6. FEATURED PRODUCT / EDITORIAL ===== -->
   <section
     class="feature-banner fade-in"
@@ -2250,7 +1769,1254 @@
   </div>
 
 
-  <script src="js/main.js"></script>
+ <!-- =========================================
+     SUPABASE
+     ========================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  window.supabaseClient =
+    window.supabase.createClient(
+
+      "https://gtmjxwcvqvtkuqzkvfsh.supabase.co",
+
+      "sb_publishable_zBG1ioEJeME73TQtHhQnlw_eGhOasAc"
+
+    );
+
+  console.log(
+    "Supabase conectado na loja ✅"
+  );
+
+</script>
+
+
+<!-- JS ORIGINAL DO SITE -->
+
+<script src="js/main.js"></script>
+
+
+<!-- =========================================
+     PRODUTOS REAIS DO SUPABASE
+     ========================================= -->
+
+<script>
+
+(() => {
+
+  let essenceProducts = [];
+
+
+  /* =========================================
+     SEGURANÇA DO TEXTO
+     ========================================= */
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  /* =========================================
+     DINHEIRO
+     ========================================= */
+
+  function money(value) {
+
+    return Number(
+      value || 0
+    ).toLocaleString(
+
+      "pt-BR",
+
+      {
+        style: "currency",
+        currency: "BRL"
+      }
+
+    );
+
+  }
+
+
+  /* =========================================
+     TAMANHOS
+     ========================================= */
+
+  function getSizes(product) {
+
+    const value =
+      product?.sizes;
+
+
+    if (
+      Array.isArray(value)
+    ) {
+
+      return value;
+
+    }
+
+
+    if (
+      typeof value === "string"
+      &&
+      value.trim()
+    ) {
+
+      try {
+
+        const parsed =
+          JSON.parse(value);
+
+
+        if (
+          Array.isArray(parsed)
+        ) {
+
+          return parsed;
+
+        }
+
+      }
+
+      catch (_) {
+
+        return value
+
+          .split(",")
+
+          .map(
+            item =>
+              item.trim()
+          )
+
+          .filter(Boolean);
+
+      }
+
+    }
+
+
+    return [];
+
+  }
+
+
+  /* =========================================
+     IMAGEM
+     ========================================= */
+
+  function productImage(product) {
+
+    return (
+
+      product?.image_url
+
+      ||
+
+      "assets/images/banner.png"
+
+    );
+
+  }
+
+
+  /* =========================================
+     PREÇO
+     ========================================= */
+
+  function getPrices(product) {
+
+    const normalPrice =
+      Number(
+        product?.price || 0
+      );
+
+
+    /*
+     * No painel que montamos,
+     * compare_at_price está recebendo
+     * o preço promocional.
+     */
+
+    const promotionalPrice =
+      Number(
+        product?.compare_at_price || 0
+      );
+
+
+    if (
+      promotionalPrice > 0
+      &&
+      promotionalPrice < normalPrice
+    ) {
+
+      return {
+
+        current:
+          promotionalPrice,
+
+        old:
+          normalPrice,
+
+        hasSale:
+          true
+
+      };
+
+    }
+
+
+    return {
+
+      current:
+        normalPrice,
+
+      old:
+        null,
+
+      hasSale:
+        false
+
+    };
+
+  }
+
+
+  /* =========================================
+     DESCONTO
+     ========================================= */
+
+  function discountPercentage(
+    normalPrice,
+    promotionalPrice
+  ) {
+
+    if (
+      !normalPrice
+      ||
+      !promotionalPrice
+      ||
+      promotionalPrice >= normalPrice
+    ) {
+
+      return 0;
+
+    }
+
+
+    return Math.round(
+
+      (
+        (
+          normalPrice -
+          promotionalPrice
+        )
+        /
+        normalPrice
+      )
+      *
+      100
+
+    );
+
+  }
+
+
+  /* =========================================
+     CRIA CARD
+     ========================================= */
+
+  function renderProductCard(product) {
+
+    const prices =
+      getPrices(product);
+
+
+    const image =
+      productImage(product);
+
+
+    const sizes =
+      getSizes(product);
+
+
+    const discount =
+
+      prices.hasSale
+
+        ?
+
+        discountPercentage(
+          prices.old,
+          prices.current
+        )
+
+        :
+
+        0;
+
+
+    const badge =
+
+      discount > 0
+
+        ?
+
+        `
+
+        <div class="product-card__badges">
+
+          <span class="badge badge--save">
+            -${discount}%
+          </span>
+
+        </div>
+
+        `
+
+        :
+
+        `
+
+        <div class="product-card__badges">
+
+          <span class="badge badge--new">
+            NEW
+          </span>
+
+        </div>
+
+        `;
+
+
+    const priceHtml =
+
+      prices.hasSale
+
+        ?
+
+        `
+
+        <span
+          class="product-card__price product-card__price--sale"
+        >
+          ${money(prices.current)}
+        </span>
+
+        <span
+          class="product-card__price product-card__price--original"
+        >
+          ${money(prices.old)}
+        </span>
+
+        `
+
+        :
+
+        `
+
+        <span class="product-card__price">
+          ${money(prices.current)}
+        </span>
+
+        `;
+
+
+    const sizesHtml =
+
+      sizes.length
+
+        ?
+
+        `
+
+        <div class="product-card__sizes">
+
+          ${
+
+            sizes
+
+              .map(
+
+                size => `
+
+                  <span class="size-option">
+
+                    ${escapeHtml(size)}
+
+                  </span>
+
+                `
+
+              )
+
+              .join("")
+
+          }
+
+        </div>
+
+        `
+
+        :
+
+        "";
+
+
+    return `
+
+      <div
+        class="product-card"
+        data-product-id="${escapeHtml(product.id)}"
+      >
+
+        <div class="product-card__image">
+
+          <img
+            src="${escapeHtml(image)}"
+            alt="${escapeHtml(product.name)}"
+            loading="lazy"
+          >
+
+          ${badge}
+
+
+          <button
+            type="button"
+            class="product-card__quick-add"
+            aria-label="Adicionar ao carrinho"
+            onclick="
+              event.stopPropagation();
+              window.addEssenceProductToCart(
+                '${escapeHtml(product.id)}'
+              );
+            "
+          >
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+
+              <path
+                d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+              />
+
+              <path
+                d="M3 6h18"
+              />
+
+              <path
+                d="M16 10a4 4 0 0 1-8 0"
+              />
+
+            </svg>
+
+          </button>
+
+        </div>
+
+
+        <h3 class="product-card__title">
+
+          ${escapeHtml(product.name)}
+
+        </h3>
+
+
+        <div class="product-card__prices">
+
+          ${priceHtml}
+
+        </div>
+
+
+        ${sizesHtml}
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================================
+     CARREGA PRODUTOS DO SUPABASE
+     ========================================= */
+
+  async function loadEssenceProducts() {
+
+    const track =
+      document.getElementById(
+        "products-track"
+      );
+
+
+    if (!track) {
+
+      return;
+
+    }
+
+
+    track.innerHTML = `
+
+      <div
+        style="
+          grid-column:1/-1;
+          text-align:center;
+          padding:50px 20px;
+          color:#777;
+        "
+      >
+        Carregando produtos...
+      </div>
+
+    `;
+
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+
+        await window.supabaseClient
+
+          .from(
+            "products"
+          )
+
+          .select(
+            "*"
+          )
+
+          .eq(
+            "is_active",
+            true
+          )
+
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
+          );
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      essenceProducts =
+
+        Array.isArray(data)
+
+          ?
+
+          data
+
+          :
+
+          [];
+
+
+      window.essenceProducts =
+        essenceProducts;
+
+
+      console.log(
+        "Produtos reais carregados ✅",
+        essenceProducts
+      );
+
+
+      if (
+        !essenceProducts.length
+      ) {
+
+        track.innerHTML = `
+
+          <div
+            style="
+              grid-column:1/-1;
+              text-align:center;
+              padding:50px 20px;
+              color:#777;
+            "
+          >
+            Nenhum produto disponível.
+          </div>
+
+        `;
+
+
+        return;
+
+      }
+
+
+      track.innerHTML =
+
+        essenceProducts
+
+          .map(
+            renderProductCard
+          )
+
+          .join("");
+
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Erro ao carregar produtos:",
+        error
+      );
+
+
+      track.innerHTML = `
+
+        <div
+          style="
+            grid-column:1/-1;
+            text-align:center;
+            padding:50px 20px;
+            color:#b91c1c;
+          "
+        >
+          Não foi possível carregar os produtos.
+        </div>
+
+      `;
+
+    }
+
+  }
+
+
+  /* =========================================
+     CARRINHO
+     ========================================= */
+
+  const CART_KEY =
+    "essence_cart_v1";
+
+
+  function getCart() {
+
+    try {
+
+      return JSON.parse(
+
+        localStorage.getItem(
+          CART_KEY
+        )
+
+        ||
+
+        "[]"
+
+      );
+
+    }
+
+    catch (_) {
+
+      return [];
+
+    }
+
+  }
+
+
+  function saveCart(cart) {
+
+    localStorage.setItem(
+
+      CART_KEY,
+
+      JSON.stringify(cart)
+
+    );
+
+
+    renderCart();
+
+  }
+
+
+  function openCart() {
+
+    document
+      .getElementById(
+        "cart-sidebar"
+      )
+      ?.classList
+      .add(
+        "active"
+      );
+
+
+    document
+      .getElementById(
+        "cart-overlay"
+      )
+      ?.classList
+      .add(
+        "active"
+      );
+
+  }
+
+
+  function closeCart() {
+
+    document
+      .getElementById(
+        "cart-sidebar"
+      )
+      ?.classList
+      .remove(
+        "active"
+      );
+
+
+    document
+      .getElementById(
+        "cart-overlay"
+      )
+      ?.classList
+      .remove(
+        "active"
+      );
+
+  }
+
+
+  function renderCart() {
+
+    const cart =
+      getCart();
+
+
+    const body =
+      document.getElementById(
+        "cart-body"
+      );
+
+
+    const countElement =
+      document.getElementById(
+        "cart-count"
+      );
+
+
+    const subtotalElement =
+      document.getElementById(
+        "cart-subtotal"
+      );
+
+
+    const count =
+
+      cart.reduce(
+
+        (
+          total,
+          item
+        ) =>
+
+          total
+          +
+          Number(
+            item.quantity || 0
+          ),
+
+        0
+
+      );
+
+
+    const subtotal =
+
+      cart.reduce(
+
+        (
+          total,
+          item
+        ) =>
+
+          total
+
+          +
+
+          (
+            Number(
+              item.price || 0
+            )
+
+            *
+
+            Number(
+              item.quantity || 0
+            )
+          ),
+
+        0
+
+      );
+
+
+    if (
+      countElement
+    ) {
+
+      countElement.textContent =
+        count;
+
+    }
+
+
+    if (
+      subtotalElement
+    ) {
+
+      subtotalElement.textContent =
+        money(
+          subtotal
+        );
+
+    }
+
+
+    if (!body) {
+
+      return;
+
+    }
+
+
+    if (
+      !cart.length
+    ) {
+
+      body.innerHTML = `
+
+        <div class="cart-sidebar__empty">
+
+          <p>
+            Seu carrinho está vazio
+          </p>
+
+        </div>
+
+      `;
+
+
+      return;
+
+    }
+
+
+    body.innerHTML =
+
+      cart
+
+        .map(
+
+          (
+            item,
+            index
+          ) => `
+
+            <div
+              style="
+                display:grid;
+                grid-template-columns:75px 1fr auto;
+                gap:14px;
+                padding:15px 0;
+                border-bottom:1px solid #eee;
+                align-items:center;
+              "
+            >
+
+              <img
+                src="${escapeHtml(item.image)}"
+                alt="${escapeHtml(item.name)}"
+                style="
+                  width:75px;
+                  height:90px;
+                  object-fit:cover;
+                  border-radius:4px;
+                "
+              >
+
+
+              <div>
+
+                <strong
+                  style="
+                    display:block;
+                    margin-bottom:6px;
+                    font-size:13px;
+                  "
+                >
+                  ${escapeHtml(item.name)}
+                </strong>
+
+
+                <span
+                  style="
+                    font-size:12px;
+                  "
+                >
+                  ${money(item.price)}
+                </span>
+
+
+                <div
+                  style="
+                    display:flex;
+                    align-items:center;
+                    gap:9px;
+                    margin-top:10px;
+                  "
+                >
+
+                  <button
+                    type="button"
+                    onclick="
+                      window.changeEssenceCartQuantity(
+                        ${index},
+                        -1
+                      )
+                    "
+                  >
+                    −
+                  </button>
+
+
+                  <span>
+                    ${item.quantity}
+                  </span>
+
+
+                  <button
+                    type="button"
+                    onclick="
+                      window.changeEssenceCartQuantity(
+                        ${index},
+                        1
+                      )
+                    "
+                  >
+                    +
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              <button
+                type="button"
+                onclick="
+                  window.removeEssenceCartItem(
+                    ${index}
+                  )
+                "
+                style="
+                  border:0;
+                  background:none;
+                  cursor:pointer;
+                  font-size:18px;
+                "
+                aria-label="Remover produto"
+              >
+                ✕
+              </button>
+
+            </div>
+
+          `
+
+        )
+
+        .join("");
+
+  }
+
+
+  /* =========================================
+     ADICIONAR PRODUTO
+     ========================================= */
+
+  window.addEssenceProductToCart =
+    function (id) {
+
+      const product =
+
+        essenceProducts.find(
+
+          item =>
+
+            String(item.id)
+
+            ===
+
+            String(id)
+
+        );
+
+
+      if (!product) {
+
+        return;
+
+      }
+
+
+      const prices =
+        getPrices(product);
+
+
+      const cart =
+        getCart();
+
+
+      const existing =
+
+        cart.find(
+
+          item =>
+
+            String(item.id)
+
+            ===
+
+            String(product.id)
+
+        );
+
+
+      if (existing) {
+
+        existing.quantity += 1;
+
+      }
+
+      else {
+
+        cart.push({
+
+          id:
+            product.id,
+
+          name:
+            product.name,
+
+          price:
+            prices.current,
+
+          image:
+            productImage(
+              product
+            ),
+
+          quantity:
+            1
+
+        });
+
+      }
+
+
+      saveCart(
+        cart
+      );
+
+
+      openCart();
+
+  };
+
+
+  window.changeEssenceCartQuantity =
+    function (
+      index,
+      amount
+    ) {
+
+      const cart =
+        getCart();
+
+
+      if (
+        !cart[index]
+      ) {
+
+        return;
+
+      }
+
+
+      cart[index].quantity +=
+        amount;
+
+
+      if (
+        cart[index].quantity
+        <=
+        0
+      ) {
+
+        cart.splice(
+          index,
+          1
+        );
+
+      }
+
+
+      saveCart(
+        cart
+      );
+
+  };
+
+
+  window.removeEssenceCartItem =
+    function (index) {
+
+      const cart =
+        getCart();
+
+
+      cart.splice(
+        index,
+        1
+      );
+
+
+      saveCart(
+        cart
+      );
+
+  };
+
+
+  /* =========================================
+     BOTÕES DO CARRINHO
+     ========================================= */
+
+  document
+    .getElementById(
+      "cart-btn"
+    )
+    ?.addEventListener(
+      "click",
+      openCart
+    );
+
+
+  document
+    .getElementById(
+      "cart-close"
+    )
+    ?.addEventListener(
+      "click",
+      closeCart
+    );
+
+
+  document
+    .getElementById(
+      "cart-overlay"
+    )
+    ?.addEventListener(
+      "click",
+      closeCart
+    );
+
+
+  /* =========================================
+     INICIAR
+     ========================================= */
+
+  async function initSupabaseStore() {
+
+    renderCart();
+
+    await loadEssenceProducts();
+
+  }
+
+
+  if (
+    document.readyState
+    ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+
+      "DOMContentLoaded",
+
+      initSupabaseStore
+
+    );
+
+  }
+
+  else {
+
+    initSupabaseStore();
+
+  }
+
+
+})();
+
+</script>
 
 </body>
 </html>
