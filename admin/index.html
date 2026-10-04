@@ -3,605 +3,535 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Painel Admin — ESSENCE</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="/admin/admin.css">
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/admin/admin.css"
+  >
+
+  <style>
+
+    .page-content {
+      display: none;
+    }
+
+    .page-content.active {
+      display: block;
+    }
+
+    .product-thumb {
+      width: 46px;
+      height: 58px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #f5f5f5;
+    }
+
+    .product-placeholder {
+      width: 46px;
+      height: 58px;
+      border-radius: 8px;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .45);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal__dialog {
+      width: min(760px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+    }
+
+    .modal__header,
+    .modal__footer {
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal__footer {
+      border-top: 1px solid #eee;
+      border-bottom: 0;
+      justify-content: flex-end;
+    }
+
+    .modal__body {
+      padding: 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group--full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .sizes-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .size-check {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid #ddd;
+      padding: 7px 10px;
+      border-radius: 8px;
+    }
+
+    .image-upload-box {
+      border: 1px dashed #bbb;
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+    }
+
+    .image-preview {
+      width: 72px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .sync-note {
+      font-size: 11px;
+      color: #b45309;
+      margin-top: 4px;
+    }
+
+    .table-empty {
+      text-align: center !important;
+      padding: 38px 16px !important;
+      color: #777;
+    }
+
+    #toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 10000;
+      background: #1e1e2e;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: .25s;
+      max-width: 360px;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width: 720px) {
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group--full {
+        grid-column: auto;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 <body>
 
-  <!-- ===== SIDEBAR ===== -->
-  <aside class="sidebar" id="sidebar">
+
+  <!-- =========================================
+       SIDEBAR
+       ========================================= -->
+
+  <aside
+    class="sidebar"
+    id="sidebar"
+  >
+
     <div class="sidebar__logo">
-      <div class="sidebar__logo-icon">E</div>
-      <div>
-        <div class="sidebar__logo-text">ESSENCE</div>
-        <div class="sidebar__logo-sub">Admin Panel</div>
+
+      <div class="sidebar__logo-icon">
+        E
       </div>
+
+      <div>
+
+        <div class="sidebar__logo-text">
+          ESSENCE
+        </div>
+
+        <div class="sidebar__logo-sub">
+          Admin Panel
+        </div>
+
+      </div>
+
     </div>
+
 
     <nav class="sidebar__nav">
-      <span class="sidebar__section-label">Principal</span>
 
-      <div class="sidebar__item active" data-page="dashboard" onclick="navigate('dashboard')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="3" width="7" height="7"/>
-          <rect x="14" y="3" width="7" height="7"/>
-          <rect x="14" y="14" width="7" height="7"/>
-          <rect x="3" y="14" width="7" height="7"/>
-        </svg>
-        Dashboard
+
+      <span class="sidebar__section-label">
+        Principal
+      </span>
+
+
+      <div
+        class="sidebar__item active"
+        data-page="dashboard"
+        onclick="navigate('dashboard')"
+      >
+        🏠 Dashboard
       </div>
 
-      <div class="sidebar__item" data-page="produtos" onclick="navigate('produtos')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m7.5 4.27 9 5.15"/>
-          <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
-          <path d="m3.3 7 8.7 5 8.7-5"/>
-          <path d="M12 22V12"/>
-        </svg>
-        Produtos
-        <span class="sidebar__item-badge">148</span>
+
+      <div
+        class="sidebar__item"
+        data-page="produtos"
+        onclick="navigate('produtos')"
+      >
+
+        📦 Produtos
+
+        <span
+          class="sidebar__item-badge"
+          id="products-badge"
+        >
+          0
+        </span>
+
       </div>
 
-      <div class="sidebar__item" data-page="categorias" onclick="navigate('categorias')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 7H4a2 2 0 0 0-2 2v6c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/>
-          <path d="M16 3H8v4h8V3Z"/>
-          <path d="M16 17H8v4h8v-4Z"/>
-        </svg>
-        Categorias
+
+      <div
+        class="sidebar__item"
+        data-page="categorias"
+        onclick="navigate('categorias')"
+      >
+        🗂️ Categorias
       </div>
 
-      <div class="sidebar__item" data-page="colecoes" onclick="navigate('colecoes')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-          <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-        Coleções
+
+      <div
+        class="sidebar__item"
+        data-page="colecoes"
+        onclick="navigate('colecoes')"
+      >
+        ✨ Coleções
       </div>
 
-      <span class="sidebar__section-label">Vendas</span>
 
-      <div class="sidebar__item" data-page="pedidos" onclick="navigate('pedidos')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-          <path d="M3 6h18"/>
-          <path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-        Pedidos
-        <span class="sidebar__item-badge">12</span>
+      <span class="sidebar__section-label">
+        Vendas
+      </span>
+
+
+      <div
+        class="sidebar__item"
+        data-page="pedidos"
+        onclick="navigate('pedidos')"
+      >
+        🛍️ Pedidos
       </div>
 
-      <div class="sidebar__item" data-page="clientes" onclick="navigate('clientes')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
-        Clientes
+
+      <div
+        class="sidebar__item"
+        data-page="clientes"
+        onclick="navigate('clientes')"
+      >
+        👥 Clientes
       </div>
 
-      <div class="sidebar__item" data-page="cupons" onclick="navigate('cupons')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
-          <line x1="7" y1="7" x2="7.01" y2="7"/>
-        </svg>
-        Cupons
+
+      <div
+        class="sidebar__item"
+        data-page="cupons"
+        onclick="navigate('cupons')"
+      >
+        🏷️ Cupons
       </div>
 
-      <span class="sidebar__section-label">Insights</span>
 
-      <div class="sidebar__item" data-page="analiticas" onclick="navigate('analiticas')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-        </svg>
-        Análises
+      <span class="sidebar__section-label">
+        Insights
+      </span>
+
+
+      <div
+        class="sidebar__item"
+        data-page="analiticas"
+        onclick="navigate('analiticas')"
+      >
+        📊 Análises
       </div>
 
-      <div class="sidebar__item" data-page="afiliados" onclick="navigate('afiliados')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="18" cy="5" r="3"/>
-          <circle cx="6" cy="12" r="3"/>
-          <circle cx="18" cy="19" r="3"/>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-        </svg>
-        Afiliados
+
+      <div
+        class="sidebar__item"
+        data-page="afiliados"
+        onclick="navigate('afiliados')"
+      >
+        🔗 Afiliados
       </div>
 
-      <div class="sidebar__item" data-page="comunicacoes" onclick="navigate('comunicacoes')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-        Comunicações
-        <span class="sidebar__item-badge">3</span>
+
+      <div
+        class="sidebar__item"
+        data-page="comunicacoes"
+        onclick="navigate('comunicacoes')"
+      >
+        💬 Comunicações
       </div>
 
-      <span class="sidebar__section-label">Config</span>
 
-      <div class="sidebar__item" data-page="configuracoes" onclick="navigate('configuracoes')">
-        <svg class="sidebar__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-        </svg>
-        Configurações
+      <span class="sidebar__section-label">
+        Config
+      </span>
+
+
+      <div
+        class="sidebar__item"
+        data-page="configuracoes"
+        onclick="navigate('configuracoes')"
+      >
+        ⚙️ Configurações
       </div>
+
+
     </nav>
 
+
     <div class="sidebar__footer">
-      <div class="sidebar__avatar">A</div>
-      <div>
-        <div class="sidebar__user-name">Administrador</div>
-        <div class="sidebar__user-role">Super Admin</div>
+
+      <div class="sidebar__avatar">
+        A
       </div>
+
+      <div>
+
+        <div class="sidebar__user-name">
+          Administrador
+        </div>
+
+        <div class="sidebar__user-role">
+          Super Admin
+        </div>
+
+      </div>
+
     </div>
+
+
   </aside>
 
-  <!-- ===== MAIN ===== -->
+
+
+  <!-- =========================================
+       CONTEÚDO
+       ========================================= -->
+
   <main class="admin-main">
 
+
     <!-- TOPBAR -->
+
     <header class="topbar">
+
       <div class="topbar__left">
-        <button
-          class="topbar__icon-btn"
-          id="sidebar-toggle"
-          style="display:none;"
-          onclick="document.getElementById('sidebar').classList.toggle('open')"
-        >
-          ☰
-        </button>
 
         <div class="topbar__search">
-          <span class="topbar__search-icon">🔍</span>
-          <input type="text" placeholder="Buscar produtos, pedidos, clientes...">
+
+          <span>
+            🔍
+          </span>
+
+          <input
+            id="global-search"
+            type="text"
+            placeholder="Buscar produtos..."
+          >
+
         </div>
+
       </div>
+
 
       <div class="topbar__right">
-        <button class="topbar__icon-btn" title="Notificações">
-          🔔
-          <span class="topbar__notif-dot"></span>
-        </button>
 
-        <button class="topbar__icon-btn" title="Mensagens">
-          ✉️
-        </button>
-
-        <a href="/index.html" target="_blank" class="topbar__store-btn">
-          <span>🏪</span> Ver Loja
+        <a
+          href="/index.html"
+          target="_blank"
+          class="topbar__store-btn"
+        >
+          🏪 Ver Loja
         </a>
+
       </div>
+
     </header>
 
-    <!-- ===========================
-         PAGE: DASHBOARD
-         =========================== -->
 
-    <div class="page-content active" id="page-dashboard">
+
+    <!-- =========================================
+         DASHBOARD
+         ========================================= -->
+
+    <div
+      class="page-content active"
+      id="page-dashboard"
+    >
 
       <div class="page-header">
+
         <div>
-          <h1 class="page-title">Dashboard</h1>
+
+          <h1 class="page-title">
+            Dashboard
+          </h1>
+
           <p class="page-subtitle">
-            Bem-vindo de volta! Aqui está o resumo de hoje.
+            Painel administrativo da ESSENCE
           </p>
+
         </div>
 
-        <div class="page-actions">
-          <button class="btn btn--outline">
-            📅 Últimos 30 dias
-          </button>
-
-          <button class="btn btn--primary">
-            ⬇️ Exportar
-          </button>
-        </div>
       </div>
+
 
       <div class="stats-grid">
 
+
         <div class="stat-card stat-card--pink">
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Receita Total
-            </span>
 
-            <div class="stat-card__icon">
-              💰
-            </div>
+          <div class="stat-card__label">
+            Produtos cadastrados
           </div>
 
-          <div class="stat-card__value">
-            R$ 48.320
+          <div
+            class="stat-card__value"
+            id="dashboard-products"
+          >
+            0
           </div>
 
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 12.5% vs mês anterior
-          </div>
         </div>
+
 
         <div class="stat-card stat-card--green">
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Pedidos
-            </span>
 
-            <div class="stat-card__icon">
-              📦
-            </div>
+          <div class="stat-card__label">
+            Produtos ativos
           </div>
 
-          <div class="stat-card__value">
-            1.284
+          <div
+            class="stat-card__value"
+            id="dashboard-active"
+          >
+            0
           </div>
 
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 8.1% vs mês anterior
-          </div>
         </div>
+
 
         <div class="stat-card stat-card--orange">
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Ticket Médio
-            </span>
 
-            <div class="stat-card__icon">
-              🎯
-            </div>
+          <div class="stat-card__label">
+            Sem estoque
           </div>
 
-          <div class="stat-card__value">
-            R$ 376
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 4.2% vs mês anterior
-          </div>
-        </div>
-
-        <div class="stat-card stat-card--purple">
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Clientes Ativos
-            </span>
-
-            <div class="stat-card__icon">
-              👥
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            3.847
-          </div>
-
-          <div class="stat-card__change stat-card__change--down">
-            ▼ 1.3% vs mês anterior
-          </div>
-        </div>
-
-      </div>
-
-      <div class="dashboard-grid">
-
-        <div class="card">
-          <div class="card-header">
-
-            <span class="card-title">
-              Receita por Mês
-            </span>
-
-            <div style="display:flex;gap:8px;">
-
-              <button
-                class="btn btn--ghost btn--sm"
-                style="border:1px solid var(--border);"
-              >
-                2025
-              </button>
-
-              <button class="btn btn--primary btn--sm">
-                2026
-              </button>
-
-            </div>
-          </div>
-
-          <div class="chart-area" id="revenue-chart"></div>
-        </div>
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <span class="card-title">
-              Top Produtos
-            </span>
-
-            <button
-              class="btn btn--ghost btn--sm"
-              onclick="navigate('produtos')"
-            >
-              Ver todos →
-            </button>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="top-product-item">
-              <img
-                class="top-product-img"
-                src="/assets/images/product-1.jpg"
-                alt="Leggings"
-              >
-
-              <div>
-                <div class="top-product-name">
-                  High-Waist Leggings
-                </div>
-
-                <div class="top-product-cat">
-                  Bottoms
-                </div>
-              </div>
-
-              <span class="top-product-sales">
-                312 vendas
-              </span>
-            </div>
-
-            <div class="top-product-item">
-              <img
-                class="top-product-img"
-                src="/assets/images/product-2.jpg"
-                alt="Ribbed"
-              >
-
-              <div>
-                <div class="top-product-name">
-                  Ribbed Leggings
-                </div>
-
-                <div class="top-product-cat">
-                  Bottoms
-                </div>
-              </div>
-
-              <span class="top-product-sales">
-                248 vendas
-              </span>
-            </div>
-
-            <div class="top-product-item">
-              <img
-                class="top-product-img"
-                src="/assets/images/product-3.jpg"
-                alt="Tights"
-              >
-
-              <div>
-                <div class="top-product-name">
-                  Athletic Tights
-                </div>
-
-                <div class="top-product-cat">
-                  Bottoms
-                </div>
-              </div>
-
-              <span class="top-product-sales">
-                197 vendas
-              </span>
-            </div>
-
-            <div class="top-product-item">
-              <img
-                class="top-product-img"
-                src="/assets/images/product-4.jpg"
-                alt="Bra"
-              >
-
-              <div>
-                <div class="top-product-name">
-                  Sports Bra Full Support
-                </div>
-
-                <div class="top-product-cat">
-                  Tops
-                </div>
-              </div>
-
-              <span class="top-product-sales">
-                183 vendas
-              </span>
-            </div>
-
-            <div class="top-product-item">
-              <img
-                class="top-product-img"
-                src="/assets/images/product-5.jpg"
-                alt="Tank"
-              >
-
-              <div>
-                <div class="top-product-name">
-                  Breathable Tank Top
-                </div>
-
-                <div class="top-product-cat">
-                  Tops
-                </div>
-              </div>
-
-              <span class="top-product-sales">
-                141 vendas
-              </span>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <div class="card" style="margin-top:20px;">
-
-        <div class="card-header">
-
-          <span class="card-title">
-            Pedidos Recentes
-          </span>
-
-          <button
-            class="btn btn--outline btn--sm"
-            onclick="navigate('pedidos')"
+          <div
+            class="stat-card__value"
+            id="dashboard-out"
           >
-            Ver todos
-          </button>
+            0
+          </div>
 
         </div>
 
-        <div class="orders-table-wrap">
 
-          <table class="data-table">
-
-            <thead>
-              <tr>
-                <th>Pedido</th>
-                <th>Cliente</th>
-                <th>Produtos</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th>Data</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td><strong>#10248</strong></td>
-                <td>Ana Beatriz Lima</td>
-                <td>2 itens</td>
-                <td>R$ 107,00</td>
-                <td>
-                  <span class="badge badge--green">
-                    Entregue
-                  </span>
-                </td>
-                <td>03/10/2026</td>
-                <td class="action-btns">
-                  <button
-                    class="btn btn--ghost btn--icon"
-                    title="Ver"
-                  >
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>#10247</strong></td>
-                <td>Carla Mendes</td>
-                <td>1 item</td>
-                <td>R$ 58,00</td>
-                <td>
-                  <span class="badge badge--blue">
-                    Enviado
-                  </span>
-                </td>
-                <td>03/10/2026</td>
-                <td class="action-btns">
-                  <button
-                    class="btn btn--ghost btn--icon"
-                    title="Ver"
-                  >
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>#10246</strong></td>
-                <td>Fernanda Costa</td>
-                <td>3 itens</td>
-                <td>R$ 178,00</td>
-                <td>
-                  <span class="badge badge--yellow">
-                    Em preparo
-                  </span>
-                </td>
-                <td>02/10/2026</td>
-                <td class="action-btns">
-                  <button
-                    class="btn btn--ghost btn--icon"
-                    title="Ver"
-                  >
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>#10245</strong></td>
-                <td>Julia Ramos</td>
-                <td>1 item</td>
-                <td>R$ 42,00</td>
-                <td>
-                  <span class="badge badge--yellow">
-                    Em preparo
-                  </span>
-                </td>
-                <td>02/10/2026</td>
-                <td class="action-btns">
-                  <button
-                    class="btn btn--ghost btn--icon"
-                    title="Ver"
-                  >
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>#10244</strong></td>
-                <td>Mariana Souza</td>
-                <td>2 itens</td>
-                <td>R$ 120,00</td>
-                <td>
-                  <span class="badge badge--red">
-                    Cancelado
-                  </span>
-                </td>
-                <td>01/10/2026</td>
-                <td class="action-btns">
-                  <button
-                    class="btn btn--ghost btn--icon"
-                    title="Ver"
-                  >
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
       </div>
 
     </div>
 
-    <!-- ===========================
-         PAGE: PRODUTOS
-         =========================== -->
 
-    <div class="page-content" id="page-produtos">
+
+    <!-- =========================================
+         PRODUTOS
+         ========================================= -->
+
+    <div
+      class="page-content"
+      id="page-produtos"
+    >
+
 
       <div class="page-header">
 
+
         <div>
+
           <h1 class="page-title">
             Produtos
           </h1>
@@ -609,13 +539,20 @@
           <p class="page-subtitle">
             Gerencie seu catálogo de produtos
           </p>
+
         </div>
+
 
         <div class="page-actions">
 
-          <button class="btn btn--outline">
-            📥 Importar
+
+          <button
+            class="btn btn--outline"
+            onclick="syncPendingProducts()"
+          >
+            🔄 Sincronizar
           </button>
+
 
           <button
             class="btn btn--primary"
@@ -624,2158 +561,178 @@
             + Novo Produto
           </button>
 
+
         </div>
 
+
       </div>
+
+
 
       <div class="section-toolbar">
 
+
         <div class="section-search">
-          <span>🔍</span>
+
+          <span>
+            🔍
+          </span>
 
           <input
+            id="product-search"
             type="text"
             placeholder="Buscar produto..."
           >
-        </div>
-
-        <div class="filter-chips">
-
-          <span class="filter-chip active">
-            Todos
-          </span>
-
-          <span class="filter-chip">
-            Ativos
-          </span>
-
-          <span class="filter-chip">
-            Rascunhos
-          </span>
-
-          <span class="filter-chip">
-            Sem estoque
-          </span>
 
         </div>
+
 
         <select
           class="form-control"
-          style="width:auto;"
+          id="category-filter"
+          style="width:auto"
         >
-          <option>Categoria</option>
-          <option>Tops</option>
-          <option>Bottoms</option>
-          <option>Acessórios</option>
+
+          <option value="">
+            Todas as categorias
+          </option>
+
+          <option value="Tops">
+            Tops
+          </option>
+
+          <option value="Bottoms">
+            Bottoms
+          </option>
+
+          <option value="Acessórios">
+            Acessórios
+          </option>
+
+          <option value="Conjuntos">
+            Conjuntos
+          </option>
+
+          <option value="Shorts">
+            Shorts
+          </option>
+
         </select>
+
 
       </div>
 
+
+
       <div class="card">
+
 
         <div class="orders-table-wrap">
 
+
           <table class="data-table">
 
+
             <thead>
+
               <tr>
+
                 <th>
-                  <input type="checkbox">
+                  Produto
                 </th>
-                <th>Produto</th>
-                <th>SKU</th>
-                <th>Categoria</th>
-                <th>Preço</th>
-                <th>Estoque</th>
-                <th>Status</th>
-                <th>Ações</th>
+
+                <th>
+                  SKU
+                </th>
+
+                <th>
+                  Categoria
+                </th>
+
+                <th>
+                  Preço
+                </th>
+
+                <th>
+                  Estoque
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Ações
+                </th>
+
               </tr>
+
             </thead>
 
+
             <tbody id="produtos-tbody">
-              <!-- Produtos renderizados pelo JavaScript -->
+
+              <tr>
+
+                <td
+                  colspan="7"
+                  class="table-empty"
+                >
+                  Carregando produtos...
+                </td>
+
+              </tr>
+
             </tbody>
+
 
           </table>
 
+
         </div>
+
 
         <div
           style="
             padding:12px 16px;
             border-top:1px solid var(--border);
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
+            font-size:12px;
+            color:var(--text-light);
           "
+          id="produtos-resumo"
         >
-
-          <span
-            id="produtos-resumo"
-            style="
-              font-size:12px;
-              color:var(--text-light);
-            "
-          >
-            Nenhum produto cadastrado
-          </span>
-
-          <div class="pagination">
-
-            <button
-              class="page-btn"
-              disabled
-            >
-              ‹
-            </button>
-
-            <button
-              class="page-btn active"
-            >
-              1
-            </button>
-
-            <button
-              class="page-btn"
-              disabled
-            >
-              ›
-            </button>
-
-          </div>
-
+          Carregando...
         </div>
+
 
       </div>
 
+
     </div>
 
-    <!-- ===========================
-         PAGE: PEDIDOS
-         =========================== -->
 
-    <div class="page-content" id="page-pedidos">
+
+    <!-- =========================================
+         OUTRAS ÁREAS
+         ========================================= -->
+
+
+    <div
+      class="page-content"
+      id="page-categorias"
+    >
 
       <div class="page-header">
 
         <div>
-          <h1 class="page-title">
-            Pedidos
-          </h1>
 
-          <p class="page-subtitle">
-            Gerencie e acompanhe todos os pedidos
-          </p>
-        </div>
-
-        <div class="page-actions">
-          <button class="btn btn--outline">
-            📥 Exportar CSV
-          </button>
-        </div>
-
-      </div>
-
-      <div
-        style="
-          display:grid;
-          grid-template-columns:repeat(4,1fr);
-          gap:12px;
-          margin-bottom:20px;
-        "
-      >
-
-        <div
-          class="card card-body"
-          style="
-            text-align:center;
-            cursor:pointer;
-          "
-          onclick="filterOrders('all')"
-        >
-          <div
-            style="
-              font-size:22px;
-              font-weight:700;
-            "
-          >
-            1.284
-          </div>
-
-          <div
-            style="
-              font-size:12px;
-              color:var(--text-light);
-              margin-top:4px;
-            "
-          >
-            Total
-          </div>
-        </div>
-
-        <div
-          class="card card-body"
-          style="
-            text-align:center;
-            cursor:pointer;
-            border-bottom:3px solid var(--warning);
-          "
-          onclick="filterOrders('preparando')"
-        >
-
-          <div
-            style="
-              font-size:22px;
-              font-weight:700;
-              color:var(--warning);
-            "
-          >
-            42
-          </div>
-
-          <div
-            style="
-              font-size:12px;
-              color:var(--text-light);
-              margin-top:4px;
-            "
-          >
-            Em Preparo
-          </div>
-
-        </div>
-
-        <div
-          class="card card-body"
-          style="
-            text-align:center;
-            cursor:pointer;
-            border-bottom:3px solid var(--info);
-          "
-          onclick="filterOrders('enviado')"
-        >
-
-          <div
-            style="
-              font-size:22px;
-              font-weight:700;
-              color:var(--info);
-            "
-          >
-            127
-          </div>
-
-          <div
-            style="
-              font-size:12px;
-              color:var(--text-light);
-              margin-top:4px;
-            "
-          >
-            Enviados
-          </div>
-
-        </div>
-
-        <div
-          class="card card-body"
-          style="
-            text-align:center;
-            cursor:pointer;
-            border-bottom:3px solid var(--success);
-          "
-          onclick="filterOrders('entregue')"
-        >
-
-          <div
-            style="
-              font-size:22px;
-              font-weight:700;
-              color:var(--success);
-            "
-          >
-            1.103
-          </div>
-
-          <div
-            style="
-              font-size:12px;
-              color:var(--text-light);
-              margin-top:4px;
-            "
-          >
-            Entregues
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="section-toolbar">
-
-        <div class="section-search">
-          <span>🔍</span>
-
-          <input
-            type="text"
-            placeholder="Buscar pedido ou cliente..."
-          >
-        </div>
-
-        <div class="filter-chips">
-
-          <span class="filter-chip active">
-            Todos
-          </span>
-
-          <span class="filter-chip">
-            Hoje
-          </span>
-
-          <span class="filter-chip">
-            Esta semana
-          </span>
-
-          <span class="filter-chip">
-            Este mês
-          </span>
-
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="orders-table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-              <tr>
-                <th>Pedido</th>
-                <th>Cliente</th>
-                <th>Produtos</th>
-                <th>Total</th>
-                <th>Pagamento</th>
-                <th>Status</th>
-                <th>Data</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td><strong>#10248</strong></td>
-                <td>Ana Beatriz Lima</td>
-                <td>2 itens</td>
-                <td>R$ 107,00</td>
-                <td>
-                  <span class="badge badge--green">
-                    Aprovado
-                  </span>
-                </td>
-                <td>
-                  <span class="badge badge--green">
-                    Entregue
-                  </span>
-                </td>
-                <td>03/10/2026</td>
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>#10247</strong></td>
-                <td>Carla Mendes</td>
-                <td>1 item</td>
-                <td>R$ 58,00</td>
-                <td>
-                  <span class="badge badge--green">
-                    Aprovado
-                  </span>
-                </td>
-                <td>
-                  <span class="badge badge--blue">
-                    Enviado
-                  </span>
-                </td>
-                <td>03/10/2026</td>
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>#10246</strong></td>
-                <td>Fernanda Costa</td>
-                <td>3 itens</td>
-                <td>R$ 178,00</td>
-                <td>
-                  <span class="badge badge--green">
-                    Aprovado
-                  </span>
-                </td>
-                <td>
-                  <span class="badge badge--yellow">
-                    Em preparo
-                  </span>
-                </td>
-                <td>02/10/2026</td>
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>#10245</strong></td>
-                <td>Julia Ramos</td>
-                <td>1 item</td>
-                <td>R$ 42,00</td>
-                <td>
-                  <span class="badge badge--green">
-                    Aprovado
-                  </span>
-                </td>
-                <td>
-                  <span class="badge badge--yellow">
-                    Em preparo
-                  </span>
-                </td>
-                <td>02/10/2026</td>
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>#10244</strong></td>
-                <td>Mariana Souza</td>
-                <td>2 itens</td>
-                <td>R$ 120,00</td>
-                <td>
-                  <span class="badge badge--red">
-                    Recusado
-                  </span>
-                </td>
-                <td>
-                  <span class="badge badge--red">
-                    Cancelado
-                  </span>
-                </td>
-                <td>01/10/2026</td>
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ===========================
-         PAGE: CLIENTES
-         =========================== -->
-
-    <div class="page-content" id="page-clientes">
-
-      <div class="page-header">
-
-        <div>
-          <h1 class="page-title">
-            Clientes
-          </h1>
-
-          <p class="page-subtitle">
-            Gerencie sua base de clientes
-          </p>
-        </div>
-
-        <div class="page-actions">
-
-          <button class="btn btn--outline">
-            📥 Exportar
-          </button>
-
-          <button class="btn btn--primary">
-            + Novo Cliente
-          </button>
-
-        </div>
-
-      </div>
-
-      <div
-        style="
-          display:grid;
-          grid-template-columns:repeat(3,1fr);
-          gap:16px;
-          margin-bottom:20px;
-        "
-      >
-
-        <div class="stat-card stat-card--pink">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Total de Clientes
-            </span>
-
-            <div class="stat-card__icon">
-              👥
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            3.847
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 5.2% este mês
-          </div>
-
-        </div>
-
-        <div class="stat-card stat-card--green">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Novos este mês
-            </span>
-
-            <div class="stat-card__icon">
-              ✨
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            193
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 2.1%
-          </div>
-
-        </div>
-
-        <div class="stat-card stat-card--purple">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Taxa de Retenção
-            </span>
-
-            <div class="stat-card__icon">
-              🔄
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            68%
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 3%
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="section-toolbar">
-
-        <div class="section-search">
-          <span>🔍</span>
-          <input
-            type="text"
-            placeholder="Buscar cliente..."
-          >
-        </div>
-
-        <div class="filter-chips">
-          <span class="filter-chip active">
-            Todos
-          </span>
-
-          <span class="filter-chip">
-            VIP
-          </span>
-
-          <span class="filter-chip">
-            Novos
-          </span>
-
-          <span class="filter-chip">
-            Inativos
-          </span>
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="orders-table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>Email</th>
-                <th>Pedidos</th>
-                <th>Total gasto</th>
-                <th>Última compra</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <div
-                      style="
-                        width:34px;
-                        height:34px;
-                        border-radius:50%;
-                        background:var(--primary-light);
-                        color:var(--primary);
-                        display:flex;
-                        align-items:center;
-                        justify-content:center;
-                        font-weight:600;
-                        font-size:13px;
-                      "
-                    >
-                      A
-                    </div>
-
-                    <strong>Ana Beatriz</strong>
-                  </div>
-                </td>
-
-                <td>ana@email.com</td>
-                <td>8</td>
-                <td>R$ 632</td>
-                <td>03/10/2026</td>
-
-                <td>
-                  <span class="badge badge--purple">
-                    VIP
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div style="display:flex;align-items:center;gap:10px;">
-
-                    <div
-                      style="
-                        width:34px;
-                        height:34px;
-                        border-radius:50%;
-                        background:#d1fae5;
-                        color:#065f46;
-                        display:flex;
-                        align-items:center;
-                        justify-content:center;
-                        font-weight:600;
-                        font-size:13px;
-                      "
-                    >
-                      C
-                    </div>
-
-                    <strong>
-                      Carla Mendes
-                    </strong>
-
-                  </div>
-                </td>
-
-                <td>carla@email.com</td>
-                <td>3</td>
-                <td>R$ 174</td>
-                <td>03/10/2026</td>
-
-                <td>
-                  <span class="badge badge--green">
-                    Ativo
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div style="display:flex;align-items:center;gap:10px;">
-
-                    <div
-                      style="
-                        width:34px;
-                        height:34px;
-                        border-radius:50%;
-                        background:#dbeafe;
-                        color:#1e40af;
-                        display:flex;
-                        align-items:center;
-                        justify-content:center;
-                        font-weight:600;
-                        font-size:13px;
-                      "
-                    >
-                      F
-                    </div>
-
-                    <strong>
-                      Fernanda Costa
-                    </strong>
-
-                  </div>
-                </td>
-
-                <td>fernanda@email.com</td>
-                <td>12</td>
-                <td>R$ 1.247</td>
-                <td>02/10/2026</td>
-
-                <td>
-                  <span class="badge badge--purple">
-                    VIP
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div style="display:flex;align-items:center;gap:10px;">
-
-                    <div
-                      style="
-                        width:34px;
-                        height:34px;
-                        border-radius:50%;
-                        background:#fce7f3;
-                        color:#9d174d;
-                        display:flex;
-                        align-items:center;
-                        justify-content:center;
-                        font-weight:600;
-                        font-size:13px;
-                      "
-                    >
-                      J
-                    </div>
-
-                    <strong>
-                      Julia Ramos
-                    </strong>
-
-                  </div>
-                </td>
-
-                <td>julia@email.com</td>
-                <td>1</td>
-                <td>R$ 42</td>
-                <td>02/10/2026</td>
-
-                <td>
-                  <span class="badge badge--blue">
-                    Novo
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ===========================
-         PAGE: CUPONS
-         =========================== -->
-
-    <div class="page-content" id="page-cupons">
-
-      <div class="page-header">
-
-        <div>
-          <h1 class="page-title">
-            Cupons de Desconto
-          </h1>
-
-          <p class="page-subtitle">
-            Crie e gerencie cupons promocionais
-          </p>
-        </div>
-
-        <div class="page-actions">
-
-          <button
-            class="btn btn--primary"
-            onclick="openModal('modal-cupom')"
-          >
-            + Novo Cupom
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="orders-table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Tipo</th>
-                <th>Valor</th>
-                <th>Usos</th>
-                <th>Mín. compra</th>
-                <th>Validade</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:3px 8px;
-                      border-radius:5px;
-                      font-weight:600;
-                    "
-                  >
-                    ESSENCE20
-                  </code>
-                </td>
-
-                <td>% Desconto</td>
-                <td>20%</td>
-                <td>148 / 500</td>
-                <td>R$ 100</td>
-                <td>31/12/2026</td>
-
-                <td>
-                  <span class="badge badge--green">
-                    Ativo
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:3px 8px;
-                      border-radius:5px;
-                      font-weight:600;
-                    "
-                  >
-                    FRETE0
-                  </code>
-                </td>
-
-                <td>Frete grátis</td>
-                <td>100%</td>
-                <td>312 / ∞</td>
-                <td>R$ 75</td>
-                <td>30/10/2026</td>
-
-                <td>
-                  <span class="badge badge--green">
-                    Ativo
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:3px 8px;
-                      border-radius:5px;
-                      font-weight:600;
-                    "
-                  >
-                    WELCOME10
-                  </code>
-                </td>
-
-                <td>% Desconto</td>
-                <td>10%</td>
-                <td>89 / 200</td>
-                <td>—</td>
-                <td>31/10/2026</td>
-
-                <td>
-                  <span class="badge badge--yellow">
-                    Próx. expirar
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:3px 8px;
-                      border-radius:5px;
-                      font-weight:600;
-                    "
-                  >
-                    FLASH50
-                  </code>
-                </td>
-
-                <td>% Desconto</td>
-                <td>50%</td>
-                <td>500 / 500</td>
-                <td>—</td>
-                <td>01/09/2026</td>
-
-                <td>
-                  <span class="badge badge--gray">
-                    Expirado
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ===========================
-         PAGE: ANÁLISES
-         =========================== -->
-
-    <div class="page-content" id="page-analiticas">
-
-      <div class="page-header">
-
-        <div>
-          <h1 class="page-title">
-            Análises
-          </h1>
-
-          <p class="page-subtitle">
-            Métricas e performance da loja
-          </p>
-        </div>
-
-        <div class="page-actions">
-          <button class="btn btn--outline">
-            📅 Últimos 30 dias
-          </button>
-        </div>
-
-      </div>
-
-      <div class="stats-grid">
-
-        <div class="stat-card stat-card--pink">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Visitantes
-            </span>
-
-            <div class="stat-card__icon">
-              👀
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            24.831
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 15% este mês
-          </div>
-
-        </div>
-
-        <div class="stat-card stat-card--green">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Taxa de Conversão
-            </span>
-
-            <div class="stat-card__icon">
-              📈
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            3.8%
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 0.3%
-          </div>
-
-        </div>
-
-        <div class="stat-card stat-card--orange">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Abandono de Carrinho
-            </span>
-
-            <div class="stat-card__icon">
-              🛒
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            67%
-          </div>
-
-          <div class="stat-card__change stat-card__change--down">
-            ▼ 2%
-          </div>
-
-        </div>
-
-        <div class="stat-card stat-card--purple">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Tempo Médio no Site
-            </span>
-
-            <div class="stat-card__icon">
-              ⏱️
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            3m 42s
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 12s
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="analytics-grid">
-
-        <div class="card">
-
-          <div class="card-header">
-            <span class="card-title">
-              Receita por Categoria
-            </span>
-          </div>
-
-          <div
-            class="card-body"
-            style="
-              display:flex;
-              align-items:center;
-              gap:24px;
-            "
-          >
-
-            <div style="position:relative;">
-
-              <svg
-                width="140"
-                height="140"
-                viewBox="0 0 140 140"
-              >
-
-                <circle
-                  cx="70"
-                  cy="70"
-                  r="55"
-                  fill="none"
-                  stroke="#f3f4f6"
-                  stroke-width="22"
-                />
-
-                <circle
-                  cx="70"
-                  cy="70"
-                  r="55"
-                  fill="none"
-                  stroke="#ec4899"
-                  stroke-width="22"
-                  stroke-dasharray="207 138"
-                  stroke-dashoffset="0"
-                  transform="rotate(-90 70 70)"
-                />
-
-                <circle
-                  cx="70"
-                  cy="70"
-                  r="55"
-                  fill="none"
-                  stroke="#8b5cf6"
-                  stroke-width="22"
-                  stroke-dasharray="104 241"
-                  stroke-dashoffset="-207"
-                  transform="rotate(-90 70 70)"
-                />
-
-                <circle
-                  cx="70"
-                  cy="70"
-                  r="55"
-                  fill="none"
-                  stroke="#f59e0b"
-                  stroke-width="22"
-                  stroke-dasharray="35 310"
-                  stroke-dashoffset="-311"
-                  transform="rotate(-90 70 70)"
-                />
-
-              </svg>
-
-              <div
-                style="
-                  position:absolute;
-                  inset:0;
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  flex-direction:column;
-                "
-              >
-
-                <div
-                  style="
-                    font-size:20px;
-                    font-weight:700;
-                  "
-                >
-                  R$48k
-                </div>
-
-                <div
-                  style="
-                    font-size:10px;
-                    color:var(--text-light);
-                  "
-                >
-                  Total
-                </div>
-
-              </div>
-
-            </div>
-
-            <div style="flex:1;">
-
-              <div class="legend-item">
-                <span
-                  class="legend-dot"
-                  style="background:#ec4899;"
-                ></span>
-                <span style="flex:1;">Bottoms</span>
-                <strong>60%</strong>
-              </div>
-
-              <div class="legend-item">
-                <span
-                  class="legend-dot"
-                  style="background:#8b5cf6;"
-                ></span>
-                <span style="flex:1;">Tops</span>
-                <strong>30%</strong>
-              </div>
-
-              <div class="legend-item">
-                <span
-                  class="legend-dot"
-                  style="background:#f59e0b;"
-                ></span>
-                <span style="flex:1;">Acessórios</span>
-                <strong>10%</strong>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="card">
-
-          <div class="card-header">
-            <span class="card-title">
-              Origem do Tráfego
-            </span>
-          </div>
-
-          <div class="card-body">
-
-            <div
-              style="
-                display:flex;
-                flex-direction:column;
-                gap:12px;
-              "
-            >
-
-              <div>
-
-                <div
-                  style="
-                    display:flex;
-                    justify-content:space-between;
-                    font-size:12px;
-                    margin-bottom:4px;
-                  "
-                >
-                  <span>Instagram</span>
-                  <strong>42%</strong>
-                </div>
-
-                <div
-                  style="
-                    height:6px;
-                    border-radius:99px;
-                    background:var(--border);
-                  "
-                >
-                  <div
-                    style="
-                      width:42%;
-                      height:100%;
-                      border-radius:99px;
-                      background:#ec4899;
-                    "
-                  ></div>
-                </div>
-
-              </div>
-
-              <div>
-
-                <div
-                  style="
-                    display:flex;
-                    justify-content:space-between;
-                    font-size:12px;
-                    margin-bottom:4px;
-                  "
-                >
-                  <span>Busca Orgânica</span>
-                  <strong>28%</strong>
-                </div>
-
-                <div
-                  style="
-                    height:6px;
-                    border-radius:99px;
-                    background:var(--border);
-                  "
-                >
-                  <div
-                    style="
-                      width:28%;
-                      height:100%;
-                      border-radius:99px;
-                      background:#3b82f6;
-                    "
-                  ></div>
-                </div>
-
-              </div>
-
-              <div>
-
-                <div
-                  style="
-                    display:flex;
-                    justify-content:space-between;
-                    font-size:12px;
-                    margin-bottom:4px;
-                  "
-                >
-                  <span>Direto</span>
-                  <strong>16%</strong>
-                </div>
-
-                <div
-                  style="
-                    height:6px;
-                    border-radius:99px;
-                    background:var(--border);
-                  "
-                >
-                  <div
-                    style="
-                      width:16%;
-                      height:100%;
-                      border-radius:99px;
-                      background:#8b5cf6;
-                    "
-                  ></div>
-                </div>
-
-              </div>
-
-              <div>
-
-                <div
-                  style="
-                    display:flex;
-                    justify-content:space-between;
-                    font-size:12px;
-                    margin-bottom:4px;
-                  "
-                >
-                  <span>TikTok</span>
-                  <strong>10%</strong>
-                </div>
-
-                <div
-                  style="
-                    height:6px;
-                    border-radius:99px;
-                    background:var(--border);
-                  "
-                >
-                  <div
-                    style="
-                      width:10%;
-                      height:100%;
-                      border-radius:99px;
-                      background:#f59e0b;
-                    "
-                  ></div>
-                </div>
-
-              </div>
-
-              <div>
-
-                <div
-                  style="
-                    display:flex;
-                    justify-content:space-between;
-                    font-size:12px;
-                    margin-bottom:4px;
-                  "
-                >
-                  <span>Email</span>
-                  <strong>4%</strong>
-                </div>
-
-                <div
-                  style="
-                    height:6px;
-                    border-radius:99px;
-                    background:var(--border);
-                  "
-                >
-                  <div
-                    style="
-                      width:4%;
-                      height:100%;
-                      border-radius:99px;
-                      background:#10b981;
-                    "
-                  ></div>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ===========================
-         PAGE: AFILIADOS
-         =========================== -->
-
-    <div class="page-content" id="page-afiliados">
-
-      <div class="page-header">
-
-        <div>
-          <h1 class="page-title">
-            Afiliados
-          </h1>
-
-          <p class="page-subtitle">
-            Gerencie parceiros e programas de indicação
-          </p>
-        </div>
-
-        <div class="page-actions">
-          <button class="btn btn--primary">
-            + Novo Afiliado
-          </button>
-        </div>
-
-      </div>
-
-      <div
-        style="
-          display:grid;
-          grid-template-columns:repeat(3,1fr);
-          gap:16px;
-          margin-bottom:20px;
-        "
-      >
-
-        <div class="stat-card stat-card--pink">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Afiliados Ativos
-            </span>
-
-            <div class="stat-card__icon">
-              🤝
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            38
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 6 novos este mês
-          </div>
-
-        </div>
-
-        <div class="stat-card stat-card--green">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Vendas Geradas
-            </span>
-
-            <div class="stat-card__icon">
-              💸
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            R$ 12.480
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            ▲ 18%
-          </div>
-
-        </div>
-
-        <div class="stat-card stat-card--purple">
-
-          <div class="stat-card__top">
-            <span class="stat-card__label">
-              Comissões Pagas
-            </span>
-
-            <div class="stat-card__icon">
-              💳
-            </div>
-          </div>
-
-          <div class="stat-card__value">
-            R$ 1.872
-          </div>
-
-          <div class="stat-card__change stat-card__change--up">
-            15% da receita
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="orders-table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-              <tr>
-                <th>Afiliado</th>
-                <th>Código</th>
-                <th>Vendas</th>
-                <th>Receita</th>
-                <th>Comissão</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td><strong>@mariafitness</strong></td>
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:3px 8px;
-                      border-radius:5px;
-                    "
-                  >
-                    MARIA15
-                  </code>
-                </td>
-                <td>87</td>
-                <td>R$ 4.218</td>
-                <td>R$ 633</td>
-                <td>
-                  <span class="badge badge--green">
-                    Ativo
-                  </span>
-                </td>
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>@carolstyle</strong></td>
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:3px 8px;
-                      border-radius:5px;
-                    "
-                  >
-                    CAROL10
-                  </code>
-                </td>
-                <td>54</td>
-                <td>R$ 2.914</td>
-                <td>R$ 291</td>
-                <td>
-                  <span class="badge badge--green">
-                    Ativo
-                  </span>
-                </td>
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>@luanagym</strong></td>
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:3px 8px;
-                      border-radius:5px;
-                    "
-                  >
-                    LUANA20
-                  </code>
-                </td>
-                <td>32</td>
-                <td>R$ 1.824</td>
-                <td>R$ 365</td>
-                <td>
-                  <span class="badge badge--yellow">
-                    Pendente
-                  </span>
-                </td>
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    👁
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ===========================
-         PAGE: COMUNICAÇÕES
-         =========================== -->
-
-    <div class="page-content" id="page-comunicacoes">
-
-      <div class="page-header">
-
-        <div>
-          <h1 class="page-title">
-            Comunicações
-          </h1>
-
-          <p class="page-subtitle">
-            Gerencie e-mails, notificações e campanhas
-          </p>
-        </div>
-
-        <div class="page-actions">
-          <button class="btn btn--primary">
-            + Nova Campanha
-          </button>
-        </div>
-
-      </div>
-
-      <div
-        style="
-          display:grid;
-          grid-template-columns:repeat(3,1fr);
-          gap:16px;
-          margin-bottom:20px;
-        "
-      >
-
-        <div
-          class="card card-body"
-          style="
-            display:flex;
-            align-items:center;
-            gap:14px;
-          "
-        >
-
-          <div
-            style="
-              width:46px;
-              height:46px;
-              border-radius:12px;
-              background:var(--primary-light);
-              display:flex;
-              align-items:center;
-              justify-content:center;
-              font-size:22px;
-            "
-          >
-            📧
-          </div>
-
-          <div>
-            <div
-              style="
-                font-size:18px;
-                font-weight:700;
-              "
-            >
-              Email
-            </div>
-
-            <div
-              style="
-                font-size:12px;
-                color:var(--text-light);
-              "
-            >
-              3.847 assinantes
-            </div>
-          </div>
-
-          <button
-            class="btn btn--primary btn--sm"
-            style="margin-left:auto;"
-          >
-            Criar
-          </button>
-
-        </div>
-
-        <div
-          class="card card-body"
-          style="
-            display:flex;
-            align-items:center;
-            gap:14px;
-          "
-        >
-
-          <div
-            style="
-              width:46px;
-              height:46px;
-              border-radius:12px;
-              background:var(--info-light);
-              display:flex;
-              align-items:center;
-              justify-content:center;
-              font-size:22px;
-            "
-          >
-            📱
-          </div>
-
-          <div>
-            <div
-              style="
-                font-size:18px;
-                font-weight:700;
-              "
-            >
-              Push
-            </div>
-
-            <div
-              style="
-                font-size:12px;
-                color:var(--text-light);
-              "
-            >
-              1.204 devices
-            </div>
-          </div>
-
-          <button
-            class="btn btn--outline btn--sm"
-            style="margin-left:auto;"
-          >
-            Criar
-          </button>
-
-        </div>
-
-        <div
-          class="card card-body"
-          style="
-            display:flex;
-            align-items:center;
-            gap:14px;
-          "
-        >
-
-          <div
-            style="
-              width:46px;
-              height:46px;
-              border-radius:12px;
-              background:var(--success-light);
-              display:flex;
-              align-items:center;
-              justify-content:center;
-              font-size:22px;
-            "
-          >
-            💬
-          </div>
-
-          <div>
-            <div
-              style="
-                font-size:18px;
-                font-weight:700;
-              "
-            >
-              WhatsApp
-            </div>
-
-            <div
-              style="
-                font-size:12px;
-                color:var(--text-light);
-              "
-            >
-              648 contatos
-            </div>
-          </div>
-
-          <button
-            class="btn btn--outline btn--sm"
-            style="margin-left:auto;"
-          >
-            Criar
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="card-header">
-          <span class="card-title">
-            Campanhas Recentes
-          </span>
-        </div>
-
-        <div class="orders-table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-              <tr>
-                <th>Campanha</th>
-                <th>Canal</th>
-                <th>Enviados</th>
-                <th>Abertos</th>
-                <th>Cliques</th>
-                <th>Conversões</th>
-                <th>Data</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td><strong>Lançamento FlexFit</strong></td>
-                <td>Email</td>
-                <td>3.847</td>
-                <td>1.618 (42%)</td>
-                <td>384 (10%)</td>
-                <td>47 (1.2%)</td>
-                <td>01/10/2026</td>
-              </tr>
-
-              <tr>
-                <td><strong>Promo Weekend</strong></td>
-                <td>Push</td>
-                <td>1.204</td>
-                <td>843 (70%)</td>
-                <td>241 (20%)</td>
-                <td>38 (3.1%)</td>
-                <td>28/09/2026</td>
-              </tr>
-
-              <tr>
-                <td><strong>Newsletter Sep</strong></td>
-                <td>Email</td>
-                <td>3.812</td>
-                <td>1.372 (36%)</td>
-                <td>297 (7.8%)</td>
-                <td>31 (0.8%)</td>
-                <td>15/09/2026</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ===========================
-         PAGE: CATEGORIAS
-         =========================== -->
-
-    <div class="page-content" id="page-categorias">
-
-      <div class="page-header">
-
-        <div>
           <h1 class="page-title">
             Categorias
           </h1>
 
           <p class="page-subtitle">
-            Organize seus produtos por categorias
+            Área preservada para a próxima etapa.
           </p>
-        </div>
-
-        <div class="page-actions">
-
-          <button
-            class="btn btn--primary"
-            onclick="openModal('modal-categoria')"
-          >
-            + Nova Categoria
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="orders-table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Slug</th>
-                <th>Produtos</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td><strong>Tops</strong></td>
-
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:2px 8px;
-                      border-radius:5px;
-                    "
-                  >
-                    /tops
-                  </code>
-                </td>
-
-                <td>54</td>
-
-                <td>
-                  <span class="badge badge--green">
-                    Ativa
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Bottoms</strong></td>
-
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:2px 8px;
-                      border-radius:5px;
-                    "
-                  >
-                    /bottoms
-                  </code>
-                </td>
-
-                <td>72</td>
-
-                <td>
-                  <span class="badge badge--green">
-                    Ativa
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>Accessories</strong></td>
-
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:2px 8px;
-                      border-radius:5px;
-                    "
-                  >
-                    /accessories
-                  </code>
-                </td>
-
-                <td>22</td>
-
-                <td>
-                  <span class="badge badge--green">
-                    Ativa
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td><strong>New Arrivals</strong></td>
-
-                <td>
-                  <code
-                    style="
-                      background:var(--bg);
-                      padding:2px 8px;
-                      border-radius:5px;
-                    "
-                  >
-                    /new
-                  </code>
-                </td>
-
-                <td>8</td>
-
-                <td>
-                  <span class="badge badge--blue">
-                    Especial
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
 
         </div>
 
@@ -2783,131 +740,24 @@
 
     </div>
 
-    <!-- ===========================
-         PAGE: COLEÇÕES
-         =========================== -->
 
-    <div class="page-content" id="page-colecoes">
+
+    <div
+      class="page-content"
+      id="page-colecoes"
+    >
 
       <div class="page-header">
 
         <div>
+
           <h1 class="page-title">
             Coleções
           </h1>
 
           <p class="page-subtitle">
-            Agrupe produtos em coleções temáticas
+            Área preservada para a próxima etapa.
           </p>
-        </div>
-
-        <div class="page-actions">
-          <button class="btn btn--primary">
-            + Nova Coleção
-          </button>
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="orders-table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-              <tr>
-                <th>Coleção</th>
-                <th>Produtos</th>
-                <th>Período</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>
-                  <strong>
-                    FlexFit Freedom
-                  </strong>
-                </td>
-
-                <td>12</td>
-                <td>Set–Dez 2026</td>
-
-                <td>
-                  <span class="badge badge--green">
-                    Publicada
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>
-                    Summer Glow
-                  </strong>
-                </td>
-
-                <td>8</td>
-                <td>Nov 2026</td>
-
-                <td>
-                  <span class="badge badge--yellow">
-                    Rascunho
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>
-                    Black Friday
-                  </strong>
-                </td>
-
-                <td>24</td>
-                <td>Nov 2026</td>
-
-                <td>
-                  <span class="badge badge--gray">
-                    Agendada
-                  </span>
-                </td>
-
-                <td class="action-btns">
-                  <button class="btn btn--ghost btn--icon">
-                    ✏️
-                  </button>
-                  <button class="btn btn--ghost btn--icon">
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
 
         </div>
 
@@ -2915,223 +765,174 @@
 
     </div>
 
-    <!-- ===========================
-         PAGE: CONFIGURAÇÕES
-         =========================== -->
 
-    <div class="page-content" id="page-configuracoes">
+
+    <div
+      class="page-content"
+      id="page-pedidos"
+    >
 
       <div class="page-header">
 
         <div>
+
+          <h1 class="page-title">
+            Pedidos
+          </h1>
+
+          <p class="page-subtitle">
+            Área preservada para a próxima etapa.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="page-content"
+      id="page-clientes"
+    >
+
+      <div class="page-header">
+
+        <div>
+
+          <h1 class="page-title">
+            Clientes
+          </h1>
+
+          <p class="page-subtitle">
+            Área preservada para a próxima etapa.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="page-content"
+      id="page-cupons"
+    >
+
+      <div class="page-header">
+
+        <div>
+
+          <h1 class="page-title">
+            Cupons
+          </h1>
+
+          <p class="page-subtitle">
+            Área preservada para a próxima etapa.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="page-content"
+      id="page-analiticas"
+    >
+
+      <div class="page-header">
+
+        <div>
+
+          <h1 class="page-title">
+            Análises
+          </h1>
+
+          <p class="page-subtitle">
+            Área preservada para a próxima etapa.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="page-content"
+      id="page-afiliados"
+    >
+
+      <div class="page-header">
+
+        <div>
+
+          <h1 class="page-title">
+            Afiliados
+          </h1>
+
+          <p class="page-subtitle">
+            Área preservada para a próxima etapa.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="page-content"
+      id="page-comunicacoes"
+    >
+
+      <div class="page-header">
+
+        <div>
+
+          <h1 class="page-title">
+            Comunicações
+          </h1>
+
+          <p class="page-subtitle">
+            Área preservada para a próxima etapa.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="page-content"
+      id="page-configuracoes"
+    >
+
+      <div class="page-header">
+
+        <div>
+
           <h1 class="page-title">
             Configurações
           </h1>
 
           <p class="page-subtitle">
-            Personalize sua loja
+            Área preservada para a próxima etapa.
           </p>
-        </div>
-
-        <div class="page-actions">
-
-          <button class="btn btn--primary">
-            💾 Salvar alterações
-          </button>
-
-        </div>
-
-      </div>
-
-      <div
-        style="
-          display:grid;
-          grid-template-columns:1fr 1fr;
-          gap:20px;
-        "
-      >
-
-        <div class="card card-body">
-
-          <h3
-            style="
-              font-size:15px;
-              font-weight:700;
-              margin-bottom:16px;
-            "
-          >
-            Informações da Loja
-          </h3>
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Nome da Loja
-            </label>
-
-            <input
-              type="text"
-              class="form-control"
-              value="ESSENCE"
-            >
-
-          </div>
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Descrição
-            </label>
-
-            <textarea
-              class="form-control"
-              rows="3"
-            >Premium activewear designed for the modern woman.</textarea>
-
-          </div>
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Email de Contato
-            </label>
-
-            <input
-              type="email"
-              class="form-control"
-              value="contact@essence.com"
-            >
-
-          </div>
-
-          <div class="form-group">
-
-            <label class="form-label">
-              WhatsApp
-            </label>
-
-            <input
-              type="text"
-              class="form-control"
-              value="+55 (11) 99999-9999"
-            >
-
-          </div>
-
-        </div>
-
-        <div class="card card-body">
-
-          <h3
-            style="
-              font-size:15px;
-              font-weight:700;
-              margin-bottom:16px;
-            "
-          >
-            Configurações de Frete
-          </h3>
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Frete grátis acima de (R$)
-            </label>
-
-            <input
-              type="number"
-              class="form-control"
-              value="75"
-            >
-
-          </div>
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Prazo de entrega padrão
-            </label>
-
-            <select class="form-control">
-              <option>3–5 dias úteis</option>
-              <option>5–7 dias úteis</option>
-            </select>
-
-          </div>
-
-          <h3
-            style="
-              font-size:15px;
-              font-weight:700;
-              margin:20px 0 16px;
-            "
-          >
-            Notificações
-          </h3>
-
-          <div
-            style="
-              display:flex;
-              flex-direction:column;
-              gap:12px;
-            "
-          >
-
-            <div class="toggle-wrap">
-
-              <label class="toggle">
-
-                <input
-                  type="checkbox"
-                  checked
-                >
-
-                <span class="toggle-slider"></span>
-
-              </label>
-
-              <span style="font-size:13px;">
-                Email de novo pedido
-              </span>
-
-            </div>
-
-            <div class="toggle-wrap">
-
-              <label class="toggle">
-
-                <input
-                  type="checkbox"
-                  checked
-                >
-
-                <span class="toggle-slider"></span>
-
-              </label>
-
-              <span style="font-size:13px;">
-                Email de baixo estoque
-              </span>
-
-            </div>
-
-            <div class="toggle-wrap">
-
-              <label class="toggle">
-
-                <input type="checkbox">
-
-                <span class="toggle-slider"></span>
-
-              </label>
-
-              <span style="font-size:13px;">
-                Relatório semanal
-              </span>
-
-            </div>
-
-          </div>
 
         </div>
 
@@ -3139,21 +940,30 @@
 
     </div>
 
+
   </main>
 
-  <!-- =====================================================
+
+
+  <!-- =========================================
        MODAL PRODUTO
-       ===================================================== -->
+       ========================================= -->
 
   <div
-    class="modal-overlay"
+    class="modal"
     id="modal-produto"
-    onclick="if(event.target===this)closeModal('modal-produto')"
+    onclick="
+      if(event.target === this)
+        closeModal('modal-produto')
+    "
   >
 
-    <div class="modal">
+
+    <div class="modal__dialog">
+
 
       <div class="modal__header">
+
 
         <h2
           class="modal__title"
@@ -3162,71 +972,80 @@
           Novo Produto
         </h2>
 
+
         <button
-          class="modal__close"
+          type="button"
+          class="btn btn--ghost btn--icon"
           onclick="closeModal('modal-produto')"
         >
           ✕
         </button>
 
+
       </div>
+
+
 
       <div class="modal__body">
 
-        <div class="form-group">
 
-          <label class="form-label">
-            Nome do Produto *
-          </label>
+        <div class="form-grid">
 
-          <input
-            type="text"
-            class="form-control"
-            id="produto-nome"
-            placeholder="Ex: High-Waist Training Leggings"
-          >
 
-        </div>
+          <div class="form-group form-group--full">
 
-        <div class="form-grid-2">
+            <label class="form-label">
+              Nome do produto *
+            </label>
+
+            <input
+              id="produto-nome"
+              class="form-control"
+              type="text"
+              placeholder="Ex: Legging Cintura Alta"
+            >
+
+          </div>
+
+
 
           <div class="form-group">
 
             <label class="form-label">
-              Preço (R$) *
+              Preço *
             </label>
 
             <input
-              type="number"
-              class="form-control"
               id="produto-preco"
-              placeholder="0.00"
+              class="form-control"
+              type="number"
               min="0"
               step="0.01"
+              placeholder="0,00"
             >
 
           </div>
+
+
 
           <div class="form-group">
 
             <label class="form-label">
-              Preço Promocional
+              Preço promocional
             </label>
 
             <input
-              type="number"
-              class="form-control"
               id="produto-preco-promocional"
-              placeholder="0.00"
+              class="form-control"
+              type="number"
               min="0"
               step="0.01"
+              placeholder="0,00"
             >
 
           </div>
 
-        </div>
 
-        <div class="form-grid-2">
 
           <div class="form-group">
 
@@ -3235,23 +1054,35 @@
             </label>
 
             <select
-              class="form-control"
               id="produto-categoria"
+              class="form-control"
             >
-              <option value="Tops">
+
+              <option>
                 Tops
               </option>
 
-              <option value="Bottoms">
+              <option>
                 Bottoms
               </option>
 
-              <option value="Accessories">
-                Accessories
+              <option>
+                Acessórios
               </option>
+
+              <option>
+                Conjuntos
+              </option>
+
+              <option>
+                Shorts
+              </option>
+
             </select>
 
           </div>
+
+
 
           <div class="form-group">
 
@@ -3260,910 +1091,806 @@
             </label>
 
             <input
-              type="number"
-              class="form-control"
               id="produto-estoque"
-              placeholder="0"
+              class="form-control"
+              type="number"
               min="0"
               step="1"
+              value="0"
             >
 
           </div>
 
-        </div>
 
-        <div class="form-group">
 
-          <label class="form-label">
-            Descrição
-          </label>
+          <div class="form-group form-group--full">
 
-          <textarea
-            class="form-control"
-            id="produto-descricao"
-            rows="3"
-            placeholder="Descreva o produto..."
-          ></textarea>
+            <label class="form-label">
+              Descrição
+            </label>
 
-        </div>
+            <textarea
+              id="produto-descricao"
+              class="form-control"
+              rows="4"
+              placeholder="Descreva o produto..."
+            ></textarea>
 
-        <div class="form-group">
+          </div>
 
-          <label class="form-label">
-            Imagem
-          </label>
 
-          <div
-            class="image-upload"
-            id="produto-image-upload"
-            style="
-              cursor:pointer;
-              position:relative;
-            "
-          >
 
-            <input
-              type="file"
-              id="produto-imagem"
-              accept="image/png,image/jpeg,image/webp"
-              style="display:none;"
-            >
+          <div class="form-group form-group--full">
 
-            <img
-              id="produto-imagem-preview"
-              alt="Prévia do produto"
-              style="
-                display:none;
-                width:72px;
-                height:72px;
-                object-fit:cover;
-                border-radius:10px;
-                margin-right:12px;
-              "
-            >
+            <label class="form-label">
+              Imagem
+            </label>
+
 
             <div
-              class="image-upload__icon"
-              id="produto-image-icon"
+              class="image-upload-box"
+              id="produto-image-upload"
             >
-              🖼️
-            </div>
 
-            <div class="image-upload__text">
 
-              <strong id="produto-image-label">
-                Clique para enviar
-              </strong>
-
-              ou arraste a imagem aqui
-
-              <br>
-
-              <small
-                style="color:var(--text-light);"
+              <input
+                id="produto-imagem"
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                hidden
               >
-                PNG, JPG ou WEBP
-              </small>
+
+
+              <img
+                id="produto-imagem-preview"
+                class="image-preview"
+                alt="Prévia"
+              >
+
+
+              <div>
+
+                <strong id="produto-image-label">
+                  Clique para enviar uma imagem
+                </strong>
+
+                <div
+                  style="
+                    font-size:11px;
+                    color:#777;
+                    margin-top:4px;
+                  "
+                >
+                  PNG, JPG ou WEBP
+                </div>
+
+              </div>
+
 
             </div>
+
 
           </div>
 
-        </div>
 
-        <div class="form-group">
 
-          <label class="form-label">
-            Tamanhos disponíveis
-          </label>
+          <div class="form-group form-group--full">
 
-          <div
-            style="
-              display:flex;
-              gap:8px;
-              flex-wrap:wrap;
-            "
-          >
 
-            <label
-              style="
-                display:flex;
-                align-items:center;
-                gap:5px;
-                font-size:13px;
-              "
-            >
-              <input
-                type="checkbox"
-                class="produto-tamanho"
-                value="XS"
-                checked
-              >
-              XS
+            <label class="form-label">
+              Tamanhos
             </label>
 
-            <label
-              style="
-                display:flex;
-                align-items:center;
-                gap:5px;
-                font-size:13px;
-              "
-            >
-              <input
-                type="checkbox"
-                class="produto-tamanho"
-                value="S"
-                checked
-              >
-              S
-            </label>
 
-            <label
-              style="
-                display:flex;
-                align-items:center;
-                gap:5px;
-                font-size:13px;
-              "
-            >
-              <input
-                type="checkbox"
-                class="produto-tamanho"
-                value="M"
-                checked
-              >
-              M
-            </label>
+            <div class="sizes-row">
 
-            <label
-              style="
-                display:flex;
-                align-items:center;
-                gap:5px;
-                font-size:13px;
-              "
-            >
-              <input
-                type="checkbox"
-                class="produto-tamanho"
-                value="L"
-                checked
-              >
-              L
-            </label>
 
-            <label
-              style="
-                display:flex;
-                align-items:center;
-                gap:5px;
-                font-size:13px;
-              "
-            >
-              <input
-                type="checkbox"
-                class="produto-tamanho"
-                value="XL"
-                checked
-              >
-              XL
-            </label>
+              <label class="size-check">
 
-            <label
-              style="
-                display:flex;
-                align-items:center;
-                gap:5px;
-                font-size:13px;
-              "
-            >
-              <input
-                type="checkbox"
-                class="produto-tamanho"
-                value="XXL"
-              >
-              XXL
-            </label>
+                <input
+                  class="produto-tamanho"
+                  type="checkbox"
+                  value="PP"
+                >
+
+                PP
+
+              </label>
+
+
+              <label class="size-check">
+
+                <input
+                  class="produto-tamanho"
+                  type="checkbox"
+                  value="P"
+                  checked
+                >
+
+                P
+
+              </label>
+
+
+              <label class="size-check">
+
+                <input
+                  class="produto-tamanho"
+                  type="checkbox"
+                  value="M"
+                  checked
+                >
+
+                M
+
+              </label>
+
+
+              <label class="size-check">
+
+                <input
+                  class="produto-tamanho"
+                  type="checkbox"
+                  value="G"
+                  checked
+                >
+
+                G
+
+              </label>
+
+
+              <label class="size-check">
+
+                <input
+                  class="produto-tamanho"
+                  type="checkbox"
+                  value="GG"
+                >
+
+                GG
+
+              </label>
+
+
+            </div>
+
 
           </div>
 
-        </div>
 
-        <div class="toggle-wrap">
 
-          <label class="toggle">
+          <div class="form-group form-group--full">
 
-            <input
-              type="checkbox"
-              id="produto-publicado"
-              checked
+
+            <label
+              class="size-check"
+              style="width:max-content"
             >
 
-            <span class="toggle-slider"></span>
+              <input
+                id="produto-publicado"
+                type="checkbox"
+                checked
+              >
 
-          </label>
+              Produto publicado
 
-          <span style="font-size:13px;">
-            Publicar produto imediatamente
-          </span>
+            </label>
+
+
+          </div>
+
 
         </div>
+
 
       </div>
 
+
+
       <div class="modal__footer">
+
 
         <button
           class="btn btn--outline"
+          type="button"
           onclick="closeModal('modal-produto')"
         >
           Cancelar
         </button>
 
+
         <button
           class="btn btn--primary"
           id="produto-save-button"
-          onclick="saveProductSupabase()"
+          type="button"
+          onclick="saveProduct()"
         >
           Criar Produto
         </button>
 
+
       </div>
+
 
     </div>
 
-  </div>
-
-  <!-- =====================================================
-       MODAL CUPOM
-       ===================================================== -->
-
-  <div
-    class="modal-overlay"
-    id="modal-cupom"
-    onclick="if(event.target===this)closeModal('modal-cupom')"
-  >
-
-    <div class="modal">
-
-      <div class="modal__header">
-
-        <h2 class="modal__title">
-          Novo Cupom
-        </h2>
-
-        <button
-          class="modal__close"
-          onclick="closeModal('modal-cupom')"
-        >
-          ✕
-        </button>
-
-      </div>
-
-      <div class="modal__body">
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Código do Cupom *
-          </label>
-
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Ex: ESSENCE20"
-            style="
-              text-transform:uppercase;
-              font-weight:600;
-            "
-          >
-
-        </div>
-
-        <div class="form-grid-2">
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Tipo de Desconto
-            </label>
-
-            <select class="form-control">
-              <option>Percentual (%)</option>
-              <option>Valor fixo (R$)</option>
-              <option>Frete grátis</option>
-            </select>
-
-          </div>
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Valor
-            </label>
-
-            <input
-              type="number"
-              class="form-control"
-              placeholder="0"
-            >
-
-          </div>
-
-        </div>
-
-        <div class="form-grid-2">
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Mínimo de Compra (R$)
-            </label>
-
-            <input
-              type="number"
-              class="form-control"
-              placeholder="0"
-            >
-
-          </div>
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Limite de Usos
-            </label>
-
-            <input
-              type="number"
-              class="form-control"
-              placeholder="Ilimitado"
-            >
-
-          </div>
-
-        </div>
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Data de Expiração
-          </label>
-
-          <input
-            type="date"
-            class="form-control"
-          >
-
-        </div>
-
-        <div class="toggle-wrap">
-
-          <label class="toggle">
-
-            <input
-              type="checkbox"
-              checked
-            >
-
-            <span class="toggle-slider"></span>
-
-          </label>
-
-          <span style="font-size:13px;">
-            Cupom ativo
-          </span>
-
-        </div>
-
-      </div>
-
-      <div class="modal__footer">
-
-        <button
-          class="btn btn--outline"
-          onclick="closeModal('modal-cupom')"
-        >
-          Cancelar
-        </button>
-
-        <button
-          class="btn btn--primary"
-          onclick="
-            closeModal('modal-cupom');
-            showToast('Cupom criado com sucesso! 🎟️')
-          "
-        >
-          Criar Cupom
-        </button>
-
-      </div>
-
-    </div>
 
   </div>
 
-  <!-- =====================================================
-       MODAL CATEGORIA
-       ===================================================== -->
-
-  <div
-    class="modal-overlay"
-    id="modal-categoria"
-    onclick="if(event.target===this)closeModal('modal-categoria')"
-  >
-
-    <div class="modal">
-
-      <div class="modal__header">
-
-        <h2 class="modal__title">
-          Nova Categoria
-        </h2>
-
-        <button
-          class="modal__close"
-          onclick="closeModal('modal-categoria')"
-        >
-          ✕
-        </button>
-
-      </div>
-
-      <div class="modal__body">
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Nome *
-          </label>
-
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Ex: Leggings"
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Slug
-          </label>
-
-          <input
-            type="text"
-            class="form-control"
-            placeholder="leggings"
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Descrição
-          </label>
-
-          <textarea
-            class="form-control"
-            rows="2"
-          ></textarea>
-
-        </div>
-
-        <div class="toggle-wrap">
-
-          <label class="toggle">
-
-            <input
-              type="checkbox"
-              checked
-            >
-
-            <span class="toggle-slider"></span>
-
-          </label>
-
-          <span style="font-size:13px;">
-            Categoria ativa
-          </span>
-
-        </div>
-
-      </div>
-
-      <div class="modal__footer">
-
-        <button
-          class="btn btn--outline"
-          onclick="closeModal('modal-categoria')"
-        >
-          Cancelar
-        </button>
-
-        <button
-          class="btn btn--primary"
-          onclick="
-            closeModal('modal-categoria');
-            showToast('Categoria criada! 📁')
-          "
-        >
-          Criar
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- ===== TOAST ===== -->
-
-  <div
-    id="toast"
-    style="
-      position:fixed;
-      bottom:24px;
-      right:24px;
-      background:#1e1e2e;
-      color:#fff;
-      padding:12px 20px;
-      border-radius:10px;
-      font-size:13px;
-      font-weight:500;
-      box-shadow:0 8px 24px rgba(0,0,0,0.2);
-      transform:translateY(80px);
-      opacity:0;
-      transition:all 0.35s cubic-bezier(.34,1.56,.64,1);
-      z-index:999;
-      border-left:4px solid #ec4899;
-    "
-  ></div>
-<!-- =====================================================
-     JAVASCRIPT PRINCIPAL DO ADMIN
-     ===================================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-  window.supabaseClient = window.supabase.createClient(
-    "https://gtmjxwcvqvtkuqzkvfsh.supabase.co",
-    "sb_publishable_zBG1ioEJeME73TQtHhQnlw_eGhOasAc"
-  );
-
-  console.log("Supabase conectado ✅");
-</script>
-
-<script src="/admin/admin.js?v=7"></script>
 
 
-<!-- =====================================================
-     PRODUTOS — SUPABASE
-     ===================================================== -->
+  <!-- TOAST -->
 
-<script>
-
-(() => {
-
-  const $ = (id) =>
-    document.getElementById(id);
+  <div id="toast"></div>
 
 
-  let products = [];
 
-  let editingId = null;
+  <!-- =========================================
+       SUPABASE
+       ========================================= -->
 
-  let pendingImage = "";
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
 
-  /* =====================================================
-     DINHEIRO
-     ===================================================== */
 
-  const money = (value) =>
+  <script>
 
-    Number(value || 0)
-      .toLocaleString(
-        "pt-BR",
-        {
-          style: "currency",
-          currency: "BRL"
-        }
+
+    /* =========================================
+       CONEXÃO SUPABASE
+       ========================================= */
+
+    const SUPABASE_URL =
+      "https://gtmjxwcvqvtkuqzkvfsh.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable_zBG1ioEJeME73TQtHhQnlw_eGhOasAc";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
       );
 
 
-  function parseMoney(value) {
+    /*
+     * Produtos que ainda não conseguiram
+     * sincronizar com o Supabase ficam aqui.
+     */
 
-    if (
-      typeof value === "number"
-    ) {
+    const PENDING_KEY =
+      "essence-products-pending-v3";
 
-      return Number.isFinite(value)
-        ? value
-        : 0;
+
+    let products = [];
+
+    let editingId = null;
+
+    let pendingImage = "";
+
+
+    const $ =
+      id =>
+        document.getElementById(id);
+
+
+
+    /* =========================================
+       NAVEGAÇÃO
+       ========================================= */
+
+    function navigate(page) {
+
+
+      document
+        .querySelectorAll(
+          ".page-content"
+        )
+        .forEach(
+          element => {
+
+            element
+              .classList
+              .remove(
+                "active"
+              );
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          ".sidebar__item[data-page]"
+        )
+        .forEach(
+          element => {
+
+            element
+              .classList
+              .toggle(
+                "active",
+                element.dataset.page
+                ===
+                page
+              );
+
+          }
+        );
+
+
+      $(
+        "page-" + page
+      )
+        ?.classList
+        .add(
+          "active"
+        );
+
 
     }
 
 
-    let text = String(value ?? "")
-      .trim()
-      .replace(/R\$/gi, "")
-      .replace(/\s/g, "");
 
+    /* =========================================
+       MODAIS
+       ========================================= */
 
-    if (!text) {
+    function openModal(id) {
 
-      return 0;
-
-    }
-
-
-    if (
-      text.includes(",")
-    ) {
-
-      text = text
-        .replace(/\./g, "")
-        .replace(",", ".");
+      $(id)
+        ?.classList
+        .add(
+          "active"
+        );
 
     }
 
 
-    const number = Number(
-      text.replace(
-        /[^\d.-]/g,
-        ""
-      )
-    );
+    function closeModal(id) {
 
-
-    return Number.isFinite(number)
-      ? number
-      : 0;
-
-  }
-
-
-  /* =====================================================
-     PROTEÇÃO DE HTML
-     ===================================================== */
-
-  function escapeHtml(value) {
-
-    return String(value ?? "")
-
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-
-      .replace(
-        /</g,
-        "&lt;"
-      )
-
-      .replace(
-        />/g,
-        "&gt;"
-      )
-
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
-  }
-
-
-  /* =====================================================
-     TOAST
-     ===================================================== */
-
-  function showToastSafe(message) {
-
-    if (
-      typeof window.showToast
-      ===
-      "function"
-    ) {
-
-      window.showToast(
-        message
-      );
-
-      return;
+      $(id)
+        ?.classList
+        .remove(
+          "active"
+        );
 
     }
 
 
-    const toast =
-      $("toast");
+
+    /* =========================================
+       TOAST
+       ========================================= */
+
+    function showToast(message) {
 
 
-    if (!toast) {
+      const toast =
+        $("toast");
 
-      console.log(
-        message
+
+      toast.textContent =
+        message;
+
+
+      toast
+        .classList
+        .add(
+          "show"
+        );
+
+
+      clearTimeout(
+        window.__toastTimer
       );
 
-      return;
+
+      window.__toastTimer =
+
+        setTimeout(
+          () => {
+
+            toast
+              .classList
+              .remove(
+                "show"
+              );
+
+          },
+          3000
+        );
+
 
     }
 
 
-    toast.textContent =
-      message;
+
+    /* =========================================
+       UTILITÁRIOS
+       ========================================= */
+
+    function escapeHtml(value) {
 
 
-    toast.style.transform =
-      "translateY(0)";
-
-
-    toast.style.opacity =
-      "1";
-
-
-    clearTimeout(
-      window.__essenceToastTimer
-    );
-
-
-    window.__essenceToastTimer =
-      setTimeout(
-        () => {
-
-          toast.style.transform =
-            "translateY(80px)";
-
-          toast.style.opacity =
-            "0";
-
-        },
-        2800
-      );
-
-  }
-
-
-  /* =====================================================
-     SKU
-     ===================================================== */
-
-  function makeSku(name) {
-
-    const base =
-
-      String(
-        name || "PROD"
+      return String(
+        value ?? ""
       )
 
-        .normalize(
-          "NFD"
+        .replace(
+          /&/g,
+          "&amp;"
         )
 
         .replace(
-          /[\u0300-\u036f]/g,
-          ""
-        )
-
-        .toUpperCase()
-
-        .replace(
-          /[^A-Z0-9]+/g,
-          "-"
+          /</g,
+          "&lt;"
         )
 
         .replace(
-          /^-|-$/g,
-          ""
+          />/g,
+          "&gt;"
         )
 
-        .slice(
-          0,
-          16
+        .replace(
+          /"/g,
+          "&quot;"
         )
 
-      ||
+        .replace(
+          /'/g,
+          "&#039;"
+        );
 
-      "PROD";
-
-
-    return (
-
-      `${base}-${Date.now()
-        .toString()
-        .slice(-6)}`
-
-    );
-
-  }
-
-
-  /* =====================================================
-     DADOS EXTRAS
-     ===================================================== */
-
-  function getSalePrice(
-    product
-  ) {
-
-    return parseMoney(
-
-      product?.compare_at_price
-
-      ??
-
-      product?.salePrice
-
-      ??
-
-      product?.promo
-
-      ??
-
-      0
-
-    );
-
-  }
-
-
-  function getSizes(
-    product
-  ) {
-
-    const value =
-      product?.sizes;
-
-
-    if (
-      Array.isArray(value)
-    ) {
-
-      return value;
 
     }
 
 
-    if (
-      typeof value === "string"
-      &&
-      value.trim()
-    ) {
 
-      try {
-
-        const parsed =
-          JSON.parse(value);
+    function money(value) {
 
 
-        if (
-          Array.isArray(parsed)
-        ) {
+      return Number(
+        value || 0
+      )
+        .toLocaleString(
+          "pt-BR",
+          {
 
-          return parsed;
+            style:
+              "currency",
 
-        }
+            currency:
+              "BRL"
+
+          }
+        );
+
+
+    }
+
+
+
+    function parseMoney(value) {
+
+
+      if (
+        typeof value
+        ===
+        "number"
+      ) {
+
+        return Number.isFinite(
+          value
+        )
+          ?
+          value
+          :
+          0;
 
       }
 
-      catch (_) {
 
-        return value
+      let text =
 
-          .split(",")
+        String(
+          value ?? ""
+        )
+          .trim()
+          .replace(
+            /R\$/gi,
+            ""
+          )
+          .replace(
+            /\s/g,
+            ""
+          );
+
+
+      if (!text) {
+
+        return 0;
+
+      }
+
+
+      if (
+        text.includes(
+          ","
+        )
+      ) {
+
+        text =
+
+          text
+            .replace(
+              /\./g,
+              ""
+            )
+            .replace(
+              ",",
+              "."
+            );
+
+      }
+
+
+      const number =
+
+        Number(
+
+          text.replace(
+            /[^\d.-]/g,
+            ""
+          )
+
+        );
+
+
+      return Number.isFinite(
+        number
+      )
+        ?
+        number
+        :
+        0;
+
+
+    }
+
+
+
+    function makeSku(name) {
+
+
+      const base =
+
+        String(
+          name || "PROD"
+        )
+
+          .normalize(
+            "NFD"
+          )
+
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+
+          .toUpperCase()
+
+          .replace(
+            /[^A-Z0-9]+/g,
+            "-"
+          )
+
+          .replace(
+            /^-|-$/g,
+            ""
+          )
+
+          .slice(
+            0,
+            16
+          )
+
+        ||
+
+        "PROD";
+
+
+      return (
+
+        `${base}-${Date.now()
+          .toString()
+          .slice(-6)}`
+
+      );
+
+
+    }
+
+
+
+    /* =========================================
+       PRODUTOS LOCAIS PENDENTES
+       ========================================= */
+
+    function getPending() {
+
+
+      try {
+
+        return JSON.parse(
+
+          localStorage
+            .getItem(
+              PENDING_KEY
+            )
+
+          ||
+
+          "[]"
+
+        );
+
+      }
+
+      catch {
+
+        return [];
+
+      }
+
+
+    }
+
+
+
+    function setPending(list) {
+
+
+      localStorage
+        .setItem(
+          PENDING_KEY,
+          JSON.stringify(
+            list
+          )
+        );
+
+
+    }
+
+
+
+    /* =========================================
+       CAMPOS DO PRODUTO
+       ========================================= */
+
+    function isActive(product) {
+
+
+      if (
+        typeof product.is_active
+        ===
+        "boolean"
+      ) {
+
+        return product.is_active;
+
+      }
+
+
+      if (
+        typeof product.published
+        ===
+        "boolean"
+      ) {
+
+        return product.published;
+
+      }
+
+
+      return true;
+
+
+    }
+
+
+
+    function getSalePrice(product) {
+
+
+      return parseMoney(
+
+        product.compare_at_price
+
+        ??
+
+        product.salePrice
+
+        ??
+
+        product.promo
+
+        ??
+
+        0
+
+      );
+
+
+    }
+
+
+
+    function getSizes(product) {
+
+
+      if (
+        Array.isArray(
+          product.sizes
+        )
+      ) {
+
+        return product.sizes;
+
+      }
+
+
+      if (
+        typeof product.sizes
+        ===
+        "string"
+
+        &&
+
+        product.sizes.trim()
+      ) {
+
+
+        try {
+
+
+          const parsed =
+
+            JSON.parse(
+              product.sizes
+            );
+
+
+          if (
+            Array.isArray(
+              parsed
+            )
+          ) {
+
+            return parsed;
+
+          }
+
+
+        }
+
+        catch {}
+
+
+        return product.sizes
+
+          .split(
+            ","
+          )
 
           .map(
-            (item) =>
+            item =>
               item.trim()
           )
 
@@ -4171,355 +1898,495 @@
             Boolean
           );
 
+
       }
 
-    }
 
+      return [];
 
-    return [];
-
-  }
-
-
-  function isActive(
-    product
-  ) {
-
-    if (
-      typeof product?.is_active
-      ===
-      "boolean"
-    ) {
-
-      return product.is_active;
 
     }
 
 
-    if (
-      typeof product?.published
-      ===
-      "boolean"
-    ) {
 
-      return product.published;
+    /* =========================================
+       DETECTA COLUNA NÃO EXISTENTE
+       ========================================= */
 
-    }
+    function missingColumn(error) {
 
 
-    return true;
+      const message =
 
-  }
-
-
-  /* =====================================================
-     STATUS
-     ===================================================== */
-
-  function statusFor(
-    product
-  ) {
-
-    if (
-      !isActive(product)
-    ) {
-
-      return {
-
-        text:
-          "Rascunho",
-
-        cls:
-          "badge--gray"
-
-      };
-
-    }
+        String(
+          error?.message || ""
+        )
+          .toLowerCase();
 
 
-    if (
-      Number(
-        product.stock || 0
-      )
-      <=
-      0
-    ) {
+      return (
 
-      return {
+        String(
+          error?.code || ""
+        )
+        ===
+        "PGRST204"
 
-        text:
-          "Sem estoque",
+        ||
 
-        cls:
-          "badge--red"
+        message.includes(
+          "could not find"
+        )
 
-      };
+        ||
 
-    }
+        (
+          message.includes(
+            "column"
+          )
 
+          &&
 
-    return {
-
-      text:
-        "Ativo",
-
-      cls:
-        "badge--green"
-
-    };
-
-  }
-
-
-  /* =====================================================
-     CONTADORES
-     ===================================================== */
-
-  function updateProductCounters() {
-
-    const count =
-      products.length;
-
-
-    const badge =
-
-      document.querySelector(
-
-        '.sidebar__item[data-page="produtos"] .sidebar__item-badge'
+          message.includes(
+            "schema cache"
+          )
+        )
 
       );
 
 
-    if (badge) {
-
-      badge.textContent =
-        count;
-
     }
 
 
-    const summary =
-      $("produtos-resumo");
 
+    /* =========================================
+       JUNTA SUPABASE + PENDENTES
+       ========================================= */
 
-    if (summary) {
-
-      summary.textContent =
-
-        count
-
-          ?
-
-          `${count} produto${count === 1 ? "" : "s"} cadastrado${count === 1 ? "" : "s"}`
-
-          :
-
-          "Nenhum produto cadastrado";
-
-    }
-
-  }
-
-
-  /* =====================================================
-     RENDERIZA PRODUTOS
-     ===================================================== */
-
-  function renderProducts() {
-
-    const tbody =
-      $("produtos-tbody");
-
-
-    if (!tbody) {
-
-      return;
-
-    }
-
-
-    if (
-      !products.length
+    function mergedProducts(
+      serverProducts
     ) {
 
-      tbody.innerHTML = `
 
-        <tr>
-
-          <td
-            colspan="8"
-            style="
-              text-align:center;
-              padding:42px 16px;
-              color:var(--text-light);
-            "
-          >
-
-            Nenhum produto cadastrado.
-
-          </td>
-
-        </tr>
-
-      `;
+      const pending =
+        getPending();
 
 
-      updateProductCounters();
+      const serverSkus =
 
-      return;
+        new Set(
+
+          serverProducts
+
+            .map(
+              product =>
+                product.sku
+            )
+
+            .filter(
+              Boolean
+            )
+
+        );
+
+
+      return [
+
+        ...pending.filter(
+          product =>
+            !serverSkus.has(
+              product.sku
+            )
+        ),
+
+        ...serverProducts
+
+      ];
+
 
     }
 
 
-    tbody.innerHTML =
 
-      products
+    /* =========================================
+       CONTADORES
+       ========================================= */
 
-        .map(
-          (product) => {
-
-            const status =
-              statusFor(product);
+    function updateCounters() {
 
 
-            const salePrice =
-              getSalePrice(product);
+      const total =
+        products.length;
 
 
-            const displayPrice =
+      const active =
 
-              salePrice > 0
-
-                ?
-
-                salePrice
-
-                :
-
-                parseMoney(
-                  product.price
-                );
+        products
+          .filter(
+            isActive
+          )
+          .length;
 
 
-            const oldPrice =
+      const out =
 
-              salePrice > 0
-
-                ?
-
-                `
-
-                <div
-                  style="
-                    font-size:11px;
-                    color:var(--text-light);
-                    text-decoration:line-through;
-                  "
-                >
-                  ${money(product.price)}
-                </div>
-
-                `
-
-                :
-
-                "";
+        products
+          .filter(
+            product =>
+              Number(
+                product.stock || 0
+              )
+              <=
+              0
+          )
+          .length;
 
 
-            const image =
+      $("products-badge")
+        .textContent =
+        total;
 
-              product.image_url
+
+      $("dashboard-products")
+        .textContent =
+        total;
+
+
+      $("dashboard-active")
+        .textContent =
+        active;
+
+
+      $("dashboard-out")
+        .textContent =
+        out;
+
+
+    }
+
+
+
+    /* =========================================
+       RENDER DOS PRODUTOS
+       ========================================= */
+
+    function renderProducts() {
+
+
+      const tbody =
+        $("produtos-tbody");
+
+
+      const query =
+
+        (
+          $("product-search")
+            ?.value
+          ||
+          ""
+        )
+          .trim()
+          .toLowerCase();
+
+
+      const category =
+
+        $("category-filter")
+          ?.value
+
+        ||
+
+        "";
+
+
+      const list =
+
+        products.filter(
+          product => {
+
+
+            const searchable =
+
+              `${product.name || ""} ${product.sku || ""}`
+                .toLowerCase();
+
+
+            const matchesSearch =
+
+              !query
 
               ||
 
-              product.image
+              searchable.includes(
+                query
+              );
+
+
+            const matchesCategory =
+
+              !category
 
               ||
 
-              "";
+              product.category
+              ===
+              category;
 
 
-            const imageHtml =
+            return (
 
-              image
+              matchesSearch
 
-                ?
+              &&
 
-                `
+              matchesCategory
 
-                <img
-                  src="${escapeHtml(image)}"
-                  alt="${escapeHtml(product.name)}"
-                  style="
-                    width:46px;
-                    height:58px;
-                    border-radius:8px;
-                    object-fit:cover;
-                    background:var(--bg);
-                  "
-                >
-
-                `
-
-                :
-
-                `
-
-                <div
-                  style="
-                    width:46px;
-                    height:58px;
-                    border-radius:8px;
-                    background:var(--bg);
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    font-size:20px;
-                  "
-                >
-                  🛍️
-                </div>
-
-                `;
+            );
 
 
-            return `
-
-              <tr
-                data-product-id="${escapeHtml(product.id)}"
-              >
-
-                <td>
-
-                  <input
-                    type="checkbox"
-                  >
-
-                </td>
+          }
+        );
 
 
-                <td>
-
-                  <div
-                    style="
-                      display:flex;
-                      align-items:center;
-                      gap:10px;
-                    "
-                  >
-
-                    ${imageHtml}
+      if (
+        !list.length
+      ) {
 
 
-                    <div>
+        tbody.innerHTML = `
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="table-empty"
+            >
+              Nenhum produto encontrado.
+            </td>
+
+          </tr>
+
+        `;
+
+
+      }
+
+      else {
+
+
+        tbody.innerHTML =
+
+          list
+
+            .map(
+              product => {
+
+
+                const sale =
+                  getSalePrice(
+                    product
+                  );
+
+
+                const displayPrice =
+
+                  sale > 0
+
+                    ?
+
+                    sale
+
+                    :
+
+                    parseMoney(
+                      product.price
+                    );
+
+
+                const active =
+                  isActive(
+                    product
+                  );
+
+
+                const local =
+
+                  String(
+                    product.id || ""
+                  )
+                    .startsWith(
+                      "local-"
+                    )
+
+                  ||
+
+                  product._local;
+
+
+                let status;
+
+
+                if (!active) {
+
+                  status = `
+
+                    <span class="badge badge--gray">
+                      Rascunho
+                    </span>
+
+                  `;
+
+                }
+
+                else if (
+                  Number(
+                    product.stock || 0
+                  )
+                  <=
+                  0
+                ) {
+
+                  status = `
+
+                    <span class="badge badge--red">
+                      Sem estoque
+                    </span>
+
+                  `;
+
+                }
+
+                else {
+
+                  status = `
+
+                    <span class="badge badge--green">
+                      Ativo
+                    </span>
+
+                  `;
+
+                }
+
+
+                const image =
+
+                  product.image_url
+
+                  ||
+
+                  product.image
+
+                  ||
+
+                  "";
+
+
+                const imageHtml =
+
+                  image
+
+                    ?
+
+                    `
+
+                    <img
+                      class="product-thumb"
+                      src="${escapeHtml(image)}"
+                      alt="${escapeHtml(product.name)}"
+                    >
+
+                    `
+
+                    :
+
+                    `
+
+                    <div class="product-placeholder">
+                      🛍️
+                    </div>
+
+                    `;
+
+
+                return `
+
+                  <tr>
+
+
+                    <td>
+
+                      <div
+                        style="
+                          display:flex;
+                          align-items:center;
+                          gap:10px;
+                        "
+                      >
+
+                        ${imageHtml}
+
+
+                        <div>
+
+                          <strong>
+                            ${escapeHtml(product.name)}
+                          </strong>
+
+
+                          ${
+                            local
+
+                              ?
+
+                              `
+
+                              <div class="sync-note">
+                                Aguardando sincronização
+                              </div>
+
+                              `
+
+                              :
+
+                              ""
+                          }
+
+                        </div>
+
+
+                      </div>
+
+                    </td>
+
+
+                    <td>
+
+                      <code>
+                        ${escapeHtml(product.sku || "")}
+                      </code>
+
+                    </td>
+
+
+                    <td>
+
+                      ${escapeHtml(
+                        product.category || "—"
+                      )}
+
+                    </td>
+
+
+                    <td>
 
                       <strong>
-                        ${escapeHtml(product.name)}
+                        ${money(displayPrice)}
                       </strong>
 
 
                       ${
-                        product.description
+                        sale > 0
 
                           ?
 
@@ -4528,14 +2395,11 @@
                           <div
                             style="
                               font-size:11px;
-                              color:var(--text-light);
-                              max-width:230px;
-                              white-space:nowrap;
-                              overflow:hidden;
-                              text-overflow:ellipsis;
+                              text-decoration:line-through;
+                              color:#888;
                             "
                           >
-                            ${escapeHtml(product.description)}
+                            ${money(product.price)}
                           </div>
 
                           `
@@ -4545,174 +2409,106 @@
                           ""
                       }
 
-                    </div>
-
-                  </div>
-
-                </td>
+                    </td>
 
 
-                <td>
+                    <td>
 
-                  <code
-                    style="
-                      font-size:11px;
-                    "
-                  >
-                    ${escapeHtml(product.sku || "")}
-                  </code>
+                      ${Number(
+                        product.stock || 0
+                      )}
 
-                </td>
+                    </td>
 
 
-                <td>
-
-                  ${escapeHtml(
-                    product.category || "—"
-                  )}
-
-                </td>
+                    <td>
+                      ${status}
+                    </td>
 
 
-                <td>
-
-                  <strong>
-
-                    ${money(
-                      displayPrice
-                    )}
-
-                  </strong>
-
-                  ${oldPrice}
-
-                </td>
+                    <td class="action-btns">
 
 
-                <td>
-
-                  ${Number(
-                    product.stock || 0
-                  )}
-
-                </td>
-
-
-                <td>
-
-                  <span
-                    class="badge ${status.cls}"
-                  >
-
-                    ${status.text}
-
-                  </span>
-
-                </td>
+                      <button
+                        class="btn btn--ghost btn--icon"
+                        onclick="editProduct('${escapeHtml(product.id)}')"
+                        title="Editar"
+                      >
+                        ✏️
+                      </button>
 
 
-                <td
-                  class="action-btns"
-                >
-
-                  <button
-                    type="button"
-                    class="btn btn--ghost btn--icon"
-                    title="Editar"
-                    onclick="editProduct('${escapeHtml(product.id)}')"
-                  >
-                    ✏️
-                  </button>
+                      <button
+                        class="btn btn--ghost btn--icon"
+                        onclick="deleteProduct('${escapeHtml(product.id)}')"
+                        title="Excluir"
+                      >
+                        🗑️
+                      </button>
 
 
-                  <button
-                    type="button"
-                    class="btn btn--ghost btn--icon"
-                    title="Excluir"
-                    onclick="deleteProduct('${escapeHtml(product.id)}')"
-                  >
-                    🗑️
-                  </button>
-
-                </td>
-
-              </tr>
-
-            `;
-
-          }
-
-        )
-
-        .join("");
+                    </td>
 
 
-    updateProductCounters();
+                  </tr>
 
-  }
-
-
-  /* =====================================================
-     LOADING
-     ===================================================== */
-
-  function setLoading(
-    message =
-      "Carregando produtos..."
-  ) {
-
-    const tbody =
-      $("produtos-tbody");
+                `;
 
 
-    if (!tbody) {
+              }
+            )
 
-      return;
+            .join(
+              ""
+            );
+
+
+      }
+
+
+      $("produtos-resumo")
+        .textContent =
+
+        `${list.length} de ${products.length} produto(s)`;
+
+
+      updateCounters();
+
 
     }
 
 
-    tbody.innerHTML = `
 
-      <tr>
+    /* =========================================
+       CARREGA PRODUTOS
+       ========================================= */
 
-        <td
-          colspan="8"
-          style="
-            text-align:center;
-            padding:38px 16px;
-            color:var(--text-light);
-          "
-        >
-
-          ${escapeHtml(message)}
-
-        </td>
-
-      </tr>
-
-    `;
-
-  }
+    async function loadProducts() {
 
 
-  /* =====================================================
-     CARREGA DO SUPABASE
-     ===================================================== */
+      $("produtos-tbody")
+        .innerHTML = `
 
-  async function loadProducts() {
+          <tr>
 
-    setLoading();
+            <td
+              colspan="7"
+              class="table-empty"
+            >
+              Carregando produtos...
+            </td>
 
+          </tr>
 
-    try {
+        `;
+
 
       const {
         data,
         error
       } =
 
-        await window.supabaseClient
+        await supabaseClient
 
           .from(
             "products"
@@ -4725,1000 +2521,684 @@
 
       if (error) {
 
-        throw error;
+
+        console.error(
+          error
+        );
+
+
+        products =
+          getPending();
+
+
+        showToast(
+          "Não consegui carregar o Supabase. Mostrando produtos locais."
+        );
+
 
       }
 
+      else {
 
-      products =
 
-        Array.isArray(data)
+        products =
 
-          ?
+          mergedProducts(
 
-          data
+            Array.isArray(data)
 
-          :
+              ?
 
-          [];
+              data
+
+              :
+
+              []
+
+          );
+
+
+      }
 
 
       products.sort(
-        (a, b) => {
+        (a, b) =>
 
-          if (
-            !a?.created_at
-            ||
-            !b?.created_at
-          ) {
-
-            return 0;
-
-          }
-
-
-          return (
-
-            new Date(
-              b.created_at
-            )
-
-            -
-
-            new Date(
-              a.created_at
-            )
-
-          );
-
-        }
-      );
-
-
-      renderProducts();
-
-
-      console.log(
-        "Produtos carregados do Supabase ✅",
-        products
-      );
-
-    }
-
-    catch (error) {
-
-      console.error(
-        "Erro ao carregar produtos do Supabase:",
-        error
-      );
-
-
-      products =
-        [];
-
-
-      renderProducts();
-
-
-      showToastSafe(
-        "Não foi possível carregar os produtos do Supabase. ⚠️"
-      );
-
-    }
-
-  }
-
-
-  /* =====================================================
-     RESET FORMULÁRIO
-     ===================================================== */
-
-  function resetProductForm() {
-
-    editingId =
-      null;
-
-
-    pendingImage =
-      "";
-
-
-    if (
-      $("produto-nome")
-    ) {
-
-      $("produto-nome").value =
-        "";
-
-    }
-
-
-    if (
-      $("produto-preco")
-    ) {
-
-      $("produto-preco").value =
-        "";
-
-    }
-
-
-    if (
-      $("produto-preco-promocional")
-    ) {
-
-      $("produto-preco-promocional").value =
-        "";
-
-    }
-
-
-    if (
-      $("produto-categoria")
-    ) {
-
-      $("produto-categoria").value =
-        "Tops";
-
-    }
-
-
-    if (
-      $("produto-estoque")
-    ) {
-
-      $("produto-estoque").value =
-        "";
-
-    }
-
-
-    if (
-      $("produto-descricao")
-    ) {
-
-      $("produto-descricao").value =
-        "";
-
-    }
-
-
-    if (
-      $("produto-publicado")
-    ) {
-
-      $("produto-publicado").checked =
-        true;
-
-    }
-
-
-    if (
-      $("produto-imagem")
-    ) {
-
-      $("produto-imagem").value =
-        "";
-
-    }
-
-
-    document
-      .querySelectorAll(
-        ".produto-tamanho"
-      )
-      .forEach(
-        (checkbox) => {
-
-          checkbox.checked =
-            checkbox.value !== "XXL";
-
-        }
-      );
-
-
-    updateImagePreview(
-      ""
-    );
-
-  }
-
-
-  /* =====================================================
-     PREVIEW DA IMAGEM
-     ===================================================== */
-
-  function updateImagePreview(
-    src
-  ) {
-
-    const preview =
-      $("produto-imagem-preview");
-
-
-    const icon =
-      $("produto-image-icon");
-
-
-    const label =
-      $("produto-image-label");
-
-
-    if (
-      !preview
-      ||
-      !icon
-      ||
-      !label
-    ) {
-
-      return;
-
-    }
-
-
-    if (src) {
-
-      preview.src =
-        src;
-
-
-      preview.style.display =
-        "block";
-
-
-      icon.style.display =
-        "none";
-
-
-      label.textContent =
-        "Trocar imagem";
-
-    }
-
-    else {
-
-      preview.removeAttribute(
-        "src"
-      );
-
-
-      preview.style.display =
-        "none";
-
-
-      icon.style.display =
-        "";
-
-
-      label.textContent =
-        "Clique para enviar";
-
-    }
-
-  }
-
-
-  /* =====================================================
-     COMPRIME IMAGEM
-     ===================================================== */
-
-  function compressImage(
-    file
-  ) {
-
-    return new Promise(
-
-      (
-        resolve,
-        reject
-      ) => {
-
-        if (
-          !file
-          ||
-          !file.type.startsWith(
-            "image/"
+          String(
+            b.created_at || ""
           )
-        ) {
+            .localeCompare(
 
-          reject(
-            new Error(
-              "Arquivo de imagem inválido."
-            )
-          );
-
-          return;
-
-        }
-
-
-        const reader =
-          new FileReader();
-
-
-        reader.onerror = () =>
-
-          reject(
-            new Error(
-              "Não foi possível ler a imagem."
-            )
-          );
-
-
-        reader.onload = () => {
-
-          const img =
-            new Image();
-
-
-          img.onerror = () =>
-
-            reject(
-              new Error(
-                "Não foi possível abrir a imagem."
-              )
-            );
-
-
-          img.onload = () => {
-
-            const maxSide =
-              900;
-
-
-            const scale =
-
-              Math.min(
-
-                1,
-
-                maxSide
-                /
-                Math.max(
-                  img.width,
-                  img.height
-                )
-
-              );
-
-
-            const width =
-
-              Math.max(
-
-                1,
-
-                Math.round(
-                  img.width
-                  *
-                  scale
-                )
-
-              );
-
-
-            const height =
-
-              Math.max(
-
-                1,
-
-                Math.round(
-                  img.height
-                  *
-                  scale
-                )
-
-              );
-
-
-            const canvas =
-              document.createElement(
-                "canvas"
-              );
-
-
-            canvas.width =
-              width;
-
-
-            canvas.height =
-              height;
-
-
-            const ctx =
-              canvas.getContext(
-                "2d"
-              );
-
-
-            ctx.drawImage(
-              img,
-              0,
-              0,
-              width,
-              height
-            );
-
-
-            resolve(
-
-              canvas.toDataURL(
-                "image/jpeg",
-                0.78
+              String(
+                a.created_at || ""
               )
 
-            );
-
-          };
-
-
-          img.src =
-            reader.result;
-
-        };
+            )
+      );
 
 
-        reader.readAsDataURL(
-          file
-        );
-
-      }
-
-    );
-
-  }
+      renderProducts();
 
 
-  async function handleImage(
-    file
-  ) {
+    }
 
-    try {
+
+
+    /* =========================================
+       RESET DO FORMULÁRIO
+       ========================================= */
+
+    function resetForm() {
+
+
+      editingId =
+        null;
+
 
       pendingImage =
-
-        await compressImage(
-          file
-        );
+        "";
 
 
-      updateImagePreview(
-        pendingImage
-      );
+      [
+        "produto-nome",
+        "produto-preco",
+        "produto-preco-promocional",
+        "produto-descricao"
+      ]
+        .forEach(
+          id => {
 
-    }
+            if ($(id)) {
 
-    catch (error) {
-
-      console.error(
-        error
-      );
-
-
-      showToastSafe(
-        "Não consegui processar essa imagem. ⚠️"
-      );
-
-    }
-
-  }
-
-
-  /* =====================================================
-     UPLOAD DA IMAGEM
-     ===================================================== */
-
-  function bindImageUpload() {
-
-    const zone =
-      $("produto-image-upload");
-
-
-    const input =
-      $("produto-imagem");
-
-
-    if (
-      !zone
-      ||
-      !input
-      ||
-      zone.dataset.bound
-      ===
-      "true"
-    ) {
-
-      return;
-
-    }
-
-
-    zone.dataset.bound =
-      "true";
-
-
-    zone.addEventListener(
-
-      "click",
-
-      (event) => {
-
-        if (
-          event.target !== input
-        ) {
-
-          input.click();
-
-        }
-
-      }
-
-    );
-
-
-    input.addEventListener(
-
-      "change",
-
-      () => {
-
-        if (
-          input.files?.[0]
-        ) {
-
-          handleImage(
-            input.files[0]
-          );
-
-        }
-
-      }
-
-    );
-
-
-    [
-      "dragenter",
-      "dragover"
-    ]
-
-      .forEach(
-        (eventName) => {
-
-          zone.addEventListener(
-
-            eventName,
-
-            (event) => {
-
-              event.preventDefault();
-
-
-              zone.style.borderColor =
-                "var(--primary)";
-
-            }
-
-          );
-
-        }
-      );
-
-
-    [
-      "dragleave",
-      "drop"
-    ]
-
-      .forEach(
-        (eventName) => {
-
-          zone.addEventListener(
-
-            eventName,
-
-            (event) => {
-
-              event.preventDefault();
-
-
-              zone.style.borderColor =
+              $(id).value =
                 "";
 
             }
 
-          );
-
-        }
-      );
-
-
-    zone.addEventListener(
-
-      "drop",
-
-      (event) => {
-
-        const file =
-
-          event.dataTransfer
-            ?.files
-            ?.[0];
-
-
-        if (file) {
-
-          handleImage(
-            file
-          );
-
-        }
-
-      }
-
-    );
-
-  }
-
-
-  /* =====================================================
-     DADOS DO FORMULÁRIO
-     ===================================================== */
-
-  function basePayload() {
-
-    const name =
-
-      $("produto-nome")
-        ?.value
-        .trim()
-
-      ||
-
-      "";
-
-
-    const price =
-
-      parseMoney(
-
-        $("produto-preco")
-          ?.value
-
-      );
-
-
-    const salePrice =
-
-      parseMoney(
-
-        $("produto-preco-promocional")
-          ?.value
-
-        ||
-
-        0
-
-      );
-
-
-    const stock =
-
-      Math.max(
-
-        0,
-
-        parseInt(
-
-          $("produto-estoque")
-            ?.value
-
-          ||
-
-          "0",
-
-          10
-
-        )
-
-        ||
-
-        0
-
-      );
-
-
-    const category =
-
-      $("produto-categoria")
-        ?.value
-
-      ||
-
-      "Tops";
-
-
-    const description =
-
-      $("produto-descricao")
-        ?.value
-        .trim()
-
-      ||
-
-      "";
-
-
-    const published =
-
-      $("produto-publicado")
-        ?.checked
-
-      !==
-
-      false;
-
-
-    const sizes =
-
-      Array.from(
-
-        document.querySelectorAll(
-          ".produto-tamanho:checked"
-        )
-
-      )
-
-        .map(
-          (checkbox) =>
-            checkbox.value
+          }
         );
 
 
-    if (!name) {
+      $("produto-categoria")
+        .value =
+        "Tops";
 
-      showToastSafe(
-        "Preencha o nome do produto. ⚠️"
+
+      $("produto-estoque")
+        .value =
+        "0";
+
+
+      $("produto-publicado")
+        .checked =
+        true;
+
+
+      $("produto-imagem")
+        .value =
+        "";
+
+
+      document
+        .querySelectorAll(
+          ".produto-tamanho"
+        )
+        .forEach(
+          checkbox => {
+
+            checkbox.checked =
+
+              [
+                "P",
+                "M",
+                "G"
+              ]
+                .includes(
+                  checkbox.value
+                );
+
+          }
+        );
+
+
+      updateImagePreview(
+        ""
       );
 
-
-      $("produto-nome")
-        ?.focus();
-
-
-      return null;
 
     }
 
 
-    if (
-      !Number.isFinite(price)
-      ||
-      price <= 0
+
+    /* =========================================
+       PREVIEW DA IMAGEM
+       ========================================= */
+
+    function updateImagePreview(
+      src
     ) {
 
-      showToastSafe(
-        "Informe um preço válido. ⚠️"
-      );
+
+      const image =
+        $("produto-imagem-preview");
 
 
-      $("produto-preco")
-        ?.focus();
+      const label =
+        $("produto-image-label");
 
 
-      return null;
-
-    }
+      if (src) {
 
 
-    if (
-      salePrice < 0
-
-      ||
-
-      (
-        salePrice > 0
-        &&
-        salePrice >= price
-      )
-    ) {
-
-      showToastSafe(
-        "O preço promocional precisa ser menor que o preço normal. ⚠️"
-      );
+        image.src =
+          src;
 
 
-      $("produto-preco-promocional")
-        ?.focus();
+        image.style.display =
+          "block";
 
 
-      return null;
+        label.textContent =
+          "Trocar imagem";
 
-    }
-
-
-    return {
-
-      base: {
-
-        name,
-
-        category,
-
-        price,
-
-        stock,
-
-        description,
-
-        image_url:
-          pendingImage
-          ||
-          null
-
-      },
-
-
-      extras: {
-
-        compare_at_price:
-
-          salePrice > 0
-
-            ?
-
-            salePrice
-
-            :
-
-            null,
-
-
-        sizes,
-
-
-        is_active:
-          published
 
       }
 
-    };
-
-  }
+      else {
 
 
-  /* =====================================================
-     COMPATIBILIDADE DE COLUNAS
-     ===================================================== */
-
-  function isMissingColumnError(
-    error
-  ) {
-
-    const message =
-
-      String(
-        error?.message || ""
-      )
-        .toLowerCase();
+        image.removeAttribute(
+          "src"
+        );
 
 
-    const code =
+        image.style.display =
+          "none";
 
-      String(
-        error?.code || ""
+
+        label.textContent =
+          "Clique para enviar uma imagem";
+
+
+      }
+
+
+    }
+
+
+
+    /* =========================================
+       COMPRIME IMAGEM
+       ========================================= */
+
+    function compressImage(
+      file
+    ) {
+
+
+      return new Promise(
+        (
+          resolve,
+          reject
+        ) => {
+
+
+          const reader =
+            new FileReader();
+
+
+          reader.onerror =
+
+            () =>
+              reject(
+                new Error(
+                  "Falha ao ler imagem"
+                )
+              );
+
+
+          reader.onload =
+
+            () => {
+
+
+              const image =
+                new Image();
+
+
+              image.onerror =
+
+                () =>
+                  reject(
+                    new Error(
+                      "Imagem inválida"
+                    )
+                  );
+
+
+              image.onload =
+
+                () => {
+
+
+                  const max =
+                    900;
+
+
+                  const scale =
+
+                    Math.min(
+
+                      1,
+
+                      max
+
+                      /
+
+                      Math.max(
+                        image.width,
+                        image.height
+                      )
+
+                    );
+
+
+                  const width =
+
+                    Math.max(
+
+                      1,
+
+                      Math.round(
+                        image.width
+                        *
+                        scale
+                      )
+
+                    );
+
+
+                  const height =
+
+                    Math.max(
+
+                      1,
+
+                      Math.round(
+                        image.height
+                        *
+                        scale
+                      )
+
+                    );
+
+
+                  const canvas =
+
+                    document.createElement(
+                      "canvas"
+                    );
+
+
+                  canvas.width =
+                    width;
+
+
+                  canvas.height =
+                    height;
+
+
+                  canvas
+                    .getContext(
+                      "2d"
+                    )
+                    .drawImage(
+                      image,
+                      0,
+                      0,
+                      width,
+                      height
+                    );
+
+
+                  resolve(
+
+                    canvas.toDataURL(
+                      "image/jpeg",
+                      .74
+                    )
+
+                  );
+
+
+                };
+
+
+              image.src =
+                reader.result;
+
+
+            };
+
+
+          reader.readAsDataURL(
+            file
+          );
+
+
+        }
       );
 
 
-    return (
+    }
 
-      code
-      ===
-      "PGRST204"
 
-      ||
 
-      message.includes(
-        "could not find"
-      )
+    /* =========================================
+       UPLOAD DE IMAGEM
+       ========================================= */
 
-      ||
+    $("produto-image-upload")
+      .addEventListener(
+        "click",
+        () => {
 
-      (
-        message.includes(
-          "column"
-        )
+          $("produto-imagem")
+            .click();
+
+        }
+      );
+
+
+    $("produto-imagem")
+      .addEventListener(
+        "change",
+        async () => {
+
+
+          const file =
+
+            $("produto-imagem")
+              .files
+              ?.[0];
+
+
+          if (!file) {
+
+            return;
+
+          }
+
+
+          try {
+
+
+            pendingImage =
+
+              await compressImage(
+                file
+              );
+
+
+            updateImagePreview(
+              pendingImage
+            );
+
+
+          }
+
+          catch (error) {
+
+
+            showToast(
+              error.message
+            );
+
+
+          }
+
+
+        }
+      );
+
+
+
+    /* =========================================
+       DADOS DO FORMULÁRIO
+       ========================================= */
+
+    function formData() {
+
+
+      const name =
+
+        $("produto-nome")
+          .value
+          .trim();
+
+
+      const price =
+
+        parseMoney(
+
+          $("produto-preco")
+            .value
+
+        );
+
+
+      const sale =
+
+        parseMoney(
+
+          $("produto-preco-promocional")
+            .value
+
+          ||
+
+          0
+
+        );
+
+
+      const stock =
+
+        Math.max(
+
+          0,
+
+          parseInt(
+
+            $("produto-estoque")
+              .value
+
+            ||
+
+            "0",
+
+            10
+
+          )
+
+          ||
+
+          0
+
+        );
+
+
+      if (!name) {
+
+
+        showToast(
+          "Preencha o nome do produto."
+        );
+
+
+        $("produto-nome")
+          .focus();
+
+
+        return null;
+
+
+      }
+
+
+      if (
+        price <= 0
+      ) {
+
+
+        showToast(
+          "Informe um preço válido."
+        );
+
+
+        $("produto-preco")
+          .focus();
+
+
+        return null;
+
+
+      }
+
+
+      if (
+        sale > 0
 
         &&
 
-        message.includes(
-          "schema cache"
-        )
-      )
-
-    );
-
-  }
+        sale >= price
+      ) {
 
 
-  /* =====================================================
-     CRIAR NO SUPABASE
-     ===================================================== */
-
-  async function insertProduct(
-    base,
-    extras
-  ) {
-
-    const richPayload = {
-
-      ...base,
-
-      ...extras,
-
-      sku:
-        makeSku(
-          base.name
-        )
-
-    };
+        showToast(
+          "O preço promocional precisa ser menor que o preço normal."
+        );
 
 
-    let result =
-
-      await window.supabaseClient
-
-        .from(
-          "products"
-        )
-
-        .insert(
-          [richPayload]
-        )
-
-        .select(
-          "*"
-        )
-
-        .single();
+        return null;
 
 
-    if (
-      result.error
-      &&
-      isMissingColumnError(
-        result.error
-      )
-    ) {
-
-      console.warn(
-        "A tabela ainda não possui todos os campos extras; salvando somente os campos existentes.",
-        result.error
-      );
+      }
 
 
-      const minimalPayload = {
+      return {
 
-        ...base,
 
-        sku:
-          richPayload.sku
+        base: {
+
+
+          name,
+
+
+          category:
+            $("produto-categoria")
+              .value,
+
+
+          price,
+
+
+          stock,
+
+
+          description:
+            $("produto-descricao")
+              .value
+              .trim(),
+
+
+          image_url:
+            pendingImage
+            ||
+            null
+
+
+        },
+
+
+        extras: {
+
+
+          compare_at_price:
+
+            sale > 0
+
+              ?
+
+              sale
+
+              :
+
+              null,
+
+
+          sizes:
+
+            Array
+              .from(
+
+                document.querySelectorAll(
+                  ".produto-tamanho:checked"
+                )
+
+              )
+              .map(
+                checkbox =>
+                  checkbox.value
+              ),
+
+
+          is_active:
+
+            $("produto-publicado")
+              .checked
+
+
+        }
+
 
       };
 
 
-      result =
+    }
 
-        await window.supabaseClient
+
+
+    /* =========================================
+       INSERT SUPABASE
+       ========================================= */
+
+    async function insertRemote(
+      base,
+      extras,
+      sku
+    ) {
+
+
+      let result =
+
+        await supabaseClient
 
           .from(
             "products"
           )
 
           .insert(
-            [minimalPayload]
+            [
+              {
+
+                ...base,
+
+                ...extras,
+
+                sku
+
+              }
+            ]
           )
 
           .select(
@@ -5727,102 +3207,91 @@
 
           .single();
 
+
+      /*
+       * Se a tabela ainda não tiver
+       * os campos extras, tenta novamente
+       * apenas com os campos básicos.
+       */
+
+      if (
+        result.error
+
+        &&
+
+        missingColumn(
+          result.error
+        )
+      ) {
+
+
+        result =
+
+          await supabaseClient
+
+            .from(
+              "products"
+            )
+
+            .insert(
+              [
+                {
+
+                  ...base,
+
+                  sku
+
+                }
+              ]
+            )
+
+            .select(
+              "*"
+            )
+
+            .single();
+
+
+      }
+
+
+      return result;
+
+
     }
 
 
-    return result;
 
-  }
+    /* =========================================
+       UPDATE SUPABASE
+       ========================================= */
 
-
-  /* =====================================================
-     ATUALIZAR NO SUPABASE
-     ===================================================== */
-
-  async function updateProduct(
-    id,
-    base,
-    extras,
-    currentProduct
-  ) {
-
-    const richPayload = {
-
-      ...base,
-
-      ...extras,
-
-      sku:
-
-        currentProduct?.sku
-
-        ||
-
-        makeSku(
-          base.name
-        )
-
-    };
-
-
-    let result =
-
-      await window.supabaseClient
-
-        .from(
-          "products"
-        )
-
-        .update(
-          richPayload
-        )
-
-        .eq(
-          "id",
-          id
-        )
-
-        .select(
-          "*"
-        )
-
-        .single();
-
-
-    if (
-      result.error
-      &&
-      isMissingColumnError(
-        result.error
-      )
+    async function updateRemote(
+      id,
+      base,
+      extras,
+      sku
     ) {
 
-      console.warn(
-        "A tabela ainda não possui todos os campos extras; atualizando somente os campos existentes.",
-        result.error
-      );
 
+      let result =
 
-      const minimalPayload = {
-
-        ...base,
-
-        sku:
-          richPayload.sku
-
-      };
-
-
-      result =
-
-        await window.supabaseClient
+        await supabaseClient
 
           .from(
             "products"
           )
 
           .update(
-            minimalPayload
+            {
+
+              ...base,
+
+              ...extras,
+
+              sku
+
+            }
           )
 
           .eq(
@@ -5836,780 +3305,899 @@
 
           .single();
 
+
+      if (
+        result.error
+
+        &&
+
+        missingColumn(
+          result.error
+        )
+      ) {
+
+
+        result =
+
+          await supabaseClient
+
+            .from(
+              "products"
+            )
+
+            .update(
+              {
+
+                ...base,
+
+                sku
+
+              }
+            )
+
+            .eq(
+              "id",
+              id
+            )
+
+            .select(
+              "*"
+            )
+
+            .single();
+
+
+      }
+
+
+      return result;
+
+
     }
 
 
-    return result;
 
-  }
+    /* =========================================
+       NOVO PRODUTO
+       ========================================= */
 
+    window.openNewProductModal =
 
-  /* =====================================================
-     NOVO PRODUTO
-     ===================================================== */
-
-  window.openNewProductModal =
-    function () {
-
-      resetProductForm();
+      function () {
 
 
-      if (
-        $("produto-modal-title")
-      ) {
+        resetForm();
+
 
         $("produto-modal-title")
           .textContent =
           "Novo Produto";
 
-      }
-
-
-      if (
-        $("produto-save-button")
-      ) {
 
         $("produto-save-button")
           .textContent =
           "Criar Produto";
 
-      }
 
-
-      if (
-        typeof window.openModal
-        ===
-        "function"
-      ) {
-
-        window.openModal(
+        openModal(
           "modal-produto"
         );
 
-      }
 
-      else {
+      };
 
-        $("modal-produto")
-          ?.classList
-          .add(
-            "active"
+
+
+    /* =========================================
+       EDITAR PRODUTO
+       ========================================= */
+
+    window.editProduct =
+
+      function (id) {
+
+
+        const product =
+
+          products.find(
+
+            item =>
+
+              String(
+                item.id
+              )
+
+              ===
+
+              String(
+                id
+              )
+
           );
 
-      }
 
-    };
+        if (!product) {
 
+          return;
 
-  /* =====================================================
-     EDITAR PRODUTO
-     ===================================================== */
-
-  window.editProduct =
-    function (id) {
-
-      const product =
-
-        products.find(
-
-          (item) =>
-
-            String(item.id)
-
-            ===
-
-            String(id)
-
-        );
+        }
 
 
-      if (!product) {
-
-        showToastSafe(
-          "Produto não encontrado. ⚠️"
-        );
-
-        return;
-
-      }
+        editingId =
+          product.id;
 
 
-      editingId =
-        product.id;
+        pendingImage =
 
+          product.image_url
 
-      pendingImage =
+          ||
 
-        product.image_url
+          product.image
 
-        ||
+          ||
 
-        product.image
+          "";
 
-        ||
-
-        "";
-
-
-      if (
-        $("produto-modal-title")
-      ) {
 
         $("produto-modal-title")
           .textContent =
           "Editar Produto";
 
-      }
-
-
-      if (
-        $("produto-save-button")
-      ) {
 
         $("produto-save-button")
           .textContent =
           "Salvar Alterações";
 
-      }
+
+        $("produto-nome")
+          .value =
+          product.name
+          ||
+          "";
 
 
-      $("produto-nome").value =
-        product.name || "";
+        $("produto-preco")
+          .value =
+
+          parseMoney(
+            product.price
+          )
+
+          ||
+
+          "";
 
 
-      $("produto-preco").value =
+        $("produto-preco-promocional")
+          .value =
 
-        parseMoney(
-          product.price
-        )
+          getSalePrice(
+            product
+          )
 
-        ||
+          ||
 
-        "";
-
-
-      $("produto-preco-promocional").value =
-
-        getSalePrice(
-          product
-        )
-
-        ||
-
-        "";
+          "";
 
 
-      $("produto-categoria").value =
+        $("produto-categoria")
+          .value =
 
-        product.category
+          product.category
 
-        ||
+          ||
 
-        "Tops";
+          "Tops";
 
 
-      $("produto-estoque").value =
+        $("produto-estoque")
+          .value =
 
-        Number(
-          product.stock || 0
+          Number(
+            product.stock || 0
+          );
+
+
+        $("produto-descricao")
+          .value =
+
+          product.description
+
+          ||
+
+          "";
+
+
+        $("produto-publicado")
+          .checked =
+
+          isActive(
+            product
+          );
+
+
+        const sizes =
+          getSizes(
+            product
+          );
+
+
+        document
+          .querySelectorAll(
+            ".produto-tamanho"
+          )
+          .forEach(
+            checkbox => {
+
+
+              checkbox.checked =
+
+                sizes.length
+
+                  ?
+
+                  sizes.includes(
+                    checkbox.value
+                  )
+
+                  :
+
+                  [
+                    "P",
+                    "M",
+                    "G"
+                  ]
+                    .includes(
+                      checkbox.value
+                    );
+
+
+            }
+          );
+
+
+        updateImagePreview(
+          pendingImage
         );
 
 
-      $("produto-descricao").value =
-
-        product.description
-
-        ||
-
-        "";
-
-
-      $("produto-publicado").checked =
-
-        isActive(
-          product
-        );
-
-
-      const sizes =
-        getSizes(
-          product
-        );
-
-
-      document
-        .querySelectorAll(
-          ".produto-tamanho"
-        )
-        .forEach(
-          (checkbox) => {
-
-            checkbox.checked =
-
-              sizes.length
-
-                ?
-
-                sizes.includes(
-                  checkbox.value
-                )
-
-                :
-
-                checkbox.value !== "XXL";
-
-          }
-
-        );
-
-
-      updateImagePreview(
-        pendingImage
-      );
-
-
-      if (
-        typeof window.openModal
-        ===
-        "function"
-      ) {
-
-        window.openModal(
+        openModal(
           "modal-produto"
         );
 
-      }
-
-      else {
-
-        $("modal-produto")
-          ?.classList
-          .add(
-            "active"
-          );
-
-      }
-
-    };
-
-
-  /* =====================================================
-     SALVAR PRODUTO
-     ===================================================== */
-
- window.saveProduct = async function () {
-
-  const payload = basePayload();
-
-  if (!payload) {
-    return;
-  }
-
-  const button =
-    $("produto-save-button");
-
-  const originalText =
-    button?.textContent || "Salvar";
-
-  if (button) {
-    button.disabled = true;
-    button.textContent = "Salvando...";
-  }
-
-  try {
-
-    /* =========================================
-       EDITANDO PRODUTO
-       ========================================= */
-
-    if (editingId) {
-
-      const currentProduct =
-        products.find(
-          item =>
-            String(item.id) ===
-            String(editingId)
-        );
-
-      const localUpdated = {
-        ...currentProduct,
-        ...payload.base,
-        ...payload.extras
-      };
-
-      const index =
-        products.findIndex(
-          item =>
-            String(item.id) ===
-            String(editingId)
-        );
-
-      if (index >= 0) {
-        products[index] =
-          localUpdated;
-      }
-
-      /* ATUALIZA O PAINEL NA HORA */
-      renderProducts();
-
-      const {
-        data,
-        error
-      } = await updateProduct(
-        editingId,
-        payload.base,
-        payload.extras,
-        currentProduct
-      );
-
-      if (error) {
-
-        console.error(
-          "Erro Supabase ao editar:",
-          error
-        );
-
-        showToastSafe(
-          "Produto atualizado no painel, mas não sincronizou com o Supabase. ⚠️"
-        );
-
-      } else {
-
-        if (index >= 0) {
-          products[index] = data;
-        }
-
-        renderProducts();
-
-        showToastSafe(
-          "Produto atualizado com sucesso! ✅"
-        );
-
-      }
-
-    }
-
-    /* =========================================
-       CRIANDO PRODUTO
-       ========================================= */
-
-    else {
-
-      const temporaryProduct = {
-
-        id:
-          `local-${Date.now()}`,
-
-        sku:
-          makeSku(
-            payload.base.name
-          ),
-
-        ...payload.base,
-        ...payload.extras,
-
-        created_at:
-          new Date().toISOString()
 
       };
 
 
-      /* COLOCA NO PAINEL IMEDIATAMENTE */
-      products.unshift(
-        temporaryProduct
-      );
 
-      renderProducts();
+    /* =========================================
+       SALVAR PRODUTO
+       ========================================= */
 
+    window.saveProduct =
 
-      console.log(
-        "Produto adicionado ao painel ✅",
-        temporaryProduct
-      );
+      async function () {
 
 
-      /* AGORA SINCRONIZA COM SUPABASE */
-
-      const {
-        data,
-        error
-      } = await insertProduct(
-        payload.base,
-        payload.extras
-      );
+        const form =
+          formData();
 
 
-      if (error) {
+        if (!form) {
 
-        console.error(
-          "Erro ao salvar no Supabase:",
-          error
-        );
-
-        showToastSafe(
-          "Produto apareceu no painel, mas não sincronizou com o Supabase. ⚠️"
-        );
-
-      }
-
-      else {
-
-        /*
-         * Troca o produto temporário
-         * pelo produto verdadeiro vindo do Supabase.
-         */
-
-        const temporaryIndex =
-          products.findIndex(
-            item =>
-              String(item.id) ===
-              String(temporaryProduct.id)
-          );
-
-
-        if (
-          temporaryIndex >= 0
-        ) {
-
-          products[
-            temporaryIndex
-          ] = data;
+          return;
 
         }
 
 
-        renderProducts();
+        const button =
+          $("produto-save-button");
 
 
-        console.log(
-          "Produto salvo no Supabase ✅",
-          data
-        );
+        const oldText =
+          button.textContent;
 
 
-        showToastSafe(
-          "Produto criado com sucesso! ✅"
-        );
-
-      }
-
-    }
+        button.disabled =
+          true;
 
 
-    /* FECHA MODAL */
-
-    if (
-      typeof window.closeModal
-      ===
-      "function"
-    ) {
-
-      window.closeModal(
-        "modal-produto"
-      );
-
-    }
-
-    else {
-
-      $("modal-produto")
-        ?.classList
-        .remove(
-          "active"
-        );
-
-    }
+        button.textContent =
+          "Salvando...";
 
 
-    resetProductForm();
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Erro ao salvar produto:",
-      error
-    );
+        try {
 
 
-    showToastSafe(
-      "O produto entrou no painel, mas ocorreu um erro na sincronização. ⚠️"
-    );
-
-  }
-
-  finally {
-
-    if (button) {
-
-      button.disabled =
-        false;
-
-      button.textContent =
-        originalText;
-
-    }
-
-  }
-
-};
-
-
-        /* ===============================================
-           EDITANDO
-           =============================================== */
-
-        if (
-          editingId
-        ) {
-
-          const currentProduct =
-
-            products.find(
-
-              (item) =>
-
-                String(item.id)
-
-                ===
-
-                String(editingId)
-
-            );
-
-
-          const {
-            data,
-            error
-          } =
-
-            await updateProduct(
-
-              editingId,
-
-              payload.base,
-
-              payload.extras,
-
-              currentProduct
-
-            );
-
-
-          if (error) {
-
-            throw error;
-
-          }
-
-
-          const index =
-
-            products.findIndex(
-
-              (item) =>
-
-                String(item.id)
-
-                ===
-
-                String(editingId)
-
-            );
-
+          /* =====================================
+             EDITANDO
+             ===================================== */
 
           if (
-            index >= 0
+            editingId
           ) {
 
-            products[index] =
-              data;
+
+            const product =
+
+              products.find(
+
+                item =>
+
+                  String(
+                    item.id
+                  )
+
+                  ===
+
+                  String(
+                    editingId
+                  )
+
+              );
+
+
+            const localProduct =
+
+              String(
+                editingId
+              )
+                .startsWith(
+                  "local-"
+                )
+
+              ||
+
+              product?._local;
+
+
+            /*
+             * Se ainda for produto local,
+             * salva as alterações no navegador.
+             */
+
+            if (
+              localProduct
+            ) {
+
+
+              const pending =
+                getPending();
+
+
+              const index =
+
+                pending.findIndex(
+
+                  item =>
+
+                    String(
+                      item.id
+                    )
+
+                    ===
+
+                    String(
+                      editingId
+                    )
+
+                );
+
+
+              const updated = {
+
+                ...product,
+
+                ...form.base,
+
+                ...form.extras,
+
+                _local:
+                  true,
+
+                updated_at:
+                  new Date()
+                    .toISOString()
+
+              };
+
+
+              if (
+                index >= 0
+              ) {
+
+                pending[index] =
+                  updated;
+
+              }
+
+              else {
+
+                pending.unshift(
+                  updated
+                );
+
+              }
+
+
+              setPending(
+                pending
+              );
+
+
+              const productIndex =
+
+                products.findIndex(
+
+                  item =>
+
+                    String(
+                      item.id
+                    )
+
+                    ===
+
+                    String(
+                      editingId
+                    )
+
+                );
+
+
+              if (
+                productIndex >= 0
+              ) {
+
+                products[
+                  productIndex
+                ] =
+                  updated;
+
+              }
+
+
+              showToast(
+                "Produto salvo no painel. Tentarei sincronizar com o Supabase."
+              );
+
+
+            }
+
+
+            /*
+             * Produto já existe no Supabase.
+             */
+
+            else {
+
+
+              const {
+                data,
+                error
+              } =
+
+                await updateRemote(
+
+                  editingId,
+
+                  form.base,
+
+                  form.extras,
+
+                  product.sku
+
+                  ||
+
+                  makeSku(
+                    form.base.name
+                  )
+
+                );
+
+
+              if (error) {
+
+                throw error;
+
+              }
+
+
+              const index =
+
+                products.findIndex(
+
+                  item =>
+
+                    String(
+                      item.id
+                    )
+
+                    ===
+
+                    String(
+                      editingId
+                    )
+
+                );
+
+
+              if (
+                index >= 0
+              ) {
+
+                products[index] =
+                  data;
+
+              }
+
+
+              showToast(
+                "Produto atualizado com sucesso! ✅"
+              );
+
+
+            }
+
 
           }
 
 
-          showToastSafe(
-            "Produto atualizado no Supabase! ✅"
-          );
+          /* =====================================
+             CRIANDO
+             ===================================== */
 
-        }
+          else {
 
 
-        /* ===============================================
-           CRIANDO
-           =============================================== */
+            const sku =
 
-        else {
+              makeSku(
+                form.base.name
+              );
 
-          const {
-            data,
-            error
-          } =
 
-            await insertProduct(
+            /*
+             * Cria primeiro localmente.
+             * Assim aparece no painel na hora.
+             */
 
-              payload.base,
+            const temporaryProduct = {
 
-              payload.extras
 
+              id:
+                `local-${Date.now()}`,
+
+
+              sku,
+
+
+              ...form.base,
+
+
+              ...form.extras,
+
+
+              _local:
+                true,
+
+
+              created_at:
+                new Date()
+                  .toISOString()
+
+
+            };
+
+
+            const pending =
+              getPending();
+
+
+            pending.unshift(
+              temporaryProduct
             );
 
 
-          if (error) {
+            setPending(
+              pending
+            );
 
-            throw error;
+
+            products.unshift(
+              temporaryProduct
+            );
+
+
+            /*
+             * Atualiza imediatamente a tabela.
+             */
+
+            renderProducts();
+
+
+            /*
+             * Agora tenta mandar para o Supabase.
+             */
+
+            const {
+              data,
+              error
+            } =
+
+              await insertRemote(
+
+                form.base,
+
+                form.extras,
+
+                sku
+
+              );
+
+
+            if (error) {
+
+
+              console.error(
+                "Erro Supabase:",
+                error
+              );
+
+
+              showToast(
+                "Produto salvo no painel. O Supabase não sincronizou ainda. ⚠️"
+              );
+
+
+            }
+
+            else {
+
+
+              /*
+               * Remove da lista de pendentes.
+               */
+
+              setPending(
+
+                getPending()
+                  .filter(
+                    item =>
+                      item.sku
+                      !==
+                      sku
+                  )
+
+              );
+
+
+              /*
+               * Troca o temporário pelo registro
+               * verdadeiro do Supabase.
+               */
+
+              const index =
+
+                products.findIndex(
+
+                  item =>
+                    item.sku
+                    ===
+                    sku
+
+                );
+
+
+              if (
+                index >= 0
+              ) {
+
+                products[index] =
+                  data;
+
+              }
+
+
+              showToast(
+                "Produto criado e salvo no Supabase! ✅"
+              );
+
+
+            }
+
 
           }
 
 
-          products.unshift(
-            data
-          );
+          renderProducts();
 
 
-          showToastSafe(
-            "Produto criado e salvo no Supabase! ✅"
-          );
-
-        }
-
-
-        renderProducts();
-
-
-        if (
-          typeof window.closeModal
-          ===
-          "function"
-        ) {
-
-          window.closeModal(
+          closeModal(
             "modal-produto"
           );
 
-        }
 
-        else {
+          resetForm();
 
-          $("modal-produto")
-            ?.classList
-            .remove(
-              "active"
-            );
 
         }
 
-
-        resetProductForm();
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Erro ao salvar produto no Supabase:",
-          error
-        );
+        catch (error) {
 
 
-        const message =
-
-          error?.message
-
-            ?
-
-            `Erro ao salvar: ${error.message}`
-
-            :
-
-            "Não foi possível salvar no Supabase. ⚠️";
+          console.error(
+            error
+          );
 
 
-        showToastSafe(
-          message
-        );
+          showToast(
 
-      }
+            `Erro ao salvar: ${
+              error.message
+              ||
+              "erro desconhecido"
+            }`
 
-      finally {
+          );
 
-        if (button) {
+
+        }
+
+        finally {
+
 
           button.disabled =
             false;
 
 
           button.textContent =
-            originalText;
+            oldText;
+
 
         }
 
-      }
 
-    };
-
-
-  /* =====================================================
-     COMPATIBILIDADE COM BOTÃO ATUAL
-     ===================================================== */
-
-  window.saveProductSupabase =
-    window.saveProduct;
+      };
 
 
-  /* =====================================================
-     EXCLUIR PRODUTO
-     ===================================================== */
 
-  window.deleteProduct =
-    async function (id) {
+    /* =========================================
+       EXCLUIR PRODUTO
+       ========================================= */
 
-      const product =
+    window.deleteProduct =
 
-        products.find(
-
-          (item) =>
-
-            String(item.id)
-
-            ===
-
-            String(id)
-
-        );
+      async function (id) {
 
 
-      if (!product) {
+        const product =
 
-        return;
+          products.find(
 
-      }
+            item =>
 
+              String(
+                item.id
+              )
 
-      const confirmed =
+              ===
 
-        window.confirm(
+              String(
+                id
+              )
 
-          `Excluir "${product.name}"?`
-
-        );
-
-
-      if (!confirmed) {
-
-        return;
-
-      }
+          );
 
 
-      try {
+        if (!product) {
+
+          return;
+
+        }
+
+
+        const confirmed =
+
+          confirm(
+            `Excluir "${product.name}"?`
+          );
+
+
+        if (!confirmed) {
+
+          return;
+
+        }
+
+
+        const localProduct =
+
+          String(
+            id
+          )
+            .startsWith(
+              "local-"
+            )
+
+          ||
+
+          product._local;
+
+
+        /*
+         * Produto ainda só existe localmente.
+         */
+
+        if (
+          localProduct
+        ) {
+
+
+          setPending(
+
+            getPending()
+              .filter(
+
+                item =>
+
+                  String(
+                    item.id
+                  )
+
+                  !==
+
+                  String(
+                    id
+                  )
+
+              )
+
+          );
+
+
+          products =
+
+            products.filter(
+
+              item =>
+
+                String(
+                  item.id
+                )
+
+                !==
+
+                String(
+                  id
+                )
+
+            );
+
+
+          renderProducts();
+
+
+          showToast(
+            "Produto excluído."
+          );
+
+
+          return;
+
+
+        }
+
+
+        /*
+         * Produto existe no Supabase.
+         */
 
         const {
           error
         } =
 
-          await window.supabaseClient
+          await supabaseClient
 
             .from(
               "products"
@@ -6625,7 +4213,19 @@
 
         if (error) {
 
-          throw error;
+
+          console.error(
+            error
+          );
+
+
+          showToast(
+            "Não foi possível excluir do Supabase."
+          );
+
+
+          return;
+
 
         }
 
@@ -6634,13 +4234,17 @@
 
           products.filter(
 
-            (item) =>
+            item =>
 
-              String(item.id)
+              String(
+                item.id
+              )
 
               !==
 
-              String(id)
+              String(
+                id
+              )
 
           );
 
@@ -6648,68 +4252,313 @@
         renderProducts();
 
 
-        showToastSafe(
-          "Produto excluído do Supabase. 🗑️"
-        );
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Erro ao excluir produto no Supabase:",
-          error
+        showToast(
+          "Produto excluído."
         );
 
 
-        showToastSafe(
-          "Não foi possível excluir o produto. ⚠️"
+      };
+
+
+
+    /* =========================================
+       SINCRONIZAR PENDENTES
+       ========================================= */
+
+    window.syncPendingProducts =
+
+      async function () {
+
+
+        const pending =
+          getPending();
+
+
+        if (
+          !pending.length
+        ) {
+
+
+          showToast(
+            "Não há produtos pendentes para sincronizar."
+          );
+
+
+          return;
+
+
+        }
+
+
+        let synced =
+          0;
+
+
+        for (
+          const product
+          of
+          pending
+        ) {
+
+
+          /*
+           * Verifica primeiro se já existe
+           * um produto com o mesmo SKU.
+           * Isso evita duplicação.
+           */
+
+          const existing =
+
+            await supabaseClient
+
+              .from(
+                "products"
+              )
+
+              .select(
+                "*"
+              )
+
+              .eq(
+                "sku",
+                product.sku
+              )
+
+              .maybeSingle();
+
+
+          /*
+           * Já existe no Supabase.
+           */
+
+          if (
+            existing.data
+          ) {
+
+
+            setPending(
+
+              getPending()
+                .filter(
+                  item =>
+                    item.sku
+                    !==
+                    product.sku
+                )
+
+            );
+
+
+            synced++;
+
+
+            continue;
+
+
+          }
+
+
+          const base = {
+
+
+            name:
+              product.name,
+
+
+            category:
+              product.category,
+
+
+            price:
+              product.price,
+
+
+            stock:
+              product.stock,
+
+
+            description:
+              product.description
+              ||
+              "",
+
+
+            image_url:
+              product.image_url
+              ||
+              null
+
+
+          };
+
+
+          const extras = {
+
+
+            compare_at_price:
+
+              product.compare_at_price
+
+              ??
+
+              null,
+
+
+            sizes:
+
+              getSizes(
+                product
+              ),
+
+
+            is_active:
+
+              isActive(
+                product
+              )
+
+
+          };
+
+
+          const result =
+
+            await insertRemote(
+
+              base,
+
+              extras,
+
+              product.sku
+
+            );
+
+
+          if (
+            !result.error
+          ) {
+
+
+            setPending(
+
+              getPending()
+                .filter(
+                  item =>
+                    item.sku
+                    !==
+                    product.sku
+                )
+
+            );
+
+
+            synced++;
+
+
+          }
+
+
+        }
+
+
+        await loadProducts();
+
+
+        showToast(
+
+          `${synced} produto(s) sincronizado(s).`
+
         );
 
-      }
 
-    };
-
-
-  /* =====================================================
-     INICIALIZAÇÃO
-     ===================================================== */
-
-  async function initProductManager() {
-
-    bindImageUpload();
-
-    await loadProducts();
-
-  }
+      };
 
 
-  if (
-    document.readyState
-    ===
-    "loading"
-  ) {
 
-    document.addEventListener(
+    /* =========================================
+       BUSCA
+       ========================================= */
 
-      "DOMContentLoaded",
+    $("product-search")
+      .addEventListener(
+        "input",
+        renderProducts
+      );
 
-      initProductManager
 
+    $("category-filter")
+      .addEventListener(
+        "change",
+        renderProducts
+      );
+
+
+    $("global-search")
+      .addEventListener(
+        "input",
+        event => {
+
+
+          navigate(
+            "produtos"
+          );
+
+
+          $("product-search")
+            .value =
+            event.target.value;
+
+
+          renderProducts();
+
+
+        }
+      );
+
+
+
+    /* =========================================
+       ESC FECHA MODAL
+       ========================================= */
+
+    document
+      .addEventListener(
+        "keydown",
+        event => {
+
+
+          if (
+            event.key
+            ===
+            "Escape"
+          ) {
+
+            closeModal(
+              "modal-produto"
+            );
+
+          }
+
+
+        }
+      );
+
+
+
+    /* =========================================
+       INICIALIZAÇÃO
+       ========================================= */
+
+    console.log(
+      "Supabase conectado ✅"
     );
 
-  }
 
-  else {
-
-    initProductManager();
-
-  }
+    loadProducts();
 
 
-})();
+  </script>
 
-</script>
 
 </body>
 </html>
