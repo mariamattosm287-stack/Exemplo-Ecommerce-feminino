@@ -1,327 +1,3847 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mesh Panel Sports Bra — ESSENCE</title>
-  <meta name="description" content="Shop the Mesh Panel Sports Bra. Full support, breathable mesh, available in multiple colors. Free shipping on orders over $75.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Produto — ESSENCE</title>
+
+  <meta
+    name="description"
+    content="Conheça os produtos ESSENCE."
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+
+  <style>
+
+    /* ========================================
+       AJUSTES DA PÁGINA DO PRODUTO
+       ======================================== */
+
+    .product-detail {
+      padding-top: 38px;
+    }
+
+
+    .product-detail__main-image {
+      aspect-ratio: 4 / 5;
+      background: #f4f1ee;
+    }
+
+
+    .product-detail__main-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      display: block;
+    }
+
+
+    .product-detail__thumb {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+    }
+
+
+    .product-detail__thumb img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+
+    .product-detail__name {
+      line-height: 1.1;
+    }
+
+
+    .product-detail__description {
+      margin: 22px 0 28px;
+
+      max-width: 540px;
+
+      color: #6e625c;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      white-space: pre-line;
+    }
+
+
+    .product-detail__price-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      gap: 11px;
+
+      margin-top: 20px;
+      margin-bottom: 26px;
+    }
+
+
+    .product-detail__price {
+      margin: 0;
+    }
+
+
+    .product-detail__old-price {
+      color: #9d9691;
+
+      font-size: 14px;
+
+      text-decoration: line-through;
+    }
+
+
+    .product-detail__discount {
+      padding: 5px 9px;
+
+      background: #f1e5df;
+
+      color: #8d5147;
+
+      border-radius: 100px;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      letter-spacing: .5px;
+    }
+
+
+    .product-detail__sizes {
+      margin-bottom: 25px;
+    }
+
+
+    .product-detail__size-btn.active {
+      background: #332a26;
+      border-color: #332a26;
+
+      color: #fff;
+    }
+
+
+    .product-detail__size-btn {
+      cursor: pointer;
+    }
+
+
+    .product-detail__stock--out {
+      color: #a3473f;
+    }
+
+
+    .product-detail__loading {
+      grid-column: 1 / -1;
+
+      padding: 100px 20px;
+
+      text-align: center;
+
+      color: #777;
+
+      font-size: 13px;
+    }
+
+
+    .product-detail__error {
+      max-width: 700px;
+
+      margin: 80px auto;
+
+      padding: 50px 20px;
+
+      text-align: center;
+    }
+
+
+    .product-detail__error h2 {
+      margin-bottom: 12px;
+
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+
+    .product-detail__error p {
+      margin-bottom: 25px;
+
+      color: #777;
+    }
+
+
+    /* ========================================
+       RELACIONADOS
+       ======================================== */
+
+    #related-products {
+      padding-top: 65px;
+    }
+
+
+    #related-products .section__title {
+      text-transform: uppercase;
+    }
+
+
+    #related-products-track {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 24px;
+    }
+
+
+    #related-products-track .product-card {
+      cursor: pointer;
+    }
+
+
+    /* ========================================
+       CARRINHO
+       ======================================== */
+
+    .essence-cart-size {
+      display: block;
+
+      margin-top: 5px;
+
+      color: #8b817b;
+
+      font-size: 10px;
+    }
+
+
+    @media (max-width: 900px) {
+
+      #related-products-track {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 20px 12px;
+      }
+
+    }
+
+
+    @media (max-width: 768px) {
+
+      .product-detail {
+        padding-top: 20px;
+      }
+
+
+      .product-detail__main-image {
+        aspect-ratio: 4 / 5;
+      }
+
+
+      #related-products {
+        padding-top: 35px;
+      }
+
+    }
+
+  </style>
+
 </head>
+
+
+
 <body>
 
-  <!-- ===== ANNOUNCEMENT BAR ===== -->
-  <div class="announcement-bar" id="announcement-bar">
-    <button class="announcement-bar__nav announcement-bar__nav--prev" aria-label="Previous">‹</button>
-    <p class="announcement-bar__text" id="announcement-text">FREE SHIPPING ON ORDERS OVER $75</p>
-    <button class="announcement-bar__nav announcement-bar__nav--next" aria-label="Next">›</button>
+
+  <!-- ========================================
+       BARRA SUPERIOR
+       ======================================== -->
+
+  <div
+    class="announcement-bar"
+    id="announcement-bar"
+  >
+
+    <button
+      class="announcement-bar__nav announcement-bar__nav--prev"
+      aria-label="Anterior"
+    >
+      ‹
+    </button>
+
+
+    <p
+      class="announcement-bar__text"
+      id="announcement-text"
+    >
+      TROCAS E DEVOLUÇÕES FACILITADAS
+    </p>
+
+
+    <button
+      class="announcement-bar__nav announcement-bar__nav--next"
+      aria-label="Próximo"
+    >
+      ›
+    </button>
+
   </div>
 
-  <!-- ===== NAVIGATION ===== -->
-  <nav class="navbar" id="navbar">
+
+
+  <!-- ========================================
+       NAVEGAÇÃO
+       ======================================== -->
+
+  <nav
+    class="navbar"
+    id="navbar"
+  >
+
     <div class="navbar__inner">
+
+
       <div class="navbar__left">
-        <button class="navbar__mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-          <span></span><span></span><span></span>
+
+
+        <button
+          class="navbar__mobile-toggle"
+          id="mobile-toggle"
+          aria-label="Abrir menu"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
         </button>
+
+
         <ul class="navbar__menu">
+
+
           <li class="navbar__dropdown">
-            <a href="collection.html" class="navbar__link">Shop <span class="chevron">▾</span></a>
+
+            <a
+              href="index.html#hot-right-now"
+              class="navbar__link"
+            >
+              Loja
+              <span class="chevron">
+                ▾
+              </span>
+            </a>
+
+
             <div class="navbar__dropdown-menu">
-              <a href="collection.html" class="navbar__dropdown-item">All Products</a>
-              <a href="collection.html" class="navbar__dropdown-item">Tops</a>
-              <a href="collection.html" class="navbar__dropdown-item">Bottoms</a>
-              <a href="collection.html" class="navbar__dropdown-item">Accessories</a>
-              <a href="collection.html" class="navbar__dropdown-item">New Arrivals</a>
-              <a href="collection.html" class="navbar__dropdown-item">Best Sellers</a>
+
+              <a
+                href="index.html#hot-right-now"
+                class="navbar__dropdown-item"
+              >
+                Todos os produtos
+              </a>
+
+              <a
+                href="index.html#essentials"
+                class="navbar__dropdown-item"
+              >
+                Categorias
+              </a>
+
+              <a
+                href="index.html#feature-banner"
+                class="navbar__dropdown-item"
+              >
+                Coleções
+              </a>
+
+              <a
+                href="index.html#novidades"
+                class="navbar__dropdown-item"
+              >
+                Novidades
+              </a>
+
             </div>
+
           </li>
-          <li><a href="#" class="navbar__link">Blog</a></li>
-          <li><a href="#" class="navbar__link">About</a></li>
-          <li><a href="#" class="navbar__link">FAQ</a></li>
-          <li><a href="#" class="navbar__link">Contact</a></li>
+
+
+          <li>
+
+            <a
+              href="index.html#feature-banner"
+              class="navbar__link"
+            >
+              Coleções
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a
+              href="index.html#hot-right-now"
+              class="navbar__link"
+            >
+              Produtos
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a
+              href="index.html#testimonials"
+              class="navbar__link"
+            >
+              Avaliações
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a
+              href="index.html#footer"
+              class="navbar__link"
+            >
+              Contato
+            </a>
+
+          </li>
+
+
         </ul>
+
+
       </div>
+
+
+
       <div class="navbar__center">
-        <a href="index.html" class="navbar__logo">ESSENCE</a>
+
+        <a
+          href="index.html"
+          class="navbar__logo"
+        >
+          ESSENCE
+        </a>
+
       </div>
+
+
+
       <div class="navbar__right">
+
+
         <div class="navbar__currency">
-          <span>🌐</span>
-          <span>USD $</span>
-          <span class="chevron" style="font-size:10px;">▾</span>
+
+          <span>
+            🌐
+          </span>
+
+          <span>
+            BRL R$
+          </span>
+
+          <span
+            class="chevron"
+            style="font-size:10px;"
+          >
+            ▾
+          </span>
+
         </div>
-        <button class="navbar__icon-btn" id="search-btn" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+
+
+
+        <button
+          class="navbar__icon-btn"
+          id="search-btn"
+          aria-label="Buscar"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+
+            <circle
+              cx="11"
+              cy="11"
+              r="8"
+            />
+
+            <path
+              d="m21 21-4.3-4.3"
+            />
+
+          </svg>
+
         </button>
-        <button class="navbar__icon-btn" aria-label="Account">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+
+
+
+        <button
+          class="navbar__icon-btn"
+          aria-label="Conta"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+
+            <path
+              d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+            />
+
+            <circle
+              cx="12"
+              cy="7"
+              r="4"
+            />
+
+          </svg>
+
         </button>
-        <button class="navbar__icon-btn" id="cart-btn" aria-label="Cart">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span class="navbar__cart-count" id="cart-count">0</span>
+
+
+
+        <button
+          class="navbar__icon-btn"
+          id="cart-btn"
+          aria-label="Sacola"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+
+            <path
+              d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+            />
+
+            <path
+              d="M3 6h18"
+            />
+
+            <path
+              d="M16 10a4 4 0 0 1-8 0"
+            />
+
+          </svg>
+
+
+          <span
+            class="navbar__cart-count"
+            id="cart-count"
+          >
+            0
+          </span>
+
         </button>
+
+
       </div>
+
+
     </div>
+
   </nav>
 
-  <!-- ===== PRODUCT DETAIL ===== -->
-  <section class="product-detail">
+
+
+  <!-- ========================================
+       PRODUTO
+       ======================================== -->
+
+  <section
+    class="product-detail"
+    id="product-detail"
+  >
+
     <div class="container">
-      <div class="product-detail__grid">
-        <!-- Thumbnails -->
-        <div class="product-detail__thumbnails">
-          <div class="product-detail__thumb active" onclick="changeMainImage(this, 'assets/images/product-3.jpg')">
-            <img src="assets/images/product-3.jpg" alt="Mesh Panel Sports Bra - View 1">
-          </div>
-          <div class="product-detail__thumb" onclick="changeMainImage(this, 'assets/images/product-1.jpg')">
-            <img src="assets/images/product-1.jpg" alt="Mesh Panel Sports Bra - View 2">
-          </div>
-          <div class="product-detail__thumb" onclick="changeMainImage(this, 'assets/images/product-2.jpg')">
-            <img src="assets/images/product-2.jpg" alt="Mesh Panel Sports Bra - View 3">
-          </div>
-          <div class="product-detail__thumb" onclick="changeMainImage(this, 'assets/images/product-4.jpg')">
-            <img src="assets/images/product-4.jpg" alt="Mesh Panel Sports Bra - View 4">
-          </div>
+
+      <div
+        class="product-detail__grid"
+        id="product-detail-grid"
+      >
+
+        <div class="product-detail__loading">
+          Carregando produto...
         </div>
 
-        <!-- Main Image -->
-        <div class="product-detail__main-image">
-          <img src="assets/images/product-3.jpg" alt="Mesh Panel Sports Bra" id="main-product-image">
-        </div>
-
-        <!-- Product Info -->
-        <div class="product-detail__info">
-          <p class="product-detail__breadcrumb">
-            <a href="index.html">Home</a> / <a href="collection.html">Tops</a> / Mesh Panel Sports Bra
-          </p>
-          <h1 class="product-detail__name">MESH PANEL SPORTS BRA</h1>
-          <a href="#" class="product-detail__view-details">View full details</a>
-
-          <div class="product-detail__rating">
-            <div class="product-detail__stars">
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbc02d"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbc02d"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbc02d"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fbc02d"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0e0e0"/></svg>
-            </div>
-            <span class="product-detail__review-count">(3)</span>
-          </div>
-
-          <div class="product-detail__price">$39.00</div>
-
-          <!-- Color -->
-          <div class="product-detail__option-label">COLOR: <span id="selected-color-name">Neon Yellow</span></div>
-          <div class="product-detail__colors">
-            <div class="product-detail__color-swatch active" style="background: #c8d83e;" onclick="selectColor(this, 'Neon Yellow')" title="Neon Yellow"></div>
-            <div class="product-detail__color-swatch" style="background: #e84073;" onclick="selectColor(this, 'Hot Pink')" title="Hot Pink"></div>
-          </div>
-
-          <!-- Size -->
-          <div class="product-detail__size-header">
-            <div class="product-detail__option-label">SIZE</div>
-            <span class="product-detail__size-chart">✏️ Size chart</span>
-          </div>
-          <div class="product-detail__sizes">
-            <button class="product-detail__size-btn active" onclick="selectSize(this)">XS</button>
-            <button class="product-detail__size-btn" onclick="selectSize(this)">S</button>
-            <button class="product-detail__size-btn" onclick="selectSize(this)">M</button>
-            <button class="product-detail__size-btn" onclick="selectSize(this)">L</button>
-            <button class="product-detail__size-btn" onclick="selectSize(this)">XL</button>
-            <button class="product-detail__size-btn" style="text-decoration: line-through; color: #ccc; border-color: #eee; cursor: not-allowed;" disabled>XXL</button>
-          </div>
-
-          <!-- Stock -->
-          <div class="product-detail__stock">
-            <span class="product-detail__stock-dot"></span>
-            In stock
-          </div>
-
-          <!-- Quantity -->
-          <div class="product-detail__quantity-label">QUANTITY</div>
-          <div class="product-detail__quantity">
-            <button class="product-detail__qty-btn" onclick="changeQty(-1)">−</button>
-            <div class="product-detail__qty-value" id="qty-value">1</div>
-            <button class="product-detail__qty-btn" onclick="changeQty(1)">+</button>
-          </div>
-
-          <!-- Actions -->
-          <div class="product-detail__actions">
-            <button class="btn btn--dark btn--full product-detail__add-to-cart" onclick="addToCart('Mesh Panel Sports Bra', 39, 'assets/images/product-3.jpg')">ADD TO CART</button>
-            <button class="btn btn--outline-dark btn--full product-detail__buy-now">BUY IT NOW</button>
-          </div>
-        </div>
       </div>
+
     </div>
+
   </section>
 
-  <!-- ===== RELATED PRODUCTS ===== -->
-  <section class="section" id="related-products">
+
+
+  <!-- ========================================
+       VOCÊ TAMBÉM PODE GOSTAR
+       ======================================== -->
+
+  <section
+    class="section"
+    id="related-products"
+    style="display:none;"
+  >
+
     <div class="container">
+
+
       <div class="section__header">
-        <h2 class="section__title">YOU MAY ALSO LIKE</h2>
-        <a href="collection.html" class="section__link">VIEW ALL <span>→</span></a>
+
+        <h2 class="section__title">
+          VOCÊ TAMBÉM PODE GOSTAR
+        </h2>
+
+        <a
+          href="index.html#hot-right-now"
+          class="section__link"
+        >
+          VER TODOS
+          <span>
+            →
+          </span>
+        </a>
+
       </div>
-      <div class="products-carousel">
-        <div class="products-carousel__track" id="products-track">
-          <div class="product-card" onclick="window.location='product.html'">
-            <div class="product-card__image">
-              <img src="assets/images/product-1.jpg" alt="High-Waist Training Leggings">
-              <div class="product-card__badges">
-                <span class="badge badge--save">SAVE $20.00</span>
-              </div>
-              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('High-Waist Training Leggings', 49, 'assets/images/product-1.jpg')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
-            </div>
-            <h3 class="product-card__title">High-Waist Training Leggings</h3>
-            <div class="product-card__prices">
-              <span class="product-card__price product-card__price--sale">$49.00</span>
-              <span class="product-card__price product-card__price--original">$69.00</span>
-            </div>
-          </div>
-          <div class="product-card" onclick="window.location='product.html'">
-            <div class="product-card__image">
-              <img src="assets/images/product-2.jpg" alt="Ribbed Performance Leggings">
-              <div class="product-card__badges">
-                <span class="badge badge--popular">POPULAR</span>
-              </div>
-              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Ribbed Performance Leggings', 58, 'assets/images/product-2.jpg')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
-            </div>
-            <h3 class="product-card__title">Ribbed Performance Leggings</h3>
-            <div class="product-card__prices">
-              <span class="product-card__price">$58.00</span>
-            </div>
-          </div>
-          <div class="product-card" onclick="window.location='product.html'">
-            <div class="product-card__image">
-              <img src="assets/images/product-4.jpg" alt="Full-Support Sports Bra">
-              <div class="product-card__badges">
-                <span class="badge badge--new">NEW</span>
-              </div>
-              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Full-Support Sports Bra', 42, 'assets/images/product-4.jpg')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
-            </div>
-            <h3 class="product-card__title">Full-Support Sports Bra</h3>
-            <div class="product-card__prices">
-              <span class="product-card__price">$42.00</span>
-            </div>
-          </div>
-          <div class="product-card" onclick="window.location='product.html'">
-            <div class="product-card__image">
-              <img src="assets/images/product-5.jpg" alt="Breathable Tank Top">
-              <button class="product-card__quick-add" aria-label="Quick add" onclick="event.stopPropagation(); addToCart('Breathable Tank Top', 35, 'assets/images/product-5.jpg')">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </button>
-            </div>
-            <h3 class="product-card__title">Breathable Tank Top</h3>
-            <div class="product-card__prices">
-              <span class="product-card__price product-card__price--sale">$35.00</span>
-              <span class="product-card__price product-card__price--original">$50.00</span>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
+
+      <div
+        id="related-products-track"
+      ></div>
+
+
     </div>
+
   </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
+
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+
+  <footer
+    class="footer"
+    id="footer"
+  >
+
     <div class="container">
+
+
       <div class="footer__grid">
+
+
         <div class="footer__brand">
-          <div class="footer__brand-name">ESSENCE</div>
-          <p class="footer__brand-desc">Premium activewear designed for the modern woman. Elegance in every movement.</p>
-          <div class="footer__socials">
-            <a href="#" class="footer__social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-            <a href="#" class="footer__social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-            <a href="#" class="footer__social-link" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+
+          <div class="footer__brand-name">
+            ESSENCE
           </div>
+
+          <p class="footer__brand-desc">
+            Moda feminina selecionada para mulheres que
+            valorizam elegância, estilo e personalidade.
+          </p>
+
         </div>
+
+
+
         <div>
-          <h4 class="footer__heading">SHOP</h4>
+
+          <h4 class="footer__heading">
+            LOJA
+          </h4>
+
           <div class="footer__links">
-            <a href="collection.html" class="footer__link">All Products</a>
-            <a href="collection.html" class="footer__link">Tops</a>
-            <a href="collection.html" class="footer__link">Bottoms</a>
-            <a href="collection.html" class="footer__link">Accessories</a>
+
+            <a
+              href="index.html#hot-right-now"
+              class="footer__link"
+            >
+              Todos os produtos
+            </a>
+
+            <a
+              href="index.html#essentials"
+              class="footer__link"
+            >
+              Categorias
+            </a>
+
+            <a
+              href="index.html#feature-banner"
+              class="footer__link"
+            >
+              Coleções
+            </a>
+
+            <a
+              href="index.html#novidades"
+              class="footer__link"
+            >
+              Novidades
+            </a>
+
           </div>
+
         </div>
+
+
+
         <div>
-          <h4 class="footer__heading">HELP</h4>
+
+          <h4 class="footer__heading">
+            AJUDA
+          </h4>
+
           <div class="footer__links">
-            <a href="#" class="footer__link">FAQ</a>
-            <a href="#" class="footer__link">Shipping & Returns</a>
-            <a href="#" class="footer__link">Size Guide</a>
-            <a href="#" class="footer__link">Contact Us</a>
+
+            <a
+              href="#"
+              class="footer__link"
+            >
+              Trocas e devoluções
+            </a>
+
+            <a
+              href="#"
+              class="footer__link"
+            >
+              Guia de tamanhos
+            </a>
+
+            <a
+              href="index.html#footer"
+              class="footer__link"
+            >
+              Contato
+            </a>
+
           </div>
+
         </div>
+
+
+
         <div>
-          <h4 class="footer__heading">COMPANY</h4>
+
+          <h4 class="footer__heading">
+            ESSENCE
+          </h4>
+
           <div class="footer__links">
-            <a href="#" class="footer__link">About Us</a>
-            <a href="#" class="footer__link">Sustainability</a>
-            <a href="#" class="footer__link">Privacy Policy</a>
+
+            <a
+              href="index.html"
+              class="footer__link"
+            >
+              Início
+            </a>
+
+            <a
+              href="index.html#testimonials"
+              class="footer__link"
+            >
+              Avaliações
+            </a>
+
           </div>
+
         </div>
+
+
       </div>
+
+
+
       <div class="footer__bottom">
-        <p class="footer__copyright">© 2026 ESSENCE. All rights reserved. · <a href="admin/index.html" style="opacity:0.4;font-size:11px;">Admin</a></p>
-        <div class="footer__payments">
-          <span class="footer__payment-icon">VISA</span>
-          <span class="footer__payment-icon">MC</span>
-          <span class="footer__payment-icon">AMEX</span>
-          <span class="footer__payment-icon">PAYPAL</span>
-        </div>
+
+        <p class="footer__copyright">
+          © 2026 ESSENCE. Todos os direitos reservados.
+        </p>
+
       </div>
+
+
     </div>
+
   </footer>
 
-  <!-- Cart Sidebar -->
-  <div class="cart-overlay" id="cart-overlay"></div>
-  <div class="cart-sidebar" id="cart-sidebar">
+
+
+  <!-- ========================================
+       CARRINHO
+       ======================================== -->
+
+  <div
+    class="cart-overlay"
+    id="cart-overlay"
+  ></div>
+
+
+  <div
+    class="cart-sidebar"
+    id="cart-sidebar"
+  >
+
+
     <div class="cart-sidebar__header">
-      <h3 class="cart-sidebar__title">YOUR CART</h3>
-      <button class="cart-sidebar__close" id="cart-close" aria-label="Close cart">✕</button>
+
+      <h3 class="cart-sidebar__title">
+        SUA SACOLA
+      </h3>
+
+      <button
+        class="cart-sidebar__close"
+        id="cart-close"
+        aria-label="Fechar sacola"
+      >
+        ✕
+      </button>
+
     </div>
-    <div class="cart-sidebar__body" id="cart-body">
-      <div class="cart-sidebar__empty"><p>Your cart is empty</p></div>
+
+
+
+    <div
+      class="cart-sidebar__body"
+      id="cart-body"
+    >
+
+      <div class="cart-sidebar__empty">
+
+        <p>
+          Sua sacola está vazia
+        </p>
+
+      </div>
+
     </div>
+
+
+
     <div class="cart-sidebar__footer">
-      <div class="cart-sidebar__subtotal"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
-      <button class="btn btn--dark btn--full cart-sidebar__checkout">CHECKOUT</button>
+
+      <div class="cart-sidebar__subtotal">
+
+        <span>
+          Subtotal
+        </span>
+
+        <span id="cart-subtotal">
+          R$ 0,00
+        </span>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn btn--dark btn--full cart-sidebar__checkout"
+      >
+        FINALIZAR COMPRA
+      </button>
+
     </div>
+
+
   </div>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobile-menu">
+
+
+  <!-- ========================================
+       MENU MOBILE
+       ======================================== -->
+
+  <div
+    class="mobile-menu"
+    id="mobile-menu"
+  >
+
     <div class="mobile-menu__header">
-      <span class="navbar__logo">ESSENCE</span>
-      <button class="mobile-menu__close" id="mobile-close" aria-label="Close menu">✕</button>
+
+      <span class="navbar__logo">
+        ESSENCE
+      </span>
+
+      <button
+        class="mobile-menu__close"
+        id="mobile-close"
+        aria-label="Fechar menu"
+      >
+        ✕
+      </button>
+
     </div>
+
+
     <div class="mobile-menu__links">
-      <a href="collection.html" class="mobile-menu__link">Shop</a>
-      <a href="#" class="mobile-menu__link">Blog</a>
-      <a href="#" class="mobile-menu__link">About</a>
-      <a href="#" class="mobile-menu__link">FAQ</a>
-      <a href="#" class="mobile-menu__link">Contact</a>
+
+      <a
+        href="index.html"
+        class="mobile-menu__link"
+      >
+        Início
+      </a>
+
+      <a
+        href="index.html#hot-right-now"
+        class="mobile-menu__link"
+      >
+        Produtos
+      </a>
+
+      <a
+        href="index.html#essentials"
+        class="mobile-menu__link"
+      >
+        Categorias
+      </a>
+
+      <a
+        href="index.html#feature-banner"
+        class="mobile-menu__link"
+      >
+        Coleções
+      </a>
+
+      <a
+        href="index.html#novidades"
+        class="mobile-menu__link"
+      >
+        Novidades
+      </a>
+
     </div>
+
   </div>
 
-  <!-- Search Overlay -->
-  <div class="search-overlay" id="search-overlay">
-    <button class="search-overlay__close" id="search-close" aria-label="Close search">✕</button>
+
+
+  <!-- ========================================
+       BUSCA
+       ======================================== -->
+
+  <div
+    class="search-overlay"
+    id="search-overlay"
+  >
+
+    <button
+      class="search-overlay__close"
+      id="search-close"
+      aria-label="Fechar busca"
+    >
+      ✕
+    </button>
+
+
     <div class="search-overlay__inner">
-      <input type="text" class="search-overlay__input" placeholder="Search products..." autofocus>
+
+      <input
+        type="text"
+        class="search-overlay__input"
+        id="product-search-input"
+        placeholder="Buscar produtos..."
+      >
+
     </div>
+
   </div>
 
-  <script src="js/main.js"></script>
+
+
+  <!-- ========================================
+       SUPABASE
+       ======================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+
+  <script>
+
+    window.supabaseClient =
+
+      window.supabase.createClient(
+
+        "https://gtmjxwcvqvtkuqzkvfsh.supabase.co",
+
+        "sb_publishable_zBG1ioEJeME73TQtHhQnlw_eGhOasAc"
+
+      );
+
+  </script>
+
+
+
+  <!-- ========================================
+       PRODUTO DINÂMICO
+       ======================================== -->
+
+  <script>
+
+  (() => {
+
+
+    let currentProduct = null;
+
+    let selectedSize = "";
+
+    let quantity = 1;
+
+
+    const CART_KEY =
+      "essence_cart_v1";
+
+
+
+    /* ========================================
+       UTILITÁRIOS
+       ======================================== */
+
+
+    function escapeHtml(value) {
+
+      return String(
+        value ?? ""
+      )
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+    }
+
+
+
+    function money(value) {
+
+      return Number(
+        value || 0
+      )
+
+      .toLocaleString(
+
+        "pt-BR",
+
+        {
+          style:
+            "currency",
+
+          currency:
+            "BRL"
+        }
+
+      );
+
+    }
+
+
+
+    function getSizes(product) {
+
+      const value =
+        product?.sizes;
+
+
+      if (
+        Array.isArray(
+          value
+        )
+      ) {
+
+        return value;
+
+      }
+
+
+      if (
+        typeof value === "string"
+        &&
+        value.trim()
+      ) {
+
+        try {
+
+          const parsed =
+            JSON.parse(
+              value
+            );
+
+
+          if (
+            Array.isArray(
+              parsed
+            )
+          ) {
+
+            return parsed;
+
+          }
+
+        }
+
+        catch (_) {
+
+          return value
+
+            .split(",")
+
+            .map(
+              item =>
+                item.trim()
+            )
+
+            .filter(
+              Boolean
+            );
+
+        }
+
+      }
+
+
+      return [];
+
+    }
+
+
+
+    function getPrices(product) {
+
+      const normalPrice =
+        Number(
+          product?.price || 0
+        );
+
+
+      const promotionalPrice =
+        Number(
+          product?.compare_at_price || 0
+        );
+
+
+      if (
+
+        promotionalPrice > 0
+
+        &&
+
+        promotionalPrice <
+        normalPrice
+
+      ) {
+
+        return {
+
+          current:
+            promotionalPrice,
+
+          old:
+            normalPrice,
+
+          hasSale:
+            true
+
+        };
+
+      }
+
+
+      return {
+
+        current:
+          normalPrice,
+
+        old:
+          null,
+
+        hasSale:
+          false
+
+      };
+
+    }
+
+
+
+    function discountPercentage(
+      oldPrice,
+      currentPrice
+    ) {
+
+      if (
+        !oldPrice
+        ||
+        !currentPrice
+      ) {
+
+        return 0;
+
+      }
+
+
+      return Math.round(
+
+        (
+          (
+            oldPrice
+            -
+            currentPrice
+          )
+
+          /
+
+          oldPrice
+        )
+
+        *
+
+        100
+
+      );
+
+    }
+
+
+
+    function productImages(product) {
+
+      const images = [
+
+        product?.image_url,
+
+        product?.image_url_2,
+
+        product?.image_url_3,
+
+        product?.image_url_4
+
+      ]
+
+      .filter(
+        Boolean
+      );
+
+
+      return [
+
+        ...new Set(
+          images
+        )
+
+      ];
+
+    }
+
+
+
+    /* ========================================
+       ERRO
+       ======================================== */
+
+
+    function showProductError(
+      message
+    ) {
+
+      const grid =
+
+        document.getElementById(
+          "product-detail-grid"
+        );
+
+
+      if (!grid) {
+
+        return;
+
+      }
+
+
+      grid.innerHTML = `
+
+        <div
+          class="product-detail__error"
+          style="grid-column:1/-1;"
+        >
+
+          <h2>
+            Produto não encontrado
+          </h2>
+
+          <p>
+            ${escapeHtml(message)}
+          </p>
+
+          <a
+            href="index.html#hot-right-now"
+            class="btn btn--dark"
+          >
+            VOLTAR PARA A LOJA
+          </a>
+
+        </div>
+
+      `;
+
+    }
+
+
+
+    /* ========================================
+       RENDERIZA PRODUTO
+       ======================================== */
+
+
+    function renderProduct(
+      product
+    ) {
+
+      currentProduct =
+        product;
+
+
+      selectedSize =
+        "";
+
+
+      quantity =
+        1;
+
+
+      const grid =
+
+        document.getElementById(
+          "product-detail-grid"
+        );
+
+
+      if (!grid) {
+
+        return;
+
+      }
+
+
+
+      const images =
+        productImages(
+          product
+        );
+
+
+      if (
+        !images.length
+      ) {
+
+        images.push(
+          "assets/images/banner.png"
+        );
+
+      }
+
+
+
+      const sizes =
+        getSizes(
+          product
+        );
+
+
+      const prices =
+        getPrices(
+          product
+        );
+
+
+      const stock =
+        Math.max(
+          0,
+          Number(
+            product.stock || 0
+          )
+        );
+
+
+      const discount =
+
+        prices.hasSale
+
+        ?
+
+        discountPercentage(
+          prices.old,
+          prices.current
+        )
+
+        :
+
+        0;
+
+
+
+      const thumbnails =
+
+        images
+
+        .map(
+
+          (
+            image,
+            index
+          ) => `
+
+            <div
+              class="
+                product-detail__thumb
+                ${index === 0 ? "active" : ""}
+              "
+              data-product-image="${escapeHtml(image)}"
+            >
+
+              <img
+                src="${escapeHtml(image)}"
+                alt="${escapeHtml(product.name)}"
+              >
+
+            </div>
+
+          `
+
+        )
+
+        .join("");
+
+
+
+      const priceHtml =
+
+        prices.hasSale
+
+        ?
+
+        `
+
+          <div
+            class="product-detail__price-row"
+          >
+
+            <div
+              class="product-detail__price"
+            >
+              ${money(
+                prices.current
+              )}
+            </div>
+
+            <span
+              class="product-detail__old-price"
+            >
+              ${money(
+                prices.old
+              )}
+            </span>
+
+            <span
+              class="product-detail__discount"
+            >
+              -${discount}%
+            </span>
+
+          </div>
+
+        `
+
+        :
+
+        `
+
+          <div
+            class="product-detail__price-row"
+          >
+
+            <div
+              class="product-detail__price"
+            >
+              ${money(
+                prices.current
+              )}
+            </div>
+
+          </div>
+
+        `;
+
+
+
+      const sizesHtml =
+
+        sizes.length
+
+        ?
+
+        `
+
+          <div
+            class="product-detail__size-header"
+          >
+
+            <div
+              class="product-detail__option-label"
+            >
+              TAMANHO
+            </div>
+
+            <span
+              class="product-detail__size-chart"
+            >
+              Guia de tamanhos
+            </span>
+
+          </div>
+
+
+          <div
+            class="product-detail__sizes"
+          >
+
+            ${
+
+              sizes
+
+              .map(
+
+                size => `
+
+                  <button
+                    type="button"
+                    class="product-detail__size-btn"
+                    data-size="${escapeHtml(size)}"
+                  >
+                    ${escapeHtml(size)}
+                  </button>
+
+                `
+
+              )
+
+              .join("")
+
+            }
+
+          </div>
+
+        `
+
+        :
+
+        "";
+
+
+
+      const stockHtml =
+
+        stock > 0
+
+        ?
+
+        `
+
+          <div
+            class="product-detail__stock"
+          >
+
+            <span
+              class="product-detail__stock-dot"
+            ></span>
+
+            Em estoque
+
+          </div>
+
+        `
+
+        :
+
+        `
+
+          <div
+            class="
+              product-detail__stock
+              product-detail__stock--out
+            "
+          >
+            Produto indisponível
+          </div>
+
+        `;
+
+
+
+      grid.innerHTML = `
+
+
+        <!-- MINIATURAS -->
+
+        <div
+          class="product-detail__thumbnails"
+        >
+
+          ${thumbnails}
+
+        </div>
+
+
+
+        <!-- FOTO PRINCIPAL -->
+
+        <div
+          class="product-detail__main-image"
+        >
+
+          <img
+            src="${escapeHtml(images[0])}"
+            alt="${escapeHtml(product.name)}"
+            id="main-product-image"
+          >
+
+        </div>
+
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div
+          class="product-detail__info"
+        >
+
+
+          <p
+            class="product-detail__breadcrumb"
+          >
+
+            <a
+              href="index.html"
+            >
+              Início
+            </a>
+
+            /
+
+            <a
+              href="index.html#hot-right-now"
+            >
+              ${escapeHtml(
+                product.category
+                ||
+                "Produtos"
+              )}
+            </a>
+
+            /
+
+            ${escapeHtml(
+              product.name
+            )}
+
+          </p>
+
+
+
+          <h1
+            class="product-detail__name"
+          >
+
+            ${escapeHtml(
+              product.name
+            )}
+
+          </h1>
+
+
+
+          ${priceHtml}
+
+
+
+          <p
+            class="product-detail__description"
+          >
+
+            ${escapeHtml(
+
+              product.description
+
+              ||
+
+              "Peça selecionada pela ESSENCE para compor produções elegantes e versáteis."
+
+            )}
+
+          </p>
+
+
+
+          ${sizesHtml}
+
+
+
+          ${stockHtml}
+
+
+
+          <div
+            class="product-detail__quantity-label"
+          >
+            QUANTIDADE
+          </div>
+
+
+
+          <div
+            class="product-detail__quantity"
+          >
+
+            <button
+              type="button"
+              class="product-detail__qty-btn"
+              id="qty-minus"
+            >
+              −
+            </button>
+
+
+            <div
+              class="product-detail__qty-value"
+              id="qty-value"
+            >
+              1
+            </div>
+
+
+            <button
+              type="button"
+              class="product-detail__qty-btn"
+              id="qty-plus"
+            >
+              +
+            </button>
+
+          </div>
+
+
+
+          <div
+            class="product-detail__actions"
+          >
+
+            <button
+              type="button"
+              class="
+                btn
+                btn--dark
+                btn--full
+                product-detail__add-to-cart
+              "
+              id="product-add-cart"
+              ${stock <= 0 ? "disabled" : ""}
+            >
+
+              ${
+                stock > 0
+
+                ?
+
+                "ADICIONAR À SACOLA"
+
+                :
+
+                "PRODUTO INDISPONÍVEL"
+              }
+
+            </button>
+
+
+            <button
+              type="button"
+              class="
+                btn
+                btn--outline-dark
+                btn--full
+                product-detail__buy-now
+              "
+              id="product-buy-now"
+              ${stock <= 0 ? "disabled" : ""}
+            >
+              COMPRAR AGORA
+            </button>
+
+          </div>
+
+
+
+          ${
+
+            product.sku
+
+            ?
+
+            `
+
+              <p
+                style="
+                  margin-top:20px;
+                  color:#aaa;
+                  font-size:9px;
+                  letter-spacing:.7px;
+                "
+              >
+                SKU:
+                ${escapeHtml(
+                  product.sku
+                )}
+              </p>
+
+            `
+
+            :
+
+            ""
+
+          }
+
+
+        </div>
+
+      `;
+
+
+
+      document.title =
+        `${product.name} — ESSENCE`;
+
+
+
+      const descriptionMeta =
+
+        document.querySelector(
+          'meta[name="description"]'
+        );
+
+
+      if (
+        descriptionMeta
+      ) {
+
+        descriptionMeta.content =
+
+          product.description
+
+          ||
+
+          `${product.name} na ESSENCE.`;
+
+      }
+
+
+
+      /* MINIATURAS */
+
+      document
+
+        .querySelectorAll(
+          "[data-product-image]"
+        )
+
+        .forEach(
+
+          thumb => {
+
+            thumb.addEventListener(
+
+              "click",
+
+              () => {
+
+                const image =
+
+                  thumb.dataset
+                    .productImage;
+
+
+                const mainImage =
+
+                  document.getElementById(
+                    "main-product-image"
+                  );
+
+
+                if (
+                  mainImage
+                  &&
+                  image
+                ) {
+
+                  mainImage.src =
+                    image;
+
+                }
+
+
+                document
+
+                  .querySelectorAll(
+                    "[data-product-image]"
+                  )
+
+                  .forEach(
+
+                    item =>
+
+                      item.classList.remove(
+                        "active"
+                      )
+
+                  );
+
+
+                thumb.classList.add(
+                  "active"
+                );
+
+              }
+
+            );
+
+          }
+
+        );
+
+
+
+      /* TAMANHOS */
+
+      document
+
+        .querySelectorAll(
+          "[data-size]"
+        )
+
+        .forEach(
+
+          button => {
+
+            button.addEventListener(
+
+              "click",
+
+              () => {
+
+                selectedSize =
+
+                  button.dataset.size
+
+                  ||
+
+                  "";
+
+
+                document
+
+                  .querySelectorAll(
+                    "[data-size]"
+                  )
+
+                  .forEach(
+
+                    item =>
+
+                      item.classList.remove(
+                        "active"
+                      )
+
+                  );
+
+
+                button.classList.add(
+                  "active"
+                );
+
+              }
+
+            );
+
+          }
+
+        );
+
+
+
+      /* QUANTIDADE */
+
+      document
+
+        .getElementById(
+          "qty-minus"
+        )
+
+        ?.addEventListener(
+
+          "click",
+
+          () => {
+
+            quantity =
+
+              Math.max(
+                1,
+                quantity - 1
+              );
+
+
+            updateQuantity();
+
+          }
+
+        );
+
+
+
+      document
+
+        .getElementById(
+          "qty-plus"
+        )
+
+        ?.addEventListener(
+
+          "click",
+
+          () => {
+
+            quantity =
+
+              Math.min(
+
+                stock > 0
+                  ? stock
+                  : 1,
+
+                quantity + 1
+
+              );
+
+
+            updateQuantity();
+
+          }
+
+        );
+
+
+
+      document
+
+        .getElementById(
+          "product-add-cart"
+        )
+
+        ?.addEventListener(
+
+          "click",
+
+          () => {
+
+            addCurrentProductToCart(
+              false
+            );
+
+          }
+
+        );
+
+
+
+      document
+
+        .getElementById(
+          "product-buy-now"
+        )
+
+        ?.addEventListener(
+
+          "click",
+
+          () => {
+
+            addCurrentProductToCart(
+              true
+            );
+
+          }
+
+        );
+
+    }
+
+
+
+    function updateQuantity() {
+
+      const element =
+
+        document.getElementById(
+          "qty-value"
+        );
+
+
+      if (
+        element
+      ) {
+
+        element.textContent =
+          quantity;
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       CARREGA PRODUTO
+       ======================================== */
+
+
+    async function loadProduct() {
+
+      const params =
+
+        new URLSearchParams(
+          window.location.search
+        );
+
+
+      const productId =
+
+        params.get(
+          "id"
+        );
+
+
+      if (
+        !productId
+      ) {
+
+        showProductError(
+          "O link deste produto está incompleto."
+        );
+
+        return;
+
+      }
+
+
+
+      try {
+
+
+        const {
+          data,
+          error
+        } =
+
+          await window.supabaseClient
+
+            .from(
+              "products"
+            )
+
+            .select(
+              "*"
+            )
+
+            .eq(
+              "id",
+              productId
+            )
+
+            .eq(
+              "is_active",
+              true
+            )
+
+            .maybeSingle();
+
+
+
+        if (
+          error
+        ) {
+
+          throw error;
+
+        }
+
+
+
+        if (
+          !data
+        ) {
+
+          showProductError(
+            "Este produto não está disponível no momento."
+          );
+
+          return;
+
+        }
+
+
+
+        renderProduct(
+          data
+        );
+
+
+        await loadRelatedProducts(
+          data
+        );
+
+
+      }
+
+      catch (
+        error
+      ) {
+
+
+        console.error(
+          "Erro ao carregar produto:",
+          error
+        );
+
+
+        showProductError(
+          "Não foi possível carregar este produto."
+        );
+
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       RELACIONADOS
+       ======================================== */
+
+
+    function renderRelatedCard(
+      product
+    ) {
+
+      const prices =
+        getPrices(
+          product
+        );
+
+
+      const image =
+
+        product.image_url
+
+        ||
+
+        "assets/images/banner.png";
+
+
+      const discount =
+
+        prices.hasSale
+
+        ?
+
+        discountPercentage(
+          prices.old,
+          prices.current
+        )
+
+        :
+
+        0;
+
+
+
+      return `
+
+        <div
+          class="product-card"
+          data-related-product="${escapeHtml(product.id)}"
+        >
+
+          <div
+            class="product-card__image"
+          >
+
+            <img
+              src="${escapeHtml(image)}"
+              alt="${escapeHtml(product.name)}"
+              loading="lazy"
+            >
+
+
+            <div
+              class="product-card__badges"
+            >
+
+              <span
+                class="
+                  badge
+                  ${
+                    discount > 0
+                      ?
+                      "badge--save"
+                      :
+                      "badge--new"
+                  }
+                "
+              >
+
+                ${
+                  discount > 0
+
+                  ?
+
+                  `-${discount}%`
+
+                  :
+
+                  "NOVO"
+                }
+
+              </span>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="product-card__quick-add"
+              data-related-quick="${escapeHtml(product.id)}"
+              aria-label="Adicionar à sacola"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path
+                  d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+                />
+
+                <path
+                  d="M3 6h18"
+                />
+
+                <path
+                  d="M16 10a4 4 0 0 1-8 0"
+                />
+
+              </svg>
+
+            </button>
+
+          </div>
+
+
+
+          <h3
+            class="product-card__title"
+          >
+            ${escapeHtml(
+              product.name
+            )}
+          </h3>
+
+
+
+          <div
+            class="product-card__prices"
+          >
+
+            ${
+
+              prices.hasSale
+
+              ?
+
+              `
+
+                <span
+                  class="
+                    product-card__price
+                    product-card__price--sale
+                  "
+                >
+                  ${money(
+                    prices.current
+                  )}
+                </span>
+
+                <span
+                  class="
+                    product-card__price
+                    product-card__price--original
+                  "
+                >
+                  ${money(
+                    prices.old
+                  )}
+                </span>
+
+              `
+
+              :
+
+              `
+
+                <span
+                  class="product-card__price"
+                >
+                  ${money(
+                    prices.current
+                  )}
+                </span>
+
+              `
+
+            }
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+
+    async function loadRelatedProducts(
+      product
+    ) {
+
+      try {
+
+
+        const {
+          data,
+          error
+        } =
+
+          await window.supabaseClient
+
+            .from(
+              "products"
+            )
+
+            .select(
+              "*"
+            )
+
+            .eq(
+              "is_active",
+              true
+            )
+
+            .order(
+              "created_at",
+              {
+                ascending:
+                  false
+              }
+            );
+
+
+        if (
+          error
+        ) {
+
+          throw error;
+
+        }
+
+
+
+        const products =
+
+          Array.isArray(
+            data
+          )
+
+          ?
+
+          data
+
+          :
+
+          [];
+
+
+
+        const others =
+
+          products.filter(
+
+            item =>
+
+              String(
+                item.id
+              )
+
+              !==
+
+              String(
+                product.id
+              )
+
+          );
+
+
+
+        const sameCategory =
+
+          others.filter(
+
+            item =>
+
+              String(
+                item.category || ""
+              )
+                .trim()
+                .toLowerCase()
+
+              ===
+
+              String(
+                product.category || ""
+              )
+                .trim()
+                .toLowerCase()
+
+          );
+
+
+
+        const differentCategory =
+
+          others.filter(
+
+            item =>
+
+              !sameCategory.some(
+
+                same =>
+
+                  String(
+                    same.id
+                  )
+
+                  ===
+
+                  String(
+                    item.id
+                  )
+
+              )
+
+          );
+
+
+
+        const related = [
+
+          ...sameCategory,
+
+          ...differentCategory
+
+        ]
+
+        .slice(
+          0,
+          4
+        );
+
+
+
+        const section =
+
+          document.getElementById(
+            "related-products"
+          );
+
+
+        const track =
+
+          document.getElementById(
+            "related-products-track"
+          );
+
+
+
+        if (
+          !section
+          ||
+          !track
+        ) {
+
+          return;
+
+        }
+
+
+
+        if (
+          !related.length
+        ) {
+
+          section.style.display =
+            "none";
+
+          return;
+
+        }
+
+
+
+        track.innerHTML =
+
+          related
+
+            .map(
+              renderRelatedCard
+            )
+
+            .join("");
+
+
+
+        section.style.display =
+          "";
+
+
+
+        track
+
+          .querySelectorAll(
+            "[data-related-product]"
+          )
+
+          .forEach(
+
+            card => {
+
+              card.addEventListener(
+
+                "click",
+
+                () => {
+
+                  const id =
+
+                    card.dataset
+                      .relatedProduct;
+
+
+                  window.location.href =
+
+                    `product.html?id=${encodeURIComponent(id)}`;
+
+                }
+
+              );
+
+            }
+
+          );
+
+
+
+        track
+
+          .querySelectorAll(
+            "[data-related-quick]"
+          )
+
+          .forEach(
+
+            button => {
+
+              button.addEventListener(
+
+                "click",
+
+                event => {
+
+                  event.stopPropagation();
+
+
+                  const id =
+
+                    button.dataset
+                      .relatedQuick;
+
+
+                  const relatedProduct =
+
+                    products.find(
+
+                      item =>
+
+                        String(
+                          item.id
+                        )
+
+                        ===
+
+                        String(
+                          id
+                        )
+
+                    );
+
+
+                  if (
+                    !relatedProduct
+                  ) {
+
+                    return;
+
+                  }
+
+
+
+                  const sizes =
+
+                    getSizes(
+                      relatedProduct
+                    );
+
+
+                  if (
+                    sizes.length
+                  ) {
+
+                    window.location.href =
+
+                      `product.html?id=${encodeURIComponent(id)}`;
+
+                    return;
+
+                  }
+
+
+
+                  addProductToCart(
+                    relatedProduct,
+                    "",
+                    1
+                  );
+
+
+                  openCart();
+
+                }
+
+              );
+
+            }
+
+          );
+
+
+      }
+
+      catch (
+        error
+      ) {
+
+
+        console.error(
+          "Erro ao carregar relacionados:",
+          error
+        );
+
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       CARRINHO
+       ======================================== */
+
+
+    function getCart() {
+
+      try {
+
+        return JSON.parse(
+
+          localStorage.getItem(
+            CART_KEY
+          )
+
+          ||
+
+          "[]"
+
+        );
+
+      }
+
+      catch (_) {
+
+        return [];
+
+      }
+
+    }
+
+
+
+    function saveCart(
+      cart
+    ) {
+
+      localStorage.setItem(
+
+        CART_KEY,
+
+        JSON.stringify(
+          cart
+        )
+
+      );
+
+
+      renderCart();
+
+    }
+
+
+
+    function addProductToCart(
+      product,
+      size = "",
+      amount = 1
+    ) {
+
+      const prices =
+        getPrices(
+          product
+        );
+
+
+      const cart =
+        getCart();
+
+
+
+      const existing =
+
+        cart.find(
+
+          item =>
+
+            String(
+              item.id
+            )
+
+            ===
+
+            String(
+              product.id
+            )
+
+            &&
+
+            String(
+              item.size || ""
+            )
+
+            ===
+
+            String(
+              size || ""
+            )
+
+        );
+
+
+
+      if (
+        existing
+      ) {
+
+        existing.quantity +=
+          amount;
+
+      }
+
+      else {
+
+        cart.push({
+
+          id:
+            product.id,
+
+          name:
+            product.name,
+
+          price:
+            prices.current,
+
+          image:
+            product.image_url
+            ||
+            "assets/images/banner.png",
+
+          size:
+            size || null,
+
+          quantity:
+            amount
+
+        });
+
+      }
+
+
+
+      saveCart(
+        cart
+      );
+
+    }
+
+
+
+    function addCurrentProductToCart(
+      buyNow
+    ) {
+
+      if (
+        !currentProduct
+      ) {
+
+        return;
+
+      }
+
+
+
+      const sizes =
+        getSizes(
+          currentProduct
+        );
+
+
+
+      if (
+        sizes.length
+        &&
+        !selectedSize
+      ) {
+
+        alert(
+          "Selecione um tamanho."
+        );
+
+        return;
+
+      }
+
+
+
+      addProductToCart(
+
+        currentProduct,
+
+        selectedSize,
+
+        quantity
+
+      );
+
+
+
+      openCart();
+
+
+
+      if (
+        buyNow
+      ) {
+
+        /*
+         * Por enquanto abre a sacola.
+         * Depois ligaremos ao checkout.
+         */
+
+      }
+
+    }
+
+
+
+    function openCart() {
+
+      document
+
+        .getElementById(
+          "cart-sidebar"
+        )
+
+        ?.classList
+        .add(
+          "active"
+        );
+
+
+      document
+
+        .getElementById(
+          "cart-overlay"
+        )
+
+        ?.classList
+        .add(
+          "active"
+        );
+
+    }
+
+
+
+    function closeCart() {
+
+      document
+
+        .getElementById(
+          "cart-sidebar"
+        )
+
+        ?.classList
+        .remove(
+          "active"
+        );
+
+
+      document
+
+        .getElementById(
+          "cart-overlay"
+        )
+
+        ?.classList
+        .remove(
+          "active"
+        );
+
+    }
+
+
+
+    function renderCart() {
+
+      const cart =
+        getCart();
+
+
+      const body =
+
+        document.getElementById(
+          "cart-body"
+        );
+
+
+      const countElement =
+
+        document.getElementById(
+          "cart-count"
+        );
+
+
+      const subtotalElement =
+
+        document.getElementById(
+          "cart-subtotal"
+        );
+
+
+
+      const count =
+
+        cart.reduce(
+
+          (
+            total,
+            item
+          ) =>
+
+            total
+
+            +
+
+            Number(
+              item.quantity || 0
+            ),
+
+          0
+
+        );
+
+
+
+      const subtotal =
+
+        cart.reduce(
+
+          (
+            total,
+            item
+          ) =>
+
+            total
+
+            +
+
+            (
+              Number(
+                item.price || 0
+              )
+
+              *
+
+              Number(
+                item.quantity || 0
+              )
+            ),
+
+          0
+
+        );
+
+
+
+      if (
+        countElement
+      ) {
+
+        countElement.textContent =
+          count;
+
+      }
+
+
+
+      if (
+        subtotalElement
+      ) {
+
+        subtotalElement.textContent =
+
+          money(
+            subtotal
+          );
+
+      }
+
+
+
+      if (
+        !body
+      ) {
+
+        return;
+
+      }
+
+
+
+      if (
+        !cart.length
+      ) {
+
+        body.innerHTML = `
+
+          <div
+            class="cart-sidebar__empty"
+          >
+
+            <p>
+              Sua sacola está vazia
+            </p>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+
+      body.innerHTML =
+
+        cart
+
+        .map(
+
+          (
+            item,
+            index
+          ) => `
+
+            <div
+              style="
+                display:grid;
+                grid-template-columns:75px 1fr auto;
+                gap:14px;
+                padding:15px 0;
+                border-bottom:1px solid #eee;
+                align-items:center;
+              "
+            >
+
+
+              <img
+                src="${escapeHtml(item.image)}"
+                alt="${escapeHtml(item.name)}"
+                style="
+                  width:75px;
+                  height:90px;
+                  object-fit:cover;
+                  border-radius:4px;
+                "
+              >
+
+
+
+              <div>
+
+
+                <strong
+                  style="
+                    display:block;
+                    margin-bottom:6px;
+                    font-size:13px;
+                  "
+                >
+
+                  ${escapeHtml(
+                    item.name
+                  )}
+
+                </strong>
+
+
+
+                <span
+                  style="
+                    font-size:12px;
+                  "
+                >
+
+                  ${money(
+                    item.price
+                  )}
+
+                </span>
+
+
+
+                ${
+
+                  item.size
+
+                  ?
+
+                  `
+
+                    <span
+                      class="essence-cart-size"
+                    >
+                      Tamanho:
+                      ${escapeHtml(
+                        item.size
+                      )}
+                    </span>
+
+                  `
+
+                  :
+
+                  ""
+
+                }
+
+
+
+                <div
+                  style="
+                    display:flex;
+                    align-items:center;
+                    gap:9px;
+                    margin-top:10px;
+                  "
+                >
+
+
+                  <button
+                    type="button"
+                    data-cart-minus="${index}"
+                  >
+                    −
+                  </button>
+
+
+                  <span>
+                    ${item.quantity}
+                  </span>
+
+
+                  <button
+                    type="button"
+                    data-cart-plus="${index}"
+                  >
+                    +
+                  </button>
+
+
+                </div>
+
+
+              </div>
+
+
+
+              <button
+                type="button"
+                data-cart-remove="${index}"
+                style="
+                  border:0;
+                  background:none;
+                  cursor:pointer;
+                  font-size:18px;
+                "
+                aria-label="Remover produto"
+              >
+                ✕
+              </button>
+
+
+            </div>
+
+          `
+
+        )
+
+        .join("");
+
+
+
+      body
+
+        .querySelectorAll(
+          "[data-cart-minus]"
+        )
+
+        .forEach(
+
+          button => {
+
+            button.addEventListener(
+
+              "click",
+
+              () => {
+
+                changeCartQuantity(
+
+                  Number(
+                    button.dataset
+                      .cartMinus
+                  ),
+
+                  -1
+
+                );
+
+              }
+
+            );
+
+          }
+
+        );
+
+
+
+      body
+
+        .querySelectorAll(
+          "[data-cart-plus]"
+        )
+
+        .forEach(
+
+          button => {
+
+            button.addEventListener(
+
+              "click",
+
+              () => {
+
+                changeCartQuantity(
+
+                  Number(
+                    button.dataset
+                      .cartPlus
+                  ),
+
+                  1
+
+                );
+
+              }
+
+            );
+
+          }
+
+        );
+
+
+
+      body
+
+        .querySelectorAll(
+          "[data-cart-remove]"
+        )
+
+        .forEach(
+
+          button => {
+
+            button.addEventListener(
+
+              "click",
+
+              () => {
+
+                removeCartItem(
+
+                  Number(
+                    button.dataset
+                      .cartRemove
+                  )
+
+                );
+
+              }
+
+            );
+
+          }
+
+        );
+
+    }
+
+
+
+    function changeCartQuantity(
+      index,
+      amount
+    ) {
+
+      const cart =
+        getCart();
+
+
+      if (
+        !cart[index]
+      ) {
+
+        return;
+
+      }
+
+
+      cart[index].quantity +=
+        amount;
+
+
+      if (
+        cart[index].quantity <= 0
+      ) {
+
+        cart.splice(
+          index,
+          1
+        );
+
+      }
+
+
+      saveCart(
+        cart
+      );
+
+    }
+
+
+
+    function removeCartItem(
+      index
+    ) {
+
+      const cart =
+        getCart();
+
+
+      cart.splice(
+        index,
+        1
+      );
+
+
+      saveCart(
+        cart
+      );
+
+    }
+
+
+
+    /* ========================================
+       MENU / BUSCA
+       ======================================== */
+
+
+    document
+
+      .getElementById(
+        "mobile-toggle"
+      )
+
+      ?.addEventListener(
+
+        "click",
+
+        () => {
+
+          document
+
+            .getElementById(
+              "mobile-menu"
+            )
+
+            ?.classList
+            .add(
+              "active"
+            );
+
+        }
+
+      );
+
+
+
+    document
+
+      .getElementById(
+        "mobile-close"
+      )
+
+      ?.addEventListener(
+
+        "click",
+
+        () => {
+
+          document
+
+            .getElementById(
+              "mobile-menu"
+            )
+
+            ?.classList
+            .remove(
+              "active"
+            );
+
+        }
+
+      );
+
+
+
+    document
+
+      .getElementById(
+        "search-btn"
+      )
+
+      ?.addEventListener(
+
+        "click",
+
+        () => {
+
+          document
+
+            .getElementById(
+              "search-overlay"
+            )
+
+            ?.classList
+            .add(
+              "active"
+            );
+
+        }
+
+      );
+
+
+
+    document
+
+      .getElementById(
+        "search-close"
+      )
+
+      ?.addEventListener(
+
+        "click",
+
+        () => {
+
+          document
+
+            .getElementById(
+              "search-overlay"
+            )
+
+            ?.classList
+            .remove(
+              "active"
+            );
+
+        }
+
+      );
+
+
+
+    document
+
+      .getElementById(
+        "cart-btn"
+      )
+
+      ?.addEventListener(
+        "click",
+        openCart
+      );
+
+
+
+    document
+
+      .getElementById(
+        "cart-close"
+      )
+
+      ?.addEventListener(
+        "click",
+        closeCart
+      );
+
+
+
+    document
+
+      .getElementById(
+        "cart-overlay"
+      )
+
+      ?.addEventListener(
+        "click",
+        closeCart
+      );
+
+
+
+    /* BUSCA */
+
+    document
+
+      .getElementById(
+        "product-search-input"
+      )
+
+      ?.addEventListener(
+
+        "keydown",
+
+        event => {
+
+          if (
+            event.key !== "Enter"
+          ) {
+
+            return;
+
+          }
+
+
+          const query =
+
+            event.target.value
+              .trim();
+
+
+          if (
+            !query
+          ) {
+
+            return;
+
+          }
+
+
+          window.location.href =
+
+            `index.html?busca=${encodeURIComponent(query)}#hot-right-now`;
+
+        }
+
+      );
+
+
+
+    /* ========================================
+       INICIAR
+       ======================================== */
+
+
+    renderCart();
+
+    loadProduct();
+
+
+  })();
+
+  </script>
+
+
 </body>
+
 </html>
