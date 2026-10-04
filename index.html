@@ -782,75 +782,84 @@ padding-top: 10px;
 }
 
 
-
 /* ========================================
    BANNER DA COLEÇÃO EM DESTAQUE — ADMIN
    ======================================== */
 
 #feature-banner {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  background: #f6f1ec;
-  overflow: hidden;
+width: 100%;
+padding: 0;
+margin: 0;
+background: #f6f1ec;
+overflow: hidden;
 }
+
 
 #feature-banner::before,
 #feature-banner::after {
-  display: none;
+display: none;
 }
 
+
 #feature-banner .featured-collection-banner {
-  display: block;
-  width: 100%;
-  line-height: 0;
-  text-decoration: none;
-  cursor: pointer;
-  overflow: hidden;
-  background: #f6f1ec;
+display: block;
+width: 100%;
+line-height: 0;
+text-decoration: none;
+cursor: pointer;
+overflow: hidden;
+background: #f6f1ec;
 }
+
 
 #feature-banner .featured-collection-banner__desktop,
 #feature-banner .featured-collection-banner__mobile {
-  width: 100%;
-  height: auto;
-  display: block;
+width: 100%;
+height: auto;
+display: block;
 }
+
 
 #feature-banner .featured-collection-banner__desktop {
-  display: block;
+display: block;
 }
+
 
 #feature-banner .featured-collection-banner__mobile {
-  display: none;
+display: none;
 }
 
+
 #feature-banner .featured-collection-banner:hover img {
-  opacity: .98;
+opacity: .98;
 }
+
 
 @media (max-width: 768px) {
 
-  #feature-banner {
-    padding: 0;
-    margin: 0;
-  }
+#feature-banner {
+padding: 0;
+margin: 0;
+}
 
-  #feature-banner .featured-collection-banner__desktop {
-    display: none;
-  }
 
-  #feature-banner .featured-collection-banner__mobile {
-    display: block;
-  }
+#feature-banner .featured-collection-banner__desktop {
+display: none;
+}
+
+
+#feature-banner .featured-collection-banner__mobile {
+display: block;
+}
 
 }
 
+
 @media (max-width: 480px) {
 
-  #feature-banner {
-    margin: 0;
-  }
+#feature-banner {
+margin: 0;
+}
 
 }
 
@@ -860,114 +869,131 @@ padding-top: 10px;
    ======================================== */
 
 #novidades {
-  padding-top: 72px;
-  padding-bottom: 86px;
-  background: #fff;
+padding-top: 72px;
+padding-bottom: 86px;
+background: #fff;
 }
+
 
 #novidades .novidades-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 34px;
+display: flex;
+align-items: flex-end;
+justify-content: space-between;
+gap: 24px;
+margin-bottom: 34px;
 }
+
 
 #novidades .novidades-kicker {
-  display: block;
-  margin-bottom: 8px;
-  color: #9a7d6e;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+display: block;
+margin-bottom: 8px;
+color: #9a7d6e;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
 }
+
 
 #novidades .novidades-title {
-  margin: 0;
-  color: #2f2925;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(34px, 3vw, 48px);
-  font-weight: 500;
-  line-height: 1.05;
+margin: 0;
+color: #2f2925;
+font-family: "Playfair Display", Georgia, serif;
+font-size: clamp(34px, 3vw, 48px);
+font-weight: 500;
+line-height: 1.05;
 }
+
 
 #novidades .novidades-subtitle {
-  margin: 10px 0 0;
-  color: #81746d;
-  font-size: 13px;
-  line-height: 1.7;
+margin: 10px 0 0;
+color: #81746d;
+font-size: 13px;
+line-height: 1.7;
 }
+
 
 #novidades .novidades-link {
-  flex-shrink: 0;
-  color: #3f332d;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-decoration: none;
-  text-transform: uppercase;
-  border-bottom: 1px solid #b9a79c;
-  padding-bottom: 5px;
+flex-shrink: 0;
+color: #3f332d;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1.2px;
+text-decoration: none;
+text-transform: uppercase;
+border-bottom: 1px solid #b9a79c;
+padding-bottom: 5px;
 }
+
 
 #novidades .novidades-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 42px 22px;
+display: grid;
+grid-template-columns: repeat(4, minmax(0, 1fr));
+gap: 42px 22px;
 }
 
+
 #novidades .novidades-grid .product-card {
-  width: 100%;
-  min-width: 0;
+width: 100%;
+min-width: 0;
 }
+
 
 @media (max-width: 900px) {
 
-  #novidades {
-    padding-top: 58px;
-    padding-bottom: 70px;
-  }
+#novidades {
+padding-top: 58px;
+padding-bottom: 70px;
+}
 
-  #novidades .novidades-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 34px 16px;
-  }
+
+#novidades .novidades-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 34px 16px;
+}
 
 }
+
 
 @media (max-width: 640px) {
 
-  #novidades {
-    padding-top: 46px;
-    padding-bottom: 58px;
-  }
+#novidades {
+padding-top: 46px;
+padding-bottom: 58px;
+}
 
-  #novidades .novidades-header {
-    align-items: flex-start;
-    margin-bottom: 26px;
-  }
 
-  #novidades .novidades-title {
-    font-size: 34px;
-  }
+#novidades .novidades-header {
+align-items: flex-start;
+margin-bottom: 26px;
+}
 
-  #novidades .novidades-subtitle {
-    font-size: 12px;
-  }
 
-  #novidades .novidades-link {
-    margin-top: 5px;
-  }
+#novidades .novidades-title {
+font-size: 34px;
+}
 
-  #novidades .novidades-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 30px 12px;
-  }
+
+#novidades .novidades-subtitle {
+font-size: 12px;
+}
+
+
+#novidades .novidades-link {
+margin-top: 5px;
+}
+
+
+#novidades .novidades-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 30px 12px;
+}
 
 }
 
+
 </style>
+
 
 
 <style>
@@ -976,14 +1002,16 @@ padding-top: 10px;
 
 @media (min-width: 1024px) {
 
-  .navbar__left {
-    position: relative;
-    left: -140px;
-  }
+.navbar__left {
+position: relative;
+left: -140px;
+}
 
 }
 
 </style>
+
+
 
 <style>
 
@@ -992,32 +1020,35 @@ padding-top: 10px;
    ======================================== */
 
 #feature-banner {
-  background: #fff;
+background: #fff;
 }
+
 
 #feature-banner .featured-collection-banner {
-  width: calc(100% - 48px);
-  max-width: 1500px;
-  margin: 24px auto 0;
-  border-radius: 10px;
-  overflow: hidden;
+width: calc(100% - 48px);
+max-width: 1500px;
+margin: 24px auto 0;
+border-radius: 10px;
+overflow: hidden;
 }
 
+
 #feature-banner .featured-collection-banner img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+width: 100%;
+height: auto;
+border-radius: 10px;
 }
 
 
 /* PC — MOSTRA APENAS DESKTOP */
 
 #feature-banner .featured-collection-banner__desktop {
-  display: block;
+display: block;
 }
 
+
 #feature-banner .featured-collection-banner__mobile {
-  display: none;
+display: none;
 }
 
 
@@ -1025,26 +1056,30 @@ padding-top: 10px;
 
 @media (max-width: 768px) {
 
-  #feature-banner .featured-collection-banner {
-    width: calc(100% - 24px);
-    margin: 12px auto 0;
-    border-radius: 7px;
-  }
+#feature-banner .featured-collection-banner {
+width: calc(100% - 24px);
+margin: 12px auto 0;
+border-radius: 7px;
+}
 
-  #feature-banner .featured-collection-banner__desktop {
-    display: none;
-  }
 
-  #feature-banner .featured-collection-banner__mobile {
-    display: block;
-    border-radius: 7px;
-  }
+#feature-banner .featured-collection-banner__desktop {
+display: none;
+}
+
+
+#feature-banner .featured-collection-banner__mobile {
+display: block;
+border-radius: 7px;
+}
 
 }
 
+
 </style>
-   
+
 </head>
+
 
 
 <body>
@@ -1110,11 +1145,9 @@ id="mobile-toggle"
 aria-label="Abrir menu"
 >
 
-
 <span></span>
 <span></span>
 <span></span>
-
 
 </button>
 
@@ -1150,9 +1183,7 @@ href="#hot-right-now"
 class="navbar__dropdown-item"
 id="menu-all-products"
 >
-
 Todos os produtos
-
 </a>
 
 
@@ -1166,9 +1197,7 @@ color:#999;
 text-transform:uppercase;
 "
 >
-
 Categorias
-
 </div>
 
 
@@ -1190,9 +1219,7 @@ border-top:1px solid #eee;
 margin-top:5px;
 "
 >
-
 Coleções
-
 </div>
 
 
@@ -1214,9 +1241,7 @@ id="menu-collection-links"
 href="#feature-banner"
 class="navbar__link"
 >
-
 Coleções
-
 </a>
 
 </li>
@@ -1230,9 +1255,7 @@ href="#hot-right-now"
 class="navbar__link"
 id="menu-products-link"
 >
-
 Produtos
-
 </a>
 
 </li>
@@ -1245,9 +1268,7 @@ Produtos
 href="#testimonials"
 class="navbar__link"
 >
-
 Avaliações
-
 </a>
 
 </li>
@@ -1260,9 +1281,7 @@ Avaliações
 href="#footer"
 class="navbar__link"
 >
-
 Contato
-
 </a>
 
 </li>
@@ -1281,9 +1300,7 @@ Contato
 href="index.html"
 class="navbar__logo"
 >
-
 ESSENCE
-
 </a>
 
 </div>
@@ -1507,9 +1524,7 @@ data-slide="2"
 class="hero__nav-btn hero__nav-btn--prev"
 aria-label="Anterior"
 >
-
 ‹
-
 </button>
 
 
@@ -1518,9 +1533,7 @@ aria-label="Anterior"
 class="hero__nav-btn hero__nav-btn--next"
 aria-label="Próximo"
 >
-
 ›
-
 </button>
 
 
@@ -1803,9 +1816,7 @@ id="essentials"
 <div class="section__header">
 
 <h2 class="section__title">
-
 COMPRE POR CATEGORIA
-
 </h2>
 
 </div>
@@ -1826,9 +1837,7 @@ padding:40px 20px;
 color:#777;
 "
 >
-
 Carregando categorias...
-
 </div>
 
 
@@ -1859,9 +1868,7 @@ id="hot-right-now"
 
 
 <h2 class="section__title">
-
 PRODUTOS EM DESTAQUE
-
 </h2>
 
 
@@ -1869,13 +1876,10 @@ PRODUTOS EM DESTAQUE
 href="#hot-right-now"
 class="section__link"
 >
-
 VER TODOS
-
 <span>
 →
 </span>
-
 </a>
 
 
@@ -1900,9 +1904,7 @@ padding:50px 20px;
 color:#777;
 "
 >
-
 Carregando produtos...
-
 </div>
 
 
@@ -1943,9 +1945,7 @@ font-size:12px;
 letter-spacing:1px;
 "
 >
-
 Carregando coleção em destaque...
-
 </div>
 
 
@@ -1972,23 +1972,17 @@ id="novidades"
 <div>
 
 <span class="novidades-kicker">
-
 ACABARAM DE CHEGAR
-
 </span>
 
 
 <h2 class="novidades-title">
-
 Novidades
-
 </h2>
 
 
 <p class="novidades-subtitle">
-
 Os últimos produtos adicionados à ESSENCE.
-
 </p>
 
 </div>
@@ -1999,9 +1993,7 @@ href="#hot-right-now"
 class="novidades-link"
 id="novidades-ver-todos"
 >
-
 VER TODOS →
-
 </a>
 
 
@@ -2023,9 +2015,7 @@ padding:40px 20px;
 color:#777;
 "
 >
-
 Carregando novidades...
-
 </div>
 
 
@@ -2053,17 +2043,12 @@ id="testimonials"
 
 
 <span class="testimonials__label">
-
 AVALIAÇÕES
-
 </span>
 
 
-
 <h2 class="testimonials__title">
-
 O QUE NOSSAS CLIENTES DIZEM?
-
 </h2>
 
 
@@ -2075,9 +2060,7 @@ O QUE NOSSAS CLIENTES DIZEM?
 
 
 <div class="testimonial-card__stars">
-
 ★★★★★
-
 </div>
 
 
@@ -2118,9 +2101,7 @@ Mariana
 
 
 <div class="testimonial-card__stars">
-
 ★★★★★
-
 </div>
 
 
@@ -2161,9 +2142,7 @@ Juliana
 
 
 <div class="testimonial-card__stars">
-
 ★★★★★
-
 </div>
 
 
@@ -2223,9 +2202,7 @@ id="newsletter"
 
 
 <h2 class="newsletter__title">
-
 FAÇA PARTE DA ESSENCE
-
 </h2>
 
 
@@ -2260,9 +2237,7 @@ required
 type="submit"
 class="newsletter__submit"
 >
-
 CADASTRAR
-
 </button>
 
 
@@ -2296,9 +2271,7 @@ id="footer"
 
 
 <div class="footer__brand-name">
-
 ESSENCE
-
 </div>
 
 
@@ -2318,9 +2291,7 @@ elegância, conforto e personalidade.
 
 
 <h4 class="footer__heading">
-
 LOJA
-
 </h4>
 
 
@@ -2332,9 +2303,7 @@ href="#hot-right-now"
 class="footer__link"
 id="footer-all-products"
 >
-
 Todos os produtos
-
 </a>
 
 
@@ -2342,9 +2311,7 @@ Todos os produtos
 href="#essentials"
 class="footer__link"
 >
-
 Categorias
-
 </a>
 
 
@@ -2352,9 +2319,7 @@ Categorias
 href="#feature-banner"
 class="footer__link"
 >
-
 Coleções
-
 </a>
 
 
@@ -2369,9 +2334,7 @@ Coleções
 
 
 <h4 class="footer__heading">
-
 AJUDA
-
 </h4>
 
 
@@ -2382,9 +2345,7 @@ AJUDA
 href="#footer"
 class="footer__link"
 >
-
 Contato
-
 </a>
 
 
@@ -2392,9 +2353,7 @@ Contato
 href="#footer"
 class="footer__link"
 >
-
 Trocas e devoluções
-
 </a>
 
 
@@ -2402,9 +2361,7 @@ Trocas e devoluções
 href="#footer"
 class="footer__link"
 >
-
 Guia de tamanhos
-
 </a>
 
 
@@ -2419,9 +2376,7 @@ Guia de tamanhos
 
 
 <h4 class="footer__heading">
-
 ESSENCE
-
 </h4>
 
 
@@ -2432,9 +2387,7 @@ ESSENCE
 href="#testimonials"
 class="footer__link"
 >
-
 Avaliações
-
 </a>
 
 
@@ -2442,9 +2395,7 @@ Avaliações
 href="#newsletter"
 class="footer__link"
 >
-
 Novidades
-
 </a>
 
 
@@ -2455,9 +2406,7 @@ style="
 opacity:.45;
 "
 >
-
 Admin
-
 </a>
 
 
@@ -2529,9 +2478,7 @@ id="cart-sidebar"
 
 
 <h3 class="cart-sidebar__title">
-
 SEU CARRINHO
-
 </h3>
 
 
@@ -2540,9 +2487,7 @@ class="cart-sidebar__close"
 id="cart-close"
 aria-label="Fechar carrinho"
 >
-
 ✕
-
 </button>
 
 
@@ -2581,9 +2526,7 @@ Subtotal
 <span
 id="cart-subtotal"
 >
-
 R$ 0,00
-
 </span>
 
 </div>
@@ -2592,9 +2535,7 @@ R$ 0,00
 <button
 class="btn btn--dark btn--full cart-sidebar__checkout"
 >
-
 FINALIZAR COMPRA
-
 </button>
 
 
@@ -2619,9 +2560,7 @@ id="mobile-menu"
 
 
 <span class="navbar__logo">
-
 ESSENCE
-
 </span>
 
 
@@ -2630,9 +2569,7 @@ class="mobile-menu__close"
 id="mobile-close"
 aria-label="Fechar menu"
 >
-
 ✕
-
 </button>
 
 
@@ -2647,9 +2584,7 @@ aria-label="Fechar menu"
 href="#hero"
 class="mobile-menu__link"
 >
-
 Início
-
 </a>
 
 
@@ -2658,9 +2593,7 @@ href="#hot-right-now"
 class="mobile-menu__link"
 id="mobile-all-products"
 >
-
 Todos os produtos
-
 </a>
 
 
@@ -2668,9 +2601,7 @@ Todos os produtos
 href="#essentials"
 class="mobile-menu__link"
 >
-
 Categorias
-
 </a>
 
 
@@ -2690,9 +2621,7 @@ gap:4px;
 href="#feature-banner"
 class="mobile-menu__link"
 >
-
 Coleções
-
 </a>
 
 
@@ -2712,9 +2641,7 @@ gap:4px;
 href="#testimonials"
 class="mobile-menu__link"
 >
-
 Avaliações
-
 </a>
 
 
@@ -2722,9 +2649,7 @@ Avaliações
 href="#footer"
 class="mobile-menu__link"
 >
-
 Contato
-
 </a>
 
 
@@ -2750,9 +2675,7 @@ class="search-overlay__close"
 id="search-close"
 aria-label="Fechar busca"
 >
-
 ✕
-
 </button>
 
 
@@ -3304,6 +3227,10 @@ return `
 <div
 class="product-card"
 data-product-id="${escapeHtml(product.id)}"
+onclick="
+window.location.href =
+'product.html?id=${encodeURIComponent(String(product.id))}';
+"
 >
 
 
@@ -3392,6 +3319,7 @@ ${sizesHtml}
 </div>
 
 `;
+
 
 }
 
@@ -3547,6 +3475,7 @@ ascending:
 false
 }
 );
+
 
 
 if (error) {
@@ -3793,6 +3722,7 @@ essenceProducts,
 "PRODUTOS EM DESTAQUE"
 
 );
+
 
 
 document
@@ -4263,7 +4193,6 @@ loading="lazy"
 
 <div class="category-card__overlay">
 
-
 <span class="category-card__title">
 
 ${escapeHtml(
@@ -4271,12 +4200,12 @@ ${escapeHtml(
 String(
 category.name || ""
 )
+
 .toUpperCase()
 
 )}
 
 </span>
-
 
 </div>
 
@@ -4346,6 +4275,7 @@ console.error(
 "Erro ao carregar categorias:",
 error
 );
+
 
 
 if (container) {
@@ -4900,7 +4830,6 @@ block:
 
 
 };
-
 
 
 
@@ -6025,1871 +5954,6 @@ initSupabaseStore();
 
 </script>
 
-<!-- =========================================
-     TELA COMPLETA DO PRODUTO — ESSENCE
-     ========================================= -->
-
-<style>
-
-body.essence-product-page-open {
-  overflow: hidden;
-}
-
-
-/* ========================================
-   TELA DO PRODUTO
-   ======================================== */
-
-.essence-product-page {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-
-  background: #ffffff;
-
-  overflow-y: auto;
-
-  opacity: 0;
-  visibility: hidden;
-
-  transform: translateX(35px);
-
-  transition:
-    opacity .28s ease,
-    transform .35s ease,
-    visibility .28s ease;
-}
-
-
-.essence-product-page.active {
-  opacity: 1;
-  visibility: visible;
-
-  transform: translateX(0);
-}
-
-
-/* ========================================
-   TOPO
-   ======================================== */
-
-.essence-product-page__header {
-  width: 100%;
-  height: 76px;
-
-  position: sticky;
-  top: 0;
-
-  z-index: 10;
-
-  background: rgba(255,255,255,.97);
-  backdrop-filter: blur(10px);
-
-  border-bottom: 1px solid #eee8e4;
-}
-
-
-.essence-product-page__header-inner {
-  width: calc(100% - 60px);
-  max-width: 1500px;
-  height: 100%;
-
-  margin: 0 auto;
-
-  display: grid;
-
-  grid-template-columns:
-    1fr
-    auto
-    1fr;
-
-  align-items: center;
-}
-
-
-.essence-product-page__back {
-  justify-self: start;
-
-  display: inline-flex;
-  align-items: center;
-
-  gap: 10px;
-
-  padding: 0;
-
-  border: 0;
-
-  background: none;
-
-  color: #413630;
-
-  font-size: 10px;
-  font-weight: 700;
-
-  letter-spacing: 1.3px;
-
-  cursor: pointer;
-
-  text-transform: uppercase;
-}
-
-
-.essence-product-page__back span {
-  font-size: 20px;
-  line-height: 1;
-}
-
-
-.essence-product-page__logo {
-  justify-self: center;
-
-  color: #2e2723;
-
-  font-size: 21px;
-  font-weight: 600;
-
-  letter-spacing: 5px;
-
-  text-decoration: none;
-}
-
-
-.essence-product-page__close {
-  justify-self: end;
-
-  width: 40px;
-  height: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: none;
-
-  border: 1px solid #ddd5cf;
-  border-radius: 50%;
-
-  color: #332b27;
-
-  cursor: pointer;
-
-  font-size: 17px;
-
-  transition:
-    background .2s ease,
-    border-color .2s ease;
-}
-
-
-.essence-product-page__close:hover {
-  background: #f7f3f0;
-  border-color: #c7b8ae;
-}
-
-
-/* ========================================
-   CONTEÚDO
-   ======================================== */
-
-.essence-product-page__main {
-  width: calc(100% - 80px);
-  max-width: 1420px;
-
-  margin: 0 auto;
-
-  padding:
-    55px
-    0
-    90px;
-}
-
-
-.essence-product-page__layout {
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1.08fr)
-    minmax(390px, .92fr);
-
-  gap: 85px;
-
-  align-items: start;
-}
-
-
-/* ========================================
-   FOTO
-   ======================================== */
-
-.essence-product-page__media {
-  width: 100%;
-}
-
-
-.essence-product-page__image-wrap {
-  width: 100%;
-
-  min-height: 700px;
-
-  background: #f3efec;
-
-  border-radius: 5px;
-
-  overflow: hidden;
-
-  position: relative;
-}
-
-
-.essence-product-page__image {
-  width: 100%;
-  height: 100%;
-
-  min-height: 700px;
-
-  display: block;
-
-  object-fit: cover;
-}
-
-
-/* ========================================
-   INFORMAÇÕES
-   ======================================== */
-
-.essence-product-page__info {
-  padding-top: 22px;
-
-  position: sticky;
-
-  top: 110px;
-}
-
-
-.essence-product-page__breadcrumb {
-  margin-bottom: 20px;
-
-  color: #9b8476;
-
-  font-size: 9px;
-  font-weight: 700;
-
-  letter-spacing: 1.8px;
-
-  text-transform: uppercase;
-}
-
-
-.essence-product-page__title {
-  margin:
-    0
-    0
-    20px;
-
-  max-width: 580px;
-
-  color: #302824;
-
-  font-family:
-    "Playfair Display",
-    Georgia,
-    serif;
-
-  font-size:
-    clamp(
-      39px,
-      4vw,
-      58px
-    );
-
-  font-weight: 500;
-
-  line-height: 1.02;
-
-  letter-spacing: -1px;
-}
-
-
-/* ========================================
-   PREÇOS
-   ======================================== */
-
-.essence-product-page__prices {
-  display: flex;
-  align-items: center;
-
-  gap: 14px;
-
-  margin-bottom: 26px;
-}
-
-
-.essence-product-page__price {
-  color: #2f2925;
-
-  font-size: 21px;
-  font-weight: 600;
-}
-
-
-.essence-product-page__price--sale {
-  color: #984d43;
-}
-
-
-.essence-product-page__old-price {
-  color: #aaa29d;
-
-  font-size: 14px;
-
-  text-decoration: line-through;
-}
-
-
-/* ========================================
-   DESCRIÇÃO
-   ======================================== */
-
-.essence-product-page__description {
-  max-width: 570px;
-
-  margin:
-    0
-    0
-    34px;
-
-  color: #72655e;
-
-  font-size: 13px;
-
-  line-height: 1.9;
-
-  white-space: pre-line;
-}
-
-
-/* ========================================
-   SEPARADOR
-   ======================================== */
-
-.essence-product-page__divider {
-  height: 1px;
-
-  margin:
-    0
-    0
-    28px;
-
-  background: #eee7e2;
-}
-
-
-/* ========================================
-   TAMANHOS
-   ======================================== */
-
-.essence-product-page__label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 13px;
-}
-
-
-.essence-product-page__label {
-  color: #443a35;
-
-  font-size: 10px;
-  font-weight: 700;
-
-  letter-spacing: 1.1px;
-
-  text-transform: uppercase;
-}
-
-
-.essence-product-page__sizes {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 9px;
-
-  margin-bottom: 28px;
-}
-
-
-.essence-product-page__size {
-  min-width: 50px;
-  height: 44px;
-
-  padding:
-    0
-    15px;
-
-  background: #fff;
-
-  border: 1px solid #d7ccc5;
-  border-radius: 4px;
-
-  color: #4c4039;
-
-  cursor: pointer;
-
-  font-size: 11px;
-  font-weight: 600;
-
-  transition:
-    background .2s ease,
-    color .2s ease,
-    border-color .2s ease;
-}
-
-
-.essence-product-page__size:hover {
-  border-color: #5b473d;
-}
-
-
-.essence-product-page__size.active {
-  background: #49372f;
-
-  border-color: #49372f;
-
-  color: #fff;
-}
-
-
-/* ========================================
-   ESTOQUE
-   ======================================== */
-
-.essence-product-page__stock {
-  margin-bottom: 18px;
-
-  font-size: 11px;
-  font-weight: 600;
-}
-
-
-.essence-product-page__stock--available {
-  color: #688066;
-}
-
-
-.essence-product-page__stock--unavailable {
-  color: #9e4f47;
-}
-
-
-/* ========================================
-   BOTÃO PRINCIPAL
-   ======================================== */
-
-.essence-product-page__add {
-  width: 100%;
-  min-height: 58px;
-
-  border: 1px solid #45342c;
-  border-radius: 3px;
-
-  background: #45342c;
-
-  color: #fff;
-
-  cursor: pointer;
-
-  font-size: 10px;
-  font-weight: 700;
-
-  letter-spacing: 1.7px;
-
-  text-transform: uppercase;
-
-  transition:
-    background .2s ease,
-    transform .2s ease;
-}
-
-
-.essence-product-page__add:hover {
-  background: #30231e;
-
-  transform: translateY(-1px);
-}
-
-
-.essence-product-page__add:disabled {
-  cursor: not-allowed;
-
-  opacity: .45;
-
-  transform: none;
-}
-
-
-/* ========================================
-   PIX
-   ======================================== */
-
-.essence-product-page__pix {
-  margin-top: 10px;
-
-  text-align: center;
-
-  color: #80736d;
-
-  font-size: 10px;
-}
-
-
-/* ========================================
-   DETALHES
-   ======================================== */
-
-.essence-product-page__benefits {
-  margin-top: 32px;
-
-  border-top: 1px solid #eee7e2;
-}
-
-
-.essence-product-page__benefit {
-  min-height: 51px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  border-bottom: 1px solid #eee7e2;
-
-  color: #71655f;
-
-  font-size: 11px;
-}
-
-
-.essence-product-page__benefit-icon {
-  width: 23px;
-
-  color: #7f6658;
-
-  text-align: center;
-}
-
-
-/* ========================================
-   SKU
-   ======================================== */
-
-.essence-product-page__sku {
-  margin-top: 22px;
-
-  color: #aaa09a;
-
-  font-size: 9px;
-
-  letter-spacing: .8px;
-}
-
-
-/* ========================================
-   MOBILE
-   ======================================== */
-
-@media (max-width: 850px) {
-
-  .essence-product-page__header {
-    height: 66px;
-  }
-
-
-  .essence-product-page__header-inner {
-    width: calc(100% - 28px);
-  }
-
-
-  .essence-product-page__back {
-    font-size: 0;
-  }
-
-
-  .essence-product-page__back span {
-    font-size: 24px;
-  }
-
-
-  .essence-product-page__logo {
-    font-size: 17px;
-
-    letter-spacing: 3px;
-  }
-
-
-  .essence-product-page__close {
-    width: 36px;
-    height: 36px;
-  }
-
-
-  .essence-product-page__main {
-    width: calc(100% - 28px);
-
-    padding:
-      20px
-      0
-      55px;
-  }
-
-
-  .essence-product-page__layout {
-    display: block;
-  }
-
-
-  .essence-product-page__image-wrap {
-    min-height: 0;
-
-    aspect-ratio: 4 / 5;
-  }
-
-
-  .essence-product-page__image {
-    min-height: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-  }
-
-
-  .essence-product-page__info {
-    position: static;
-
-    padding:
-      30px
-      2px
-      0;
-  }
-
-
-  .essence-product-page__title {
-    font-size: 36px;
-  }
-
-}
-
-</style>
-
-
-
-<div
-class="essence-product-page"
-id="essence-product-page"
-aria-hidden="true"
->
-
-
-<header
-class="essence-product-page__header"
->
-
-
-<div
-class="essence-product-page__header-inner"
->
-
-
-<button
-type="button"
-class="essence-product-page__back"
-id="essence-product-page-back"
->
-
-<span>
-←
-</span>
-
-VOLTAR
-
-</button>
-
-
-
-<a
-href="#"
-class="essence-product-page__logo"
-id="essence-product-page-logo"
->
-
-ESSENCE
-
-</a>
-
-
-
-<button
-type="button"
-class="essence-product-page__close"
-id="essence-product-page-close"
-aria-label="Fechar produto"
->
-
-✕
-
-</button>
-
-
-</div>
-
-
-</header>
-
-
-
-<main
-class="essence-product-page__main"
->
-
-
-<div
-class="essence-product-page__layout"
->
-
-
-<div
-class="essence-product-page__media"
->
-
-
-<div
-class="essence-product-page__image-wrap"
->
-
-
-<img
-class="essence-product-page__image"
-id="essence-product-page-image"
-src=""
-alt=""
->
-
-
-</div>
-
-
-</div>
-
-
-
-<div
-class="essence-product-page__info"
-id="essence-product-page-info"
-></div>
-
-
-</div>
-
-
-</main>
-
-
-</div>
-
-
-
-<script>
-
-(() => {
-
-
-let selectedProductSize = "";
-
-
-
-function detailEscape(value) {
-
-
-return String(
-value ?? ""
-)
-
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
-);
-
-
-}
-
-
-
-function detailMoney(value) {
-
-
-return Number(
-value || 0
-)
-
-.toLocaleString(
-
-"pt-BR",
-
-{
-
-style:
-"currency",
-
-currency:
-"BRL"
-
-}
-
-);
-
-
-}
-
-
-
-function detailSizes(product) {
-
-
-const value =
-product?.sizes;
-
-
-
-if (
-Array.isArray(
-value
-)
-) {
-
-
-return value;
-
-
-}
-
-
-
-if (
-
-typeof value
-===
-"string"
-
-&&
-
-value.trim()
-
-) {
-
-
-try {
-
-
-const parsed =
-JSON.parse(
-value
-);
-
-
-
-if (
-Array.isArray(
-parsed
-)
-) {
-
-
-return parsed;
-
-
-}
-
-
-}
-
-catch (_) {
-
-
-return value
-
-.split(",")
-
-.map(
-item =>
-item.trim()
-)
-
-.filter(
-Boolean
-);
-
-
-}
-
-
-}
-
-
-
-return [];
-
-
-}
-
-
-
-/* ========================================
-   FECHAR
-   ======================================== */
-
-function closeEssenceProductPage() {
-
-
-const page =
-
-document.getElementById(
-"essence-product-page"
-);
-
-
-
-page
-?.classList
-.remove(
-"active"
-);
-
-
-
-page
-?.setAttribute(
-"aria-hidden",
-"true"
-);
-
-
-
-document
-.body
-.classList
-.remove(
-"essence-product-page-open"
-);
-
-
-
-selectedProductSize =
-"";
-
-
-}
-
-
-
-/* ========================================
-   ABRIR PRODUTO
-   ======================================== */
-
-window.openEssenceProductPage =
-
-function (
-productId
-) {
-
-
-const products =
-
-window.essenceProducts
-||
-[];
-
-
-
-const product =
-
-products.find(
-
-item =>
-
-String(
-item.id
-)
-
-===
-
-String(
-productId
-)
-
-);
-
-
-
-if (
-!product
-) {
-
-
-return;
-
-
-}
-
-
-
-selectedProductSize =
-"";
-
-
-
-const normalPrice =
-
-Number(
-product.price
-||
-0
-);
-
-
-
-const promotionalPrice =
-
-Number(
-product.compare_at_price
-||
-0
-);
-
-
-
-const hasSale =
-
-promotionalPrice > 0
-
-&&
-
-promotionalPrice
-<
-normalPrice;
-
-
-
-const currentPrice =
-
-hasSale
-
-?
-
-promotionalPrice
-
-:
-
-normalPrice;
-
-
-
-const sizes =
-
-detailSizes(
-product
-);
-
-
-
-const stock =
-
-Number(
-product.stock
-||
-0
-);
-
-
-
-const image =
-
-product.image_url
-
-||
-
-"assets/images/banner.png";
-
-
-
-const description =
-
-product.description
-
-||
-
-"Uma peça selecionada pela ESSENCE para compor produções elegantes, femininas e versáteis.";
-
-
-
-const imageElement =
-
-document.getElementById(
-"essence-product-page-image"
-);
-
-
-
-if (
-imageElement
-) {
-
-
-imageElement.src =
-image;
-
-
-imageElement.alt =
-product.name
-||
-"Produto ESSENCE";
-
-
-}
-
-
-
-const sizesHtml =
-
-sizes.length
-
-?
-
-`
-
-<div
-class="essence-product-page__label-row"
->
-
-<span
-class="essence-product-page__label"
->
-Tamanho
-</span>
-
-</div>
-
-
-<div
-class="essence-product-page__sizes"
->
-
-${
-
-sizes
-
-.map(
-
-size => `
-
-<button
-type="button"
-class="essence-product-page__size"
-data-essence-product-size="${detailEscape(size)}"
->
-
-${detailEscape(size)}
-
-</button>
-
-`
-
-)
-
-.join(
-""
-)
-
-}
-
-</div>
-
-`
-
-:
-
-"";
-
-
-
-const priceHtml =
-
-hasSale
-
-?
-
-`
-
-<span
-class="
-essence-product-page__price
-essence-product-page__price--sale
-"
->
-
-${detailMoney(
-currentPrice
-)}
-
-</span>
-
-
-<span
-class="essence-product-page__old-price"
->
-
-${detailMoney(
-normalPrice
-)}
-
-</span>
-
-`
-
-:
-
-`
-
-<span
-class="essence-product-page__price"
->
-
-${detailMoney(
-currentPrice
-)}
-
-</span>
-
-`;
-
-
-
-const stockHtml =
-
-stock > 0
-
-?
-
-`
-
-<div
-class="
-essence-product-page__stock
-essence-product-page__stock--available
-"
->
-
-✓ Produto disponível
-
-</div>
-
-`
-
-:
-
-`
-
-<div
-class="
-essence-product-page__stock
-essence-product-page__stock--unavailable
-"
->
-
-Produto indisponível
-
-</div>
-
-`;
-
-
-
-const info =
-
-document.getElementById(
-"essence-product-page-info"
-);
-
-
-
-if (
-!info
-) {
-
-
-return;
-
-
-}
-
-
-
-info.innerHTML = `
-
-
-<div
-class="essence-product-page__breadcrumb"
->
-
-ESSENCE
-
-&nbsp; / &nbsp;
-
-${detailEscape(
-product.category
-||
-"Produtos"
-)}
-
-</div>
-
-
-
-<h1
-class="essence-product-page__title"
->
-
-${detailEscape(
-product.name
-)}
-
-</h1>
-
-
-
-<div
-class="essence-product-page__prices"
->
-
-${priceHtml}
-
-</div>
-
-
-
-<p
-class="essence-product-page__description"
->
-
-${detailEscape(
-description
-)}
-
-</p>
-
-
-
-<div
-class="essence-product-page__divider"
-></div>
-
-
-
-${sizesHtml}
-
-
-
-${stockHtml}
-
-
-
-<button
-type="button"
-class="essence-product-page__add"
-id="essence-product-page-add"
-${stock <= 0 ? "disabled" : ""}
->
-
-${
-
-stock > 0
-
-?
-
-"ADICIONAR À SACOLA"
-
-:
-
-"PRODUTO INDISPONÍVEL"
-
-}
-
-</button>
-
-
-
-<div
-class="essence-product-page__pix"
->
-
-5% de desconto no pagamento via PIX
-
-</div>
-
-
-
-<div
-class="essence-product-page__benefits"
->
-
-
-<div
-class="essence-product-page__benefit"
->
-
-<span
-class="essence-product-page__benefit-icon"
->
-◇
-</span>
-
-Compra 100% segura
-
-</div>
-
-
-
-<div
-class="essence-product-page__benefit"
->
-
-<span
-class="essence-product-page__benefit-icon"
->
-↻
-</span>
-
-Trocas e devoluções facilitadas
-
-</div>
-
-
-
-<div
-class="essence-product-page__benefit"
->
-
-<span
-class="essence-product-page__benefit-icon"
->
-♡
-</span>
-
-Peça selecionada pela ESSENCE
-
-</div>
-
-
-</div>
-
-
-
-${
-
-product.sku
-
-?
-
-`
-
-<div
-class="essence-product-page__sku"
->
-
-SKU:
-${detailEscape(
-product.sku
-)}
-
-</div>
-
-`
-
-:
-
-""
-
-}
-
-
-`;
-
-
-
-/* TAMANHOS */
-
-info
-
-.querySelectorAll(
-"[data-essence-product-size]"
-)
-
-.forEach(
-
-button => {
-
-
-button.addEventListener(
-
-"click",
-
-() => {
-
-
-selectedProductSize =
-
-button.dataset.essenceProductSize
-
-||
-
-"";
-
-
-
-info
-
-.querySelectorAll(
-"[data-essence-product-size]"
-)
-
-.forEach(
-
-item =>
-
-item.classList.remove(
-"active"
-)
-
-);
-
-
-
-button.classList.add(
-"active"
-);
-
-
-}
-
-);
-
-
-}
-
-);
-
-
-
-/* ADICIONAR */
-
-document
-
-.getElementById(
-"essence-product-page-add"
-)
-
-?.addEventListener(
-
-"click",
-
-() => {
-
-
-if (
-
-sizes.length
-
-&&
-
-!selectedProductSize
-
-) {
-
-
-alert(
-"Selecione um tamanho."
-);
-
-
-return;
-
-
-}
-
-
-
-window
-.addEssenceProductToCart(
-product.id,
-selectedProductSize
-);
-
-
-
-closeEssenceProductPage();
-
-
-}
-
-);
-
-
-
-const page =
-
-document.getElementById(
-"essence-product-page"
-);
-
-
-
-page
-?.classList
-.add(
-"active"
-);
-
-
-
-page
-?.setAttribute(
-"aria-hidden",
-"false"
-);
-
-
-
-page.scrollTop =
-0;
-
-
-
-document
-.body
-.classList
-.add(
-"essence-product-page-open"
-);
-
-
-};
-
-
-
-/* ========================================
-   CLIQUE NOS CARDS
-   ======================================== */
-
-document
-
-.addEventListener(
-
-"click",
-
-event => {
-
-
-const quickAdd =
-
-event.target.closest(
-".product-card__quick-add"
-);
-
-
-
-if (
-quickAdd
-) {
-
-
-return;
-
-
-}
-
-
-
-const card =
-
-event.target.closest(
-".product-card"
-);
-
-
-
-if (
-!card
-) {
-
-
-return;
-
-
-}
-
-
-
-const productId =
-
-card.dataset.productId;
-
-
-
-if (
-productId
-) {
-
-
-window
-.openEssenceProductPage(
-productId
-);
-
-
-}
-
-
-}
-
-);
-
-
-
-/* ========================================
-   VOLTAR / FECHAR
-   ======================================== */
-
-document
-
-.getElementById(
-"essence-product-page-back"
-)
-
-?.addEventListener(
-
-"click",
-
-closeEssenceProductPage
-
-);
-
-
-
-document
-
-.getElementById(
-"essence-product-page-close"
-)
-
-?.addEventListener(
-
-"click",
-
-closeEssenceProductPage
-
-);
-
-
-
-document
-
-.getElementById(
-"essence-product-page-logo"
-)
-
-?.addEventListener(
-
-"click",
-
-event => {
-
-
-event.preventDefault();
-
-
-closeEssenceProductPage();
-
-
-window.scrollTo({
-
-top:
-0,
-
-behavior:
-"smooth"
-
-});
-
-
-}
-
-);
-
-
-
-document
-
-.addEventListener(
-
-"keydown",
-
-event => {
-
-
-if (
-event.key
-===
-"Escape"
-) {
-
-
-closeEssenceProductPage();
-
-
-}
-
-
-}
-
-);
-
-
-})();
-
-</script>
-   
 </body>
 
 </html>
