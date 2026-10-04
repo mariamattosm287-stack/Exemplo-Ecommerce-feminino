@@ -781,6 +781,79 @@ padding-top: 10px;
 
 }
 
+
+
+/* ========================================
+   BANNER DA COLEÇÃO EM DESTAQUE — ADMIN
+   ======================================== */
+
+#feature-banner {
+  width: 100%;
+  padding: 0;
+  margin: 0 0 75px;
+  background: #f6f1ec;
+  overflow: hidden;
+}
+
+#feature-banner::before,
+#feature-banner::after {
+  display: none;
+}
+
+#feature-banner .featured-collection-banner {
+  display: block;
+  width: 100%;
+  line-height: 0;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  background: #f6f1ec;
+}
+
+#feature-banner .featured-collection-banner__desktop,
+#feature-banner .featured-collection-banner__mobile {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#feature-banner .featured-collection-banner__desktop {
+  display: block;
+}
+
+#feature-banner .featured-collection-banner__mobile {
+  display: none;
+}
+
+#feature-banner .featured-collection-banner:hover img {
+  opacity: .98;
+}
+
+@media (max-width: 768px) {
+
+  #feature-banner {
+    padding: 0;
+    margin-bottom: 50px;
+  }
+
+  #feature-banner .featured-collection-banner__desktop {
+    display: none;
+  }
+
+  #feature-banner .featured-collection-banner__mobile {
+    display: block;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  #feature-banner {
+    margin-bottom: 42px;
+  }
+
+}
+
 </style>
 
 <style>
@@ -4216,9 +4289,7 @@ closeStoreMobileMenu();
    DESTAQUE DE COLEÇÃO
    ========================================= */
 
-function renderFeaturedCollection(
-index = 0
-) {
+function renderFeaturedCollection() {
 
 
 const section =
@@ -4252,34 +4323,38 @@ return;
 
 
 
-section.style.display =
-"";
+const collection =
 
+storefrontCollections.find(
 
-
-featuredCollectionIndex =
-
-(
-
-index
-
-+
-
-storefrontCollections.length
+item =>
+item.is_featured
+===
+true
 
 )
 
-%
+||
 
-storefrontCollections.length;
+storefrontCollections[0];
 
 
 
-const collection =
+if (!collection) {
 
-storefrontCollections[
-featuredCollectionIndex
-];
+
+section.style.display =
+"none";
+
+
+return;
+
+}
+
+
+
+section.style.display =
+"";
 
 
 
@@ -4291,7 +4366,7 @@ collection.id
 
 
 
-const mainImage =
+const fallbackImage =
 
 collection.image_url
 
@@ -4305,212 +4380,78 @@ collectionProducts[0]?.image_url
 
 
 
-const sideImageOne =
+const desktopImage =
 
-collectionProducts[0]?.image_url
-
-||
-
-mainImage;
-
-
-
-const sideImageTwo =
-
-collectionProducts[1]?.image_url
+collection.banner_image_url
 
 ||
 
-collectionProducts[0]?.image_url
+fallbackImage;
+
+
+
+const mobileImage =
+
+collection.banner_mobile_url
 
 ||
 
-mainImage;
-
-
-
-const description =
-
-collection.description
-
-||
-
-"Uma seleção especial de peças escolhidas para compor esta coleção ESSENCE.";
-
-
-
-const productCount =
-collectionProducts.length;
-
-
-
-const nextButton =
-
-storefrontCollections.length > 1
-
-?
-
-`
-
-<button
-type="button"
-class="feature-editorial__button feature-editorial__button--secondary"
-onclick="
-window.nextEssenceFeaturedCollection()
-"
->
-
-PRÓXIMA COLEÇÃO
-
-</button>
-
-`
-
-:
-
-"";
+desktopImage;
 
 
 
 section.innerHTML = `
 
-<div class="feature-editorial">
-
-
-<div class="feature-editorial__gallery">
-
-
-<div class="feature-editorial__main-image">
-
+<a
+href="#hot-right-now"
+class="featured-collection-banner"
+id="featured-collection-link"
+aria-label="Ver coleção ${escapeHtml(collection.name)}"
+>
 
 <img
-src="${escapeHtml(mainImage)}"
+class="featured-collection-banner__desktop"
+src="${escapeHtml(desktopImage)}"
 alt="${escapeHtml(collection.name)}"
 >
 
-
-</div>
-
-
-
-<div class="feature-editorial__side-images">
-
-
-<div class="feature-editorial__side-image">
-
 <img
-src="${escapeHtml(sideImageOne)}"
+class="featured-collection-banner__mobile"
+src="${escapeHtml(mobileImage)}"
 alt="${escapeHtml(collection.name)}"
 >
 
-</div>
+</a>
+
+`;
 
 
 
-<div class="feature-editorial__side-image">
+document
 
-<img
-src="${escapeHtml(sideImageTwo)}"
-alt="${escapeHtml(collection.name)}"
->
+.getElementById(
+"featured-collection-link"
+)
 
-</div>
+?.addEventListener(
 
+"click",
 
-</div>
-
-
-</div>
+event => {
 
 
-
-<div class="feature-editorial__content">
-
-
-<div class="feature-editorial__eyebrow">
-
-
-<span class="feature-editorial__eyebrow-dot"></span>
-
-
-COLEÇÃO EM DESTAQUE
-
-
-</div>
+event.preventDefault();
 
 
 
-<h2 class="feature-editorial__title">
+window.openEssenceCollection(
+collection.id
+);
 
-${escapeHtml(
-collection.name
-)}
-
-</h2>
-
-
-
-<p class="feature-editorial__subtitle">
-
-${
-
-productCount === 1
-
-?
-
-"1 produto selecionado"
-
-:
-
-`${productCount} produtos selecionados`
 
 }
 
-</p>
-
-
-
-<p class="feature-editorial__description">
-
-${escapeHtml(
-description
-)}
-
-</p>
-
-
-
-<div class="feature-editorial__actions">
-
-
-<button
-type="button"
-class="feature-editorial__button feature-editorial__button--primary"
-onclick="
-window.openEssenceCollection(
-'${escapeHtml(collection.id)}'
-)
-"
->
-
-VER COLEÇÃO
-
-</button>
-
-
-
-${nextButton}
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-`;
+);
 
 
 }
@@ -4610,23 +4551,6 @@ block:
 
 };
 
-
-
-window.nextEssenceFeaturedCollection =
-
-function () {
-
-
-renderFeaturedCollection(
-
-featuredCollectionIndex
-+
-1
-
-);
-
-
-};
 
 
 
@@ -4796,9 +4720,7 @@ renderCollectionMenuLinks();
 
 
 
-renderFeaturedCollection(
-0
-);
+renderFeaturedCollection();
 
 
 }
