@@ -1,3372 +1,5703 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>ESSENCE — Elegance in Every Movement | Activewear</title>
-
-  <meta
-    name="description"
-    content="Discover premium activewear that combines elegance and performance. Shop tops, bottoms, and accessories designed for the modern woman."
-  >
-
-  <!-- Montserrat -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="css/style.css">
-
-  <style>
-    /* ========================================
-       HOT RIGHT NOW — PRODUCT GRID
-       ======================================== */
-
-    #hot-right-now .products-carousel {
-      width: 100%;
-    }
-
-    #hot-right-now .hot-products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 70px 30px;
-      width: 100%;
-    }
-
-    #hot-right-now .hot-products-grid .product-card {
-      width: 100%;
-      min-width: 0;
-      flex: none;
-    }
-
-    @media (max-width: 900px) {
-      #hot-right-now .hot-products-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 50px 18px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      #hot-right-now .hot-products-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 34px 12px;
-      }
-    }
-
-
-    /* ========================================
-       ESSENCE — EDITORIAL FEATURED PRODUCT
-       ======================================== */
-
-    #feature-banner {
-      width: 100%;
-      background:
-        linear-gradient(
-          135deg,
-          #f6f1ec 0%,
-          #f3eee8 48%,
-          #eee5dc 100%
-        );
-      padding: 105px 6% 125px;
-      margin: 0 0 75px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #feature-banner::before {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      background: rgba(200, 181, 163, 0.10);
-      top: -180px;
-      right: -120px;
-      pointer-events: none;
-    }
-
-    #feature-banner::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: rgba(90, 70, 58, 0.035);
-      bottom: -170px;
-      left: -100px;
-      pointer-events: none;
-    }
-
-    #feature-banner .feature-editorial {
-      width: 100%;
-      max-width: 1320px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      align-items: center;
-      gap: 78px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ========================================
-       GALERIA
-       ======================================== */
-
-    #feature-banner .feature-editorial__gallery {
-      display: grid;
-      grid-template-columns: minmax(0, 1.65fr) minmax(0, 0.85fr);
-      gap: 14px;
-      min-width: 0;
-    }
-
-    #feature-banner .feature-editorial__main-image {
-      height: 640px;
-      min-width: 0;
-      overflow: hidden;
-      border-radius: 3px;
-      background: #e8e0d8;
-      box-shadow:
-        0 18px 45px rgba(62, 48, 40, 0.10);
-    }
-
-    #feature-banner .feature-editorial__side-images {
-      display: grid;
-      grid-template-rows: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      min-width: 0;
-    }
-
-    #feature-banner .feature-editorial__side-image {
-      min-height: 0;
-      overflow: hidden;
-      border-radius: 3px;
-      background: #e8e0d8;
-      box-shadow:
-        0 12px 30px rgba(62, 48, 40, 0.08);
-    }
-
-    #feature-banner .feature-editorial__gallery img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      transition: transform 0.8s ease;
-    }
-
-    #feature-banner .feature-editorial__main-image:hover img,
-    #feature-banner .feature-editorial__side-image:hover img {
-      transform: scale(1.035);
-    }
-
-    /* ========================================
-       CONTEÚDO
-       ======================================== */
-
-    #feature-banner .feature-editorial__content {
-      max-width: 600px;
-      padding: 15px 0 15px 8px;
-    }
-
-    #feature-banner .feature-editorial__eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      color: #8c6253;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2.2px;
-      text-transform: uppercase;
-    }
-
-    #feature-banner .feature-editorial__eyebrow::after {
-      content: "";
-      width: 42px;
-      height: 1px;
-      background: #c8b5a3;
-      display: block;
-      margin-left: 2px;
-    }
-
-    #feature-banner .feature-editorial__eyebrow-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #5a463a;
-      flex-shrink: 0;
-    }
-
-    #feature-banner .feature-editorial__title {
-      margin: 0 0 12px;
-      color: #3e3028;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(42px, 4.2vw, 62px);
-      font-weight: 500;
-      line-height: 1.02;
-      letter-spacing: -1.5px;
-    }
-
-    #feature-banner .feature-editorial__subtitle {
-      margin: 0 0 25px;
-      color: #8a7a6f;
-      font-size: 15px;
-      line-height: 1.6;
-      letter-spacing: 1.2px;
-      font-weight: 400;
-    }
-
-    #feature-banner .feature-editorial__description {
-      max-width: 550px;
-      margin: 0 0 32px;
-      color: #62554c;
-      font-size: 13.5px;
-      line-height: 1.9;
-      letter-spacing: 0.1px;
-    }
-
-    #feature-banner .feature-editorial__price {
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 32px;
-      padding-top: 3px;
-    }
-
-    #feature-banner .feature-editorial__price-main {
-      color: #3e3028;
-      font-size: 27px;
-      font-weight: 700;
-      letter-spacing: -0.4px;
-    }
-
-    #feature-banner .feature-editorial__price-installments {
-      color: #8a7a6f;
-      font-size: 11px;
-      letter-spacing: 0.4px;
-    }
-
-    #feature-banner .feature-editorial__actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    #feature-banner .feature-editorial__button {
-      min-height: 50px;
-      padding: 0 29px;
-      border-radius: 2px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition:
-        background 0.25s ease,
-        color 0.25s ease,
-        border-color 0.25s ease,
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-      cursor: pointer;
-    }
-
-    #feature-banner .feature-editorial__button--primary {
-      background: #4a362c;
-      color: #fff;
-      border: 1px solid #4a362c;
-      box-shadow: 0 8px 20px rgba(74, 54, 44, 0.12);
-    }
-
-    #feature-banner .feature-editorial__button--primary:hover {
-      background: #35261f;
-      border-color: #35261f;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(74, 54, 44, 0.18);
-    }
-
-    #feature-banner .feature-editorial__button--secondary {
-      background: rgba(255,255,255,0.28);
-      color: #3e3028;
-      border: 1px solid #8f7b6d;
-    }
-
-    #feature-banner .feature-editorial__button--secondary:hover {
-      background: #5a463a;
-      border-color: #5a463a;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-
-    /* ========================================
-       MAIS ESPAÇO ANTES DOS TESTIMONIALS
-       ======================================== */
-
-    #testimonials {
-      padding-top: 30px;
-    }
-
-
-    /* ========================================
-       TABLET
-       ======================================== */
-
-    @media (max-width: 1050px) {
-
-      #feature-banner {
-        padding: 80px 5% 105px;
-        margin-bottom: 60px;
-      }
-
-      #feature-banner .feature-editorial {
-        gap: 48px;
-      }
-
-      #feature-banner .feature-editorial__main-image {
-        height: 550px;
-      }
-
-      #feature-banner .feature-editorial__title {
-        font-size: clamp(36px, 4vw, 50px);
-      }
-
-    }
-
-
-    /* ========================================
-       MOBILE
-       ======================================== */
-
-    @media (max-width: 768px) {
-
-      #feature-banner {
-        padding: 65px 20px 80px;
-        margin-bottom: 50px;
-      }
-
-      #feature-banner::before {
-        width: 300px;
-        height: 300px;
-        right: -150px;
-      }
-
-      #feature-banner .feature-editorial {
-        grid-template-columns: 1fr;
-        gap: 42px;
-      }
-
-      #feature-banner .feature-editorial__gallery {
-        grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
-        gap: 10px;
-      }
-
-      #feature-banner .feature-editorial__main-image {
-        height: 470px;
-      }
-
-      #feature-banner .feature-editorial__side-images {
-        gap: 10px;
-      }
-
-      #feature-banner .feature-editorial__content {
-        max-width: none;
-        padding: 0;
-      }
-
-      #feature-banner .feature-editorial__eyebrow {
-        margin-bottom: 18px;
-      }
-
-      #feature-banner .feature-editorial__title {
-        font-size: 40px;
-      }
-
-      #feature-banner .feature-editorial__description {
-        font-size: 13px;
-        line-height: 1.8;
-      }
-
-      #feature-banner .feature-editorial__actions {
-        width: 100%;
-      }
-
-      #feature-banner .feature-editorial__button {
-        flex: 1;
-      }
-
-      #testimonials {
-        padding-top: 20px;
-      }
-
-    }
-
-
-    @media (max-width: 480px) {
-
-      #feature-banner {
-        padding: 52px 16px 65px;
-        margin-bottom: 42px;
-      }
-
-      #feature-banner .feature-editorial {
-        gap: 32px;
-      }
-
-      #feature-banner .feature-editorial__main-image {
-        height: 390px;
-      }
-
-      #feature-banner .feature-editorial__gallery {
-        gap: 8px;
-      }
-
-      #feature-banner .feature-editorial__side-images {
-        gap: 8px;
-      }
-
-      #feature-banner .feature-editorial__eyebrow {
-        font-size: 9px;
-        letter-spacing: 1.5px;
-      }
-
-      #feature-banner .feature-editorial__eyebrow::after {
-        width: 28px;
-      }
-
-      #feature-banner .feature-editorial__title {
-        font-size: 34px;
-        letter-spacing: -0.8px;
-      }
-
-      #feature-banner .feature-editorial__subtitle {
-        font-size: 14px;
-      }
-
-      #feature-banner .feature-editorial__actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      #feature-banner .feature-editorial__button {
-        width: 100%;
-      }
-
-      #testimonials {
-        padding-top: 10px;
-      }
-
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESSENCE — Moda feminina com elegância</title>
+
+<meta
+name="description"
+content="Descubra a ESSENCE: moda feminina elegante, coleções especiais e peças selecionadas para valorizar cada estilo."
+>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+rel="stylesheet"
+>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+#hot-right-now .products-carousel {
+width: 100%;
+}
+
+#hot-right-now .hot-products-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 70px 30px;
+width: 100%;
+}
+
+#hot-right-now .hot-products-grid .product-card {
+width: 100%;
+min-width: 0;
+flex: none;
+}
+
+@media (max-width: 900px) {
+
+#hot-right-now .hot-products-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 50px 18px;
+}
+
+}
+
+@media (max-width: 640px) {
+
+#hot-right-now .hot-products-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 34px 12px;
+}
+
+}
+
+
+/* ========================================
+   COLEÇÃO EM DESTAQUE
+   ======================================== */
+
+#feature-banner {
+width: 100%;
+
+background:
+linear-gradient(
+135deg,
+#f6f1ec 0%,
+#f3eee8 48%,
+#eee5dc 100%
+);
+
+padding: 105px 6% 125px;
+
+margin: 0 0 75px;
+
+position: relative;
+
+overflow: hidden;
+}
+
+
+#feature-banner::before {
+
+content: "";
+
+position: absolute;
+
+width: 420px;
+height: 420px;
+
+border-radius: 50%;
+
+background:
+rgba(
+200,
+181,
+163,
+0.10
+);
+
+top: -180px;
+right: -120px;
+
+pointer-events: none;
+
+}
+
+
+#feature-banner::after {
+
+content: "";
+
+position: absolute;
+
+width: 300px;
+height: 300px;
+
+border-radius: 50%;
+
+background:
+rgba(
+90,
+70,
+58,
+0.035
+);
+
+bottom: -170px;
+left: -100px;
+
+pointer-events: none;
+
+}
+
+
+#feature-banner .feature-editorial {
+
+width: 100%;
+
+max-width: 1320px;
+
+margin: 0 auto;
+
+display: grid;
+
+grid-template-columns:
+minmax(0, 1.05fr)
+minmax(0, 0.95fr);
+
+align-items: center;
+
+gap: 78px;
+
+position: relative;
+
+z-index: 1;
+
+}
+
+
+#feature-banner .feature-editorial__gallery {
+
+display: grid;
+
+grid-template-columns:
+minmax(0, 1.65fr)
+minmax(0, 0.85fr);
+
+gap: 14px;
+
+min-width: 0;
+
+}
+
+
+#feature-banner .feature-editorial__main-image {
+
+height: 640px;
+
+min-width: 0;
+
+overflow: hidden;
+
+border-radius: 3px;
+
+background: #e8e0d8;
+
+box-shadow:
+0 18px 45px
+rgba(
+62,
+48,
+40,
+0.10
+);
+
+}
+
+
+#feature-banner .feature-editorial__side-images {
+
+display: grid;
+
+grid-template-rows:
+repeat(
+2,
+minmax(0, 1fr)
+);
+
+gap: 14px;
+
+min-width: 0;
+
+}
+
+
+#feature-banner .feature-editorial__side-image {
+
+min-height: 0;
+
+overflow: hidden;
+
+border-radius: 3px;
+
+background: #e8e0d8;
+
+box-shadow:
+0 12px 30px
+rgba(
+62,
+48,
+40,
+0.08
+);
+
+}
+
+
+#feature-banner .feature-editorial__gallery img {
+
+width: 100%;
+
+height: 100%;
+
+display: block;
+
+object-fit: cover;
+
+transition:
+transform
+0.8s
+ease;
+
+}
+
+
+#feature-banner .feature-editorial__main-image:hover img,
+#feature-banner .feature-editorial__side-image:hover img {
+
+transform:
+scale(
+1.035
+);
+
+}
+
+
+#feature-banner .feature-editorial__content {
+
+max-width: 600px;
+
+padding:
+15px
+0
+15px
+8px;
+
+}
+
+
+#feature-banner .feature-editorial__eyebrow {
+
+display: flex;
+
+align-items: center;
+
+gap: 10px;
+
+margin-bottom: 20px;
+
+color: #8c6253;
+
+font-size: 10px;
+
+font-weight: 600;
+
+letter-spacing: 2.2px;
+
+text-transform: uppercase;
+
+}
+
+
+#feature-banner .feature-editorial__eyebrow::after {
+
+content: "";
+
+width: 42px;
+
+height: 1px;
+
+background: #c8b5a3;
+
+display: block;
+
+margin-left: 2px;
+
+}
+
+
+#feature-banner .feature-editorial__eyebrow-dot {
+
+width: 6px;
+
+height: 6px;
+
+border-radius: 50%;
+
+background: #5a463a;
+
+flex-shrink: 0;
+
+}
+
+
+#feature-banner .feature-editorial__title {
+
+margin:
+0
+0
+12px;
+
+color: #3e3028;
+
+font-family:
+"Playfair Display",
+Georgia,
+serif;
+
+font-size:
+clamp(
+42px,
+4.2vw,
+62px
+);
+
+font-weight: 500;
+
+line-height: 1.02;
+
+letter-spacing: -1.5px;
+
+}
+
+
+#feature-banner .feature-editorial__subtitle {
+
+margin:
+0
+0
+25px;
+
+color: #8a7a6f;
+
+font-size: 15px;
+
+line-height: 1.6;
+
+letter-spacing: 1.2px;
+
+font-weight: 400;
+
+}
+
+
+#feature-banner .feature-editorial__description {
+
+max-width: 550px;
+
+margin:
+0
+0
+32px;
+
+color: #62554c;
+
+font-size: 13.5px;
+
+line-height: 1.9;
+
+letter-spacing: 0.1px;
+
+}
+
+
+#feature-banner .feature-editorial__actions {
+
+display: flex;
+
+align-items: center;
+
+gap: 12px;
+
+flex-wrap: wrap;
+
+}
+
+
+#feature-banner .feature-editorial__button {
+
+min-height: 50px;
+
+padding:
+0
+29px;
+
+border-radius: 2px;
+
+display: inline-flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 8px;
+
+font-size: 10px;
+
+font-weight: 700;
+
+letter-spacing: 1px;
+
+text-transform: uppercase;
+
+transition:
+background 0.25s ease,
+color 0.25s ease,
+border-color 0.25s ease,
+transform 0.25s ease,
+box-shadow 0.25s ease;
+
+cursor: pointer;
+
+}
+
+
+#feature-banner .feature-editorial__button--primary {
+
+background: #4a362c;
+
+color: #fff;
+
+border:
+1px
+solid
+#4a362c;
+
+box-shadow:
+0
+8px
+20px
+rgba(
+74,
+54,
+44,
+0.12
+);
+
+}
+
+
+#feature-banner .feature-editorial__button--primary:hover {
+
+background: #35261f;
+
+border-color: #35261f;
+
+transform:
+translateY(
+-2px
+);
+
+box-shadow:
+0
+12px
+25px
+rgba(
+74,
+54,
+44,
+0.18
+);
+
+}
+
+
+#feature-banner .feature-editorial__button--secondary {
+
+background:
+rgba(
+255,
+255,
+255,
+0.28
+);
+
+color: #3e3028;
+
+border:
+1px
+solid
+#8f7b6d;
+
+}
+
+
+#feature-banner .feature-editorial__button--secondary:hover {
+
+background: #5a463a;
+
+border-color: #5a463a;
+
+color: #fff;
+
+transform:
+translateY(
+-2px
+);
+
+}
+
+
+#testimonials {
+
+padding-top: 30px;
+
+}
+
+
+@media (max-width: 1050px) {
+
+#feature-banner {
+
+padding:
+80px
+5%
+105px;
+
+margin-bottom: 60px;
+
+}
+
+
+#feature-banner .feature-editorial {
+
+gap: 48px;
+
+}
+
+
+#feature-banner .feature-editorial__main-image {
+
+height: 550px;
+
+}
+
+
+#feature-banner .feature-editorial__title {
+
+font-size:
+clamp(
+36px,
+4vw,
+50px
+);
+
+}
+
+}
+
+
+@media (max-width: 768px) {
+
+#feature-banner {
+
+padding:
+65px
+20px
+80px;
+
+margin-bottom: 50px;
+
+}
+
+
+#feature-banner::before {
+
+width: 300px;
+
+height: 300px;
+
+right: -150px;
+
+}
+
+
+#feature-banner .feature-editorial {
+
+grid-template-columns: 1fr;
+
+gap: 42px;
+
+}
+
+
+#feature-banner .feature-editorial__gallery {
+
+grid-template-columns:
+minmax(
+0,
+1.55fr
+)
+minmax(
+0,
+0.85fr
+);
+
+gap: 10px;
+
+}
+
+
+#feature-banner .feature-editorial__main-image {
+
+height: 470px;
+
+}
+
+
+#feature-banner .feature-editorial__side-images {
+
+gap: 10px;
+
+}
+
+
+#feature-banner .feature-editorial__content {
+
+max-width: none;
+
+padding: 0;
+
+}
+
+
+#feature-banner .feature-editorial__title {
+
+font-size: 40px;
+
+}
+
+
+#feature-banner .feature-editorial__description {
+
+font-size: 13px;
+
+line-height: 1.8;
+
+}
+
+
+#feature-banner .feature-editorial__actions {
+
+width: 100%;
+
+}
+
+
+#feature-banner .feature-editorial__button {
+
+flex: 1;
+
+}
+
+
+#testimonials {
+
+padding-top: 20px;
+
+}
+
+}
+
+
+@media (max-width: 480px) {
+
+#feature-banner {
+
+padding:
+52px
+16px
+65px;
+
+margin-bottom: 42px;
+
+}
+
+
+#feature-banner .feature-editorial {
+
+gap: 32px;
+
+}
+
+
+#feature-banner .feature-editorial__main-image {
+
+height: 390px;
+
+}
+
+
+#feature-banner .feature-editorial__gallery {
+
+gap: 8px;
+
+}
+
+
+#feature-banner .feature-editorial__side-images {
+
+gap: 8px;
+
+}
+
+
+#feature-banner .feature-editorial__title {
+
+font-size: 34px;
+
+letter-spacing: -0.8px;
+
+}
+
+
+#feature-banner .feature-editorial__actions {
+
+flex-direction: column;
+
+align-items: stretch;
+
+}
+
+
+#feature-banner .feature-editorial__button {
+
+width: 100%;
+
+}
+
+
+#testimonials {
+
+padding-top: 10px;
+
+}
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <!-- ===== 1. ANNOUNCEMENT BAR ===== -->
-  <div class="announcement-bar" id="announcement-bar">
-    <button class="announcement-bar__nav announcement-bar__nav--prev" aria-label="Previous announcement">‹</button>
 
-    <p class="announcement-bar__text" id="announcement-text">
-      EASY RETURNS AND EXCHANGES
-    </p>
 
-    <button class="announcement-bar__nav announcement-bar__nav--next" aria-label="Next announcement">›</button>
-  </div>
+<!-- =========================================
+     BARRA DE AVISOS
+     ========================================= -->
 
+<div
+class="announcement-bar"
+id="announcement-bar"
+>
 
-  <!-- ===== 2. NAVIGATION ===== -->
-  <nav class="navbar" id="navbar">
+<button
+class="announcement-bar__nav announcement-bar__nav--prev"
+aria-label="Aviso anterior"
+>
+‹
+</button>
 
-    <div class="navbar__inner">
 
-      <div class="navbar__left">
+<p
+class="announcement-bar__text"
+id="announcement-text"
+>
+TROCAS E DEVOLUÇÕES FÁCEIS
+</p>
 
-        <button
-          class="navbar__mobile-toggle"
-          id="mobile-toggle"
-          aria-label="Open menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
 
-        <ul class="navbar__menu">
+<button
+class="announcement-bar__nav announcement-bar__nav--next"
+aria-label="Próximo aviso"
+>
+›
+</button>
 
-          <li class="navbar__dropdown">
+</div>
 
-            <a href="collection.html" class="navbar__link">
-              Shop <span class="chevron">▾</span>
-            </a>
 
-            <div class="navbar__dropdown-menu">
 
-              <a href="collection.html" class="navbar__dropdown-item">
-                All Products
-              </a>
+<!-- =========================================
+     MENU
+     ========================================= -->
 
-              <a href="collection.html" class="navbar__dropdown-item">
-                Tops
-              </a>
+<nav
+class="navbar"
+id="navbar"
+>
 
-              <a href="collection.html" class="navbar__dropdown-item">
-                Bottoms
-              </a>
+<div class="navbar__inner">
 
-              <a href="collection.html" class="navbar__dropdown-item">
-                Accessories
-              </a>
-
-              <a href="collection.html" class="navbar__dropdown-item">
-                New Arrivals
-              </a>
-
-              <a href="collection.html" class="navbar__dropdown-item">
-                Best Sellers
-              </a>
-
-            </div>
-
-          </li>
-
-          <li>
-            <a href="#" class="navbar__link">Blog</a>
-          </li>
-
-          <li>
-            <a href="#" class="navbar__link">About</a>
-          </li>
-
-          <li>
-            <a href="#" class="navbar__link">FAQ</a>
-          </li>
 
-          <li>
-            <a href="#" class="navbar__link">Contact</a>
-          </li>
+<div class="navbar__left">
 
-        </ul>
 
-      </div>
+<button
+class="navbar__mobile-toggle"
+id="mobile-toggle"
+aria-label="Abrir menu"
+>
 
+<span></span>
 
-      <div class="navbar__center">
+<span></span>
 
-        <a href="index.html" class="navbar__logo">
-          ESSENCE
-        </a>
+<span></span>
 
-      </div>
+</button>
 
 
-      <div class="navbar__right">
 
-        <div class="navbar__currency">
-          <span>🌐</span>
-          <span>USD $</span>
-          <span class="chevron" style="font-size:10px;">▾</span>
-        </div>
-
-
-        <button
-          class="navbar__icon-btn"
-          id="search-btn"
-          aria-label="Search"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="11" cy="11" r="8"/>
-            <path d="m21 21-4.3-4.3"/>
-          </svg>
-        </button>
+<ul class="navbar__menu">
 
 
-        <button
-          class="navbar__icon-btn"
-          aria-label="Account"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </button>
-
-
-        <button
-          class="navbar__icon-btn"
-          id="cart-btn"
-          aria-label="Cart"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-            <path d="M3 6h18"/>
-            <path d="M16 10a4 4 0 0 1-8 0"/>
-          </svg>
+<li class="navbar__dropdown">
 
-          <span
-            class="navbar__cart-count"
-            id="cart-count"
-          >
-            0
-          </span>
 
-        </button>
+<a
+href="#hot-right-now"
+class="navbar__link"
+id="menu-loja-link"
+>
 
-      </div>
+Loja
 
-    </div>
+<span class="chevron">
+▾
+</span>
 
-  </nav>
+</a>
 
 
-  <!-- ===== 3. HERO SLIDER ===== -->
-  <section class="hero" id="hero">
 
-    <div class="hero__slides">
+<div class="navbar__dropdown-menu">
 
-      <div class="hero__slide active">
 
-        <img
-          src="assets/images/banner.png"
-          alt="Elegance in Every Movement - Model in gray activewear"
-        >
+<a
+href="#hot-right-now"
+class="navbar__dropdown-item"
+id="menu-all-products"
+>
 
-      </div>
+Todos os produtos
 
+</a>
 
-      <div class="hero__slide">
 
-        <img
-          src="assets/images/banner%202.png"
-          alt="Premium activewear collection"
-        >
+<div
+style="
+padding:10px 14px 5px;
+font-size:9px;
+font-weight:700;
+letter-spacing:1.2px;
+color:#999;
+text-transform:uppercase;
+"
+>
 
-      </div>
+Categorias
 
+</div>
 
-      <div class="hero__slide">
 
-        <img
-          src="assets/images/banner%203.png"
-          alt="Fitness collection"
-        >
+<div
+id="menu-category-links"
+></div>
 
-      </div>
 
-    </div>
 
+<div
+style="
+padding:12px 14px 5px;
+font-size:9px;
+font-weight:700;
+letter-spacing:1.2px;
+color:#999;
+text-transform:uppercase;
+border-top:1px solid #eee;
+margin-top:5px;
+"
+>
 
-    <div class="hero__nav">
+Coleções
 
-      <div class="hero__dots">
+</div>
 
-        <span
-          class="hero__dot active"
-          data-slide="0"
-        ></span>
 
-        <span
-          class="hero__dot"
-          data-slide="1"
-        ></span>
+<div
+id="menu-collection-links"
+></div>
 
-        <span
-          class="hero__dot"
-          data-slide="2"
-        ></span>
 
-      </div>
+</div>
 
 
-      <button
-        class="hero__nav-btn hero__nav-btn--prev"
-        aria-label="Previous slide"
-      >
-        ‹
-      </button>
+</li>
 
 
-      <button
-        class="hero__nav-btn hero__nav-btn--next"
-        aria-label="Next slide"
-      >
-        ›
-      </button>
 
-    </div>
+<li>
 
-  </section>
+<a
+href="#feature-banner"
+class="navbar__link"
+>
 
+Coleções
 
-  <!-- ===== 3.5. BENEFITS BAR ===== -->
-  <section
-    class="benefits-bar"
-    aria-label="Shopping benefits"
-  >
+</a>
 
-    <div class="benefits-bar__inner">
+</li>
 
-      <div class="benefit-item">
 
-        <div class="benefit-item__icon">
 
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="3" y="5" width="18" height="14" rx="2"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-            <line x1="7" y1="15" x2="10" y2="15"/>
-          </svg>
+<li>
 
-        </div>
+<a
+href="#hot-right-now"
+class="navbar__link"
+id="menu-products-link"
+>
 
-        <div class="benefit-item__content">
+Produtos
 
-          <strong>PARCELA EM</strong>
+</a>
 
-          <span>
-            4x sem juros no cartão
-          </span>
+</li>
 
-        </div>
 
-      </div>
 
+<li>
 
-      <div class="benefits-bar__divider"></div>
+<a
+href="#testimonials"
+class="navbar__link"
+>
 
+Avaliações
 
-      <div class="benefit-item">
+</a>
 
-        <div class="benefit-item__icon">
+</li>
 
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="1.5" y="6" width="13" height="11" rx="1"/>
-            <path d="M14.5 9h4l4 4v4h-8z"/>
-            <circle cx="6" cy="18" r="2"/>
-            <circle cx="18" cy="18" r="2"/>
-          </svg>
 
-        </div>
 
-        <div class="benefit-item__content">
+<li>
 
-          <strong>ENTREGA GARANTIDA</strong>
+<a
+href="#footer"
+class="navbar__link"
+>
 
-          <span>
-            Para todo o Brasil
-          </span>
+Contato
 
-        </div>
+</a>
 
-      </div>
+</li>
 
 
-      <div class="benefits-bar__divider"></div>
+</ul>
 
 
-      <div class="benefit-item">
+</div>
 
-        <div class="benefit-item__icon">
 
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="5" y="10" width="14" height="10" rx="2"/>
-            <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-            <circle cx="12" cy="15" r="1"/>
-            <line x1="12" y1="16" x2="12" y2="17"/>
-          </svg>
 
-        </div>
+<div class="navbar__center">
 
-        <div class="benefit-item__content">
+<a
+href="index.html"
+class="navbar__logo"
+>
 
-          <strong>COMPRA 100% SEGURA</strong>
+ESSENCE
 
-          <span>
-            Seus dados protegidos
-          </span>
+</a>
 
-        </div>
+</div>
 
-      </div>
 
 
-      <div class="benefits-bar__divider"></div>
+<div class="navbar__right">
 
 
-      <div class="benefit-item">
+<div class="navbar__currency">
 
-        <div class="benefit-item__icon">
+<span>
+🌐
+</span>
 
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M20.5 13.5 13.5 20.5 4 18l-2-8 7-7 8 2z"/>
-            <circle cx="8" cy="9" r="1.5"/>
-            <path d="M13 12l4 4"/>
-            <path d="M15 10l4 4"/>
-          </svg>
+<span>
+BRL R$
+</span>
 
-        </div>
+<span
+class="chevron"
+style="font-size:10px;"
+>
+▾
+</span>
 
-        <div class="benefit-item__content">
+</div>
 
-          <strong>PAGUE VIA PIX</strong>
 
-          <span>
-            Receba 5% de desconto
-          </span>
 
-        </div>
+<button
+class="navbar__icon-btn"
+id="search-btn"
+aria-label="Buscar"
+>
 
-      </div>
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
 
-    </div>
+<circle
+cx="11"
+cy="11"
+r="8"
+/>
 
-  </section>
+<path
+d="m21 21-4.3-4.3"
+/>
 
+</svg>
 
-  <!-- ===== 4. SHOP THE ESSENTIALS ===== -->
-  <section
-    class="section fade-in"
-    id="essentials"
-  >
+</button>
 
-    <div class="container">
 
-      <div class="section__header">
 
-        <h2 class="section__title">
-          SHOP THE ESSENTIALS
-        </h2>
+<button
+class="navbar__icon-btn"
+aria-label="Minha conta"
+>
 
-      </div>
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
 
+<path
+d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+/>
 
-      <div
-        class="categories-grid"
-        id="essence-categories"
-      >
+<circle
+cx="12"
+cy="7"
+r="4"
+/>
 
-        <div
-          style="
-            grid-column:1/-1;
-            text-align:center;
-            padding:40px 20px;
-            color:#777;
-          "
-        >
-          Carregando categorias...
-        </div>
+</svg>
 
-      </div>
+</button>
 
-    </div>
 
-  </section>
 
+<button
+class="navbar__icon-btn"
+id="cart-btn"
+aria-label="Carrinho"
+>
 
-  <!-- ===== 5. HOT RIGHT NOW ===== -->
-  <section
-    class="section fade-in"
-    id="hot-right-now"
-  >
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
 
-    <div class="container">
+<path
+d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+/>
 
-      <div class="section__header">
+<path
+d="M3 6h18"
+/>
 
-        <h2 class="section__title">
-          HOT RIGHT NOW
-        </h2>
+<path
+d="M16 10a4 4 0 0 1-8 0"
+/>
 
-        <a
-          href="collection.html"
-          class="section__link"
-        >
-          VIEW ALL <span>→</span>
-        </a>
+</svg>
 
-      </div>
 
+<span
+class="navbar__cart-count"
+id="cart-count"
+>
+0
+</span>
 
-      <div class="products-carousel">
 
-        <div
-          class="hot-products-grid"
-          id="products-track"
-        >
+</button>
 
-          <div
-            style="
-              grid-column:1/-1;
-              text-align:center;
-              padding:50px 20px;
-              color:#777;
-            "
-          >
-            Carregando produtos...
-          </div>
 
-        </div>
+</div>
 
-      </div>
 
-    </div>
+</div>
 
-  </section>
+</nav>
 
 
-  <!-- ===== 6. FEATURED PRODUCT / EDITORIAL ===== -->
-  <section
-    class="feature-banner fade-in"
-    id="feature-banner"
-  >
 
-    <div class="feature-editorial">
+<!-- =========================================
+     HERO
+     ========================================= -->
 
-      <div class="feature-editorial__gallery">
+<section
+class="hero"
+id="hero"
+>
 
-        <div class="feature-editorial__main-image">
 
-          <img
-            src="assets/images/feature-banner.jpg"
-            alt="FlexFit Freedom Collection"
-          >
+<div class="hero__slides">
 
-        </div>
 
+<div class="hero__slide active">
 
-        <div class="feature-editorial__side-images">
+<img
+src="assets/images/banner.png"
+alt="ESSENCE"
+/>
 
-          <div class="feature-editorial__side-image">
+</div>
 
-            <img
-              src="assets/images/product-4.jpg"
-              alt="ESSENCE activewear detail"
-            >
 
-          </div>
 
+<div class="hero__slide">
 
-          <div class="feature-editorial__side-image">
+<img
+src="assets/images/banner%202.png"
+alt="Coleção ESSENCE"
+/>
 
-            <img
-              src="assets/images/product-6.jpg"
-              alt="ESSENCE activewear collection"
-            >
+</div>
 
-          </div>
 
-        </div>
 
-      </div>
+<div class="hero__slide">
 
+<img
+src="assets/images/banner%203.png"
+alt="Moda feminina ESSENCE"
+/>
 
-      <div class="feature-editorial__content">
+</div>
 
-        <div class="feature-editorial__eyebrow">
 
-          <span class="feature-editorial__eyebrow-dot"></span>
+</div>
 
-          DESTAQUE DA SEMANA
 
-        </div>
 
+<div class="hero__nav">
 
-        <h2 class="feature-editorial__title">
-          FlexFit Freedom
-        </h2>
 
+<div class="hero__dots">
 
-        <p class="feature-editorial__subtitle">
-          Performance meets effortless elegance
-        </p>
 
+<span
+class="hero__dot active"
+data-slide="0"
+></span>
 
-        <p class="feature-editorial__description">
-          Descubra a coleção FlexFit, desenvolvida para acompanhar
-          cada movimento com conforto, sustentação e liberdade.
-          Uma combinação de tecnologia e estética minimalista para
-          você se sentir confiante dentro e fora dos treinos.
-        </p>
 
+<span
+class="hero__dot"
+data-slide="1"
+></span>
 
-        <div class="feature-editorial__price">
 
-          <span class="feature-editorial__price-main">
-            $79.00
-          </span>
+<span
+class="hero__dot"
+data-slide="2"
+></span>
 
-          <span class="feature-editorial__price-installments">
-            ou 4x sem juros
-          </span>
 
-        </div>
+</div>
 
 
-        <div class="feature-editorial__actions">
 
-          <a
-            href="product.html"
-            class="feature-editorial__button feature-editorial__button--primary"
-          >
-            COMPRAR AGORA
-          </a>
+<button
+class="hero__nav-btn hero__nav-btn--prev"
+aria-label="Anterior"
+>
 
+‹
 
-          <a
-            href="product.html"
-            class="feature-editorial__button feature-editorial__button--secondary"
-          >
-            VER DETALHES
-          </a>
+</button>
 
-        </div>
 
-      </div>
 
-    </div>
+<button
+class="hero__nav-btn hero__nav-btn--next"
+aria-label="Próximo"
+>
 
-  </section>
+›
 
+</button>
 
-  <!-- ===== 7. TESTIMONIALS ===== -->
-  <section
-    class="section testimonials fade-in"
-    id="testimonials"
-  >
 
-    <div class="container">
+</div>
 
-      <span class="testimonials__label">
-        TESTIMONIALS
-      </span>
 
+</section>
 
-      <h2 class="testimonials__title">
-        WHAT DO OUR CUSTOMERS SAY?
-      </h2>
 
 
-      <div class="testimonials__grid">
+<!-- =========================================
+     BENEFÍCIOS
+     ========================================= -->
 
-        <div class="testimonial-card">
+<section
+class="benefits-bar"
+aria-label="Benefícios da compra"
+>
 
-          <div class="testimonial-card__stars">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<div class="benefits-bar__inner">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<div class="benefit-item">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<div class="benefit-item__icon">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="1.5"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
 
-          </div>
+<rect
+x="3"
+y="5"
+width="18"
+height="14"
+rx="2"
+/>
 
+<line
+x1="3"
+y1="10"
+x2="21"
+y2="10"
+/>
 
-          <p class="testimonial-card__text">
-            "Absolutely love these leggings! The fabric is so soft and stretchy,
-            yet holds everything in place. Best activewear I've ever owned.
-            Will definitely be ordering more!"
-          </p>
+<line
+x1="7"
+y1="15"
+x2="10"
+y2="15"
+/>
 
+</svg>
 
-          <div class="testimonial-card__author">
+</div>
 
-            <div class="testimonial-card__avatar">
-              S
-            </div>
 
-            <div>
+<div class="benefit-item__content">
 
-              <div class="testimonial-card__name">
-                Sarah M.
-              </div>
+<strong>
+PARCELA EM
+</strong>
 
-              <div class="testimonial-card__verified">
-                ✓ Verified Buyer
-              </div>
+<span>
+4x sem juros no cartão
+</span>
 
-            </div>
+</div>
 
-          </div>
+</div>
 
-        </div>
 
 
-        <div class="testimonial-card">
+<div class="benefits-bar__divider"></div>
 
-          <div class="testimonial-card__stars">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<div class="benefit-item">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<div class="benefit-item__icon">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="1.5"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 3.25L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<rect
+x="1.5"
+y="6"
+width="13"
+height="11"
+rx="1"
+/>
 
-          </div>
+<path
+d="M14.5 9h4l4 4v4h-8z"
+/>
 
+<circle
+cx="6"
+cy="18"
+r="2"
+/>
 
-          <p class="testimonial-card__text">
-            "The sports bra is incredible — perfect support without feeling restrictive.
-            The colors are exactly as shown online. Shipping was fast and packaging was beautiful."
-          </p>
+<circle
+cx="18"
+cy="18"
+r="2"
+/>
 
+</svg>
 
-          <div class="testimonial-card__author">
+</div>
 
-            <div class="testimonial-card__avatar">
-              J
-            </div>
 
-            <div>
+<div class="benefit-item__content">
 
-              <div class="testimonial-card__name">
-                Jessica L.
-              </div>
+<strong>
+ENTREGA GARANTIDA
+</strong>
 
-              <div class="testimonial-card__verified">
-                ✓ Verified Buyer
-              </div>
+<span>
+Para todo o Brasil
+</span>
 
-            </div>
+</div>
 
-          </div>
+</div>
 
-        </div>
 
 
-        <div class="testimonial-card">
+<div class="benefits-bar__divider"></div>
 
-          <div class="testimonial-card__stars">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<div class="benefit-item">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<div class="benefit-item__icon">
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="1.5"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
 
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
+<rect
+x="5"
+y="10"
+width="14"
+height="10"
+rx="2"
+/>
 
-          </div>
+<path
+d="M8 10V7a4 4 0 0 1 8 0v3"
+/>
 
+<circle
+cx="12"
+cy="15"
+r="1"
+/>
 
-          <p class="testimonial-card__text">
-            "I've tried so many brands but Essence is on another level.
-            The quality, the fit, the design — everything is premium.
-            My go-to for gym and everyday wear now."
-          </p>
+<line
+x1="12"
+y1="16"
+x2="12"
+y2="17"
+/>
 
+</svg>
 
-          <div class="testimonial-card__author">
+</div>
 
-            <div class="testimonial-card__avatar">
-              A
-            </div>
 
-            <div>
+<div class="benefit-item__content">
 
-              <div class="testimonial-card__name">
-                Amanda K.
-              </div>
+<strong>
+COMPRA 100% SEGURA
+</strong>
 
-              <div class="testimonial-card__verified">
-                ✓ Verified Buyer
-              </div>
+<span>
+Seus dados protegidos
+</span>
 
-            </div>
+</div>
 
-          </div>
+</div>
 
-        </div>
 
-      </div>
 
-    </div>
+<div class="benefits-bar__divider"></div>
 
-  </section>
 
 
-  <!-- ===== 8. NEWSLETTER ===== -->
-  <section
-    class="newsletter"
-    id="newsletter"
-  >
+<div class="benefit-item">
 
-    <div class="container">
+<div class="benefit-item__icon">
 
-      <h2 class="newsletter__title">
-        JOIN THE ESSENCE COMMUNITY
-      </h2>
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="1.5"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
 
+<path
+d="M20.5 13.5 13.5 20.5 4 18l-2-8 7-7 8 2z"
+/>
 
-      <p class="newsletter__subtitle">
-        Subscribe to get exclusive offers, early access to new collections, and style tips.
-      </p>
+<circle
+cx="8"
+cy="9"
+r="1.5"
+/>
 
+<path
+d="M13 12l4 4"
+/>
 
-      <form
-        class="newsletter__form"
-        onsubmit="event.preventDefault(); alert('Thank you for subscribing!');"
-      >
+<path
+d="M15 10l4 4"
+/>
 
-        <input
-          type="email"
-          class="newsletter__input"
-          placeholder="Enter your email address"
-          required
-        >
+</svg>
 
-        <button
-          type="submit"
-          class="newsletter__submit"
-        >
-          SUBSCRIBE
-        </button>
+</div>
 
-      </form>
 
-    </div>
+<div class="benefit-item__content">
 
-  </section>
+<strong>
+PAGUE VIA PIX
+</strong>
 
+<span>
+Receba 5% de desconto
+</span>
 
-  <!-- ===== 9. FOOTER ===== -->
-  <footer
-    class="footer"
-    id="footer"
-  >
+</div>
 
-    <div class="container">
+</div>
 
-      <div class="footer__grid">
 
-        <div class="footer__brand">
+</div>
 
-          <div class="footer__brand-name">
-            ESSENCE
-          </div>
+</section>
 
-          <p class="footer__brand-desc">
-            Premium activewear designed for the modern woman.
-            Elegance in every movement, confidence in every step.
-          </p>
 
-          <div class="footer__socials">
 
-            <a
-              href="#"
-              class="footer__social-link"
-              aria-label="Instagram"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-              </svg>
-            </a>
+<!-- =========================================
+     CATEGORIAS
+     ========================================= -->
 
-            <a
-              href="#"
-              class="footer__social-link"
-              aria-label="Facebook"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
+<section
+class="section fade-in"
+id="essentials"
+>
 
-            <a
-              href="#"
-              class="footer__social-link"
-              aria-label="TikTok"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-              </svg>
-            </a>
 
-            <a
-              href="#"
-              class="footer__social-link"
-              aria-label="Pinterest"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.017 0C5.396.0.029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641 0 12.017 0z"/>
-              </svg>
-            </a>
+<div class="container">
 
-          </div>
 
-        </div>
+<div class="section__header">
 
+<h2 class="section__title">
 
-        <div>
+COMPRE POR CATEGORIA
 
-          <h4 class="footer__heading">
-            SHOP
-          </h4>
+</h2>
 
-          <div class="footer__links">
+</div>
 
-            <a href="collection.html" class="footer__link">
-              All Products
-            </a>
 
-            <a href="collection.html" class="footer__link">
-              Tops
-            </a>
 
-            <a href="collection.html" class="footer__link">
-              Bottoms
-            </a>
+<div
+class="categories-grid"
+id="essence-categories"
+>
 
-            <a href="collection.html" class="footer__link">
-              Accessories
-            </a>
 
-            <a href="collection.html" class="footer__link">
-              New Arrivals
-            </a>
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:40px 20px;
+color:#777;
+"
+>
 
-          </div>
+Carregando categorias...
 
-        </div>
+</div>
 
 
-        <div>
+</div>
 
-          <h4 class="footer__heading">
-            HELP
-          </h4>
 
-          <div class="footer__links">
+</div>
 
-            <a href="#" class="footer__link">
-              FAQ
-            </a>
 
-            <a href="#" class="footer__link">
-              Shipping & Returns
-            </a>
+</section>
 
-            <a href="#" class="footer__link">
-              Size Guide
-            </a>
 
-            <a href="#" class="footer__link">
-              Contact Us
-            </a>
 
-            <a href="#" class="footer__link">
-              Track Order
-            </a>
+<!-- =========================================
+     PRODUTOS
+     ========================================= -->
 
-          </div>
+<section
+class="section fade-in"
+id="hot-right-now"
+>
 
-        </div>
 
+<div class="container">
 
-        <div>
 
-          <h4 class="footer__heading">
-            COMPANY
-          </h4>
+<div class="section__header">
 
-          <div class="footer__links">
 
-            <a href="#" class="footer__link">
-              About Us
-            </a>
+<h2 class="section__title">
 
-            <a href="#" class="footer__link">
-              Sustainability
-            </a>
+PRODUTOS EM DESTAQUE
 
-            <a href="#" class="footer__link">
-              Careers
-            </a>
+</h2>
 
-            <a href="#" class="footer__link">
-              Press
-            </a>
 
-            <a href="#" class="footer__link">
-              Privacy Policy
-            </a>
+<a
+href="#hot-right-now"
+class="section__link"
+>
 
-          </div>
+VER TODOS
 
-        </div>
+<span>
+→
+</span>
 
-      </div>
+</a>
 
 
-      <div class="footer__bottom">
+</div>
 
-        <p class="footer__copyright">
 
-          © 2026 ESSENCE. All rights reserved. ·
 
-          <a
-            href="admin/index.html"
-            style="opacity:0.4;font-size:11px;"
-          >
-            Admin
-          </a>
+<div class="products-carousel">
 
-        </p>
 
+<div
+class="hot-products-grid"
+id="products-track"
+>
 
-        <div class="footer__payments">
 
-          <span class="footer__payment-icon">
-            VISA
-          </span>
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:50px 20px;
+color:#777;
+"
+>
 
-          <span class="footer__payment-icon">
-            MC
-          </span>
+Carregando produtos...
 
-          <span class="footer__payment-icon">
-            AMEX
-          </span>
+</div>
 
-          <span class="footer__payment-icon">
-            PAYPAL
-          </span>
 
-          <span class="footer__payment-icon">
-            APPLE
-          </span>
+</div>
 
-        </div>
 
-      </div>
+</div>
 
-    </div>
 
-  </footer>
+</div>
 
 
-  <!-- ===== CART SIDEBAR ===== -->
-  <div
-    class="cart-overlay"
-    id="cart-overlay"
-  ></div>
+</section>
 
 
-  <div
-    class="cart-sidebar"
-    id="cart-sidebar"
-  >
 
-    <div class="cart-sidebar__header">
+<!-- =========================================
+     COLEÇÃO EM DESTAQUE
+     ========================================= -->
 
-      <h3 class="cart-sidebar__title">
-        YOUR CART
-      </h3>
+<section
+class="feature-banner fade-in"
+id="feature-banner"
+>
 
 
-      <button
-        class="cart-sidebar__close"
-        id="cart-close"
-        aria-label="Close cart"
-      >
-        ✕
-      </button>
+<div
+id="featured-collection-loading"
+style="
+max-width:1320px;
+margin:0 auto;
+min-height:360px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#8a7a6f;
+font-size:12px;
+letter-spacing:1px;
+"
+>
 
-    </div>
+Carregando coleção em destaque...
 
+</div>
 
-    <div
-      class="cart-sidebar__body"
-      id="cart-body"
-    >
 
-      <div class="cart-sidebar__empty">
-        <p>Your cart is empty</p>
-      </div>
+</section>
 
-    </div>
 
 
-    <div class="cart-sidebar__footer">
+<!-- =========================================
+     AVALIAÇÕES
+     ========================================= -->
 
-      <div class="cart-sidebar__subtotal">
+<section
+class="section testimonials fade-in"
+id="testimonials"
+>
 
-        <span>
-          Subtotal
-        </span>
 
-        <span id="cart-subtotal">
-          $0.00
-        </span>
+<div class="container">
 
-      </div>
 
+<span class="testimonials__label">
 
-      <button class="btn btn--dark btn--full cart-sidebar__checkout">
-        CHECKOUT
-      </button>
+AVALIAÇÕES
 
-    </div>
+</span>
 
-  </div>
 
 
-  <!-- ===== MOBILE MENU ===== -->
-  <div
-    class="mobile-menu"
-    id="mobile-menu"
-  >
+<h2 class="testimonials__title">
 
-    <div class="mobile-menu__header">
+O QUE NOSSAS CLIENTES DIZEM?
 
-      <span class="navbar__logo">
-        ESSENCE
-      </span>
+</h2>
 
 
-      <button
-        class="mobile-menu__close"
-        id="mobile-close"
-        aria-label="Close menu"
-      >
-        ✕
-      </button>
 
-    </div>
+<div class="testimonials__grid">
 
 
-    <div class="mobile-menu__links">
+<div class="testimonial-card">
 
-      <a
-        href="collection.html"
-        class="mobile-menu__link"
-      >
-        Shop
-      </a>
 
-      <a
-        href="#"
-        class="mobile-menu__link"
-      >
-        Blog
-      </a>
+<div class="testimonial-card__stars">
 
-      <a
-        href="#"
-        class="mobile-menu__link"
-      >
-        About
-      </a>
+★★★★★
 
-      <a
-        href="#"
-        class="mobile-menu__link"
-      >
-        FAQ
-      </a>
+</div>
 
-      <a
-        href="#"
-        class="mobile-menu__link"
-      >
-        Contact
-      </a>
 
-    </div>
+<p class="testimonial-card__text">
 
-  </div>
+"Peças lindas e com ótimo caimento.
+A qualidade me surpreendeu e chegou tudo certinho."
 
+</p>
 
-  <!-- ===== SEARCH OVERLAY ===== -->
-  <div
-    class="search-overlay"
-    id="search-overlay"
-  >
 
-    <button
-      class="search-overlay__close"
-      id="search-close"
-      aria-label="Close search"
-    >
-      ✕
-    </button>
+<div class="testimonial-card__author">
 
+<div class="testimonial-card__avatar">
+M
+</div>
 
-    <div class="search-overlay__inner">
+<div>
 
-      <input
-        type="text"
-        class="search-overlay__input"
-        placeholder="Search products..."
-        autofocus
-      >
+<div class="testimonial-card__name">
+Mariana
+</div>
 
-    </div>
+<div class="testimonial-card__verified">
+✓ Compra verificada
+</div>
 
-  </div>
+</div>
 
+</div>
 
-  <!-- =========================================
-       SUPABASE
-       ========================================= -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</div>
 
-  <script>
 
-    window.supabaseClient =
-      window.supabase.createClient(
 
-        "https://gtmjxwcvqvtkuqzkvfsh.supabase.co",
+<div class="testimonial-card">
 
-        "sb_publishable_zBG1ioEJeME73TQtHhQnlw_eGhOasAc"
 
-      );
+<div class="testimonial-card__stars">
 
-    console.log(
-      "Supabase conectado na loja ✅"
-    );
+★★★★★
 
-  </script>
+</div>
 
 
-  <!-- JS ORIGINAL DO SITE -->
+<p class="testimonial-card__text">
 
-  <script src="js/main.js"></script>
+"Amei a experiência de compra.
+As peças são ainda mais bonitas pessoalmente."
 
+</p>
 
-  <!-- =========================================
-       PRODUTOS + CATEGORIAS REAIS DO SUPABASE
-       ========================================= -->
 
-  <script>
+<div class="testimonial-card__author">
 
-  (() => {
+<div class="testimonial-card__avatar">
+J
+</div>
 
-    let essenceProducts = [];
+<div>
 
+<div class="testimonial-card__name">
+Juliana
+</div>
 
-    /* =========================================
-       SEGURANÇA DO TEXTO
-       ========================================= */
+<div class="testimonial-card__verified">
+✓ Compra verificada
+</div>
 
-    function escapeHtml(value) {
+</div>
 
-      return String(value ?? "")
+</div>
 
-        .replace(
-          /&/g,
-          "&amp;"
-        )
 
-        .replace(
-          /</g,
-          "&lt;"
-        )
+</div>
 
-        .replace(
-          />/g,
-          "&gt;"
-        )
 
-        .replace(
-          /"/g,
-          "&quot;"
-        )
 
-        .replace(
-          /'/g,
-          "&#039;"
-        );
+<div class="testimonial-card">
 
-    }
 
+<div class="testimonial-card__stars">
 
-    /* =========================================
-       DINHEIRO
-       ========================================= */
+★★★★★
 
-    function money(value) {
+</div>
 
-      return Number(
-        value || 0
-      ).toLocaleString(
 
-        "pt-BR",
+<p class="testimonial-card__text">
 
-        {
-          style: "currency",
-          currency: "BRL"
-        }
+"Modelagens lindas, atendimento ótimo
+e peças que realmente valorizam o look."
 
-      );
+</p>
 
-    }
 
+<div class="testimonial-card__author">
 
-    /* =========================================
-       TAMANHOS
-       ========================================= */
+<div class="testimonial-card__avatar">
+A
+</div>
 
-    function getSizes(product) {
+<div>
 
-      const value =
-        product?.sizes;
+<div class="testimonial-card__name">
+Amanda
+</div>
 
+<div class="testimonial-card__verified">
+✓ Compra verificada
+</div>
 
-      if (
-        Array.isArray(value)
-      ) {
+</div>
 
-        return value;
+</div>
 
-      }
 
+</div>
 
-      if (
-        typeof value === "string"
-        &&
-        value.trim()
-      ) {
 
-        try {
+</div>
 
-          const parsed =
-            JSON.parse(value);
 
+</div>
 
-          if (
-            Array.isArray(parsed)
-          ) {
 
-            return parsed;
+</section>
 
-          }
 
-        }
 
-        catch (_) {
+<!-- =========================================
+     NEWSLETTER
+     ========================================= -->
 
-          return value
+<section
+class="newsletter"
+id="newsletter"
+>
 
-            .split(",")
 
-            .map(
-              item =>
-                item.trim()
-            )
+<div class="container">
 
-            .filter(Boolean);
 
-        }
+<h2 class="newsletter__title">
 
-      }
+FAÇA PARTE DA ESSENCE
 
+</h2>
 
-      return [];
 
-    }
+<p class="newsletter__subtitle">
 
+Receba novidades,
+lançamentos e ofertas especiais.
 
-    /* =========================================
-       IMAGEM
-       ========================================= */
+</p>
 
-    function productImage(product) {
 
-      return (
+<form
+class="newsletter__form"
+onsubmit="
+event.preventDefault();
+alert(
+'Obrigada por se cadastrar!'
+);
+"
+>
 
-        product?.image_url
 
-        ||
+<input
+type="email"
+class="newsletter__input"
+placeholder="Digite seu e-mail"
+required
+>
 
-        "assets/images/banner.png"
 
-      );
+<button
+type="submit"
+class="newsletter__submit"
+>
 
-    }
+CADASTRAR
 
+</button>
 
-    /* =========================================
-       PREÇO
-       ========================================= */
 
-    function getPrices(product) {
+</form>
 
-      const normalPrice =
-        Number(
-          product?.price || 0
-        );
 
+</div>
 
-      const promotionalPrice =
-        Number(
-          product?.compare_at_price || 0
-        );
 
+</section>
 
-      if (
-        promotionalPrice > 0
-        &&
-        promotionalPrice < normalPrice
-      ) {
 
-        return {
 
-          current:
-            promotionalPrice,
+<!-- =========================================
+     RODAPÉ
+     ========================================= -->
 
-          old:
-            normalPrice,
+<footer
+class="footer"
+id="footer"
+>
 
-          hasSale:
-            true
 
-        };
+<div class="container">
 
-      }
 
+<div class="footer__grid">
 
-      return {
 
-        current:
-          normalPrice,
+<div class="footer__brand">
 
-        old:
-          null,
 
-        hasSale:
-          false
+<div class="footer__brand-name">
 
-      };
+ESSENCE
 
-    }
+</div>
 
 
-    /* =========================================
-       DESCONTO
-       ========================================= */
+<p class="footer__brand-desc">
 
-    function discountPercentage(
-      normalPrice,
-      promotionalPrice
-    ) {
+Moda feminina pensada para unir
+elegância, conforto e personalidade.
 
-      if (
-        !normalPrice
-        ||
-        !promotionalPrice
-        ||
-        promotionalPrice >= normalPrice
-      ) {
+</p>
 
-        return 0;
 
-      }
+</div>
 
 
-      return Math.round(
 
-        (
-          (
-            normalPrice -
-            promotionalPrice
-          )
-          /
-          normalPrice
-        )
-        *
-        100
+<div>
 
-      );
 
-    }
+<h4 class="footer__heading">
 
+LOJA
 
-    /* =========================================
-       CRIA CARD DE PRODUTO
-       ========================================= */
+</h4>
 
-    function renderProductCard(product) {
 
-      const prices =
-        getPrices(product);
+<div class="footer__links">
 
 
-      const image =
-        productImage(product);
+<a
+href="#hot-right-now"
+class="footer__link"
+id="footer-all-products"
+>
 
+Todos os produtos
 
-      const sizes =
-        getSizes(product);
+</a>
 
 
-      const discount =
+<a
+href="#essentials"
+class="footer__link"
+>
 
-        prices.hasSale
+Categorias
 
-          ?
+</a>
 
-          discountPercentage(
-            prices.old,
-            prices.current
-          )
 
-          :
+<a
+href="#feature-banner"
+class="footer__link"
+>
 
-          0;
+Coleções
 
+</a>
 
-      const badge =
 
-        discount > 0
+</div>
 
-          ?
 
-          `
+</div>
 
-          <div class="product-card__badges">
 
-            <span class="badge badge--save">
-              -${discount}%
-            </span>
 
-          </div>
+<div>
 
-          `
 
-          :
+<h4 class="footer__heading">
 
-          `
+AJUDA
 
-          <div class="product-card__badges">
+</h4>
 
-            <span class="badge badge--new">
-              NEW
-            </span>
 
-          </div>
+<div class="footer__links">
 
-          `;
 
+<a
+href="#footer"
+class="footer__link"
+>
 
-      const priceHtml =
+Contato
 
-        prices.hasSale
+</a>
 
-          ?
 
-          `
+<a
+href="#footer"
+class="footer__link"
+>
 
-          <span
-            class="product-card__price product-card__price--sale"
-          >
-            ${money(prices.current)}
-          </span>
+Trocas e devoluções
 
-          <span
-            class="product-card__price product-card__price--original"
-          >
-            ${money(prices.old)}
-          </span>
+</a>
 
-          `
 
-          :
+<a
+href="#footer"
+class="footer__link"
+>
 
-          `
+Guia de tamanhos
 
-          <span class="product-card__price">
-            ${money(prices.current)}
-          </span>
+</a>
 
-          `;
 
+</div>
 
-      const sizesHtml =
 
-        sizes.length
+</div>
 
-          ?
 
-          `
 
-          <div class="product-card__sizes">
+<div>
 
-            ${
 
-              sizes
+<h4 class="footer__heading">
 
-                .map(
+ESSENCE
 
-                  size => `
+</h4>
 
-                    <span class="size-option">
 
-                      ${escapeHtml(size)}
+<div class="footer__links">
 
-                    </span>
 
-                  `
+<a
+href="#testimonials"
+class="footer__link"
+>
 
-                )
+Avaliações
 
-                .join("")
+</a>
 
-            }
 
-          </div>
+<a
+href="#newsletter"
+class="footer__link"
+>
 
-          `
+Novidades
 
-          :
+</a>
 
-          "";
 
+<a
+href="admin/index.html"
+class="footer__link"
+style="
+opacity:.45;
+"
+>
 
-      return `
+Admin
 
-        <div
-          class="product-card"
-          data-product-id="${escapeHtml(product.id)}"
-        >
+</a>
 
-          <div class="product-card__image">
 
-            <img
-              src="${escapeHtml(image)}"
-              alt="${escapeHtml(product.name)}"
-              loading="lazy"
-            >
+</div>
 
-            ${badge}
 
+</div>
 
-            <button
-              type="button"
-              class="product-card__quick-add"
-              aria-label="Adicionar ao carrinho"
-              onclick="
-                event.stopPropagation();
-                window.addEssenceProductToCart(
-                  '${escapeHtml(product.id)}'
-                );
-              "
-            >
 
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+</div>
 
-                <path
-                  d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
-                />
 
-                <path
-                  d="M3 6h18"
-                />
 
-                <path
-                  d="M16 10a4 4 0 0 1-8 0"
-                />
+<div class="footer__bottom">
 
-              </svg>
 
-            </button>
+<p class="footer__copyright">
 
-          </div>
+© 2026 ESSENCE.
+Todos os direitos reservados.
 
+</p>
 
-          <h3 class="product-card__title">
 
-            ${escapeHtml(product.name)}
+<div class="footer__payments">
 
-          </h3>
+<span class="footer__payment-icon">
+VISA
+</span>
 
+<span class="footer__payment-icon">
+MC
+</span>
 
-          <div class="product-card__prices">
+<span class="footer__payment-icon">
+PIX
+</span>
 
-            ${priceHtml}
+</div>
 
-          </div>
 
+</div>
 
-          ${sizesHtml}
 
-        </div>
+</div>
 
-      `;
 
-    }
+</footer>
 
 
-    /* =========================================
-       CARREGA PRODUTOS DO SUPABASE
-       ========================================= */
 
-    async function loadEssenceProducts() {
+<!-- =========================================
+     CARRINHO
+     ========================================= -->
 
-      const track =
-        document.getElementById(
-          "products-track"
-        );
+<div
+class="cart-overlay"
+id="cart-overlay"
+></div>
 
 
-      if (!track) {
+<div
+class="cart-sidebar"
+id="cart-sidebar"
+>
 
-        return;
 
-      }
+<div class="cart-sidebar__header">
 
 
-      track.innerHTML = `
+<h3 class="cart-sidebar__title">
 
-        <div
-          style="
-            grid-column:1/-1;
-            text-align:center;
-            padding:50px 20px;
-            color:#777;
-          "
-        >
-          Carregando produtos...
-        </div>
+SEU CARRINHO
 
-      `;
+</h3>
 
 
-      try {
+<button
+class="cart-sidebar__close"
+id="cart-close"
+aria-label="Fechar carrinho"
+>
 
-        const {
-          data,
-          error
-        } =
+✕
 
-          await window.supabaseClient
+</button>
 
-            .from(
-              "products"
-            )
 
-            .select(
-              "*"
-            )
+</div>
 
-            .eq(
-              "is_active",
-              true
-            )
 
-            .order(
-              "created_at",
-              {
-                ascending: false
-              }
-            );
 
+<div
+class="cart-sidebar__body"
+id="cart-body"
+>
 
-        if (error) {
 
-          throw error;
+<div class="cart-sidebar__empty">
 
-        }
+<p>
+Seu carrinho está vazio
+</p>
 
+</div>
 
-        essenceProducts =
 
-          Array.isArray(data)
+</div>
 
-            ?
 
-            data
 
-            :
+<div class="cart-sidebar__footer">
 
-            [];
 
+<div class="cart-sidebar__subtotal">
 
-        window.essenceProducts =
-          essenceProducts;
+<span>
+Subtotal
+</span>
 
+<span
+id="cart-subtotal"
+>
 
-        console.log(
-          "Produtos reais carregados ✅",
-          essenceProducts
-        );
+R$ 0,00
 
+</span>
 
-        if (
-          !essenceProducts.length
-        ) {
+</div>
 
-          track.innerHTML = `
 
-            <div
-              style="
-                grid-column:1/-1;
-                text-align:center;
-                padding:50px 20px;
-                color:#777;
-              "
-            >
-              Nenhum produto disponível.
-            </div>
+<button
+class="btn btn--dark btn--full cart-sidebar__checkout"
+>
 
-          `;
+FINALIZAR COMPRA
 
+</button>
 
-          return;
 
-        }
+</div>
 
 
-        track.innerHTML =
+</div>
 
-          essenceProducts
 
-            .map(
-              renderProductCard
-            )
 
-            .join("");
+<!-- =========================================
+     MENU MOBILE
+     ========================================= -->
 
+<div
+class="mobile-menu"
+id="mobile-menu"
+>
 
-      }
 
-      catch (error) {
+<div class="mobile-menu__header">
 
-        console.error(
-          "Erro ao carregar produtos:",
-          error
-        );
 
+<span class="navbar__logo">
 
-        track.innerHTML = `
+ESSENCE
 
-          <div
-            style="
-              grid-column:1/-1;
-              text-align:center;
-              padding:50px 20px;
-              color:#b91c1c;
-            "
-          >
-            Não foi possível carregar os produtos.
-          </div>
+</span>
 
-        `;
 
-      }
+<button
+class="mobile-menu__close"
+id="mobile-close"
+aria-label="Fechar menu"
+>
 
-    }
+✕
 
+</button>
 
-    /* =========================================
-       CATEGORIAS REAIS DO SUPABASE
-       ========================================= */
 
-    function renderStoreProducts(
-      list,
-      title = "HOT RIGHT NOW"
-    ) {
+</div>
 
-      const track =
-        document.getElementById(
-          "products-track"
-        );
 
-      const titleElement =
-        document.querySelector(
-          "#hot-right-now .section__title"
-        );
 
-      if (!track) {
-        return;
-      }
+<div class="mobile-menu__links">
 
-      if (titleElement) {
-        titleElement.textContent =
-          title;
-      }
 
-      if (
-        !Array.isArray(list)
-        ||
-        !list.length
-      ) {
+<a
+href="#hero"
+class="mobile-menu__link"
+>
 
-        track.innerHTML = `
+Início
 
-          <div
-            style="
-              grid-column:1/-1;
-              text-align:center;
-              padding:50px 20px;
-              color:#777;
-            "
-          >
-            Nenhum produto encontrado nesta categoria.
-          </div>
+</a>
 
-        `;
 
-        return;
+<a
+href="#hot-right-now"
+class="mobile-menu__link"
+id="mobile-all-products"
+>
 
-      }
+Todos os produtos
 
+</a>
 
-      track.innerHTML =
 
-        list
+<a
+href="#essentials"
+class="mobile-menu__link"
+>
 
-          .map(
-            renderProductCard
-          )
+Categorias
 
-          .join("");
+</a>
 
-    }
 
+<div
+id="mobile-category-links"
+style="
+padding-left:14px;
+display:flex;
+flex-direction:column;
+gap:4px;
+"
+></div>
 
-    function normalizeCategoryName(value) {
 
-      return String(
-        value || ""
-      )
 
-        .normalize(
-          "NFD"
-        )
+<a
+href="#feature-banner"
+class="mobile-menu__link"
+>
 
-        .replace(
-          /[\u0300-\u036f]/g,
-          ""
-        )
+Coleções
 
-        .trim()
+</a>
 
-        .toLowerCase();
 
-    }
+<div
+id="mobile-collection-links"
+style="
+padding-left:14px;
+display:flex;
+flex-direction:column;
+gap:4px;
+"
+></div>
 
 
-    function showAllStoreProducts() {
 
-      renderStoreProducts(
-        essenceProducts,
-        "HOT RIGHT NOW"
-      );
+<a
+href="#testimonials"
+class="mobile-menu__link"
+>
 
+Avaliações
 
-      document
-        .querySelectorAll(
-          "[data-store-category]"
-        )
-        .forEach(
-          card =>
-            card.classList.remove(
-              "is-active"
-            )
-        );
+</a>
 
-    }
 
+<a
+href="#footer"
+class="mobile-menu__link"
+>
 
-    window.showAllEssenceProducts =
-      showAllStoreProducts;
+Contato
 
+</a>
 
-    function filterStoreByCategory(
-      categoryName,
-      clickedCard = null
-    ) {
 
-      const normalized =
-        normalizeCategoryName(
-          categoryName
-        );
+</div>
 
 
-      const filtered =
+</div>
 
-        essenceProducts.filter(
-          product =>
 
-            normalizeCategoryName(
-              product.category
-            )
 
-            ===
+<!-- =========================================
+     BUSCA
+     ========================================= -->
 
-            normalized
-        );
+<div
+class="search-overlay"
+id="search-overlay"
+>
 
 
-      renderStoreProducts(
-        filtered,
-        String(
-          categoryName || "Produtos"
-        ).toUpperCase()
-      );
+<button
+class="search-overlay__close"
+id="search-close"
+aria-label="Fechar busca"
+>
 
+✕
 
-      document
-        .querySelectorAll(
-          "[data-store-category]"
-        )
-        .forEach(
-          card =>
-            card.classList.toggle(
-              "is-active",
-              card === clickedCard
-            )
-        );
+</button>
 
 
-      document
-        .getElementById(
-          "hot-right-now"
-        )
-        ?.scrollIntoView({
-          behavior:
-            "smooth",
+<div class="search-overlay__inner">
 
-          block:
-            "start"
-        });
 
-    }
+<input
+type="text"
+class="search-overlay__input"
+placeholder="Buscar produtos..."
+autofocus
+>
 
 
-    async function loadStorefrontCategories() {
+</div>
 
-      const container =
-        document.getElementById(
-          "essence-categories"
-        );
 
+</div>
 
-      if (!container) {
-        return;
-      }
 
 
-      try {
+<!-- =========================================
+     SUPABASE
+     ========================================= -->
 
-        const {
-          data,
-          error
-        } =
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
 
-          await window.supabaseClient
 
-            .from(
-              "categories"
-            )
+<script>
 
-            .select(
-              "*"
-            )
+window.supabaseClient =
 
-            .eq(
-              "is_active",
-              true
-            )
+window.supabase.createClient(
 
-            .order(
-              "created_at",
-              {
-                ascending: true
-              }
-            );
+"https://gtmjxwcvqvtkuqzkvfsh.supabase.co",
 
+"sb_publishable_zBG1ioEJeME73TQtHhQnlw_eGhOasAc"
 
-        if (error) {
-          throw error;
-        }
+);
 
 
-        const categories =
+console.log(
+"Supabase conectado na loja ✅"
+);
 
-          Array.isArray(data)
+</script>
 
-            ?
 
-            data
 
-            :
+<script src="js/main.js"></script>
 
-            [];
 
 
-        if (
-          !categories.length
-        ) {
+<script>
 
-          container.innerHTML = `
+(() => {
 
-            <div
-              style="
-                grid-column:1/-1;
-                text-align:center;
-                padding:40px 20px;
-                color:#777;
-              "
-            >
-              Nenhuma categoria disponível.
-            </div>
 
-          `;
+let essenceProducts = [];
 
 
-          return;
+let storefrontCollections = [];
 
-        }
 
+let storefrontCollectionProducts = {};
 
-        container.innerHTML =
 
-          categories
+let featuredCollectionIndex = 0;
 
-            .map(
-              category => {
 
 
-                const image =
+/* =========================================
+   UTILITÁRIOS
+   ========================================= */
 
-                  category.image_url
+function escapeHtml(value) {
 
-                  ||
 
-                  "assets/images/banner.png";
+return String(
+value ?? ""
+)
 
+.replace(
+/&/g,
+"&amp;"
+)
 
-                return `
+.replace(
+/</g,
+"&lt;"
+)
 
-                  <a
-                    href="#hot-right-now"
-                    class="category-card"
-                    data-store-category="${escapeHtml(category.name)}"
-                    aria-label="Ver produtos de ${escapeHtml(category.name)}"
-                  >
+.replace(
+/>/g,
+"&gt;"
+)
 
-                    <img
-                      src="${escapeHtml(image)}"
-                      alt="${escapeHtml(category.name)}"
-                      loading="lazy"
-                    >
+.replace(
+/"/g,
+"&quot;"
+)
 
+.replace(
+/'/g,
+"&#039;"
+);
 
-                    <div class="category-card__overlay">
 
-                      <span class="category-card__title">
+}
 
-                        ${escapeHtml(
-                          String(
-                            category.name || ""
-                          )
-                            .toUpperCase()
-                        )}
 
-                      </span>
 
-                    </div>
+function money(value) {
 
-                  </a>
 
-                `;
+return Number(
+value || 0
+)
 
-              }
-            )
+.toLocaleString(
 
-            .join("");
+"pt-BR",
 
+{
 
-        container
-          .querySelectorAll(
-            "[data-store-category]"
-          )
-          .forEach(
-            card => {
+style:
+"currency",
 
-              card.addEventListener(
-                "click",
-                event => {
+currency:
+"BRL"
 
-                  event.preventDefault();
+}
 
+);
 
-                  filterStoreByCategory(
 
-                    card.dataset.storeCategory,
+}
 
-                    card
 
-                  );
 
-                }
-              );
+function getSizes(product) {
 
-            }
-          );
 
+const value =
+product?.sizes;
 
-        console.log(
-          "Categorias reais carregadas ✅",
-          categories
-        );
 
+if (
+Array.isArray(
+value
+)
+) {
 
-      }
+return value;
 
-      catch (error) {
+}
 
-        console.error(
-          "Erro ao carregar categorias:",
-          error
-        );
 
+if (
 
-        container.innerHTML = `
+typeof value
+===
+"string"
 
-          <div
-            style="
-              grid-column:1/-1;
-              text-align:center;
-              padding:40px 20px;
-              color:#b91c1c;
-            "
-          >
-            Não foi possível carregar as categorias.
-          </div>
+&&
 
-        `;
+value.trim()
 
-      }
+) {
 
-    }
 
+try {
 
-    /* =========================================
-       VIEW ALL
-       ========================================= */
 
-    const viewAllLink =
-      document.querySelector(
-        "#hot-right-now .section__link"
-      );
+const parsed =
+JSON.parse(
+value
+);
 
 
-    if (viewAllLink) {
+if (
+Array.isArray(
+parsed
+)
+) {
 
-      viewAllLink.href =
-        "#hot-right-now";
+return parsed;
 
+}
 
-      viewAllLink.addEventListener(
-        "click",
-        event => {
 
-          event.preventDefault();
+}
 
+catch (_) {
 
-          showAllStoreProducts();
 
-        }
-      );
+return value
 
-    }
+.split(
+","
+)
 
+.map(
+item =>
+item.trim()
+)
 
+.filter(
+Boolean
+);
 
-    /* =========================================
-       CARRINHO
-       ========================================= */
 
-    const CART_KEY =
-      "essence_cart_v1";
+}
 
 
-    function getCart() {
+}
 
-      try {
 
-        return JSON.parse(
+return [];
 
-          localStorage.getItem(
-            CART_KEY
-          )
 
-          ||
+}
 
-          "[]"
 
-        );
 
-      }
+function productImage(product) {
 
-      catch (_) {
 
-        return [];
+return (
 
-      }
+product?.image_url
 
-    }
+||
 
+"assets/images/banner.png"
 
-    function saveCart(cart) {
+);
 
-      localStorage.setItem(
 
-        CART_KEY,
+}
 
-        JSON.stringify(cart)
 
-      );
 
+function getPrices(product) {
 
-      renderCart();
 
-    }
+const normalPrice =
 
+Number(
+product?.price || 0
+);
 
-    function openCart() {
 
-      document
-        .getElementById(
-          "cart-sidebar"
-        )
-        ?.classList
-        .add(
-          "active"
-        );
+const promotionalPrice =
 
+Number(
+product?.compare_at_price || 0
+);
 
-      document
-        .getElementById(
-          "cart-overlay"
-        )
-        ?.classList
-        .add(
-          "active"
-        );
 
-    }
+if (
 
+promotionalPrice > 0
 
-    function closeCart() {
+&&
 
-      document
-        .getElementById(
-          "cart-sidebar"
-        )
-        ?.classList
-        .remove(
-          "active"
-        );
+promotionalPrice < normalPrice
 
+) {
 
-      document
-        .getElementById(
-          "cart-overlay"
-        )
-        ?.classList
-        .remove(
-          "active"
-        );
 
-    }
+return {
 
 
-    function renderCart() {
+current:
+promotionalPrice,
 
-      const cart =
-        getCart();
 
+old:
+normalPrice,
 
-      const body =
-        document.getElementById(
-          "cart-body"
-        );
 
+hasSale:
+true
 
-      const countElement =
-        document.getElementById(
-          "cart-count"
-        );
 
+};
 
-      const subtotalElement =
-        document.getElementById(
-          "cart-subtotal"
-        );
 
+}
 
-      const count =
 
-        cart.reduce(
+return {
 
-          (
-            total,
-            item
-          ) =>
 
-            total
-            +
-            Number(
-              item.quantity || 0
-            ),
+current:
+normalPrice,
 
-          0
 
-        );
+old:
+null,
 
 
-      const subtotal =
+hasSale:
+false
 
-        cart.reduce(
 
-          (
-            total,
-            item
-          ) =>
+};
 
-            total
 
-            +
+}
 
-            (
-              Number(
-                item.price || 0
-              )
 
-              *
 
-              Number(
-                item.quantity || 0
-              )
-            ),
+function discountPercentage(
+normalPrice,
+promotionalPrice
+) {
 
-          0
 
-        );
+if (
 
+!normalPrice
 
-      if (
-        countElement
-      ) {
+||
 
-        countElement.textContent =
-          count;
+!promotionalPrice
 
-      }
+||
 
+promotionalPrice >= normalPrice
 
-      if (
-        subtotalElement
-      ) {
+) {
 
-        subtotalElement.textContent =
-          money(
-            subtotal
-          );
+return 0;
 
-      }
+}
 
 
-      if (!body) {
+return Math.round(
 
-        return;
+(
 
-      }
+(
+normalPrice
+-
+promotionalPrice
+)
 
+/
 
-      if (
-        !cart.length
-      ) {
+normalPrice
 
-        body.innerHTML = `
+)
 
-          <div class="cart-sidebar__empty">
+*
 
-            <p>
-              Seu carrinho está vazio
-            </p>
+100
 
-          </div>
+);
 
-        `;
 
+}
 
-        return;
 
-      }
 
+/* =========================================
+   CARD DE PRODUTO
+   ========================================= */
 
-      body.innerHTML =
+function renderProductCard(product) {
 
-        cart
 
-          .map(
+const prices =
+getPrices(
+product
+);
 
-            (
-              item,
-              index
-            ) => `
 
-              <div
-                style="
-                  display:grid;
-                  grid-template-columns:75px 1fr auto;
-                  gap:14px;
-                  padding:15px 0;
-                  border-bottom:1px solid #eee;
-                  align-items:center;
-                "
-              >
+const image =
+productImage(
+product
+);
 
-                <img
-                  src="${escapeHtml(item.image)}"
-                  alt="${escapeHtml(item.name)}"
-                  style="
-                    width:75px;
-                    height:90px;
-                    object-fit:cover;
-                    border-radius:4px;
-                  "
-                >
 
+const sizes =
+getSizes(
+product
+);
 
-                <div>
 
-                  <strong
-                    style="
-                      display:block;
-                      margin-bottom:6px;
-                      font-size:13px;
-                    "
-                  >
-                    ${escapeHtml(item.name)}
-                  </strong>
+const discount =
 
+prices.hasSale
 
-                  <span
-                    style="
-                      font-size:12px;
-                    "
-                  >
-                    ${money(item.price)}
-                  </span>
+?
 
+discountPercentage(
 
-                  <div
-                    style="
-                      display:flex;
-                      align-items:center;
-                      gap:9px;
-                      margin-top:10px;
-                    "
-                  >
+prices.old,
 
-                    <button
-                      type="button"
-                      onclick="
-                        window.changeEssenceCartQuantity(
-                          ${index},
-                          -1
-                        )
-                      "
-                    >
-                      −
-                    </button>
+prices.current
 
+)
 
-                    <span>
-                      ${item.quantity}
-                    </span>
+:
 
+0;
 
-                    <button
-                      type="button"
-                      onclick="
-                        window.changeEssenceCartQuantity(
-                          ${index},
-                          1
-                        )
-                      "
-                    >
-                      +
-                    </button>
 
-                  </div>
 
-                </div>
+const badge =
 
+discount > 0
 
-                <button
-                  type="button"
-                  onclick="
-                    window.removeEssenceCartItem(
-                      ${index}
-                    )
-                  "
-                  style="
-                    border:0;
-                    background:none;
-                    cursor:pointer;
-                    font-size:18px;
-                  "
-                  aria-label="Remover produto"
-                >
-                  ✕
-                </button>
+?
 
-              </div>
+`
 
-            `
+<div class="product-card__badges">
 
-          )
+<span class="badge badge--save">
 
-          .join("");
+-${discount}%
 
-    }
+</span>
 
+</div>
 
-    /* =========================================
-       ADICIONAR PRODUTO
-       ========================================= */
+`
 
-    window.addEssenceProductToCart =
-      function (id) {
+:
 
-        const product =
+`
 
-          essenceProducts.find(
+<div class="product-card__badges">
 
-            item =>
+<span class="badge badge--new">
 
-              String(item.id)
+NOVO
 
-              ===
+</span>
 
-              String(id)
+</div>
 
-          );
+`;
 
 
-        if (!product) {
 
-          return;
+const priceHtml =
 
-        }
+prices.hasSale
 
+?
 
-        const prices =
-          getPrices(product);
+`
 
+<span
+class="product-card__price product-card__price--sale"
+>
 
-        const cart =
-          getCart();
+${money(
+prices.current
+)}
 
+</span>
 
-        const existing =
 
-          cart.find(
+<span
+class="product-card__price product-card__price--original"
+>
 
-            item =>
+${money(
+prices.old
+)}
 
-              String(item.id)
+</span>
 
-              ===
+`
 
-              String(product.id)
+:
 
-          );
+`
 
+<span
+class="product-card__price"
+>
 
-        if (existing) {
+${money(
+prices.current
+)}
 
-          existing.quantity += 1;
+</span>
 
-        }
+`;
 
-        else {
 
-          cart.push({
 
-            id:
-              product.id,
+const sizesHtml =
 
-            name:
-              product.name,
+sizes.length
 
-            price:
-              prices.current,
+?
 
-            image:
-              productImage(
-                product
-              ),
+`
 
-            quantity:
-              1
+<div class="product-card__sizes">
 
-          });
+${
 
-        }
+sizes
 
+.map(
 
-        saveCart(
-          cart
-        );
+size => `
 
+<span class="size-option">
 
-        openCart();
+${escapeHtml(
+size
+)}
 
-    };
+</span>
 
+`
 
-    window.changeEssenceCartQuantity =
-      function (
-        index,
-        amount
-      ) {
+)
 
-        const cart =
-          getCart();
+.join(
+""
+)
 
+}
 
-        if (
-          !cart[index]
-        ) {
+</div>
 
-          return;
+`
 
-        }
+:
 
+"";
 
-        cart[index].quantity +=
-          amount;
 
 
-        if (
-          cart[index].quantity
-          <=
-          0
-        ) {
+return `
 
-          cart.splice(
-            index,
-            1
-          );
+<div
+class="product-card"
+data-product-id="${escapeHtml(product.id)}"
+>
 
-        }
 
+<div class="product-card__image">
 
-        saveCart(
-          cart
-        );
 
-    };
+<img
+src="${escapeHtml(image)}"
+alt="${escapeHtml(product.name)}"
+loading="lazy"
+>
 
 
-    window.removeEssenceCartItem =
-      function (index) {
+${badge}
 
-        const cart =
-          getCart();
 
 
-        cart.splice(
-          index,
-          1
-        );
+<button
+type="button"
+class="product-card__quick-add"
+aria-label="Adicionar ao carrinho"
+onclick="
+event.stopPropagation();
 
+window.addEssenceProductToCart(
+'${escapeHtml(product.id)}'
+);
+"
+>
 
-        saveCart(
-          cart
-        );
 
-    };
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+>
 
 
-    /* =========================================
-       BOTÕES DO CARRINHO
-       ========================================= */
+<path
+d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+/>
 
-    document
-      .getElementById(
-        "cart-btn"
-      )
-      ?.addEventListener(
-        "click",
-        openCart
-      );
 
+<path
+d="M3 6h18"
+/>
 
-    document
-      .getElementById(
-        "cart-close"
-      )
-      ?.addEventListener(
-        "click",
-        closeCart
-      );
 
+<path
+d="M16 10a4 4 0 0 1-8 0"
+/>
 
-    document
-      .getElementById(
-        "cart-overlay"
-      )
-      ?.addEventListener(
-        "click",
-        closeCart
-      );
 
+</svg>
 
-    /* =========================================
-       INICIAR
-       ========================================= */
 
-    async function initSupabaseStore() {
+</button>
 
-      renderCart();
 
+</div>
 
-      await Promise.all([
 
-        loadEssenceProducts(),
 
-        loadStorefrontCategories()
+<h3 class="product-card__title">
 
-      ]);
+${escapeHtml(
+product.name
+)}
 
-    }
+</h3>
 
 
-    if (
-      document.readyState
-      ===
-      "loading"
-    ) {
 
-      document.addEventListener(
+<div class="product-card__prices">
 
-        "DOMContentLoaded",
+${priceHtml}
 
-        initSupabaseStore
+</div>
 
-      );
 
-    }
 
-    else {
+${sizesHtml}
 
-      initSupabaseStore();
 
-    }
+</div>
 
+`;
 
-  })();
+}
 
-  </script>
+
+
+/* =========================================
+   PRODUTOS
+   ========================================= */
+
+async function loadEssenceProducts() {
+
+
+const track =
+
+document.getElementById(
+"products-track"
+);
+
+
+if (!track) {
+
+return;
+
+}
+
+
+
+track.innerHTML = `
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:50px 20px;
+color:#777;
+"
+>
+
+Carregando produtos...
+
+</div>
+
+`;
+
+
+
+try {
+
+
+const {
+data,
+error
+} =
+
+await window.supabaseClient
+
+.from(
+"products"
+)
+
+.select(
+"*"
+)
+
+.eq(
+"is_active",
+true
+)
+
+.order(
+"created_at",
+{
+ascending:
+false
+}
+);
+
+
+if (error) {
+
+throw error;
+
+}
+
+
+
+essenceProducts =
+
+Array.isArray(
+data
+)
+
+?
+
+data
+
+:
+
+[];
+
+
+
+window.essenceProducts =
+essenceProducts;
+
+
+
+if (
+!essenceProducts.length
+) {
+
+
+track.innerHTML = `
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:50px 20px;
+color:#777;
+"
+>
+
+Nenhum produto disponível.
+
+</div>
+
+`;
+
+
+return;
+
+}
+
+
+
+track.innerHTML =
+
+essenceProducts
+
+.map(
+renderProductCard
+)
+
+.join(
+""
+);
+
+
+}
+
+catch (error) {
+
+
+console.error(
+"Erro ao carregar produtos:",
+error
+);
+
+
+track.innerHTML = `
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:50px 20px;
+color:#b91c1c;
+"
+>
+
+Não foi possível carregar os produtos.
+
+</div>
+
+`;
+
+
+}
+
+
+}
+
+
+
+/* =========================================
+   FILTRAGEM
+   ========================================= */
+
+function renderStoreProducts(
+list,
+title = "PRODUTOS EM DESTAQUE"
+) {
+
+
+const track =
+
+document.getElementById(
+"products-track"
+);
+
+
+const titleElement =
+
+document.querySelector(
+"#hot-right-now .section__title"
+);
+
+
+
+if (!track) {
+
+return;
+
+}
+
+
+
+if (
+titleElement
+) {
+
+titleElement.textContent =
+title;
+
+}
+
+
+
+if (
+
+!Array.isArray(
+list
+)
+
+||
+
+!list.length
+
+) {
+
+
+track.innerHTML = `
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:50px 20px;
+color:#777;
+"
+>
+
+Nenhum produto encontrado nesta seleção.
+
+</div>
+
+`;
+
+
+return;
+
+}
+
+
+
+track.innerHTML =
+
+list
+
+.map(
+renderProductCard
+)
+
+.join(
+""
+);
+
+
+}
+
+
+
+function normalizeCategoryName(value) {
+
+
+return String(
+value || ""
+)
+
+.normalize(
+"NFD"
+)
+
+.replace(
+/[\u0300-\u036f]/g,
+""
+)
+
+.trim()
+
+.toLowerCase();
+
+
+}
+
+
+
+function showAllStoreProducts() {
+
+
+renderStoreProducts(
+
+essenceProducts,
+
+"PRODUTOS EM DESTAQUE"
+
+);
+
+
+document
+
+.querySelectorAll(
+"[data-store-category]"
+)
+
+.forEach(
+
+card =>
+
+card.classList.remove(
+"is-active"
+)
+
+);
+
+
+}
+
+
+
+window.showAllEssenceProducts =
+showAllStoreProducts;
+
+
+
+function filterStoreByCategory(
+categoryName,
+clickedCard = null
+) {
+
+
+const normalized =
+
+normalizeCategoryName(
+categoryName
+);
+
+
+
+const filtered =
+
+essenceProducts.filter(
+
+product =>
+
+normalizeCategoryName(
+product.category
+)
+
+===
+
+normalized
+
+);
+
+
+
+renderStoreProducts(
+
+filtered,
+
+String(
+categoryName || "Produtos"
+)
+.toUpperCase()
+
+);
+
+
+
+document
+
+.querySelectorAll(
+"[data-store-category]"
+)
+
+.forEach(
+
+card =>
+
+card.classList.toggle(
+
+"is-active",
+
+card === clickedCard
+
+)
+
+);
+
+
+
+document
+
+.getElementById(
+"hot-right-now"
+)
+
+?.scrollIntoView({
+
+behavior:
+"smooth",
+
+block:
+"start"
+
+});
+
+
+}
+
+
+
+function closeStoreMobileMenu() {
+
+
+document
+
+.getElementById(
+"mobile-menu"
+)
+
+?.classList
+
+.remove(
+"active"
+);
+
+
+}
+
+
+
+/* =========================================
+   CATEGORIAS NO MENU
+   ========================================= */
+
+function renderCategoryMenuLinks(
+categories
+) {
+
+
+const desktop =
+
+document.getElementById(
+"menu-category-links"
+);
+
+
+const mobile =
+
+document.getElementById(
+"mobile-category-links"
+);
+
+
+
+const desktopHtml =
+
+categories.length
+
+?
+
+categories
+
+.map(
+
+category => `
+
+<a
+href="#hot-right-now"
+class="navbar__dropdown-item"
+data-menu-category="${escapeHtml(category.name)}"
+>
+
+${escapeHtml(
+category.name
+)}
+
+</a>
+
+`
+
+)
+
+.join(
+""
+)
+
+:
+
+`
+
+<span
+style="
+display:block;
+padding:8px 14px;
+color:#999;
+font-size:11px;
+"
+>
+
+Nenhuma categoria
+
+</span>
+
+`;
+
+
+
+const mobileHtml =
+
+categories
+
+.map(
+
+category => `
+
+<a
+href="#hot-right-now"
+class="mobile-menu__link"
+data-mobile-category="${escapeHtml(category.name)}"
+style="
+font-size:12px;
+opacity:.78;
+padding-top:7px;
+padding-bottom:7px;
+"
+>
+
+${escapeHtml(
+category.name
+)}
+
+</a>
+
+`
+
+)
+
+.join(
+""
+);
+
+
+
+if (desktop) {
+
+desktop.innerHTML =
+desktopHtml;
+
+}
+
+
+if (mobile) {
+
+mobile.innerHTML =
+mobileHtml;
+
+}
+
+
+
+document
+
+.querySelectorAll(
+"[data-menu-category], [data-mobile-category]"
+)
+
+.forEach(
+
+link => {
+
+
+link.addEventListener(
+
+"click",
+
+event => {
+
+
+event.preventDefault();
+
+
+
+const categoryName =
+
+link.dataset.menuCategory
+
+||
+
+link.dataset.mobileCategory;
+
+
+
+filterStoreByCategory(
+categoryName
+);
+
+
+
+closeStoreMobileMenu();
+
+
+}
+
+);
+
+
+}
+
+);
+
+
+}
+
+
+
+async function loadStorefrontCategories() {
+
+
+const container =
+
+document.getElementById(
+"essence-categories"
+);
+
+
+
+try {
+
+
+const {
+data,
+error
+} =
+
+await window.supabaseClient
+
+.from(
+"categories"
+)
+
+.select(
+"*"
+)
+
+.eq(
+"is_active",
+true
+)
+
+.order(
+"created_at",
+{
+ascending:
+true
+}
+);
+
+
+
+if (error) {
+
+throw error;
+
+}
+
+
+
+const categories =
+
+Array.isArray(
+data
+)
+
+?
+
+data
+
+:
+
+[];
+
+
+
+renderCategoryMenuLinks(
+categories
+);
+
+
+
+if (!container) {
+
+return;
+
+}
+
+
+
+if (
+!categories.length
+) {
+
+
+container.innerHTML = `
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:40px 20px;
+color:#777;
+"
+>
+
+Nenhuma categoria disponível.
+
+</div>
+
+`;
+
+
+return;
+
+}
+
+
+
+container.innerHTML =
+
+categories
+
+.map(
+
+category => {
+
+
+const image =
+
+category.image_url
+
+||
+
+"assets/images/banner.png";
+
+
+
+return `
+
+<a
+href="#hot-right-now"
+class="category-card"
+data-store-category="${escapeHtml(category.name)}"
+aria-label="Ver produtos de ${escapeHtml(category.name)}"
+>
+
+
+<img
+src="${escapeHtml(image)}"
+alt="${escapeHtml(category.name)}"
+loading="lazy"
+>
+
+
+<div class="category-card__overlay">
+
+
+<span class="category-card__title">
+
+${escapeHtml(
+
+String(
+category.name || ""
+)
+.toUpperCase()
+
+)}
+
+</span>
+
+
+</div>
+
+
+</a>
+
+`;
+
+
+}
+
+)
+
+.join(
+""
+);
+
+
+
+container
+
+.querySelectorAll(
+"[data-store-category]"
+)
+
+.forEach(
+
+card => {
+
+
+card.addEventListener(
+
+"click",
+
+event => {
+
+
+event.preventDefault();
+
+
+
+filterStoreByCategory(
+
+card.dataset.storeCategory,
+
+card
+
+);
+
+
+}
+
+);
+
+
+}
+
+);
+
+
+}
+
+catch (error) {
+
+
+console.error(
+"Erro ao carregar categorias:",
+error
+);
+
+
+if (container) {
+
+
+container.innerHTML = `
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:40px 20px;
+color:#b91c1c;
+"
+>
+
+Não foi possível carregar as categorias.
+
+</div>
+
+`;
+
+
+}
+
+
+}
+
+
+}
+
+
+
+/* =========================================
+   COLEÇÕES
+   ========================================= */
+
+function getCollectionProductIds(
+collectionId
+) {
+
+
+return (
+
+storefrontCollectionProducts[
+
+String(
+collectionId
+)
+
+]
+
+||
+
+[]
+
+);
+
+
+}
+
+
+
+function getCollectionProducts(
+collectionId
+) {
+
+
+const ids =
+
+new Set(
+
+getCollectionProductIds(
+collectionId
+)
+
+.map(
+String
+)
+
+);
+
+
+
+return essenceProducts.filter(
+
+product =>
+
+ids.has(
+
+String(
+product.id
+)
+
+)
+
+);
+
+
+}
+
+
+
+/* =========================================
+   COLEÇÕES NO MENU
+   ========================================= */
+
+function renderCollectionMenuLinks() {
+
+
+const desktop =
+
+document.getElementById(
+"menu-collection-links"
+);
+
+
+const mobile =
+
+document.getElementById(
+"mobile-collection-links"
+);
+
+
+
+const desktopHtml =
+
+storefrontCollections.length
+
+?
+
+storefrontCollections
+
+.map(
+
+collection => `
+
+<a
+href="#hot-right-now"
+class="navbar__dropdown-item"
+data-menu-collection="${escapeHtml(collection.id)}"
+>
+
+${escapeHtml(
+collection.name
+)}
+
+</a>
+
+`
+
+)
+
+.join(
+""
+)
+
+:
+
+`
+
+<span
+style="
+display:block;
+padding:8px 14px;
+color:#999;
+font-size:11px;
+"
+>
+
+Nenhuma coleção
+
+</span>
+
+`;
+
+
+
+const mobileHtml =
+
+storefrontCollections
+
+.map(
+
+collection => `
+
+<a
+href="#hot-right-now"
+class="mobile-menu__link"
+data-mobile-collection="${escapeHtml(collection.id)}"
+style="
+font-size:12px;
+opacity:.78;
+padding-top:7px;
+padding-bottom:7px;
+"
+>
+
+${escapeHtml(
+collection.name
+)}
+
+</a>
+
+`
+
+)
+
+.join(
+""
+);
+
+
+
+if (desktop) {
+
+desktop.innerHTML =
+desktopHtml;
+
+}
+
+
+if (mobile) {
+
+mobile.innerHTML =
+mobileHtml;
+
+}
+
+
+
+document
+
+.querySelectorAll(
+"[data-menu-collection], [data-mobile-collection]"
+)
+
+.forEach(
+
+link => {
+
+
+link.addEventListener(
+
+"click",
+
+event => {
+
+
+event.preventDefault();
+
+
+
+const collectionId =
+
+link.dataset.menuCollection
+
+||
+
+link.dataset.mobileCollection;
+
+
+
+window.openEssenceCollection(
+collectionId
+);
+
+
+
+closeStoreMobileMenu();
+
+
+}
+
+);
+
+
+}
+
+);
+
+
+}
+
+
+
+/* =========================================
+   DESTAQUE DE COLEÇÃO
+   ========================================= */
+
+function renderFeaturedCollection(
+index = 0
+) {
+
+
+const section =
+
+document.getElementById(
+"feature-banner"
+);
+
+
+
+if (!section) {
+
+return;
+
+}
+
+
+
+if (
+!storefrontCollections.length
+) {
+
+
+section.style.display =
+"none";
+
+
+return;
+
+}
+
+
+
+section.style.display =
+"";
+
+
+
+featuredCollectionIndex =
+
+(
+
+index
+
++
+
+storefrontCollections.length
+
+)
+
+%
+
+storefrontCollections.length;
+
+
+
+const collection =
+
+storefrontCollections[
+featuredCollectionIndex
+];
+
+
+
+const collectionProducts =
+
+getCollectionProducts(
+collection.id
+);
+
+
+
+const mainImage =
+
+collection.image_url
+
+||
+
+collectionProducts[0]?.image_url
+
+||
+
+"assets/images/banner.png";
+
+
+
+const sideImageOne =
+
+collectionProducts[0]?.image_url
+
+||
+
+mainImage;
+
+
+
+const sideImageTwo =
+
+collectionProducts[1]?.image_url
+
+||
+
+collectionProducts[0]?.image_url
+
+||
+
+mainImage;
+
+
+
+const description =
+
+collection.description
+
+||
+
+"Uma seleção especial de peças escolhidas para compor esta coleção ESSENCE.";
+
+
+
+const productCount =
+collectionProducts.length;
+
+
+
+const nextButton =
+
+storefrontCollections.length > 1
+
+?
+
+`
+
+<button
+type="button"
+class="feature-editorial__button feature-editorial__button--secondary"
+onclick="
+window.nextEssenceFeaturedCollection()
+"
+>
+
+PRÓXIMA COLEÇÃO
+
+</button>
+
+`
+
+:
+
+"";
+
+
+
+section.innerHTML = `
+
+<div class="feature-editorial">
+
+
+<div class="feature-editorial__gallery">
+
+
+<div class="feature-editorial__main-image">
+
+
+<img
+src="${escapeHtml(mainImage)}"
+alt="${escapeHtml(collection.name)}"
+>
+
+
+</div>
+
+
+
+<div class="feature-editorial__side-images">
+
+
+<div class="feature-editorial__side-image">
+
+<img
+src="${escapeHtml(sideImageOne)}"
+alt="${escapeHtml(collection.name)}"
+>
+
+</div>
+
+
+
+<div class="feature-editorial__side-image">
+
+<img
+src="${escapeHtml(sideImageTwo)}"
+alt="${escapeHtml(collection.name)}"
+>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="feature-editorial__content">
+
+
+<div class="feature-editorial__eyebrow">
+
+
+<span class="feature-editorial__eyebrow-dot"></span>
+
+
+COLEÇÃO EM DESTAQUE
+
+
+</div>
+
+
+
+<h2 class="feature-editorial__title">
+
+${escapeHtml(
+collection.name
+)}
+
+</h2>
+
+
+
+<p class="feature-editorial__subtitle">
+
+${
+
+productCount === 1
+
+?
+
+"1 produto selecionado"
+
+:
+
+`${productCount} produtos selecionados`
+
+}
+
+</p>
+
+
+
+<p class="feature-editorial__description">
+
+${escapeHtml(
+description
+)}
+
+</p>
+
+
+
+<div class="feature-editorial__actions">
+
+
+<button
+type="button"
+class="feature-editorial__button feature-editorial__button--primary"
+onclick="
+window.openEssenceCollection(
+'${escapeHtml(collection.id)}'
+)
+"
+>
+
+VER COLEÇÃO
+
+</button>
+
+
+
+${nextButton}
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+`;
+
+
+}
+
+
+
+window.openEssenceCollection =
+
+function (
+collectionId
+) {
+
+
+const collection =
+
+storefrontCollections.find(
+
+item =>
+
+String(
+item.id
+)
+
+===
+
+String(
+collectionId
+)
+
+);
+
+
+
+if (!collection) {
+
+return;
+
+}
+
+
+
+const collectionProducts =
+
+getCollectionProducts(
+collection.id
+);
+
+
+
+renderStoreProducts(
+
+collectionProducts,
+
+String(
+collection.name || "Coleção"
+)
+.toUpperCase()
+
+);
+
+
+
+document
+
+.querySelectorAll(
+"[data-store-category]"
+)
+
+.forEach(
+
+card =>
+
+card.classList.remove(
+"is-active"
+)
+
+);
+
+
+
+document
+
+.getElementById(
+"hot-right-now"
+)
+
+?.scrollIntoView({
+
+behavior:
+"smooth",
+
+block:
+"start"
+
+});
+
+
+};
+
+
+
+window.nextEssenceFeaturedCollection =
+
+function () {
+
+
+renderFeaturedCollection(
+
+featuredCollectionIndex
++
+1
+
+);
+
+
+};
+
+
+
+async function loadStorefrontCollections() {
+
+
+try {
+
+
+const [
+collectionsResult,
+linksResult
+] =
+
+await Promise.all([
+
+
+window.supabaseClient
+
+.from(
+"collections"
+)
+
+.select(
+"*"
+)
+
+.eq(
+"is_active",
+true
+)
+
+.order(
+"created_at",
+{
+ascending:
+false
+}
+),
+
+
+
+window.supabaseClient
+
+.from(
+"collection_products"
+)
+
+.select(
+"collection_id,product_id"
+)
+
+
+]);
+
+
+
+if (
+collectionsResult.error
+) {
+
+throw collectionsResult.error;
+
+}
+
+
+
+if (
+linksResult.error
+) {
+
+throw linksResult.error;
+
+}
+
+
+
+storefrontCollections =
+
+Array.isArray(
+collectionsResult.data
+)
+
+?
+
+collectionsResult.data
+
+:
+
+[];
+
+
+
+storefrontCollectionProducts =
+{};
+
+
+
+(
+
+Array.isArray(
+linksResult.data
+)
+
+?
+
+linksResult.data
+
+:
+
+[]
+
+)
+
+.forEach(
+
+link => {
+
+
+const collectionId =
+
+String(
+link.collection_id
+);
+
+
+
+if (
+
+!storefrontCollectionProducts[
+collectionId
+]
+
+) {
+
+
+storefrontCollectionProducts[
+collectionId
+] =
+[];
+
+
+}
+
+
+
+storefrontCollectionProducts[
+collectionId
+]
+
+.push(
+
+String(
+link.product_id
+)
+
+);
+
+
+}
+
+);
+
+
+
+renderCollectionMenuLinks();
+
+
+
+renderFeaturedCollection(
+0
+);
+
+
+}
+
+catch (error) {
+
+
+console.error(
+"Erro ao carregar coleções:",
+error
+);
+
+
+
+const section =
+
+document.getElementById(
+"feature-banner"
+);
+
+
+
+if (section) {
+
+
+section.innerHTML = `
+
+<div
+style="
+max-width:1320px;
+margin:0 auto;
+padding:40px 20px;
+text-align:center;
+color:#8a7a6f;
+"
+>
+
+Não foi possível carregar as coleções.
+
+</div>
+
+`;
+
+
+}
+
+
+}
+
+
+}
+
+
+
+/* =========================================
+   VER TODOS
+   ========================================= */
+
+const viewAllLink =
+
+document.querySelector(
+"#hot-right-now .section__link"
+);
+
+
+
+if (viewAllLink) {
+
+
+viewAllLink.href =
+"#hot-right-now";
+
+
+viewAllLink.addEventListener(
+
+"click",
+
+event => {
+
+
+event.preventDefault();
+
+
+showAllStoreProducts();
+
+
+}
+
+);
+
+
+}
+
+
+
+[
+"menu-all-products",
+"menu-products-link",
+"mobile-all-products",
+"footer-all-products"
+]
+
+.forEach(
+
+id => {
+
+
+document
+
+.getElementById(
+id
+)
+
+?.addEventListener(
+
+"click",
+
+event => {
+
+
+event.preventDefault();
+
+
+
+showAllStoreProducts();
+
+
+
+document
+
+.getElementById(
+"hot-right-now"
+)
+
+?.scrollIntoView({
+
+behavior:
+"smooth",
+
+block:
+"start"
+
+});
+
+
+
+closeStoreMobileMenu();
+
+
+}
+
+);
+
+
+}
+
+);
+
+
+
+/* =========================================
+   CARRINHO
+   ========================================= */
+
+const CART_KEY =
+"essence_cart_v1";
+
+
+
+function getCart() {
+
+
+try {
+
+
+return JSON.parse(
+
+localStorage.getItem(
+CART_KEY
+)
+
+||
+
+"[]"
+
+);
+
+
+}
+
+catch (_) {
+
+
+return [];
+
+
+}
+
+
+}
+
+
+
+function saveCart(cart) {
+
+
+localStorage.setItem(
+
+CART_KEY,
+
+JSON.stringify(
+cart
+)
+
+);
+
+
+renderCart();
+
+
+}
+
+
+
+function openCart() {
+
+
+document
+
+.getElementById(
+"cart-sidebar"
+)
+
+?.classList
+
+.add(
+"active"
+);
+
+
+
+document
+
+.getElementById(
+"cart-overlay"
+)
+
+?.classList
+
+.add(
+"active"
+);
+
+
+}
+
+
+
+function closeCart() {
+
+
+document
+
+.getElementById(
+"cart-sidebar"
+)
+
+?.classList
+
+.remove(
+"active"
+);
+
+
+
+document
+
+.getElementById(
+"cart-overlay"
+)
+
+?.classList
+
+.remove(
+"active"
+);
+
+
+}
+
+
+
+function renderCart() {
+
+
+const cart =
+getCart();
+
+
+
+const body =
+
+document.getElementById(
+"cart-body"
+);
+
+
+
+const countElement =
+
+document.getElementById(
+"cart-count"
+);
+
+
+
+const subtotalElement =
+
+document.getElementById(
+"cart-subtotal"
+);
+
+
+
+const count =
+
+cart.reduce(
+
+(
+total,
+item
+) =>
+
+total
+
++
+
+Number(
+item.quantity || 0
+),
+
+0
+
+);
+
+
+
+const subtotal =
+
+cart.reduce(
+
+(
+total,
+item
+) =>
+
+total
+
++
+
+(
+
+Number(
+item.price || 0
+)
+
+*
+
+Number(
+item.quantity || 0
+)
+
+),
+
+0
+
+);
+
+
+
+if (
+countElement
+) {
+
+
+countElement.textContent =
+count;
+
+
+}
+
+
+
+if (
+subtotalElement
+) {
+
+
+subtotalElement.textContent =
+
+money(
+subtotal
+);
+
+
+}
+
+
+
+if (!body) {
+
+return;
+
+}
+
+
+
+if (
+!cart.length
+) {
+
+
+body.innerHTML = `
+
+<div class="cart-sidebar__empty">
+
+<p>
+Seu carrinho está vazio
+</p>
+
+</div>
+
+`;
+
+
+return;
+
+}
+
+
+
+body.innerHTML =
+
+cart
+
+.map(
+
+(
+item,
+index
+) => `
+
+<div
+style="
+display:grid;
+grid-template-columns:75px 1fr auto;
+gap:14px;
+padding:15px 0;
+border-bottom:1px solid #eee;
+align-items:center;
+"
+>
+
+
+<img
+src="${escapeHtml(item.image)}"
+alt="${escapeHtml(item.name)}"
+style="
+width:75px;
+height:90px;
+object-fit:cover;
+border-radius:4px;
+"
+>
+
+
+
+<div>
+
+
+<strong
+style="
+display:block;
+margin-bottom:6px;
+font-size:13px;
+"
+>
+
+${escapeHtml(
+item.name
+)}
+
+</strong>
+
+
+
+<span
+style="
+font-size:12px;
+"
+>
+
+${money(
+item.price
+)}
+
+</span>
+
+
+
+<div
+style="
+display:flex;
+align-items:center;
+gap:9px;
+margin-top:10px;
+"
+>
+
+
+<button
+type="button"
+onclick="
+window.changeEssenceCartQuantity(
+${index},
+-1
+)
+"
+>
+
+−
+
+</button>
+
+
+<span>
+
+${item.quantity}
+
+</span>
+
+
+<button
+type="button"
+onclick="
+window.changeEssenceCartQuantity(
+${index},
+1
+)
+"
+>
+
++
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+<button
+type="button"
+onclick="
+window.removeEssenceCartItem(
+${index}
+)
+"
+style="
+border:0;
+background:none;
+cursor:pointer;
+font-size:18px;
+"
+aria-label="Remover produto"
+>
+
+✕
+
+</button>
+
+
+</div>
+
+`
+
+)
+
+.join(
+""
+);
+
+
+}
+
+
+
+/* =========================================
+   ADICIONAR AO CARRINHO
+   ========================================= */
+
+window.addEssenceProductToCart =
+
+function (id) {
+
+
+const product =
+
+essenceProducts.find(
+
+item =>
+
+String(
+item.id
+)
+
+===
+
+String(
+id
+)
+
+);
+
+
+
+if (!product) {
+
+return;
+
+}
+
+
+
+const prices =
+getPrices(
+product
+);
+
+
+
+const cart =
+getCart();
+
+
+
+const existing =
+
+cart.find(
+
+item =>
+
+String(
+item.id
+)
+
+===
+
+String(
+product.id
+)
+
+);
+
+
+
+if (existing) {
+
+
+existing.quantity +=
+1;
+
+
+}
+
+else {
+
+
+cart.push({
+
+
+id:
+product.id,
+
+
+name:
+product.name,
+
+
+price:
+prices.current,
+
+
+image:
+productImage(
+product
+),
+
+
+quantity:
+1
+
+
+});
+
+
+}
+
+
+
+saveCart(
+cart
+);
+
+
+
+openCart();
+
+
+};
+
+
+
+window.changeEssenceCartQuantity =
+
+function (
+index,
+amount
+) {
+
+
+const cart =
+getCart();
+
+
+
+if (
+!cart[index]
+) {
+
+return;
+
+}
+
+
+
+cart[index].quantity +=
+amount;
+
+
+
+if (
+
+cart[index].quantity
+<=
+0
+
+) {
+
+
+cart.splice(
+index,
+1
+);
+
+
+}
+
+
+
+saveCart(
+cart
+);
+
+
+};
+
+
+
+window.removeEssenceCartItem =
+
+function (index) {
+
+
+const cart =
+getCart();
+
+
+
+cart.splice(
+index,
+1
+);
+
+
+
+saveCart(
+cart
+);
+
+
+};
+
+
+
+/* =========================================
+   EVENTOS DO CARRINHO
+   ========================================= */
+
+document
+
+.getElementById(
+"cart-btn"
+)
+
+?.addEventListener(
+"click",
+openCart
+);
+
+
+
+document
+
+.getElementById(
+"cart-close"
+)
+
+?.addEventListener(
+"click",
+closeCart
+);
+
+
+
+document
+
+.getElementById(
+"cart-overlay"
+)
+
+?.addEventListener(
+"click",
+closeCart
+);
+
+
+
+/* =========================================
+   INICIAR
+   ========================================= */
+
+async function initSupabaseStore() {
+
+
+renderCart();
+
+
+
+await loadEssenceProducts();
+
+
+
+await Promise.all([
+
+loadStorefrontCategories(),
+
+loadStorefrontCollections()
+
+]);
+
+
+}
+
+
+
+if (
+
+document.readyState
+===
+"loading"
+
+) {
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+initSupabaseStore
+
+);
+
+
+}
+
+else {
+
+
+initSupabaseStore();
+
+
+}
+
+
+})();
+
+</script>
+
 
 </body>
+
 </html>
