@@ -1,15 +1,8 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Produto — ESSENCE</title>
 
@@ -43,91 +36,239 @@
   <style>
 
     /* ========================================
-       AJUSTES DA PÁGINA DO PRODUTO
+       PÁGINA DO PRODUTO
        ======================================== */
 
     .product-detail {
-      padding-top: 38px;
+      padding: 42px 0 72px;
+      background: #fff;
     }
 
 
-    .product-detail__main-image {
-      aspect-ratio: 4 / 5;
-      background: #f4f1ee;
+    .product-detail__grid {
+
+      display: grid;
+
+      grid-template-columns:
+        82px
+        minmax(0, 1.18fr)
+        minmax(320px, .82fr);
+
+      grid-template-areas:
+        "thumbs main info";
+
+      gap: 22px;
+
+      align-items: start;
+
     }
 
 
-    .product-detail__main-image img {
-      width: 100%;
-      height: 100%;
+    .product-detail__thumbnails {
 
-      object-fit: cover;
-      display: block;
+      grid-area: thumbs;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+      max-height: 680px;
+
+      overflow: auto;
+
+      scrollbar-width: thin;
+
     }
 
 
     .product-detail__thumb {
+
+      width: 100%;
+
       aspect-ratio: 4 / 5;
+
+      border:
+        1px
+        solid
+        transparent;
+
+      border-radius: 5px;
+
       overflow: hidden;
+
+      cursor: pointer;
+
+      background: #f4f1ee;
+
+      opacity: .72;
+
+      transition: .2s;
+
+    }
+
+
+    .product-detail__thumb:hover,
+    .product-detail__thumb.active {
+
+      opacity: 1;
+
+      border-color: #4a3a32;
+
     }
 
 
     .product-detail__thumb img {
+
       width: 100%;
+
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+    }
+
+
+    .product-detail__main-image {
+
+      grid-area: main;
+
+      width: 100%;
+
+      aspect-ratio: 4 / 5;
+
+      overflow: hidden;
+
+      border-radius: 5px;
+
+      background: #f4f1ee;
+
+    }
+
+
+    .product-detail__main-image img {
+
+      width: 100%;
+
       height: 100%;
 
       object-fit: cover;
+
+      display: block;
+
+      transition:
+        opacity
+        .18s
+        ease;
+
+    }
+
+
+    .product-detail__info {
+
+      grid-area: info;
+
+      padding:
+        8px
+        0
+        0
+        18px;
+
+      position: sticky;
+
+      top: 95px;
+
+    }
+
+
+    .product-detail__breadcrumb {
+
+      font-size: 10px;
+
+      color: #9a908a;
+
+      margin:
+        0
+        0
+        18px;
+
+      line-height: 1.7;
+
+    }
+
+
+    .product-detail__breadcrumb a {
+
+      color: inherit;
+
+      text-decoration: none;
+
     }
 
 
     .product-detail__name {
-      line-height: 1.1;
-    }
 
+      font-size: 34px;
 
-    .product-detail__description {
-      margin: 22px 0 28px;
+      line-height: 1.12;
 
-      max-width: 540px;
+      font-weight: 500;
 
-      color: #6e625c;
+      color: #2f2925;
 
-      font-size: 13px;
+      margin: 0;
 
-      line-height: 1.8;
-
-      white-space: pre-line;
     }
 
 
     .product-detail__price-row {
+
       display: flex;
+
       align-items: center;
+
       flex-wrap: wrap;
 
       gap: 11px;
 
-      margin-top: 20px;
-      margin-bottom: 26px;
+      margin:
+        19px
+        0
+        24px;
+
     }
 
 
     .product-detail__price {
-      margin: 0;
+
+      font-size: 20px;
+
+      font-weight: 600;
+
+      color: #2f2925;
+
     }
 
 
     .product-detail__old-price {
+
       color: #9d9691;
 
       font-size: 14px;
 
       text-decoration: line-through;
+
     }
 
 
     .product-detail__discount {
-      padding: 5px 9px;
+
+      padding:
+        5px
+        9px;
 
       background: #f1e5df;
 
@@ -136,71 +277,327 @@
       border-radius: 100px;
 
       font-size: 9px;
+
       font-weight: 700;
 
-      letter-spacing: .5px;
     }
 
 
-    .product-detail__sizes {
-      margin-bottom: 25px;
+    .product-detail__description {
+
+      margin:
+        0
+        0
+        28px;
+
+      color: #6e625c;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      white-space: pre-line;
+
     }
 
 
-    .product-detail__size-btn.active {
+    /* ========================================
+       OPÇÕES
+       ======================================== */
+
+    .product-detail__option {
+
+      margin:
+        0
+        0
+        24px;
+
+    }
+
+
+    .product-detail__option-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .product-detail__option-label {
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 1.1px;
+
+      color: #3d342f;
+
+    }
+
+
+    .product-detail__selected-option {
+
+      font-size: 10px;
+
+      color: #8c8079;
+
+    }
+
+
+    .product-detail__options {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+    }
+
+
+    .product-detail__size-btn,
+    .product-detail__color-btn {
+
+      min-width: 46px;
+
+      height: 40px;
+
+      padding:
+        0
+        13px;
+
+      border:
+        1px
+        solid
+        #d8d2ce;
+
+      border-radius: 3px;
+
+      background: #fff;
+
+      color: #403733;
+
+      cursor: pointer;
+
+      font-size: 11px;
+
+      transition: .18s;
+
+    }
+
+
+    .product-detail__size-btn:hover,
+    .product-detail__color-btn:hover {
+
+      border-color: #5a463a;
+
+    }
+
+
+    .product-detail__size-btn.active,
+    .product-detail__color-btn.active {
+
       background: #332a26;
+
       border-color: #332a26;
 
       color: #fff;
+
     }
 
 
-    .product-detail__size-btn {
-      cursor: pointer;
+    /* ========================================
+       ESTOQUE
+       ======================================== */
+
+    .product-detail__stock {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      font-size: 11px;
+
+      color: #66735f;
+
+      margin:
+        2px
+        0
+        22px;
+
+    }
+
+
+    .product-detail__stock-dot {
+
+      width: 7px;
+
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #6b8f62;
+
     }
 
 
     .product-detail__stock--out {
+
       color: #a3473f;
+
     }
 
 
+    /* ========================================
+       QUANTIDADE
+       ======================================== */
+
+    .product-detail__quantity-label {
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 9px;
+
+    }
+
+
+    .product-detail__quantity {
+
+      display: flex;
+
+      align-items: center;
+
+      width: max-content;
+
+      border:
+        1px
+        solid
+        #d8d2ce;
+
+      border-radius: 3px;
+
+      margin-bottom: 20px;
+
+    }
+
+
+    .product-detail__qty-btn {
+
+      width: 42px;
+
+      height: 40px;
+
+      border: 0;
+
+      background: #fff;
+
+      cursor: pointer;
+
+      font-size: 18px;
+
+    }
+
+
+    .product-detail__qty-value {
+
+      width: 38px;
+
+      text-align: center;
+
+      font-size: 12px;
+
+    }
+
+
+    .product-detail__actions {
+
+      display: grid;
+
+      gap: 10px;
+
+    }
+
+
+    .product-detail__actions button:disabled {
+
+      opacity: .45;
+
+      cursor: not-allowed;
+
+    }
+
+
+    /* ========================================
+       LOADING / ERRO
+       ======================================== */
+
     .product-detail__loading {
+
       grid-column: 1 / -1;
 
-      padding: 100px 20px;
+      padding:
+        100px
+        20px;
 
       text-align: center;
 
       color: #777;
 
       font-size: 13px;
+
     }
 
 
     .product-detail__error {
+
+      grid-column: 1 / -1;
+
       max-width: 700px;
 
-      margin: 80px auto;
+      margin:
+        80px
+        auto;
 
-      padding: 50px 20px;
+      padding:
+        50px
+        20px;
 
       text-align: center;
+
     }
 
 
     .product-detail__error h2 {
+
       margin-bottom: 12px;
 
       font-size: 30px;
+
       font-weight: 500;
+
     }
 
 
     .product-detail__error p {
+
       margin-bottom: 25px;
 
       color: #777;
+
     }
 
 
@@ -209,27 +606,40 @@
        ======================================== */
 
     #related-products {
-      padding-top: 65px;
+
+      padding-top: 25px;
+
+      padding-bottom: 80px;
+
     }
 
 
     #related-products .section__title {
+
       text-transform: uppercase;
+
     }
 
 
     #related-products-track {
+
       display: grid;
 
       grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+        repeat(
+          4,
+          minmax(0, 1fr)
+        );
 
       gap: 24px;
+
     }
 
 
     #related-products-track .product-card {
+
       cursor: pointer;
+
     }
 
 
@@ -237,43 +647,329 @@
        CARRINHO
        ======================================== */
 
-    .essence-cart-size {
-      display: block;
+    body.essence-cart-open {
 
-      margin-top: 5px;
+      overflow: hidden;
+
+    }
+
+
+    #cart-overlay.cart-overlay {
+
+      position: fixed !important;
+
+      inset: 0 !important;
+
+      z-index: 9998 !important;
+
+      display: block !important;
+
+      background:
+        rgba(
+          0,
+          0,
+          0,
+          .42
+        ) !important;
+
+      opacity: 0 !important;
+
+      visibility:
+        hidden !important;
+
+      pointer-events:
+        none !important;
+
+      transition:
+        opacity .25s ease,
+        visibility .25s ease !important;
+
+    }
+
+
+    #cart-overlay.cart-overlay.active {
+
+      opacity: 1 !important;
+
+      visibility:
+        visible !important;
+
+      pointer-events:
+        auto !important;
+
+    }
+
+
+    #cart-sidebar.cart-sidebar {
+
+      position:
+        fixed !important;
+
+      top:
+        0 !important;
+
+      right:
+        0 !important;
+
+      bottom:
+        0 !important;
+
+      left:
+        auto !important;
+
+      width:
+        min(
+          430px,
+          92vw
+        ) !important;
+
+      height:
+        100vh !important;
+
+      z-index:
+        9999 !important;
+
+      display:
+        flex !important;
+
+      flex-direction:
+        column !important;
+
+      background:
+        #fff !important;
+
+      transform:
+        translateX(
+          105%
+        ) !important;
+
+      visibility:
+        visible !important;
+
+      transition:
+        transform
+        .28s
+        ease !important;
+
+      box-shadow:
+        -18px
+        0
+        50px
+        rgba(
+          0,
+          0,
+          0,
+          .13
+        ) !important;
+
+    }
+
+
+    #cart-sidebar.cart-sidebar.active {
+
+      transform:
+        translateX(
+          0
+        ) !important;
+
+    }
+
+
+    #cart-sidebar .cart-sidebar__header {
+
+      flex:
+        0
+        0
+        auto;
+
+    }
+
+
+    #cart-sidebar .cart-sidebar__body {
+
+      flex:
+        1
+        1
+        auto;
+
+      overflow: auto;
+
+    }
+
+
+    #cart-sidebar .cart-sidebar__footer {
+
+      flex:
+        0
+        0
+        auto;
+
+      background: #fff;
+
+    }
+
+
+    .essence-cart-meta {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 3px;
+
+      margin-top: 6px;
 
       color: #8b817b;
 
       font-size: 10px;
+
     }
 
+
+    .essence-cart-item-qty {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-top: 10px;
+
+    }
+
+
+    .essence-cart-item-qty button {
+
+      width: 27px;
+
+      height: 27px;
+
+      border:
+        1px
+        solid
+        #ddd;
+
+      background: #fff;
+
+      cursor: pointer;
+
+      border-radius: 2px;
+
+    }
+
+
+    /* ========================================
+       RESPONSIVO
+       ======================================== */
 
     @media (max-width: 900px) {
 
-      #related-products-track {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
+      .product-detail__grid {
 
-        gap: 20px 12px;
+        grid-template-columns:
+          72px
+          minmax(0, 1fr);
+
+        grid-template-areas:
+          "thumbs main"
+          "info info";
+
+      }
+
+
+      .product-detail__info {
+
+        position: static;
+
+        padding:
+          26px
+          0
+          0;
+
+      }
+
+
+      #related-products-track {
+
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+
+        gap:
+          20px
+          12px;
+
       }
 
     }
 
 
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
 
       .product-detail {
+
         padding-top: 20px;
+
       }
 
 
-      .product-detail__main-image {
-        aspect-ratio: 4 / 5;
+      .product-detail__grid {
+
+        grid-template-columns:
+          1fr;
+
+        grid-template-areas:
+          "main"
+          "thumbs"
+          "info";
+
+        gap: 12px;
+
+      }
+
+
+      .product-detail__thumbnails {
+
+        flex-direction: row;
+
+        max-height: none;
+
+        overflow-x: auto;
+
+      }
+
+
+      .product-detail__thumb {
+
+        flex:
+          0
+          0
+          72px;
+
+      }
+
+
+      .product-detail__info {
+
+        padding-top: 18px;
+
+      }
+
+
+      .product-detail__name {
+
+        font-size: 28px;
+
       }
 
 
       #related-products {
-        padding-top: 35px;
+
+        padding-top: 10px;
+
       }
 
     }
@@ -281,7 +977,6 @@
   </style>
 
 </head>
-
 
 
 <body>
@@ -351,23 +1046,30 @@
         </button>
 
 
+
         <ul class="navbar__menu">
 
 
           <li class="navbar__dropdown">
 
+
             <a
               href="index.html#hot-right-now"
               class="navbar__link"
             >
+
               Loja
+
               <span class="chevron">
                 ▾
               </span>
+
             </a>
 
 
+
             <div class="navbar__dropdown-menu">
+
 
               <a
                 href="index.html#hot-right-now"
@@ -376,12 +1078,14 @@
                 Todos os produtos
               </a>
 
+
               <a
                 href="index.html#essentials"
                 class="navbar__dropdown-item"
               >
                 Categorias
               </a>
+
 
               <a
                 href="index.html#feature-banner"
@@ -390,6 +1094,7 @@
                 Coleções
               </a>
 
+
               <a
                 href="index.html#novidades"
                 class="navbar__dropdown-item"
@@ -397,9 +1102,12 @@
                 Novidades
               </a>
 
+
             </div>
 
+
           </li>
+
 
 
           <li>
@@ -414,6 +1122,7 @@
           </li>
 
 
+
           <li>
 
             <a
@@ -426,6 +1135,7 @@
           </li>
 
 
+
           <li>
 
             <a
@@ -436,6 +1146,7 @@
             </a>
 
           </li>
+
 
 
           <li>
@@ -505,8 +1216,6 @@
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
           >
 
             <circle
@@ -535,8 +1244,6 @@
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
           >
 
             <path
@@ -566,8 +1273,6 @@
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
           >
 
             <path
@@ -592,6 +1297,7 @@
             0
           </span>
 
+
         </button>
 
 
@@ -615,16 +1321,21 @@
 
     <div class="container">
 
+
       <div
         class="product-detail__grid"
         id="product-detail-grid"
       >
 
         <div class="product-detail__loading">
+
           Carregando produto...
+
         </div>
 
+
       </div>
+
 
     </div>
 
@@ -647,19 +1358,27 @@
 
       <div class="section__header">
 
+
         <h2 class="section__title">
+
           VOCÊ TAMBÉM PODE GOSTAR
+
         </h2>
+
 
         <a
           href="index.html#hot-right-now"
           class="section__link"
         >
+
           VER TODOS
+
           <span>
             →
           </span>
+
         </a>
+
 
       </div>
 
@@ -693,14 +1412,21 @@
 
         <div class="footer__brand">
 
+
           <div class="footer__brand-name">
+
             ESSENCE
+
           </div>
 
+
           <p class="footer__brand-desc">
+
             Moda feminina selecionada para mulheres que
             valorizam elegância, estilo e personalidade.
+
           </p>
+
 
         </div>
 
@@ -708,11 +1434,16 @@
 
         <div>
 
+
           <h4 class="footer__heading">
+
             LOJA
+
           </h4>
 
+
           <div class="footer__links">
+
 
             <a
               href="index.html#hot-right-now"
@@ -721,12 +1452,14 @@
               Todos os produtos
             </a>
 
+
             <a
               href="index.html#essentials"
               class="footer__link"
             >
               Categorias
             </a>
+
 
             <a
               href="index.html#feature-banner"
@@ -735,6 +1468,7 @@
               Coleções
             </a>
 
+
             <a
               href="index.html#novidades"
               class="footer__link"
@@ -742,7 +1476,9 @@
               Novidades
             </a>
 
+
           </div>
+
 
         </div>
 
@@ -750,11 +1486,16 @@
 
         <div>
 
+
           <h4 class="footer__heading">
+
             AJUDA
+
           </h4>
 
+
           <div class="footer__links">
+
 
             <a
               href="#"
@@ -763,12 +1504,14 @@
               Trocas e devoluções
             </a>
 
+
             <a
               href="#"
               class="footer__link"
             >
               Guia de tamanhos
             </a>
+
 
             <a
               href="index.html#footer"
@@ -777,7 +1520,9 @@
               Contato
             </a>
 
+
           </div>
+
 
         </div>
 
@@ -785,11 +1530,16 @@
 
         <div>
 
+
           <h4 class="footer__heading">
+
             ESSENCE
+
           </h4>
 
+
           <div class="footer__links">
+
 
             <a
               href="index.html"
@@ -798,6 +1548,7 @@
               Início
             </a>
 
+
             <a
               href="index.html#testimonials"
               class="footer__link"
@@ -805,7 +1556,9 @@
               Avaliações
             </a>
 
+
           </div>
+
 
         </div>
 
@@ -816,9 +1569,14 @@
 
       <div class="footer__bottom">
 
+
         <p class="footer__copyright">
-          © 2026 ESSENCE. Todos os direitos reservados.
+
+          © 2026 ESSENCE.
+          Todos os direitos reservados.
+
         </p>
+
 
       </div>
 
@@ -839,6 +1597,7 @@
   ></div>
 
 
+
   <div
     class="cart-sidebar"
     id="cart-sidebar"
@@ -847,9 +1606,13 @@
 
     <div class="cart-sidebar__header">
 
+
       <h3 class="cart-sidebar__title">
+
         SUA SACOLA
+
       </h3>
+
 
       <button
         class="cart-sidebar__close"
@@ -858,6 +1621,7 @@
       >
         ✕
       </button>
+
 
     </div>
 
@@ -868,6 +1632,7 @@
       id="cart-body"
     >
 
+
       <div class="cart-sidebar__empty">
 
         <p>
@@ -876,31 +1641,44 @@
 
       </div>
 
+
     </div>
 
 
 
     <div class="cart-sidebar__footer">
 
+
       <div class="cart-sidebar__subtotal">
 
+
         <span>
+
           Subtotal
+
         </span>
 
-        <span id="cart-subtotal">
+
+        <span
+          id="cart-subtotal"
+        >
           R$ 0,00
         </span>
 
+
       </div>
+
 
 
       <button
         type="button"
         class="btn btn--dark btn--full cart-sidebar__checkout"
       >
+
         FINALIZAR COMPRA
+
       </button>
+
 
     </div>
 
@@ -918,11 +1696,16 @@
     id="mobile-menu"
   >
 
+
     <div class="mobile-menu__header">
 
+
       <span class="navbar__logo">
+
         ESSENCE
+
       </span>
+
 
       <button
         class="mobile-menu__close"
@@ -932,10 +1715,13 @@
         ✕
       </button>
 
+
     </div>
 
 
+
     <div class="mobile-menu__links">
+
 
       <a
         href="index.html"
@@ -944,12 +1730,14 @@
         Início
       </a>
 
+
       <a
         href="index.html#hot-right-now"
         class="mobile-menu__link"
       >
         Produtos
       </a>
+
 
       <a
         href="index.html#essentials"
@@ -958,12 +1746,14 @@
         Categorias
       </a>
 
+
       <a
         href="index.html#feature-banner"
         class="mobile-menu__link"
       >
         Coleções
       </a>
+
 
       <a
         href="index.html#novidades"
@@ -972,7 +1762,9 @@
         Novidades
       </a>
 
+
     </div>
+
 
   </div>
 
@@ -987,6 +1779,7 @@
     id="search-overlay"
   >
 
+
     <button
       class="search-overlay__close"
       id="search-close"
@@ -996,7 +1789,9 @@
     </button>
 
 
+
     <div class="search-overlay__inner">
+
 
       <input
         type="text"
@@ -1005,7 +1800,9 @@
         placeholder="Buscar produtos..."
       >
 
+
     </div>
+
 
   </div>
 
@@ -1018,6 +1815,7 @@
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
   ></script>
+
 
 
   <script>
@@ -1037,7 +1835,7 @@
 
 
   <!-- ========================================
-       PRODUTO DINÂMICO
+       PRODUTO
        ======================================== -->
 
   <script>
@@ -1045,11 +1843,20 @@
   (() => {
 
 
-    let currentProduct = null;
+    let currentProduct =
+      null;
 
-    let selectedSize = "";
 
-    let quantity = 1;
+    let selectedSize =
+      "";
+
+
+    let selectedColor =
+      "";
+
+
+    let quantity =
+      1;
 
 
     const CART_KEY =
@@ -1061,8 +1868,10 @@
        UTILITÁRIOS
        ======================================== */
 
+    function escapeHtml(
+      value
+    ) {
 
-    function escapeHtml(value) {
 
       return String(
         value ?? ""
@@ -1093,11 +1902,15 @@
         "&#039;"
       );
 
+
     }
 
 
 
-    function money(value) {
+    function money(
+      value
+    ) {
+
 
       return Number(
         value || 0
@@ -1108,23 +1921,25 @@
         "pt-BR",
 
         {
+
           style:
             "currency",
 
           currency:
             "BRL"
+
         }
 
       );
+
 
     }
 
 
 
-    function getSizes(product) {
-
-      const value =
-        product?.sizes;
+    function normalizeArray(
+      value
+    ) {
 
 
       if (
@@ -1133,20 +1948,47 @@
         )
       ) {
 
-        return value;
+
+        return value
+
+          .map(
+
+            item =>
+
+              String(
+                item ?? ""
+              )
+              .trim()
+
+          )
+
+          .filter(
+            Boolean
+          );
+
 
       }
 
 
+
       if (
-        typeof value === "string"
+
+        typeof value
+        ===
+        "string"
+
         &&
+
         value.trim()
+
       ) {
+
 
         try {
 
+
           const parsed =
+
             JSON.parse(
               value
             );
@@ -1158,50 +2000,96 @@
             )
           ) {
 
-            return parsed;
+
+            return normalizeArray(
+              parsed
+            );
+
 
           }
 
-        }
-
-        catch (_) {
-
-          return value
-
-            .split(",")
-
-            .map(
-              item =>
-                item.trim()
-            )
-
-            .filter(
-              Boolean
-            );
 
         }
+
+        catch (_) {}
+
+
+
+        return value
+
+          .split(
+            ","
+          )
+
+          .map(
+
+            item =>
+
+              item.trim()
+
+          )
+
+          .filter(
+            Boolean
+          );
+
 
       }
 
 
       return [];
 
+
     }
 
 
 
-    function getPrices(product) {
+    function getSizes(
+      product
+    ) {
+
+
+      return normalizeArray(
+        product?.sizes
+      );
+
+
+    }
+
+
+
+    function getColors(
+      product
+    ) {
+
+
+      return normalizeArray(
+        product?.colors
+      );
+
+
+    }
+
+
+
+    function getPrices(
+      product
+    ) {
+
 
       const normalPrice =
+
         Number(
           product?.price || 0
         );
 
 
       const promotionalPrice =
+
         Number(
           product?.compare_at_price || 0
         );
+
 
 
       if (
@@ -1214,6 +2102,7 @@
         normalPrice
 
       ) {
+
 
         return {
 
@@ -1228,7 +2117,9 @@
 
         };
 
+
       }
+
 
 
       return {
@@ -1244,6 +2135,7 @@
 
       };
 
+
     }
 
 
@@ -1253,10 +2145,15 @@
       currentPrice
     ) {
 
+
       if (
+
         !oldPrice
+
         ||
+
         !currentPrice
+
       ) {
 
         return 0;
@@ -1267,6 +2164,7 @@
       return Math.round(
 
         (
+
           (
             oldPrice
             -
@@ -1276,6 +2174,7 @@
           /
 
           oldPrice
+
         )
 
         *
@@ -1284,21 +2183,29 @@
 
       );
 
+
     }
 
 
 
-    function productImages(product) {
+    function productImages(
+      product
+    ) {
 
-      const images = [
 
-        product?.image_url,
+      const gallery =
 
-        product?.image_url_2,
+        normalizeArray(
+          product?.image_urls
+        );
 
-        product?.image_url_3,
 
-        product?.image_url_4
+
+      const all = [
+
+        ...gallery,
+
+        product?.image_url
 
       ]
 
@@ -1307,13 +2214,37 @@
       );
 
 
+
       return [
 
         ...new Set(
-          images
+          all
         )
 
       ];
+
+
+    }
+
+
+
+    function productCover(
+      product
+    ) {
+
+
+      return (
+
+        productImages(
+          product
+        )[0]
+
+        ||
+
+        "assets/images/banner.png"
+
+      );
+
 
     }
 
@@ -1323,10 +2254,10 @@
        ERRO
        ======================================== */
 
-
     function showProductError(
       message
     ) {
+
 
       const grid =
 
@@ -1342,11 +2273,11 @@
       }
 
 
+
       grid.innerHTML = `
 
         <div
           class="product-detail__error"
-          style="grid-column:1/-1;"
         >
 
           <h2>
@@ -1368,18 +2299,19 @@
 
       `;
 
+
     }
 
 
 
     /* ========================================
-       RENDERIZA PRODUTO
+       RENDER DO PRODUTO
        ======================================== */
-
 
     function renderProduct(
       product
     ) {
+
 
       currentProduct =
         product;
@@ -1389,8 +2321,13 @@
         "";
 
 
+      selectedColor =
+        "";
+
+
       quantity =
         1;
+
 
 
       const grid =
@@ -1409,6 +2346,7 @@
 
 
       const images =
+
         productImages(
           product
         );
@@ -1418,32 +2356,47 @@
         !images.length
       ) {
 
+
         images.push(
           "assets/images/banner.png"
         );
+
 
       }
 
 
 
       const sizes =
+
         getSizes(
           product
         );
 
 
+      const colors =
+
+        getColors(
+          product
+        );
+
+
       const prices =
+
         getPrices(
           product
         );
 
 
       const stock =
+
         Math.max(
+
           0,
+
           Number(
             product.stock || 0
           )
+
         );
 
 
@@ -1454,8 +2407,11 @@
         ?
 
         discountPercentage(
+
           prices.old,
+
           prices.current
+
         )
 
         :
@@ -1463,6 +2419,8 @@
         0;
 
 
+
+      /* MINIATURAS */
 
       const thumbnails =
 
@@ -1475,28 +2433,37 @@
             index
           ) => `
 
-            <div
+
+            <button
+              type="button"
               class="
                 product-detail__thumb
                 ${index === 0 ? "active" : ""}
               "
               data-product-image="${escapeHtml(image)}"
+              aria-label="Ver foto ${index + 1}"
             >
+
 
               <img
                 src="${escapeHtml(image)}"
-                alt="${escapeHtml(product.name)}"
+                alt="${escapeHtml(product.name)} - foto ${index + 1}"
               >
 
-            </div>
+
+            </button>
 
           `
 
         )
 
-        .join("");
+        .join(
+          ""
+        );
 
 
+
+      /* PREÇO */
 
       const priceHtml =
 
@@ -1506,30 +2473,28 @@
 
         `
 
-          <div
-            class="product-detail__price-row"
-          >
+          <div class="product-detail__price-row">
 
-            <div
-              class="product-detail__price"
-            >
+            <div class="product-detail__price">
+
               ${money(
                 prices.current
               )}
+
             </div>
 
-            <span
-              class="product-detail__old-price"
-            >
+            <span class="product-detail__old-price">
+
               ${money(
                 prices.old
               )}
+
             </span>
 
-            <span
-              class="product-detail__discount"
-            >
+            <span class="product-detail__discount">
+
               -${discount}%
+
             </span>
 
           </div>
@@ -1540,16 +2505,14 @@
 
         `
 
-          <div
-            class="product-detail__price-row"
-          >
+          <div class="product-detail__price-row">
 
-            <div
-              class="product-detail__price"
-            >
+            <div class="product-detail__price">
+
               ${money(
                 prices.current
               )}
+
             </div>
 
           </div>
@@ -1558,60 +2521,73 @@
 
 
 
-      const sizesHtml =
+      /* CORES */
 
-        sizes.length
+      const colorsHtml =
+
+        colors.length
 
         ?
 
         `
 
-          <div
-            class="product-detail__size-header"
-          >
+          <div class="product-detail__option">
 
-            <div
-              class="product-detail__option-label"
-            >
-              TAMANHO
+
+            <div class="product-detail__option-header">
+
+
+              <div class="product-detail__option-label">
+
+                COR
+
+              </div>
+
+
+              <span
+                class="product-detail__selected-option"
+                id="selected-color-label"
+              >
+                Selecione
+              </span>
+
+
             </div>
 
-            <span
-              class="product-detail__size-chart"
-            >
-              Guia de tamanhos
-            </span>
-
-          </div>
 
 
-          <div
-            class="product-detail__sizes"
-          >
+            <div class="product-detail__options">
 
-            ${
 
-              sizes
+              ${
 
-              .map(
+                colors
 
-                size => `
+                .map(
 
-                  <button
-                    type="button"
-                    class="product-detail__size-btn"
-                    data-size="${escapeHtml(size)}"
-                  >
-                    ${escapeHtml(size)}
-                  </button>
+                  color => `
 
-                `
+                    <button
+                      type="button"
+                      class="product-detail__color-btn"
+                      data-color="${escapeHtml(color)}"
+                    >
+                      ${escapeHtml(color)}
+                    </button>
 
-              )
+                  `
 
-              .join("")
+                )
 
-            }
+                .join(
+                  ""
+                )
+
+              }
+
+
+            </div>
+
 
           </div>
 
@@ -1623,6 +2599,86 @@
 
 
 
+      /* TAMANHOS */
+
+      const sizesHtml =
+
+        sizes.length
+
+        ?
+
+        `
+
+          <div class="product-detail__option">
+
+
+            <div class="product-detail__option-header">
+
+
+              <div class="product-detail__option-label">
+
+                TAMANHO
+
+              </div>
+
+
+              <span
+                class="product-detail__selected-option"
+                id="selected-size-label"
+              >
+                Selecione
+              </span>
+
+
+            </div>
+
+
+
+            <div class="product-detail__options">
+
+
+              ${
+
+                sizes
+
+                .map(
+
+                  size => `
+
+                    <button
+                      type="button"
+                      class="product-detail__size-btn"
+                      data-size="${escapeHtml(size)}"
+                    >
+                      ${escapeHtml(size)}
+                    </button>
+
+                  `
+
+                )
+
+                .join(
+                  ""
+                )
+
+              }
+
+
+            </div>
+
+
+          </div>
+
+        `
+
+        :
+
+        "";
+
+
+
+      /* ESTOQUE */
+
       const stockHtml =
 
         stock > 0
@@ -1631,13 +2687,9 @@
 
         `
 
-          <div
-            class="product-detail__stock"
-          >
+          <div class="product-detail__stock">
 
-            <span
-              class="product-detail__stock-dot"
-            ></span>
+            <span class="product-detail__stock-dot"></span>
 
             Em estoque
 
@@ -1655,7 +2707,9 @@
               product-detail__stock--out
             "
           >
+
             Produto indisponível
+
           </div>
 
         `;
@@ -1665,11 +2719,7 @@
       grid.innerHTML = `
 
 
-        <!-- MINIATURAS -->
-
-        <div
-          class="product-detail__thumbnails"
-        >
+        <div class="product-detail__thumbnails">
 
           ${thumbnails}
 
@@ -1677,11 +2727,8 @@
 
 
 
-        <!-- FOTO PRINCIPAL -->
+        <div class="product-detail__main-image">
 
-        <div
-          class="product-detail__main-image"
-        >
 
           <img
             src="${escapeHtml(images[0])}"
@@ -1689,52 +2736,49 @@
             id="main-product-image"
           >
 
+
         </div>
 
 
 
-        <!-- INFORMAÇÕES -->
-
-        <div
-          class="product-detail__info"
-        >
+        <div class="product-detail__info">
 
 
-          <p
-            class="product-detail__breadcrumb"
-          >
+          <p class="product-detail__breadcrumb">
 
-            <a
-              href="index.html"
-            >
+
+            <a href="index.html">
+
               Início
+
             </a>
+
 
             /
 
-            <a
-              href="index.html#hot-right-now"
-            >
+
+            <a href="index.html#hot-right-now">
+
               ${escapeHtml(
-                product.category
-                ||
-                "Produtos"
+                product.category || "Produtos"
               )}
+
             </a>
 
+
             /
+
 
             ${escapeHtml(
               product.name
             )}
 
+
           </p>
 
 
 
-          <h1
-            class="product-detail__name"
-          >
+          <h1 class="product-detail__name">
 
             ${escapeHtml(
               product.name
@@ -1748,21 +2792,27 @@
 
 
 
-          <p
-            class="product-detail__description"
-          >
+          <p class="product-detail__description">
 
-            ${escapeHtml(
+            ${
 
-              product.description
+              escapeHtml(
 
-              ||
+                product.description
 
-              "Peça selecionada pela ESSENCE para compor produções elegantes e versáteis."
+                ||
 
-            )}
+                "Peça selecionada pela ESSENCE para compor produções elegantes e versáteis."
+
+              )
+
+            }
 
           </p>
+
+
+
+          ${colorsHtml}
 
 
 
@@ -1774,17 +2824,16 @@
 
 
 
-          <div
-            class="product-detail__quantity-label"
-          >
+          <div class="product-detail__quantity-label">
+
             QUANTIDADE
+
           </div>
 
 
 
-          <div
-            class="product-detail__quantity"
-          >
+          <div class="product-detail__quantity">
+
 
             <button
               type="button"
@@ -1811,13 +2860,13 @@
               +
             </button>
 
+
           </div>
 
 
 
-          <div
-            class="product-detail__actions"
-          >
+          <div class="product-detail__actions">
+
 
             <button
               type="button"
@@ -1833,17 +2882,14 @@
 
               ${
                 stock > 0
-
                 ?
-
                 "ADICIONAR À SACOLA"
-
                 :
-
                 "PRODUTO INDISPONÍVEL"
               }
 
             </button>
+
 
 
             <button
@@ -1857,8 +2903,11 @@
               id="product-buy-now"
               ${stock <= 0 ? "disabled" : ""}
             >
+
               COMPRAR AGORA
+
             </button>
+
 
           </div>
 
@@ -1880,10 +2929,10 @@
                   letter-spacing:.7px;
                 "
               >
+
                 SKU:
-                ${escapeHtml(
-                  product.sku
-                )}
+                ${escapeHtml(product.sku)}
+
               </p>
 
             `
@@ -1917,6 +2966,7 @@
         descriptionMeta
       ) {
 
+
         descriptionMeta.content =
 
           product.description
@@ -1925,11 +2975,14 @@
 
           `${product.name} na ESSENCE.`;
 
+
       }
 
 
 
-      /* MINIATURAS */
+      /* ========================================
+         TROCAR FOTO
+         ======================================== */
 
       document
 
@@ -1941,16 +2994,19 @@
 
           thumb => {
 
+
             thumb.addEventListener(
 
               "click",
 
               () => {
 
+
                 const image =
 
                   thumb.dataset
                     .productImage;
+
 
 
                 const mainImage =
@@ -1960,16 +3016,44 @@
                   );
 
 
+
                 if (
+
                   mainImage
+
                   &&
+
                   image
+
                 ) {
 
-                  mainImage.src =
-                    image;
+
+                  mainImage.style.opacity =
+                    ".45";
+
+
+                  setTimeout(
+
+                    () => {
+
+
+                      mainImage.src =
+                        image;
+
+
+                      mainImage.style.opacity =
+                        "1";
+
+
+                    },
+
+                    90
+
+                  );
+
 
                 }
+
 
 
                 document
@@ -1980,22 +3064,27 @@
 
                   .forEach(
 
-                    item =>
+                    item => {
 
                       item.classList.remove(
                         "active"
-                      )
+                      );
+
+                    }
 
                   );
+
 
 
                 thumb.classList.add(
                   "active"
                 );
 
+
               }
 
             );
+
 
           }
 
@@ -2003,7 +3092,93 @@
 
 
 
-      /* TAMANHOS */
+      /* ========================================
+         CORES
+         ======================================== */
+
+      document
+
+        .querySelectorAll(
+          "[data-color]"
+        )
+
+        .forEach(
+
+          button => {
+
+
+            button.addEventListener(
+
+              "click",
+
+              () => {
+
+
+                selectedColor =
+
+                  button.dataset.color
+
+                  ||
+
+                  "";
+
+
+
+                document
+
+                  .querySelectorAll(
+                    "[data-color]"
+                  )
+
+                  .forEach(
+
+                    item => {
+
+                      item.classList.remove(
+                        "active"
+                      );
+
+                    }
+
+                  );
+
+
+
+                button.classList.add(
+                  "active"
+                );
+
+
+
+                const label =
+
+                  document.getElementById(
+                    "selected-color-label"
+                  );
+
+
+                if (label) {
+
+                  label.textContent =
+                    selectedColor;
+
+                }
+
+
+              }
+
+            );
+
+
+          }
+
+        );
+
+
+
+      /* ========================================
+         TAMANHOS
+         ======================================== */
 
       document
 
@@ -2015,11 +3190,13 @@
 
           button => {
 
+
             button.addEventListener(
 
               "click",
 
               () => {
+
 
                 selectedSize =
 
@@ -2030,6 +3207,7 @@
                   "";
 
 
+
                 document
 
                   .querySelectorAll(
@@ -2038,22 +3216,43 @@
 
                   .forEach(
 
-                    item =>
+                    item => {
 
                       item.classList.remove(
                         "active"
-                      )
+                      );
+
+                    }
 
                   );
+
 
 
                 button.classList.add(
                   "active"
                 );
 
+
+
+                const label =
+
+                  document.getElementById(
+                    "selected-size-label"
+                  );
+
+
+                if (label) {
+
+                  label.textContent =
+                    selectedSize;
+
+                }
+
+
               }
 
             );
+
 
           }
 
@@ -2061,7 +3260,9 @@
 
 
 
-      /* QUANTIDADE */
+      /* ========================================
+         QUANTIDADE
+         ======================================== */
 
       document
 
@@ -2075,15 +3276,20 @@
 
           () => {
 
+
             quantity =
 
               Math.max(
+
                 1,
+
                 quantity - 1
+
               );
 
 
             updateQuantity();
+
 
           }
 
@@ -2103,13 +3309,16 @@
 
           () => {
 
+
             quantity =
 
               Math.min(
 
                 stock > 0
-                  ? stock
-                  : 1,
+                ?
+                stock
+                :
+                1,
 
                 quantity + 1
 
@@ -2117,6 +3326,7 @@
 
 
             updateQuantity();
+
 
           }
 
@@ -2136,9 +3346,11 @@
 
           () => {
 
+
             addCurrentProductToCart(
               false
             );
+
 
           }
 
@@ -2158,19 +3370,23 @@
 
           () => {
 
+
             addCurrentProductToCart(
               true
             );
 
+
           }
 
         );
+
 
     }
 
 
 
     function updateQuantity() {
+
 
       const element =
 
@@ -2179,14 +3395,13 @@
         );
 
 
-      if (
-        element
-      ) {
+      if (element) {
 
         element.textContent =
           quantity;
 
       }
+
 
     }
 
@@ -2196,8 +3411,8 @@
        CARREGA PRODUTO
        ======================================== */
 
-
     async function loadProduct() {
+
 
       const params =
 
@@ -2213,15 +3428,19 @@
         );
 
 
+
       if (
         !productId
       ) {
+
 
         showProductError(
           "O link deste produto está incompleto."
         );
 
+
         return;
+
 
       }
 
@@ -2259,9 +3478,7 @@
 
 
 
-        if (
-          error
-        ) {
+        if (error) {
 
           throw error;
 
@@ -2273,11 +3490,14 @@
           !data
         ) {
 
+
           showProductError(
             "Este produto não está disponível no momento."
           );
 
+
           return;
+
 
         }
 
@@ -2313,20 +3533,22 @@
 
       }
 
+
     }
 
 
 
     /* ========================================
-       RELACIONADOS
+       PRODUTOS RELACIONADOS
        ======================================== */
-
 
     function renderRelatedCard(
       product
     ) {
 
+
       const prices =
+
         getPrices(
           product
         );
@@ -2334,11 +3556,9 @@
 
       const image =
 
-        product.image_url
-
-        ||
-
-        "assets/images/banner.png";
+        productCover(
+          product
+        );
 
 
       const discount =
@@ -2348,8 +3568,11 @@
         ?
 
         discountPercentage(
+
           prices.old,
+
           prices.current
+
         )
 
         :
@@ -2360,14 +3583,15 @@
 
       return `
 
+
         <div
           class="product-card"
           data-related-product="${escapeHtml(product.id)}"
         >
 
-          <div
-            class="product-card__image"
-          >
+
+          <div class="product-card__image">
+
 
             <img
               src="${escapeHtml(image)}"
@@ -2376,38 +3600,36 @@
             >
 
 
-            <div
-              class="product-card__badges"
-            >
+
+            <div class="product-card__badges">
+
 
               <span
                 class="
                   badge
                   ${
                     discount > 0
-                      ?
-                      "badge--save"
-                      :
-                      "badge--new"
+                    ?
+                    "badge--save"
+                    :
+                    "badge--new"
                   }
                 "
               >
 
                 ${
                   discount > 0
-
                   ?
-
                   `-${discount}%`
-
                   :
-
                   "NOVO"
                 }
 
               </span>
 
+
             </div>
+
 
 
             <button
@@ -2417,6 +3639,7 @@
               aria-label="Adicionar à sacola"
             >
 
+
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -2424,39 +3647,44 @@
                 stroke-width="2"
               >
 
+
                 <path
                   d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
                 />
+
 
                 <path
                   d="M3 6h18"
                 />
 
+
                 <path
                   d="M16 10a4 4 0 0 1-8 0"
                 />
 
+
               </svg>
 
+
             </button>
+
 
           </div>
 
 
 
-          <h3
-            class="product-card__title"
-          >
+          <h3 class="product-card__title">
+
             ${escapeHtml(
               product.name
             )}
+
           </h3>
 
 
 
-          <div
-            class="product-card__prices"
-          >
+          <div class="product-card__prices">
+
 
             ${
 
@@ -2472,10 +3700,13 @@
                     product-card__price--sale
                   "
                 >
+
                   ${money(
                     prices.current
                   )}
+
                 </span>
+
 
                 <span
                   class="
@@ -2483,9 +3714,11 @@
                     product-card__price--original
                   "
                 >
+
                   ${money(
                     prices.old
                   )}
+
                 </span>
 
               `
@@ -2494,23 +3727,26 @@
 
               `
 
-                <span
-                  class="product-card__price"
-                >
+                <span class="product-card__price">
+
                   ${money(
                     prices.current
                   )}
+
                 </span>
 
               `
 
             }
 
+
           </div>
+
 
         </div>
 
       `;
+
 
     }
 
@@ -2519,6 +3755,7 @@
     async function loadRelatedProducts(
       product
     ) {
+
 
       try {
 
@@ -2552,9 +3789,8 @@
             );
 
 
-        if (
-          error
-        ) {
+
+        if (error) {
 
           throw error;
 
@@ -2598,6 +3834,18 @@
 
 
 
+        const category =
+
+          String(
+            product.category || ""
+          )
+
+          .trim()
+
+          .toLowerCase();
+
+
+
         const sameCategory =
 
           others.filter(
@@ -2607,22 +3855,20 @@
               String(
                 item.category || ""
               )
-                .trim()
-                .toLowerCase()
+
+              .trim()
+
+              .toLowerCase()
 
               ===
 
-              String(
-                product.category || ""
-              )
-                .trim()
-                .toLowerCase()
+              category
 
           );
 
 
 
-        const differentCategory =
+        const rest =
 
           others.filter(
 
@@ -2652,7 +3898,7 @@
 
           ...sameCategory,
 
-          ...differentCategory
+          ...rest
 
         ]
 
@@ -2679,9 +3925,13 @@
 
 
         if (
+
           !section
+
           ||
+
           !track
+
         ) {
 
           return;
@@ -2694,10 +3944,13 @@
           !related.length
         ) {
 
+
           section.style.display =
             "none";
 
+
           return;
+
 
         }
 
@@ -2707,11 +3960,13 @@
 
           related
 
-            .map(
-              renderRelatedCard
-            )
+          .map(
+            renderRelatedCard
+          )
 
-            .join("");
+          .join(
+            ""
+          );
 
 
 
@@ -2730,11 +3985,13 @@
 
             card => {
 
+
               card.addEventListener(
 
                 "click",
 
                 () => {
+
 
                   const id =
 
@@ -2746,9 +4003,11 @@
 
                     `product.html?id=${encodeURIComponent(id)}`;
 
+
                 }
 
               );
+
 
             }
 
@@ -2766,19 +4025,23 @@
 
             button => {
 
+
               button.addEventListener(
 
                 "click",
 
                 event => {
 
+
                   event.stopPropagation();
+
 
 
                   const id =
 
                     button.dataset
                       .relatedQuick;
+
 
 
                   const relatedProduct =
@@ -2810,39 +4073,59 @@
 
 
 
-                  const sizes =
+                  const hasVariants =
 
                     getSizes(
                       relatedProduct
-                    );
+                    )
+                    .length
+
+                    ||
+
+                    getColors(
+                      relatedProduct
+                    )
+                    .length;
+
 
 
                   if (
-                    sizes.length
+                    hasVariants
                   ) {
+
 
                     window.location.href =
 
                       `product.html?id=${encodeURIComponent(id)}`;
 
+
                     return;
+
 
                   }
 
 
 
                   addProductToCart(
+
                     relatedProduct,
+
                     "",
+
+                    "",
+
                     1
+
                   );
 
 
                   openCart();
 
+
                 }
 
               );
+
 
             }
 
@@ -2864,6 +4147,7 @@
 
       }
 
+
     }
 
 
@@ -2872,30 +4156,50 @@
        CARRINHO
        ======================================== */
 
-
     function getCart() {
+
 
       try {
 
-        return JSON.parse(
 
-          localStorage.getItem(
-            CART_KEY
-          )
+        const data =
 
-          ||
+          JSON.parse(
 
-          "[]"
+            localStorage.getItem(
+              CART_KEY
+            )
 
-        );
+            ||
+
+            "[]"
+
+          );
+
+
+        return Array.isArray(
+          data
+        )
+
+        ?
+
+        data
+
+        :
+
+        [];
+
 
       }
 
       catch (_) {
 
+
         return [];
 
+
       }
+
 
     }
 
@@ -2904,6 +4208,7 @@
     function saveCart(
       cart
     ) {
+
 
       localStorage.setItem(
 
@@ -2918,24 +4223,47 @@
 
       renderCart();
 
+
     }
 
 
 
     function addProductToCart(
+
       product,
+
       size = "",
+
+      color = "",
+
       amount = 1
+
     ) {
 
+
       const prices =
+
         getPrices(
           product
         );
 
 
       const cart =
+
         getCart();
+
+
+      const stock =
+
+        Math.max(
+
+          0,
+
+          Number(
+            product.stock || 0
+          )
+
+        );
 
 
 
@@ -2967,6 +4295,18 @@
               size || ""
             )
 
+            &&
+
+            String(
+              item.color || ""
+            )
+
+            ===
+
+            String(
+              color || ""
+            )
+
         );
 
 
@@ -2975,36 +4315,94 @@
         existing
       ) {
 
-        existing.quantity +=
+
+        const desired =
+
+          Number(
+            existing.quantity || 0
+          )
+
+          +
+
           amount;
+
+
+
+        existing.quantity =
+
+          stock > 0
+
+          ?
+
+          Math.min(
+            desired,
+            stock
+          )
+
+          :
+
+          desired;
+
+
+        existing.stock =
+          stock;
+
 
       }
 
       else {
 
+
         cart.push({
+
 
           id:
             product.id,
 
+
           name:
             product.name,
+
 
           price:
             prices.current,
 
+
           image:
-            product.image_url
-            ||
-            "assets/images/banner.png",
+            productCover(
+              product
+            ),
+
 
           size:
             size || null,
 
+
+          color:
+            color || null,
+
+
           quantity:
-            amount
+
+            stock > 0
+
+            ?
+
+            Math.min(
+              amount,
+              stock
+            )
+
+            :
+
+            amount,
+
+
+          stock
+
 
         });
+
 
       }
 
@@ -3014,6 +4412,7 @@
         cart
       );
 
+
     }
 
 
@@ -3021,6 +4420,7 @@
     function addCurrentProductToCart(
       buyNow
     ) {
+
 
       if (
         !currentProduct
@@ -3033,23 +4433,61 @@
 
 
       const sizes =
+
         getSizes(
+          currentProduct
+        );
+
+
+      const colors =
+
+        getColors(
           currentProduct
         );
 
 
 
       if (
-        sizes.length
+
+        colors.length
+
         &&
-        !selectedSize
+
+        !selectedColor
+
       ) {
+
+
+        alert(
+          "Selecione uma cor."
+        );
+
+
+        return;
+
+
+      }
+
+
+
+      if (
+
+        sizes.length
+
+        &&
+
+        !selectedSize
+
+      ) {
+
 
         alert(
           "Selecione um tamanho."
         );
 
+
         return;
+
 
       }
 
@@ -3060,6 +4498,8 @@
         currentProduct,
 
         selectedSize,
+
+        selectedColor,
 
         quantity
 
@@ -3076,17 +4516,27 @@
       ) {
 
         /*
-         * Por enquanto abre a sacola.
-         * Depois ligaremos ao checkout.
+         * Na próxima etapa este botão
+         * seguirá direto para o checkout.
          */
 
       }
+
 
     }
 
 
 
+    /* ========================================
+       ABRIR / FECHAR CARRINHO
+       ======================================== */
+
     function openCart() {
+
+
+      renderCart();
+
+
 
       document
 
@@ -3095,9 +4545,11 @@
         )
 
         ?.classList
+
         .add(
           "active"
         );
+
 
 
       document
@@ -3107,9 +4559,21 @@
         )
 
         ?.classList
+
         .add(
           "active"
         );
+
+
+
+      document.body
+
+        .classList
+
+        .add(
+          "essence-cart-open"
+        );
+
 
     }
 
@@ -3117,6 +4581,7 @@
 
     function closeCart() {
 
+
       document
 
         .getElementById(
@@ -3124,9 +4589,11 @@
         )
 
         ?.classList
+
         .remove(
           "active"
         );
+
 
 
       document
@@ -3136,18 +4603,37 @@
         )
 
         ?.classList
+
         .remove(
           "active"
         );
+
+
+
+      document.body
+
+        .classList
+
+        .remove(
+          "essence-cart-open"
+        );
+
 
     }
 
 
 
+    /* ========================================
+       RENDER DO CARRINHO
+       ======================================== */
+
     function renderCart() {
 
+
       const cart =
+
         getCart();
+
 
 
       const body =
@@ -3208,16 +4694,14 @@
 
             +
 
-            (
-              Number(
-                item.price || 0
-              )
+            Number(
+              item.price || 0
+            )
 
-              *
+            *
 
-              Number(
-                item.quantity || 0
-              )
+            Number(
+              item.quantity || 0
             ),
 
           0
@@ -3251,9 +4735,7 @@
 
 
 
-      if (
-        !body
-      ) {
+      if (!body) {
 
         return;
 
@@ -3265,11 +4747,10 @@
         !cart.length
       ) {
 
+
         body.innerHTML = `
 
-          <div
-            class="cart-sidebar__empty"
-          >
+          <div class="cart-sidebar__empty">
 
             <p>
               Sua sacola está vazia
@@ -3279,7 +4760,9 @@
 
         `;
 
+
         return;
+
 
       }
 
@@ -3295,6 +4778,7 @@
             item,
             index
           ) => `
+
 
             <div
               style="
@@ -3356,20 +4840,73 @@
 
                 ${
 
+                  item.color
+
+                  ||
+
                   item.size
 
                   ?
 
                   `
 
-                    <span
-                      class="essence-cart-size"
-                    >
-                      Tamanho:
-                      ${escapeHtml(
+                    <div class="essence-cart-meta">
+
+
+                      ${
+
+                        item.color
+
+                        ?
+
+                        `
+
+                          <span>
+
+                            Cor:
+                            ${escapeHtml(
+                              item.color
+                            )}
+
+                          </span>
+
+                        `
+
+                        :
+
+                        ""
+
+                      }
+
+
+
+                      ${
+
                         item.size
-                      )}
-                    </span>
+
+                        ?
+
+                        `
+
+                          <span>
+
+                            Tamanho:
+                            ${escapeHtml(
+                              item.size
+                            )}
+
+                          </span>
+
+                        `
+
+                        :
+
+                        ""
+
+                      }
+
+
+                    </div>
 
                   `
 
@@ -3381,14 +4918,7 @@
 
 
 
-                <div
-                  style="
-                    display:flex;
-                    align-items:center;
-                    gap:9px;
-                    margin-top:10px;
-                  "
-                >
+                <div class="essence-cart-item-qty">
 
 
                   <button
@@ -3400,7 +4930,11 @@
 
 
                   <span>
-                    ${item.quantity}
+
+                    ${Number(
+                      item.quantity || 1
+                    )}
+
                   </span>
 
 
@@ -3440,7 +4974,9 @@
 
         )
 
-        .join("");
+        .join(
+          ""
+        );
 
 
 
@@ -3454,11 +4990,13 @@
 
           button => {
 
+
             button.addEventListener(
 
               "click",
 
               () => {
+
 
                 changeCartQuantity(
 
@@ -3471,9 +5009,11 @@
 
                 );
 
+
               }
 
             );
+
 
           }
 
@@ -3491,11 +5031,13 @@
 
           button => {
 
+
             button.addEventListener(
 
               "click",
 
               () => {
+
 
                 changeCartQuantity(
 
@@ -3508,9 +5050,11 @@
 
                 );
 
+
               }
 
             );
+
 
           }
 
@@ -3528,11 +5072,13 @@
 
           button => {
 
+
             button.addEventListener(
 
               "click",
 
               () => {
+
 
                 removeCartItem(
 
@@ -3543,24 +5089,32 @@
 
                 );
 
+
               }
 
             );
 
+
           }
 
         );
+
 
     }
 
 
 
     function changeCartQuantity(
+
       index,
+
       amount
+
     ) {
 
+
       const cart =
+
         getCart();
 
 
@@ -3573,25 +5127,72 @@
       }
 
 
-      cart[index].quantity +=
+
+      const current =
+
+        Number(
+          cart[index].quantity || 0
+        );
+
+
+      const stock =
+
+        Number(
+          cart[index].stock || 0
+        );
+
+
+      let next =
+
+        current
+
+        +
+
         amount;
+
+
+
+      if (
+        stock > 0
+      ) {
+
+
+        next =
+
+          Math.min(
+            next,
+            stock
+          );
+
+
+      }
+
+
+
+      cart[index].quantity =
+        next;
+
 
 
       if (
         cart[index].quantity <= 0
       ) {
 
+
         cart.splice(
           index,
           1
         );
 
+
       }
+
 
 
       saveCart(
         cart
       );
+
 
     }
 
@@ -3601,7 +5202,9 @@
       index
     ) {
 
+
       const cart =
+
         getCart();
 
 
@@ -3615,14 +5218,14 @@
         cart
       );
 
+
     }
 
 
 
     /* ========================================
-       MENU / BUSCA
+       MENU
        ======================================== */
-
 
     document
 
@@ -3636,6 +5239,7 @@
 
         () => {
 
+
           document
 
             .getElementById(
@@ -3643,9 +5247,11 @@
             )
 
             ?.classList
+
             .add(
               "active"
             );
+
 
         }
 
@@ -3665,6 +5271,7 @@
 
         () => {
 
+
           document
 
             .getElementById(
@@ -3672,15 +5279,21 @@
             )
 
             ?.classList
+
             .remove(
               "active"
             );
+
 
         }
 
       );
 
 
+
+    /* ========================================
+       BUSCA
+       ======================================== */
 
     document
 
@@ -3694,6 +5307,7 @@
 
         () => {
 
+
           document
 
             .getElementById(
@@ -3701,9 +5315,11 @@
             )
 
             ?.classList
+
             .add(
               "active"
             );
+
 
         }
 
@@ -3723,6 +5339,7 @@
 
         () => {
 
+
           document
 
             .getElementById(
@@ -3730,15 +5347,70 @@
             )
 
             ?.classList
+
             .remove(
               "active"
             );
+
 
         }
 
       );
 
 
+
+    document
+
+      .getElementById(
+        "product-search-input"
+      )
+
+      ?.addEventListener(
+
+        "keydown",
+
+        event => {
+
+
+          if (
+            event.key !== "Enter"
+          ) {
+
+            return;
+
+          }
+
+
+
+          const query =
+
+            event.target.value
+              .trim();
+
+
+
+          if (!query) {
+
+            return;
+
+          }
+
+
+
+          window.location.href =
+
+            `index.html?busca=${encodeURIComponent(query)}#hot-right-now`;
+
+
+        }
+
+      );
+
+
+
+    /* ========================================
+       EVENTOS DO CARRINHO
+       ======================================== */
 
     document
 
@@ -3779,47 +5451,54 @@
 
 
 
-    /* BUSCA */
-
     document
 
-      .getElementById(
-        "product-search-input"
-      )
-
-      ?.addEventListener(
+      .addEventListener(
 
         "keydown",
 
         event => {
 
+
           if (
-            event.key !== "Enter"
+            event.key ===
+            "Escape"
           ) {
 
-            return;
+
+            closeCart();
+
+
+
+            document
+
+              .getElementById(
+                "search-overlay"
+              )
+
+              ?.classList
+
+              .remove(
+                "active"
+              );
+
+
+
+            document
+
+              .getElementById(
+                "mobile-menu"
+              )
+
+              ?.classList
+
+              .remove(
+                "active"
+              );
+
 
           }
 
-
-          const query =
-
-            event.target.value
-              .trim();
-
-
-          if (
-            !query
-          ) {
-
-            return;
-
-          }
-
-
-          window.location.href =
-
-            `index.html?busca=${encodeURIComponent(query)}#hot-right-now`;
 
         }
 
@@ -3830,7 +5509,6 @@
     /* ========================================
        INICIAR
        ======================================== */
-
 
     renderCart();
 
@@ -3843,5 +5521,4 @@
 
 
 </body>
-
 </html>
