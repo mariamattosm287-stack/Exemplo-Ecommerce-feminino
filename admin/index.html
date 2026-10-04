@@ -731,9 +731,86 @@
           </h1>
 
           <p class="page-subtitle">
-            Área preservada para a próxima etapa.
+            Organize os produtos da sua loja
           </p>
 
+        </div>
+
+        <div class="page-actions">
+
+          <button
+            class="btn btn--primary"
+            type="button"
+            onclick="openNewCategoryModal()"
+          >
+            + Nova Categoria
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="orders-table-wrap">
+
+          <table class="data-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Categoria
+                </th>
+
+                <th>
+                  Slug
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Ações
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="categorias-tbody">
+
+              <tr>
+
+                <td
+                  colspan="4"
+                  class="table-empty"
+                >
+                  Carregando categorias...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <div
+          id="categorias-resumo"
+          style="
+            padding:12px 16px;
+            border-top:1px solid var(--border);
+            font-size:12px;
+            color:var(--text-light);
+          "
+        >
+          Carregando...
         </div>
 
       </div>
@@ -1319,6 +1396,174 @@
 
   </div>
 
+
+
+  <!-- =========================================
+       MODAL CATEGORIA
+       ========================================= -->
+
+  <div
+    class="modal"
+    id="modal-categoria"
+    onclick="
+      if(event.target === this)
+        closeModal('modal-categoria')
+    "
+  >
+
+    <div class="modal__dialog">
+
+      <div class="modal__header">
+
+        <h2
+          class="modal__title"
+          id="categoria-modal-title"
+        >
+          Nova Categoria
+        </h2>
+
+        <button
+          class="btn btn--ghost btn--icon"
+          type="button"
+          onclick="closeModal('modal-categoria')"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <div class="modal__body">
+
+        <div class="form-grid">
+
+          <div class="form-group form-group--full">
+
+            <label class="form-label">
+              Nome da categoria *
+            </label>
+
+            <input
+              id="categoria-nome"
+              class="form-control"
+              type="text"
+              placeholder="Ex: Conjuntos"
+            >
+
+          </div>
+
+
+          <div class="form-group form-group--full">
+
+            <label class="form-label">
+              Descrição
+            </label>
+
+            <textarea
+              id="categoria-descricao"
+              class="form-control"
+              rows="3"
+              placeholder="Descrição da categoria..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group form-group--full">
+
+            <label class="form-label">
+              Imagem
+            </label>
+
+            <div
+              class="image-upload-box"
+              id="categoria-image-upload"
+            >
+
+              <input
+                id="categoria-imagem"
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                hidden
+              >
+
+              <img
+                id="categoria-imagem-preview"
+                class="image-preview"
+                alt="Prévia da categoria"
+              >
+
+              <div>
+
+                <strong id="categoria-image-label">
+                  Clique para enviar uma imagem
+                </strong>
+
+                <div
+                  style="
+                    font-size:11px;
+                    color:#777;
+                    margin-top:4px;
+                  "
+                >
+                  PNG, JPG ou WEBP
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group form-group--full">
+
+            <label
+              class="size-check"
+              style="width:max-content"
+            >
+
+              <input
+                id="categoria-ativa"
+                type="checkbox"
+                checked
+              >
+
+              Categoria ativa
+
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal__footer">
+
+        <button
+          class="btn btn--outline"
+          type="button"
+          onclick="closeModal('modal-categoria')"
+        >
+          Cancelar
+        </button>
+
+        <button
+          class="btn btn--primary"
+          type="button"
+          id="categoria-save-button"
+          onclick="saveCategory()"
+        >
+          Criar Categoria
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
 
 
   <!-- TOAST -->
@@ -4475,6 +4720,523 @@
 
 
 
+
+    /* =========================================
+       CATEGORIAS — SUPABASE
+       ========================================= */
+
+    let categoriesAdmin = [];
+    let editingCategoryId = null;
+    let categoryImage = "";
+
+    function categorySlug(text) {
+      return String(text || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function updateCategoryPreview(src) {
+      const image = $("categoria-imagem-preview");
+      const label = $("categoria-image-label");
+
+      if (!image || !label) return;
+
+      if (src) {
+        image.src = src;
+        image.style.display = "block";
+        label.textContent = "Trocar imagem";
+      } else {
+        image.removeAttribute("src");
+        image.style.display = "none";
+        label.textContent = "Clique para enviar uma imagem";
+      }
+    }
+
+    function refreshProductCategoryOptions() {
+      if (!categoriesAdmin.length) return;
+
+      const activeCategories = categoriesAdmin.filter(
+        (category) => category.is_active !== false
+      );
+
+      const productSelect = $("produto-categoria");
+      const filterSelect = $("category-filter");
+
+      if (productSelect) {
+        const currentValue = productSelect.value;
+
+        productSelect.innerHTML = activeCategories
+          .map(
+            (category) =>
+              `<option value="${escapeHtml(category.name)}">${escapeHtml(category.name)}</option>`
+          )
+          .join("");
+
+        if (
+          currentValue &&
+          activeCategories.some(
+            (category) => String(category.name) === String(currentValue)
+          )
+        ) {
+          productSelect.value = currentValue;
+        }
+      }
+
+      if (filterSelect) {
+        const currentFilter = filterSelect.value;
+
+        filterSelect.innerHTML =
+          '<option value="">Todas as categorias</option>' +
+          activeCategories
+            .map(
+              (category) =>
+                `<option value="${escapeHtml(category.name)}">${escapeHtml(category.name)}</option>`
+            )
+            .join("");
+
+        if (
+          currentFilter &&
+          activeCategories.some(
+            (category) => String(category.name) === String(currentFilter)
+          )
+        ) {
+          filterSelect.value = currentFilter;
+        }
+      }
+    }
+
+    function renderCategoriesAdmin() {
+      const tbody = $("categorias-tbody");
+      const summary = $("categorias-resumo");
+
+      if (!tbody) return;
+
+      if (!categoriesAdmin.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="table-empty">
+              Nenhuma categoria cadastrada.
+            </td>
+          </tr>
+        `;
+      } else {
+        tbody.innerHTML = categoriesAdmin
+          .map((category) => {
+            const image = category.image_url
+              ? `
+                <img
+                  src="${escapeHtml(category.image_url)}"
+                  alt="${escapeHtml(category.name)}"
+                  style="
+                    width:52px;
+                    height:52px;
+                    object-fit:cover;
+                    border-radius:8px;
+                  "
+                >
+              `
+              : `
+                <div
+                  style="
+                    width:52px;
+                    height:52px;
+                    border-radius:8px;
+                    background:#f3f3f3;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                  "
+                >
+                  🗂️
+                </div>
+              `;
+
+            const status = category.is_active !== false
+              ? '<span class="badge badge--green">Ativa</span>'
+              : '<span class="badge badge--gray">Inativa</span>';
+
+            return `
+              <tr>
+                <td>
+                  <div
+                    style="
+                      display:flex;
+                      align-items:center;
+                      gap:12px;
+                    "
+                  >
+                    ${image}
+
+                    <div>
+                      <strong>
+                        ${escapeHtml(category.name)}
+                      </strong>
+
+                      ${
+                        category.description
+                          ? `
+                            <div
+                              style="
+                                font-size:11px;
+                                color:#777;
+                                margin-top:3px;
+                                max-width:320px;
+                              "
+                            >
+                              ${escapeHtml(category.description)}
+                            </div>
+                          `
+                          : ""
+                      }
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <code>
+                    ${escapeHtml(category.slug)}
+                  </code>
+                </td>
+
+                <td>
+                  ${status}
+                </td>
+
+                <td class="action-btns">
+                  <button
+                    class="btn btn--ghost btn--icon"
+                    type="button"
+                    title="Editar"
+                    onclick="editCategory('${escapeHtml(category.id)}')"
+                  >
+                    ✏️
+                  </button>
+
+                  <button
+                    class="btn btn--ghost btn--icon"
+                    type="button"
+                    title="Excluir"
+                    onclick="deleteCategory('${escapeHtml(category.id)}')"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      if (summary) {
+        summary.textContent =
+          `${categoriesAdmin.length} categoria(s) cadastrada(s)`;
+      }
+
+      refreshProductCategoryOptions();
+    }
+
+    async function loadCategoriesAdmin() {
+      const tbody = $("categorias-tbody");
+
+      if (tbody) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="table-empty">
+              Carregando categorias...
+            </td>
+          </tr>
+        `;
+      }
+
+      const { data, error } = await supabaseClient
+        .from("categories")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Erro ao carregar categorias:", error);
+
+        if (tbody) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="4" class="table-empty">
+                Não foi possível carregar as categorias.
+              </td>
+            </tr>
+          `;
+        }
+
+        showToast("Erro ao carregar categorias.");
+        return;
+      }
+
+      categoriesAdmin = Array.isArray(data) ? data : [];
+      renderCategoriesAdmin();
+    }
+
+    window.openNewCategoryModal = function () {
+      editingCategoryId = null;
+      categoryImage = "";
+
+      $("categoria-modal-title").textContent =
+        "Nova Categoria";
+
+      $("categoria-save-button").textContent =
+        "Criar Categoria";
+
+      $("categoria-nome").value = "";
+      $("categoria-descricao").value = "";
+      $("categoria-ativa").checked = true;
+      $("categoria-imagem").value = "";
+
+      updateCategoryPreview("");
+
+      openModal("modal-categoria");
+    };
+
+    window.editCategory = function (id) {
+      const category = categoriesAdmin.find(
+        (item) => String(item.id) === String(id)
+      );
+
+      if (!category) return;
+
+      editingCategoryId = category.id;
+      categoryImage = category.image_url || "";
+
+      $("categoria-modal-title").textContent =
+        "Editar Categoria";
+
+      $("categoria-save-button").textContent =
+        "Salvar Alterações";
+
+      $("categoria-nome").value =
+        category.name || "";
+
+      $("categoria-descricao").value =
+        category.description || "";
+
+      $("categoria-ativa").checked =
+        category.is_active !== false;
+
+      $("categoria-imagem").value = "";
+
+      updateCategoryPreview(categoryImage);
+
+      openModal("modal-categoria");
+    };
+
+    window.saveCategory = async function () {
+      const name =
+        $("categoria-nome").value.trim();
+
+      if (!name) {
+        showToast("Preencha o nome da categoria.");
+        $("categoria-nome").focus();
+        return;
+      }
+
+      const button =
+        $("categoria-save-button");
+
+      const oldText =
+        button.textContent;
+
+      button.disabled = true;
+      button.textContent = "Salvando...";
+
+      const payload = {
+        name,
+        slug: categorySlug(name),
+        description:
+          $("categoria-descricao").value.trim(),
+        image_url:
+          categoryImage || null,
+        is_active:
+          $("categoria-ativa").checked
+      };
+
+      try {
+        if (editingCategoryId) {
+          const { data, error } = await supabaseClient
+            .from("categories")
+            .update(payload)
+            .eq("id", editingCategoryId)
+            .select("*")
+            .single();
+
+          if (error) throw error;
+
+          const index = categoriesAdmin.findIndex(
+            (item) =>
+              String(item.id) ===
+              String(editingCategoryId)
+          );
+
+          if (index >= 0) {
+            categoriesAdmin[index] = data;
+          }
+
+          showToast("Categoria atualizada! ✅");
+        } else {
+          const { data, error } = await supabaseClient
+            .from("categories")
+            .insert([payload])
+            .select("*")
+            .single();
+
+          if (error) throw error;
+
+          categoriesAdmin.unshift(data);
+          showToast("Categoria criada! ✅");
+        }
+
+        renderCategoriesAdmin();
+        closeModal("modal-categoria");
+
+      } catch (error) {
+
+        console.error(
+          "Erro ao salvar categoria:",
+          error
+        );
+
+        if (
+          String(error?.code || "") === "23505"
+        ) {
+
+          showToast(
+            "Já existe uma categoria com esse nome."
+          );
+
+        } else {
+
+          showToast(
+            error?.message ||
+            "Erro ao salvar categoria."
+          );
+
+        }
+
+      } finally {
+
+        button.disabled = false;
+        button.textContent = oldText;
+
+      }
+    };
+
+
+    window.deleteCategory = async function (id) {
+
+      const category = categoriesAdmin.find(
+        (item) => String(item.id) === String(id)
+      );
+
+      if (!category) return;
+
+      if (
+        !window.confirm(
+          `Excluir "${category.name}"?`
+        )
+      ) {
+        return;
+      }
+
+      const { error } = await supabaseClient
+        .from("categories")
+        .delete()
+        .eq("id", id);
+
+      if (error) {
+
+        console.error(
+          "Erro ao excluir categoria:",
+          error
+        );
+
+        showToast(
+          "Erro ao excluir categoria."
+        );
+
+        return;
+      }
+
+      categoriesAdmin =
+        categoriesAdmin.filter(
+          (item) =>
+            String(item.id) !== String(id)
+        );
+
+      renderCategoriesAdmin();
+
+      showToast(
+        "Categoria excluída."
+      );
+    };
+
+
+    $("categoria-image-upload")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          $("categoria-imagem")
+            .click();
+
+        }
+      );
+
+
+    $("categoria-imagem")
+      ?.addEventListener(
+        "change",
+        async () => {
+
+          const file =
+
+            $("categoria-imagem")
+              .files?.[0];
+
+
+          if (!file) return;
+
+
+          try {
+
+            categoryImage =
+
+              await compressImage(
+                file
+              );
+
+
+            updateCategoryPreview(
+              categoryImage
+            );
+
+          } catch (error) {
+
+            console.error(
+              "Erro ao processar imagem da categoria:",
+              error
+            );
+
+
+            showToast(
+              "Erro ao processar imagem."
+            );
+
+          }
+        }
+      );
+
+
+
     /* =========================================
        BUSCA
        ========================================= */
@@ -4537,6 +5299,10 @@
               "modal-produto"
             );
 
+            closeModal(
+              "modal-categoria"
+            );
+
           }
 
 
@@ -4555,6 +5321,7 @@
 
 
     loadProducts();
+    loadCategoriesAdmin();
 
 
   </script>
