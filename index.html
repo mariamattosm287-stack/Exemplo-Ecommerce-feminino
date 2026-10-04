@@ -19,7 +19,7 @@ rel="stylesheet"
 >
 
 <link rel="stylesheet" href="css/style.css">
-   
+
 <style>
 
 #hot-right-now .products-carousel {
@@ -790,7 +790,7 @@ padding-top: 10px;
 #feature-banner {
   width: 100%;
   padding: 0;
-  margin: 0 0 75px;
+  margin: 0;
   background: #f6f1ec;
   overflow: hidden;
 }
@@ -833,7 +833,7 @@ padding-top: 10px;
 
   #feature-banner {
     padding: 0;
-    margin-bottom: 50px;
+    margin: 0;
   }
 
   #feature-banner .featured-collection-banner__desktop {
@@ -849,12 +849,126 @@ padding-top: 10px;
 @media (max-width: 480px) {
 
   #feature-banner {
-    margin-bottom: 42px;
+    margin: 0;
+  }
+
+}
+
+
+/* ========================================
+   NOVIDADES
+   ======================================== */
+
+#novidades {
+  padding-top: 72px;
+  padding-bottom: 86px;
+  background: #fff;
+}
+
+#novidades .novidades-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 34px;
+}
+
+#novidades .novidades-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: #9a7d6e;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#novidades .novidades-title {
+  margin: 0;
+  color: #2f2925;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(34px, 3vw, 48px);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+#novidades .novidades-subtitle {
+  margin: 10px 0 0;
+  color: #81746d;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+#novidades .novidades-link {
+  flex-shrink: 0;
+  color: #3f332d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid #b9a79c;
+  padding-bottom: 5px;
+}
+
+#novidades .novidades-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 42px 22px;
+}
+
+#novidades .novidades-grid .product-card {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+
+  #novidades {
+    padding-top: 58px;
+    padding-bottom: 70px;
+  }
+
+  #novidades .novidades-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px 16px;
+  }
+
+}
+
+@media (max-width: 640px) {
+
+  #novidades {
+    padding-top: 46px;
+    padding-bottom: 58px;
+  }
+
+  #novidades .novidades-header {
+    align-items: flex-start;
+    margin-bottom: 26px;
+  }
+
+  #novidades .novidades-title {
+    font-size: 34px;
+  }
+
+  #novidades .novidades-subtitle {
+    font-size: 12px;
+  }
+
+  #novidades .novidades-link {
+    margin-top: 5px;
+  }
+
+  #novidades .novidades-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 12px;
   }
 
 }
 
 </style>
+
 
 <style>
 
@@ -870,11 +984,11 @@ padding-top: 10px;
 }
 
 </style>
-   
+
 </head>
 
-<body>
 
+<body>
 
 
 <!-- =========================================
@@ -885,6 +999,7 @@ padding-top: 10px;
 class="announcement-bar"
 id="announcement-bar"
 >
+
 
 <button
 class="announcement-bar__nav announcement-bar__nav--prev"
@@ -909,6 +1024,7 @@ aria-label="Próximo aviso"
 ›
 </button>
 
+
 </div>
 
 
@@ -922,6 +1038,7 @@ class="navbar"
 id="navbar"
 >
 
+
 <div class="navbar__inner">
 
 
@@ -934,11 +1051,11 @@ id="mobile-toggle"
 aria-label="Abrir menu"
 >
 
-<span></span>
 
 <span></span>
-
 <span></span>
+<span></span>
+
 
 </button>
 
@@ -1244,6 +1361,7 @@ id="cart-count"
 
 
 </div>
+
 
 </nav>
 
@@ -1605,6 +1723,7 @@ Receba 5% de desconto
 
 </div>
 
+
 </section>
 
 
@@ -1767,6 +1886,92 @@ letter-spacing:1px;
 >
 
 Carregando coleção em destaque...
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     NOVIDADES
+     ========================================= -->
+
+<section
+class="section fade-in"
+id="novidades"
+>
+
+
+<div class="container">
+
+
+<div class="novidades-header">
+
+
+<div>
+
+<span class="novidades-kicker">
+
+ACABARAM DE CHEGAR
+
+</span>
+
+
+<h2 class="novidades-title">
+
+Novidades
+
+</h2>
+
+
+<p class="novidades-subtitle">
+
+Os últimos produtos adicionados à ESSENCE.
+
+</p>
+
+</div>
+
+
+<a
+href="#hot-right-now"
+class="novidades-link"
+id="novidades-ver-todos"
+>
+
+VER TODOS →
+
+</a>
+
+
+</div>
+
+
+
+<div
+class="novidades-grid"
+id="novidades-track"
+>
+
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:40px 20px;
+color:#777;
+"
+>
+
+Carregando novidades...
+
+</div>
+
+
+</div>
+
 
 </div>
 
@@ -3134,6 +3339,85 @@ ${sizesHtml}
 
 
 /* =========================================
+   NOVIDADES
+   ========================================= */
+
+function renderNewArrivals() {
+
+
+const track =
+
+document.getElementById(
+"novidades-track"
+);
+
+
+if (!track) {
+
+return;
+
+}
+
+
+
+const latestProducts =
+
+essenceProducts
+
+.slice(
+0,
+4
+);
+
+
+
+if (
+!latestProducts.length
+) {
+
+
+track.innerHTML = `
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:40px 20px;
+color:#777;
+"
+>
+
+Nenhuma novidade disponível ainda.
+
+</div>
+
+`;
+
+
+return;
+
+}
+
+
+
+track.innerHTML =
+
+latestProducts
+
+.map(
+renderProductCard
+)
+
+.join(
+""
+);
+
+
+}
+
+
+
+/* =========================================
    PRODUTOS
    ========================================= */
 
@@ -3232,6 +3516,10 @@ data
 
 window.essenceProducts =
 essenceProducts;
+
+
+
+renderNewArrivals();
 
 
 
@@ -4409,17 +4697,20 @@ id="featured-collection-link"
 aria-label="Ver coleção ${escapeHtml(collection.name)}"
 >
 
+
 <img
 class="featured-collection-banner__desktop"
 src="${escapeHtml(desktopImage)}"
 alt="${escapeHtml(collection.name)}"
 >
 
+
 <img
 class="featured-collection-banner__mobile"
 src="${escapeHtml(mobileImage)}"
 alt="${escapeHtml(collection.name)}"
 >
+
 
 </a>
 
@@ -4873,6 +5164,48 @@ closeStoreMobileMenu();
 }
 
 );
+
+
+}
+
+);
+
+
+
+document
+
+.getElementById(
+"novidades-ver-todos"
+)
+
+?.addEventListener(
+
+"click",
+
+event => {
+
+
+event.preventDefault();
+
+
+showAllStoreProducts();
+
+
+document
+
+.getElementById(
+"hot-right-now"
+)
+
+?.scrollIntoView({
+
+behavior:
+"smooth",
+
+block:
+"start"
+
+});
 
 
 }
