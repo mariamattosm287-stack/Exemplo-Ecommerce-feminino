@@ -1005,22 +1005,38 @@ padding-top: 10px;
 
 #feature-banner .featured-collection-banner img {
   width: 100%;
-  display: block;
+  height: auto;
   border-radius: 10px;
 }
 
 
-/* MOBILE */
+/* PC — MOSTRA APENAS DESKTOP */
+
+#feature-banner .featured-collection-banner__desktop {
+  display: block;
+}
+
+#feature-banner .featured-collection-banner__mobile {
+  display: none;
+}
+
+
+/* MOBILE — MOSTRA APENAS MOBILE */
 
 @media (max-width: 768px) {
 
   #feature-banner .featured-collection-banner {
     width: calc(100% - 24px);
-    margin-top: 12px;
+    margin: 12px auto 0;
     border-radius: 7px;
   }
 
-  #feature-banner .featured-collection-banner img {
+  #feature-banner .featured-collection-banner__desktop {
+    display: none;
+  }
+
+  #feature-banner .featured-collection-banner__mobile {
+    display: block;
     border-radius: 7px;
   }
 
