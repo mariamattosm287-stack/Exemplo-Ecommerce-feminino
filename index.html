@@ -995,7 +995,6 @@ gap: 30px 12px;
 </style>
 
 
-
 <style>
 
 /* MENU MAIS PARA A ESQUERDA — SOMENTE PC */
@@ -1010,7 +1009,6 @@ left: -140px;
 }
 
 </style>
-
 
 
 <style>
@@ -1081,7 +1079,6 @@ border-radius: 7px;
 </head>
 
 
-
 <body>
 
 
@@ -1122,7 +1119,6 @@ aria-label="Próximo aviso"
 </div>
 
 
-
 <!-- =========================================
      MENU
      ========================================= -->
@@ -1152,7 +1148,6 @@ aria-label="Abrir menu"
 </button>
 
 
-
 <ul class="navbar__menu">
 
 
@@ -1172,7 +1167,6 @@ Loja
 </span>
 
 </a>
-
 
 
 <div class="navbar__dropdown-menu">
@@ -1206,7 +1200,6 @@ id="menu-category-links"
 ></div>
 
 
-
 <div
 style="
 padding:12px 14px 5px;
@@ -1234,7 +1227,6 @@ id="menu-collection-links"
 </li>
 
 
-
 <li>
 
 <a
@@ -1245,7 +1237,6 @@ Coleções
 </a>
 
 </li>
-
 
 
 <li>
@@ -1261,7 +1252,6 @@ Produtos
 </li>
 
 
-
 <li>
 
 <a
@@ -1272,7 +1262,6 @@ Avaliações
 </a>
 
 </li>
-
 
 
 <li>
@@ -1293,7 +1282,6 @@ Contato
 </div>
 
 
-
 <div class="navbar__center">
 
 <a
@@ -1304,7 +1292,6 @@ ESSENCE
 </a>
 
 </div>
-
 
 
 <div class="navbar__right">
@@ -1328,7 +1315,6 @@ style="font-size:10px;"
 </span>
 
 </div>
-
 
 
 <button
@@ -1361,7 +1347,6 @@ d="m21 21-4.3-4.3"
 </button>
 
 
-
 <button
 class="navbar__icon-btn"
 aria-label="Minha conta"
@@ -1389,7 +1374,6 @@ r="4"
 </svg>
 
 </button>
-
 
 
 <button
@@ -1442,7 +1426,6 @@ id="cart-count"
 </nav>
 
 
-
 <!-- =========================================
      HERO
      ========================================= -->
@@ -1466,7 +1449,6 @@ alt="ESSENCE"
 </div>
 
 
-
 <div class="hero__slide">
 
 <img
@@ -1475,7 +1457,6 @@ alt="Coleção ESSENCE"
 />
 
 </div>
-
 
 
 <div class="hero__slide">
@@ -1489,7 +1470,6 @@ alt="Moda feminina ESSENCE"
 
 
 </div>
-
 
 
 <div class="hero__nav">
@@ -1519,14 +1499,12 @@ data-slide="2"
 </div>
 
 
-
 <button
 class="hero__nav-btn hero__nav-btn--prev"
 aria-label="Anterior"
 >
 ‹
 </button>
-
 
 
 <button
@@ -1541,7 +1519,6 @@ aria-label="Próximo"
 
 
 </section>
-
 
 
 <!-- =========================================
@@ -1612,9 +1589,7 @@ PARCELA EM
 </div>
 
 
-
 <div class="benefits-bar__divider"></div>
-
 
 
 <div class="benefit-item">
@@ -1674,9 +1649,7 @@ Para todo o Brasil
 </div>
 
 
-
 <div class="benefits-bar__divider"></div>
-
 
 
 <div class="benefit-item">
@@ -3298,7 +3271,6 @@ d="M16 10a4 4 0 0 1-8 0"
 </div>
 
 
-
 <h3 class="product-card__title">
 
 ${escapeHtml(
@@ -4099,7 +4071,6 @@ throw error;
 }
 
 
-
 const categories =
 
 Array.isArray(
@@ -4898,7 +4869,6 @@ collectionsResult.error
 throw collectionsResult.error;
 
 }
-
 
 
 if (
@@ -5881,123 +5851,6 @@ openCart();
 
 
 };
-
-
-const product =
-
-essenceProducts.find(
-
-item =>
-
-String(
-item.id
-)
-
-===
-
-String(
-id
-)
-
-);
-
-
-
-if (!product) {
-
-return;
-
-}
-
-
-
-const prices =
-getPrices(
-product
-);
-
-
-
-const cart =
-getCart();
-
-
-
-const existing =
-
-cart.find(
-
-item =>
-
-String(
-item.id
-)
-
-===
-
-String(
-product.id
-)
-
-);
-
-
-
-if (existing) {
-
-
-existing.quantity +=
-1;
-
-
-}
-
-else {
-
-
-cart.push({
-
-
-id:
-product.id,
-
-
-name:
-product.name,
-
-
-price:
-prices.current,
-
-
-image:
-productImage(
-product
-),
-
-
-quantity:
-1
-
-
-});
-
-
-}
-
-
-
-saveCart(
-cart
-);
-
-
-
-openCart();
-
-
-};
-
 
 
 window.changeEssenceCartQuantity =
