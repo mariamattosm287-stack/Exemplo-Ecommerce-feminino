@@ -4874,3 +4874,73 @@ body * {
   }
 
 }
+/* =========================================================
+   HERO PRINCIPAL — MOBILE HORIZONTAL
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .hero {
+    width: 100%;
+
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    max-height: none !important;
+
+    aspect-ratio: 2 / 1;
+
+    overflow: hidden;
+
+    background: #f3eee8;
+  }
+
+
+  .hero__slides,
+  .hero__slide,
+  .hero__slide picture {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .hero__slide picture {
+    display: block;
+  }
+
+
+  .hero__slide img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center center;
+  }
+
+
+  .hero__nav {
+    left: 0;
+    right: 0;
+
+    bottom: 10px;
+
+    width: 100%;
+
+    justify-content: center;
+  }
+
+
+  .hero__nav-btn {
+    display: none;
+  }
+
+
+  .hero__dots {
+    margin: 0;
+  }
+
+}
