@@ -3352,14 +3352,12 @@ function nav(
   )
   .forEach(
     element =>
-
     element.classList.toggle(
       "active",
       element.dataset.page
       ===
       page
     )
-
   );
 
 
@@ -3398,6 +3396,16 @@ function nav(
   ) {
 
     loadCoupons();
+
+  }
+
+
+  if (
+    page ===
+    "frete"
+  ) {
+
+    loadShippingZones();
 
   }
 
