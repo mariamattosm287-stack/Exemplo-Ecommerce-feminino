@@ -9000,6 +9000,1130 @@ function clientWhatsApp() {
 
 }
 
+/* =========================================
+   CUPONS
+   ========================================= */
+
+function couponExpired(
+  coupon
+) {
+
+  if (
+    !coupon.expires_at
+  ) {
+
+    return false;
+
+  }
+
+  return (
+    new Date(
+      coupon.expires_at
+    )
+    <
+    new Date()
+  );
+
+}
+
+
+function couponLimitReached(
+  coupon
+) {
+
+  if (
+    !coupon.max_uses
+  ) {
+
+    return false;
+
+  }
+
+  return (
+    Number(
+      coupon.used_count || 0
+    )
+    >=
+    Number(
+      coupon.max_uses
+    )
+  );
+
+}
+
+
+function couponAvailable(
+  coupon
+) {
+
+  return (
+
+    coupon.is_active !== false
+
+    &&
+
+    !couponExpired(
+      coupon
+    )
+
+    &&
+
+    !couponLimitReached(
+      coupon
+    )
+
+  );
+
+}
+
+
+function couponDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "Sem validade";
+
+  }
+
+  const date =
+  new Date(
+    value
+  );
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "—";
+
+  }
+
+  return date
+  .toLocaleDateString(
+    "pt-BR"
+  );
+
+}
+
+
+function couponInputDate(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+  const date =
+  new Date(
+    value
+  );
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+
+  }
+
+  const pad =
+  number =>
+  String(
+    number
+  )
+  .padStart(
+    2,
+    "0"
+  );
+
+  return (
+    date.getFullYear()
+    +
+    "-"
+    +
+    pad(
+      date.getMonth() + 1
+    )
+    +
+    "-"
+    +
+    pad(
+      date.getDate()
+    )
+    +
+    "T"
+    +
+    pad(
+      date.getHours()
+    )
+    +
+    ":"
+    +
+    pad(
+      date.getMinutes()
+    )
+  );
+
+}
+
+
+function couponDiscountText(
+  coupon
+) {
+
+  if (
+    coupon.discount_type
+    ===
+    "percent"
+  ) {
+
+    return (
+      Number(
+        coupon.discount_value || 0
+      )
+      +
+      "%"
+    );
+
+  }
+
+  return money(
+    coupon.discount_value
+  );
+
+}
+
+
+function renderCouponStats() {
+
+  $("coupons-total")
+  .textContent =
+  coupons.length;
+
+
+  $("coupons-active")
+  .textContent =
+
+  coupons
+  .filter(
+    coupon =>
+    couponAvailable(
+      coupon
+    )
+  )
+  .length;
+
+
+  $("coupons-used")
+  .textContent =
+
+  coupons
+  .reduce(
+    (
+      total,
+      coupon
+    ) =>
+
+    total
+    +
+    Number(
+      coupon.used_count || 0
+    ),
+
+    0
+  );
+
+
+  $("coupons-expired")
+  .textContent =
+
+  coupons
+  .filter(
+    coupon =>
+    couponExpired(
+      coupon
+    )
+  )
+  .length;
+
+}
+
+
+function renderCoupons() {
+
+  if (
+    !$(
+      "coupons-body"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const query =
+
+  String(
+    $("coupons-search")
+    ?.value
+    ||
+    ""
+  )
+  .trim()
+  .toLowerCase();
+
+
+  const list =
+
+  coupons
+  .filter(
+    coupon =>
+
+    !query
+
+    ||
+
+    String(
+      coupon.code || ""
+    )
+    .toLowerCase()
+    .includes(
+      query
+    )
+
+  );
+
+
+  $("coupons-body")
+  .innerHTML =
+
+  list.length
+
+  ?
+
+  list
+  .map(
+    coupon => {
+
+      let status = `
+
+        <span class="badge badge--green">
+          Ativo
+        </span>
+
+      `;
+
+
+      if (
+        coupon.is_active
+        ===
+        false
+      ) {
+
+        status = `
+
+          <span class="badge badge--gray">
+            Inativo
+          </span>
+
+        `;
+
+      }
+
+      else if (
+        couponExpired(
+          coupon
+        )
+      ) {
+
+        status = `
+
+          <span class="badge badge--red">
+            Expirado
+          </span>
+
+        `;
+
+      }
+
+      else if (
+        couponLimitReached(
+          coupon
+        )
+      ) {
+
+        status = `
+
+          <span
+            class="badge"
+            style="
+              background:#fff4df;
+              color:#a56600;
+            "
+          >
+            Limite atingido
+          </span>
+
+        `;
+
+      }
+
+
+      const uses =
+
+      coupon.max_uses
+
+      ?
+
+      `${Number(
+        coupon.used_count || 0
+      )} / ${Number(
+        coupon.max_uses
+      )}`
+
+      :
+
+      `${Number(
+        coupon.used_count || 0
+      )} / ∞`;
+
+
+      return `
+
+      <tr>
+
+        <td>
+          <strong>
+            ${esc(
+              coupon.code
+            )}
+          </strong>
+        </td>
+
+
+        <td>
+          <strong>
+            ${esc(
+              couponDiscountText(
+                coupon
+              )
+            )}
+          </strong>
+        </td>
+
+
+        <td>
+
+          ${
+            Number(
+              coupon.min_order || 0
+            )
+            >
+            0
+
+            ?
+
+            money(
+              coupon.min_order
+            )
+
+            :
+
+            "Sem mínimo"
+          }
+
+        </td>
+
+
+        <td>
+          ${esc(
+            uses
+          )}
+        </td>
+
+
+        <td>
+          ${esc(
+            couponDate(
+              coupon.expires_at
+            )
+          )}
+        </td>
+
+
+        <td>
+          ${status}
+        </td>
+
+
+        <td class="action-btns">
+
+          <button
+            class="btn btn--ghost btn--icon"
+            onclick="
+              editCouponForm(
+                '${esc(
+                  coupon.id
+                )}'
+              )
+            "
+            title="Editar cupom"
+          >
+            ✏️
+          </button>
+
+          <button
+            class="btn btn--ghost btn--icon"
+            onclick="
+              deleteCoupon(
+                '${esc(
+                  coupon.id
+                )}'
+              )
+            "
+            title="Excluir cupom"
+          >
+            🗑️
+          </button>
+
+        </td>
+
+      </tr>
+
+      `;
+
+    }
+  )
+  .join(
+    ""
+  )
+
+  :
+
+  `
+  <tr>
+
+    <td
+      colspan="7"
+      class="empty"
+    >
+      Nenhum cupom encontrado.
+    </td>
+
+  </tr>
+  `;
+
+
+  $("coupons-summary")
+  .textContent =
+
+  `${list.length} de ${coupons.length} cupom(ns)`;
+
+
+  renderCouponStats();
+
+}
+
+
+async function loadCoupons() {
+
+  const {
+    data,
+    error
+  } =
+
+  await sb
+  .from(
+    "coupons"
+  )
+  .select(
+    "*"
+  )
+  .order(
+    "created_at",
+    {
+      ascending:
+      false
+    }
+  );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+    toast(
+      "Erro ao carregar cupons."
+    );
+
+    return;
+
+  }
+
+
+  coupons =
+  data || [];
+
+
+  renderCoupons();
+
+}
+
+
+function newCoupon() {
+
+  editCoupon =
+  null;
+
+
+  $("coupon-title")
+  .textContent =
+  "Novo Cupom";
+
+
+  $("coupon-code")
+  .value =
+  "";
+
+
+  $("coupon-type")
+  .value =
+  "percent";
+
+
+  $("coupon-value")
+  .value =
+  "";
+
+
+  $("coupon-min")
+  .value =
+  "0";
+
+
+  $("coupon-max")
+  .value =
+  "";
+
+
+  $("coupon-start")
+  .value =
+  "";
+
+
+  $("coupon-expire")
+  .value =
+  "";
+
+
+  $("coupon-active")
+  .checked =
+  true;
+
+
+  openModal(
+    "coupon-modal"
+  );
+
+}
+
+
+function editCouponForm(
+  id
+) {
+
+  const coupon =
+
+  coupons
+  .find(
+    item =>
+    String(
+      item.id
+    )
+    ===
+    String(
+      id
+    )
+  );
+
+
+  if (
+    !coupon
+  ) {
+
+    return;
+
+  }
+
+
+  editCoupon =
+  coupon.id;
+
+
+  $("coupon-title")
+  .textContent =
+  "Editar Cupom";
+
+
+  $("coupon-code")
+  .value =
+  coupon.code || "";
+
+
+  $("coupon-type")
+  .value =
+  coupon.discount_type
+  ||
+  "percent";
+
+
+  $("coupon-value")
+  .value =
+  coupon.discount_value
+  ??
+  "";
+
+
+  $("coupon-min")
+  .value =
+  coupon.min_order
+  ??
+  0;
+
+
+  $("coupon-max")
+  .value =
+  coupon.max_uses
+  ??
+  "";
+
+
+  $("coupon-start")
+  .value =
+  couponInputDate(
+    coupon.starts_at
+  );
+
+
+  $("coupon-expire")
+  .value =
+  couponInputDate(
+    coupon.expires_at
+  );
+
+
+  $("coupon-active")
+  .checked =
+  coupon.is_active
+  !==
+  false;
+
+
+  openModal(
+    "coupon-modal"
+  );
+
+}
+
+
+async function saveCoupon() {
+
+  const code =
+
+  $("coupon-code")
+  .value
+  .trim()
+  .toUpperCase();
+
+
+  const type =
+
+  $("coupon-type")
+  .value;
+
+
+  const value =
+
+  Number(
+    $("coupon-value")
+    .value || 0
+  );
+
+
+  const minimum =
+
+  Number(
+    $("coupon-min")
+    .value || 0
+  );
+
+
+  const maxUsesRaw =
+
+  $("coupon-max")
+  .value
+  .trim();
+
+
+  const maxUses =
+
+  maxUsesRaw
+
+  ?
+
+  Number(
+    maxUsesRaw
+  )
+
+  :
+
+  null;
+
+
+  if (
+    !code
+  ) {
+
+    toast(
+      "Informe o código do cupom."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    value <= 0
+  ) {
+
+    toast(
+      "Informe um desconto válido."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    type ===
+    "percent"
+    &&
+    value > 100
+  ) {
+
+    toast(
+      "O desconto em porcentagem não pode passar de 100%."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    minimum < 0
+  ) {
+
+    toast(
+      "O pedido mínimo não pode ser negativo."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    maxUses !== null
+    &&
+    maxUses < 1
+  ) {
+
+    toast(
+      "O limite de usos precisa ser maior que zero."
+    );
+
+    return;
+
+  }
+
+
+  const startValue =
+  $("coupon-start")
+  .value;
+
+
+  const expireValue =
+  $("coupon-expire")
+  .value;
+
+
+  if (
+    startValue
+    &&
+    expireValue
+    &&
+    new Date(
+      expireValue
+    )
+    <=
+    new Date(
+      startValue
+    )
+  ) {
+
+    toast(
+      "A validade precisa ser posterior à data de início."
+    );
+
+    return;
+
+  }
+
+
+  const payload = {
+
+    code,
+
+    discount_type:
+    type,
+
+    discount_value:
+    value,
+
+    min_order:
+    minimum,
+
+    max_uses:
+    maxUses,
+
+    starts_at:
+    startValue
+    ?
+    new Date(
+      startValue
+    )
+    .toISOString()
+    :
+    null,
+
+    expires_at:
+    expireValue
+    ?
+    new Date(
+      expireValue
+    )
+    .toISOString()
+    :
+    null,
+
+    is_active:
+    $("coupon-active")
+    .checked,
+
+    updated_at:
+    new Date()
+    .toISOString()
+
+  };
+
+
+  const query =
+
+  editCoupon
+
+  ?
+
+  sb
+  .from(
+    "coupons"
+  )
+  .update(
+    payload
+  )
+  .eq(
+    "id",
+    editCoupon
+  )
+
+  :
+
+  sb
+  .from(
+    "coupons"
+  )
+  .insert(
+    payload
+  );
+
+
+  const {
+    error
+  } =
+
+  await query;
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    if (
+      String(
+        error.message || ""
+      )
+      .toLowerCase()
+      .includes(
+        "duplicate"
+      )
+    ) {
+
+      toast(
+        "Já existe um cupom com esse código."
+      );
+
+    }
+
+    else {
+
+      toast(
+        "Erro ao salvar cupom: "
+        +
+        error.message
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  closeModal(
+    "coupon-modal"
+  );
+
+
+  toast(
+
+    editCoupon
+
+    ?
+
+    "Cupom atualizado ✅"
+
+    :
+
+    "Cupom criado ✅"
+
+  );
+
+
+  editCoupon =
+  null;
+
+
+  await loadCoupons();
+
+}
+
+
+async function deleteCoupon(
+  id
+) {
+
+  const coupon =
+
+  coupons
+  .find(
+    item =>
+    String(
+      item.id
+    )
+    ===
+    String(
+      id
+    )
+  );
+
+
+  if (
+    !confirm(
+      `Excluir o cupom ${coupon?.code || ""}?`
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+
+  await sb
+  .from(
+    "coupons"
+  )
+  .delete()
+  .eq(
+    "id",
+    id
+  );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+    toast(
+      "Erro ao excluir cupom."
+    );
+
+    return;
+
+  }
+
+
+  toast(
+    "Cupom excluído."
+  );
+
+
+  await loadCoupons();
+
+}
+  
 /* EVENTOS */
 
 $("product-search")
