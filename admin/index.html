@@ -2253,6 +2253,68 @@ body:not(.authed) .admin-main{
 
 </div>
 
+  <!-- MODAL CLIENTE -->
+
+<div
+  class="modal"
+  id="client-modal"
+>
+
+  <div class="modal__dialog">
+
+    <div class="modal__header">
+
+      <div>
+
+        <h2
+          class="modal__title"
+          id="client-title"
+        >
+          Cliente
+        </h2>
+
+        <small id="client-subtitle"></small>
+
+      </div>
+
+      <button
+        class="btn btn--ghost btn--icon"
+        onclick="closeModal('client-modal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div
+      class="modal__body"
+      id="client-detail"
+    ></div>
+
+
+    <div class="modal__footer">
+
+      <button
+        class="btn btn--outline"
+        id="client-wa"
+        onclick="clientWhatsApp()"
+      >
+        💬 WhatsApp
+      </button>
+
+      <button
+        class="btn btn--primary"
+        onclick="closeModal('client-modal')"
+      >
+        Fechar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 <div id="toast"></div>
 
