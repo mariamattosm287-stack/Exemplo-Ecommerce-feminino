@@ -1273,6 +1273,10 @@ body:not(.authed) .admin-main{
 
 <!-- OUTRAS ÁREAS -->
 
+<!-- =========================================
+     CLIENTES
+     ========================================= -->
+
 <div
   class="page-content"
   id="page-clientes"
@@ -1287,9 +1291,162 @@ body:not(.authed) .admin-main{
       </h1>
 
       <p class="page-subtitle">
-        Área preservada para a próxima etapa.
+        Clientes que já realizaram pedidos na ESSENCE
       </p>
 
+    </div>
+
+  </div>
+
+
+  <div class="order-stats">
+
+    <div class="order-stat">
+
+      <small>
+        Total de clientes
+      </small>
+
+      <strong id="clients-total">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="order-stat">
+
+      <small>
+        Clientes recorrentes
+      </small>
+
+      <strong id="clients-repeat">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="order-stat">
+
+      <small>
+        Pedidos realizados
+      </small>
+
+      <strong id="clients-orders">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="order-stat">
+
+      <small>
+        Valor total
+      </small>
+
+      <strong id="clients-revenue">
+        R$ 0,00
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-toolbar">
+
+    <div class="section-search">
+
+      <span>
+        🔍
+      </span>
+
+      <input
+        id="clients-search"
+        type="text"
+        placeholder="Buscar nome, WhatsApp ou e-mail..."
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="orders-table-wrap">
+
+      <table class="data-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Cliente
+            </th>
+
+            <th>
+              WhatsApp
+            </th>
+
+            <th>
+              E-mail
+            </th>
+
+            <th>
+              Pedidos
+            </th>
+
+            <th>
+              Total gasto
+            </th>
+
+            <th>
+              Último pedido
+            </th>
+
+            <th>
+              Ações
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="clients-body">
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="empty"
+            >
+              Carregando clientes...
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      id="clients-summary"
+      style="
+        padding:12px 16px;
+        border-top:1px solid var(--border);
+        font-size:12px;
+        color:var(--text-light);
+      "
+    >
+      0 clientes
     </div>
 
   </div>
