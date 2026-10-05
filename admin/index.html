@@ -1454,10 +1454,184 @@ body:not(.authed) .admin-main{
 </div>
 
 
+<!-- =========================================
+     CUPONS
+     ========================================= -->
+
 <div
   class="page-content"
   id="page-cupons"
 >
+
+  <div class="page-header">
+
+    <div>
+
+      <h1 class="page-title">
+        Cupons
+      </h1>
+
+      <p class="page-subtitle">
+        Crie e gerencie cupons de desconto
+      </p>
+
+    </div>
+
+
+    <div class="page-actions">
+
+      <button
+        class="btn btn--outline"
+        onclick="loadCoupons()"
+      >
+        🔄 Atualizar
+      </button>
+
+      <button
+        class="btn btn--primary"
+        onclick="newCoupon()"
+      >
+        + Novo Cupom
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="order-stats">
+
+    <div class="order-stat">
+
+      <small>
+        Total de cupons
+      </small>
+
+      <strong id="coupons-total">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="order-stat">
+
+      <small>
+        Cupons ativos
+      </small>
+
+      <strong id="coupons-active">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="order-stat">
+
+      <small>
+        Usos registrados
+      </small>
+
+      <strong id="coupons-used">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="order-stat">
+
+      <small>
+        Expirados
+      </small>
+
+      <strong id="coupons-expired">
+        0
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-toolbar">
+
+    <div class="section-search">
+
+      <span>
+        🔍
+      </span>
+
+      <input
+        id="coupons-search"
+        type="text"
+        placeholder="Buscar cupom..."
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="orders-table-wrap">
+
+      <table class="data-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Código</th>
+            <th>Desconto</th>
+            <th>Pedido mínimo</th>
+            <th>Usos</th>
+            <th>Validade</th>
+            <th>Status</th>
+            <th>Ações</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="coupons-body">
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="empty"
+            >
+              Nenhum cupom cadastrado.
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      id="coupons-summary"
+      style="
+        padding:12px 16px;
+        border-top:1px solid var(--border);
+        font-size:12px;
+        color:var(--text-light);
+      "
+    >
+      0 cupons
+    </div>
+
+  </div>
+
+</div>
 
 
 <div
