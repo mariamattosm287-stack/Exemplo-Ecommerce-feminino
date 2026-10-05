@@ -3341,44 +3341,63 @@ function renderProducts() {
       `;
 
 
-      const status =
+      const stock =
+Number(
+  product.stock || 0
+);
 
-      product.is_active
-      ===
-      false
 
-      ?
+const status =
 
-      `
-      <span class="badge badge--gray">
-        Rascunho
-      </span>
-      `
+product.is_active
+===
+false
 
-      :
+?
 
-      Number(
-        product.stock || 0
-      )
-      <=
-      0
+`
+<span class="badge badge--gray">
+  Rascunho
+</span>
+`
 
-      ?
+:
 
-      `
-      <span class="badge badge--red">
-        Sem estoque
-      </span>
-      `
+stock <= 0
 
-      :
+?
 
-      `
-      <span class="badge badge--green">
-        Ativo
-      </span>
-      `;
+`
+<span class="badge badge--red">
+  Sem estoque
+</span>
+`
 
+:
+
+stock <= 5
+
+?
+
+`
+<span
+  class="badge"
+  style="
+    background:#fff4df;
+    color:#a56600;
+  "
+>
+  ⚠️ Estoque baixo
+</span>
+`
+
+:
+
+`
+<span class="badge badge--green">
+  Ativo
+</span>
+`;
 
       return `
 
