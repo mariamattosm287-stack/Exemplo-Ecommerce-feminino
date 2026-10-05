@@ -7764,7 +7764,944 @@ function orderWhatsApp() {
 
 }
 
+/* =========================================
+   CLIENTES
+   ========================================= */
 
+function normalizePhone(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+  .replace(
+    /\D/g,
+    ""
+  );
+
+}
+
+
+function clientIdentity(
+  order
+) {
+
+  const phone =
+  normalizePhone(
+    order.customer_phone
+  );
+
+
+  if (
+    phone
+  ) {
+
+    return "phone:"
+    +
+    phone;
+
+  }
+
+
+  const email =
+
+  String(
+    order.customer_email
+    ||
+    order.email
+    ||
+    ""
+  )
+  .trim()
+  .toLowerCase();
+
+
+  if (
+    email
+  ) {
+
+    return "email:"
+    +
+    email;
+
+  }
+
+
+  return "name:"
+  +
+  String(
+    order.customer_name
+    ||
+    "cliente"
+  )
+  .trim()
+  .toLowerCase();
+
+}
+
+
+function buildClients() {
+
+  const map =
+  new Map();
+
+
+  orders
+  .forEach(
+    order => {
+
+
+      const key =
+      clientIdentity(
+        order
+      );
+
+
+      if (
+        !map.has(
+          key
+        )
+      ) {
+
+        map.set(
+          key,
+          {
+
+            key,
+
+            name:
+            order.customer_name
+            ||
+            "Cliente",
+
+            phone:
+            order.customer_phone
+            ||
+            "",
+
+            email:
+            order.customer_email
+            ||
+            order.email
+            ||
+            "",
+
+            orders:
+            [],
+
+            total:
+            0,
+
+            lastOrder:
+            null
+
+          }
+        );
+
+      }
+
+
+      const client =
+      map.get(
+        key
+      );
+
+
+      client.orders.push(
+        order
+      );
+
+
+      if (
+        ordStatus(
+          order
+        )
+        !==
+        "Cancelado"
+      ) {
+
+        client.total +=
+
+        Number(
+          order.total || 0
+        );
+
+      }
+
+
+      if (
+
+        !client.lastOrder
+
+        ||
+
+        new Date(
+          order.created_at
+        )
+        >
+        new Date(
+          client.lastOrder.created_at
+        )
+
+      ) {
+
+        client.lastOrder =
+        order;
+
+      }
+
+
+      if (
+        !client.phone
+        &&
+        order.customer_phone
+      ) {
+
+        client.phone =
+        order.customer_phone;
+
+      }
+
+
+      if (
+        !client.email
+      ) {
+
+        client.email =
+        order.customer_email
+        ||
+        order.email
+        ||
+        "";
+
+      }
+
+
+    }
+  );
+
+
+  clients =
+
+  [
+    ...map.values()
+  ]
+  .sort(
+    (
+      a,
+      b
+    ) =>
+
+    new Date(
+      b.lastOrder
+      ?.created_at
+      ||
+      0
+    )
+
+    -
+
+    new Date(
+      a.lastOrder
+      ?.created_at
+      ||
+      0
+    )
+  );
+
+}
+
+
+function renderClientStats() {
+
+  $("clients-total")
+  .textContent =
+  clients.length;
+
+
+  $("clients-repeat")
+  .textContent =
+
+  clients
+  .filter(
+    client =>
+    client.orders.length > 1
+  )
+  .length;
+
+
+  $("clients-orders")
+  .textContent =
+
+  clients
+  .reduce(
+    (
+      total,
+      client
+    ) =>
+
+    total
+    +
+    client.orders.length,
+
+    0
+  );
+
+
+  $("clients-revenue")
+  .textContent =
+
+  money(
+
+    clients
+    .reduce(
+      (
+        total,
+        client
+      ) =>
+
+      total
+      +
+      Number(
+        client.total || 0
+      ),
+
+      0
+    )
+
+  );
+
+}
+
+
+function renderClients() {
+
+  if (
+    !$(
+      "clients-body"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  buildClients();
+
+
+  const query =
+
+  String(
+    $("clients-search")
+    ?.value
+    ||
+    ""
+  )
+  .trim()
+  .toLowerCase();
+
+
+  const list =
+
+  clients
+  .filter(
+    client => {
+
+
+      const searchable =
+
+      `
+      ${client.name || ""}
+      ${client.phone || ""}
+      ${client.email || ""}
+      `
+      .toLowerCase();
+
+
+      return (
+
+        !query
+
+        ||
+
+        searchable.includes(
+          query
+        )
+
+      );
+
+    }
+  );
+
+
+  $("clients-body")
+  .innerHTML =
+
+  list.length
+
+  ?
+
+  list
+  .map(
+    client => `
+
+      <tr>
+
+        <td>
+
+          <strong>
+            ${esc(client.name)}
+          </strong>
+
+          ${
+            client.orders.length > 1
+
+            ?
+
+            `
+            <div
+              style="
+                margin-top:4px;
+                font-size:10px;
+                color:#247a48;
+                font-weight:700;
+              "
+            >
+              Cliente recorrente
+            </div>
+            `
+
+            :
+
+            ""
+          }
+
+        </td>
+
+
+        <td>
+
+          ${
+            client.phone
+
+            ?
+
+            esc(
+              client.phone
+            )
+
+            :
+
+            "—"
+          }
+
+        </td>
+
+
+        <td>
+
+          ${
+            client.email
+
+            ?
+
+            esc(
+              client.email
+            )
+
+            :
+
+            "Não informado"
+          }
+
+        </td>
+
+
+        <td>
+
+          <strong>
+            ${client.orders.length}
+          </strong>
+
+        </td>
+
+
+        <td>
+
+          <strong>
+            ${money(client.total)}
+          </strong>
+
+        </td>
+
+
+        <td>
+
+          ${
+            client.lastOrder
+
+            ?
+
+            `
+            <strong>
+              #${esc(
+                ordNo(
+                  client.lastOrder
+                )
+              )}
+            </strong>
+
+            <div
+              style="
+                font-size:10px;
+                color:#888;
+                margin-top:3px;
+              "
+            >
+              ${esc(
+                ordDate(
+                  client.lastOrder
+                  .created_at
+                )
+              )}
+            </div>
+            `
+
+            :
+
+            "—"
+          }
+
+        </td>
+
+
+        <td>
+
+          <button
+            class="btn btn--ghost btn--icon"
+            onclick="
+              showClient(
+                '${esc(client.key)}'
+              )
+            "
+            title="Ver cliente"
+          >
+            👁️
+          </button>
+
+        </td>
+
+      </tr>
+
+    `
+  )
+  .join(
+    ""
+  )
+
+  :
+
+  `
+  <tr>
+
+    <td
+      colspan="7"
+      class="empty"
+    >
+      Nenhum cliente encontrado.
+    </td>
+
+  </tr>
+  `;
+
+
+  $("clients-summary")
+  .textContent =
+
+  `${list.length} de ${clients.length} cliente(s)`;
+
+
+  renderClientStats();
+
+}
+
+
+function showClient(
+  key
+) {
+
+  buildClients();
+
+
+  const client =
+
+  clients
+  .find(
+    item =>
+    item.key === key
+  );
+
+
+  if (
+    !client
+  ) {
+
+    return;
+
+  }
+
+
+  currentClient =
+  client.key;
+
+
+  $("client-title")
+  .textContent =
+  client.name;
+
+
+  $("client-subtitle")
+  .textContent =
+
+  `${client.orders.length} pedido(s) • ${money(client.total)} em compras`;
+
+
+  const history =
+
+  [
+    ...client.orders
+  ]
+  .sort(
+    (
+      a,
+      b
+    ) =>
+
+    new Date(
+      b.created_at
+    )
+
+    -
+
+    new Date(
+      a.created_at
+    )
+  )
+  .map(
+    order => `
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:
+            110px 1fr auto auto;
+          gap:12px;
+          align-items:center;
+          padding:12px 0;
+          border-bottom:1px solid #eee;
+        "
+      >
+
+        <div>
+
+          <strong>
+            #${esc(
+              ordNo(
+                order
+              )
+            )}
+          </strong>
+
+          <div
+            style="
+              font-size:10px;
+              color:#888;
+            "
+          >
+            ${esc(
+              ordDate(
+                order.created_at
+              )
+            )}
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <span
+            class="order-status"
+            data-s="${esc(
+              ordStatus(
+                order
+              )
+            )}"
+          >
+            ${esc(
+              ordStatus(
+                order
+              )
+            )}
+          </span>
+
+        </div>
+
+
+        <strong>
+          ${money(order.total)}
+        </strong>
+
+
+        <button
+          class="btn btn--ghost btn--icon"
+          onclick="
+            closeModal('client-modal');
+
+            showOrder(
+              '${esc(order.id)}'
+            );
+          "
+        >
+          👁️
+        </button>
+
+      </div>
+
+    `
+  )
+  .join(
+    ""
+  );
+
+
+  $("client-detail")
+  .innerHTML = `
+
+    <div class="order-grid">
+
+
+      <div class="order-box">
+
+        <h3>
+          Contato
+        </h3>
+
+        <div>
+
+          <strong>
+            ${esc(client.name)}
+          </strong>
+
+        </div>
+
+        <div
+          style="
+            margin-top:7px;
+          "
+        >
+
+          WhatsApp:
+
+          ${
+            client.phone
+
+            ?
+
+            esc(
+              client.phone
+            )
+
+            :
+
+            "Não informado"
+          }
+
+        </div>
+
+        <div>
+
+          E-mail:
+
+          ${
+            client.email
+
+            ?
+
+            esc(
+              client.email
+            )
+
+            :
+
+            "Não informado"
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="order-box">
+
+        <h3>
+          Resumo
+        </h3>
+
+        <div>
+
+          Pedidos:
+
+          <strong>
+            ${client.orders.length}
+          </strong>
+
+        </div>
+
+        <div>
+
+          Total gasto:
+
+          <strong>
+            ${money(client.total)}
+          </strong>
+
+        </div>
+
+        <div>
+
+          Ticket médio:
+
+          <strong>
+
+            ${money(
+
+              client.orders.length
+
+              ?
+
+              client.total
+              /
+              client.orders.length
+
+              :
+
+              0
+
+            )}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="order-box full">
+
+        <h3>
+          Histórico de pedidos
+        </h3>
+
+        ${
+          history
+          ||
+          "Nenhum pedido."
+        }
+
+      </div>
+
+
+    </div>
+
+  `;
+
+
+  $("client-wa")
+  .style
+  .display =
+
+  client.phone
+
+  ?
+
+  "inline-flex"
+
+  :
+
+  "none";
+
+
+  openModal(
+    "client-modal"
+  );
+
+}
+
+
+function clientWhatsApp() {
+
+  const client =
+
+  clients
+  .find(
+    item =>
+    item.key
+    ===
+    currentClient
+  );
+
+
+  if (
+    !client
+    ||
+    !client.phone
+  ) {
+
+    return;
+
+  }
+
+
+  let phone =
+
+  normalizePhone(
+    client.phone
+  );
+
+
+  if (
+    phone.length === 10
+    ||
+    phone.length === 11
+  ) {
+
+    phone =
+    "55"
+    +
+    phone;
+
+  }
+
+
+  const message =
+
+  `Olá, ${client.name}! Tudo bem? Aqui é da ESSENCE. 💕`;
+
+
+  window.open(
+
+    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+
+    "_blank",
+
+    "noopener,noreferrer"
+
+  );
+
+}
 
 /* EVENTOS */
 
