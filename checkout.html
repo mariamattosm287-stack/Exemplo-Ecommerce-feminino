@@ -74,16 +74,12 @@
 
 
     button {
-
       cursor: pointer;
-
     }
 
 
     a {
-
       color: inherit;
-
     }
 
 
@@ -100,7 +96,6 @@
         auto;
 
     }
-
 
 
     /* ========================================
@@ -171,7 +166,6 @@
     }
 
 
-
     /* ========================================
        MAIN
        ======================================== */
@@ -236,7 +230,6 @@
       align-items: start;
 
     }
-
 
 
     /* ========================================
@@ -324,7 +317,6 @@
       font-size: 11px;
 
     }
-
 
 
     /* ========================================
@@ -447,7 +439,6 @@
     }
 
 
-
     /* ========================================
        ENTREGA
        ======================================== */
@@ -564,18 +555,13 @@
 
 
     #address-fields {
-
       display: block;
-
     }
 
 
     #address-fields.hidden {
-
       display: none;
-
     }
-
 
 
     /* ========================================
@@ -684,7 +670,6 @@
     }
 
 
-
     /* ========================================
        RESUMO
        ======================================== */
@@ -740,9 +725,7 @@
 
 
     .summary-item__image-wrap {
-
       position: relative;
-
     }
 
 
@@ -879,6 +862,20 @@
     }
 
 
+    .summary-line--discount {
+
+      color: #56744e;
+
+    }
+
+
+    .summary-line--discount strong {
+
+      color: #56744e;
+
+    }
+
+
     .summary-line--total {
 
       margin:
@@ -930,6 +927,178 @@
 
     }
 
+
+    /* ========================================
+       CUPOM
+       ======================================== */
+
+    .coupon-box {
+
+      margin-top: 20px;
+
+      padding-top: 20px;
+
+      border-top:
+        1px
+        solid
+        #ebe7e4;
+
+    }
+
+
+    .coupon-label {
+
+      display: block;
+
+      margin-bottom: 8px;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      color: #514742;
+
+      text-transform: uppercase;
+
+      letter-spacing: .4px;
+
+    }
+
+
+    .coupon-row {
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+
+      gap: 8px;
+
+    }
+
+
+    .coupon-input {
+
+      width: 100%;
+
+      min-width: 0;
+
+      height: 43px;
+
+      border:
+        1px
+        solid
+        #ddd7d3;
+
+      border-radius: 5px;
+
+      padding:
+        0
+        12px;
+
+      outline: 0;
+
+      text-transform: uppercase;
+
+      color: #332b27;
+
+    }
+
+
+    .coupon-input:focus {
+
+      border-color: #675248;
+
+      box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(
+          103,
+          82,
+          72,
+          .08
+        );
+
+    }
+
+
+    .coupon-button {
+
+      min-width: 88px;
+
+      height: 43px;
+
+      border:
+        1px
+        solid
+        #3b302a;
+
+      border-radius: 5px;
+
+      padding:
+        0
+        14px;
+
+      background: #fff;
+
+      color: #3b302a;
+
+      font-size: 9px;
+
+      font-weight: 700;
+
+      letter-spacing: .4px;
+
+    }
+
+
+    .coupon-button:hover {
+
+      background: #3b302a;
+
+      color: #fff;
+
+    }
+
+
+    .coupon-button:disabled {
+
+      opacity: .55;
+
+      cursor: not-allowed;
+
+    }
+
+
+    .coupon-message {
+
+      display: none;
+
+      margin-top: 8px;
+
+      font-size: 9px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .coupon-message.show {
+      display: block;
+    }
+
+
+    .coupon-message.success {
+      color: #56744e;
+    }
+
+
+    .coupon-message.error {
+      color: #b42335;
+    }
 
 
     /* ========================================
@@ -1004,11 +1173,8 @@
 
 
     .back-store:hover {
-
       text-decoration: underline;
-
     }
-
 
 
     /* ========================================
@@ -1107,7 +1273,6 @@
     }
 
 
-
     /* ========================================
        SUCESSO
        ======================================== */
@@ -1128,9 +1293,7 @@
 
 
     .order-success.active {
-
       display: block;
-
     }
 
 
@@ -1276,7 +1439,6 @@
     }
 
 
-
     /* ========================================
        TOAST
        ======================================== */
@@ -1331,7 +1493,6 @@
     }
 
 
-
     /* ========================================
        RESPONSIVO
        ======================================== */
@@ -1369,23 +1530,17 @@
 
 
       .checkout-header__inner {
-
         min-height: 66px;
-
       }
 
 
       .checkout-logo {
-
         font-size: 20px;
-
       }
 
 
       .checkout-secure span {
-
         display: none;
-
       }
 
 
@@ -1400,39 +1555,27 @@
 
 
       .checkout-subtitle {
-
         margin-bottom: 25px;
-
       }
 
 
       .checkout-card {
-
         padding: 19px;
-
       }
 
 
       .form-grid {
-
-        grid-template-columns:
-          1fr;
-
+        grid-template-columns: 1fr;
       }
 
 
       .form-group--full {
-
         grid-column: auto;
-
       }
 
 
       .delivery-options {
-
-        grid-template-columns:
-          1fr;
-
+        grid-template-columns: 1fr;
       }
 
 
@@ -1451,6 +1594,15 @@
         width: 58px;
 
         height: 72px;
+
+      }
+
+
+      .coupon-row {
+
+        grid-template-columns:
+          minmax(0, 1fr)
+          82px;
 
       }
 
@@ -1538,9 +1690,7 @@
 
 
       <p class="checkout-subtitle">
-
         Preencha seus dados para enviar seu pedido à ESSENCE.
-
       </p>
 
 
@@ -1551,9 +1701,7 @@
       >
 
 
-        <!-- ========================================
-             FORMULÁRIO
-             ======================================== -->
+        <!-- FORMULÁRIO -->
 
         <div>
 
@@ -1561,7 +1709,6 @@
           <!-- CLIENTE -->
 
           <section class="checkout-card">
-
 
             <div class="checkout-card__header">
 
@@ -1584,7 +1731,6 @@
             </div>
 
 
-
             <div class="form-grid">
 
 
@@ -1605,7 +1751,6 @@
               </div>
 
 
-
               <div class="form-group">
 
                 <label class="form-label">
@@ -1621,7 +1766,6 @@
                 >
 
               </div>
-
 
 
               <div class="form-group">
@@ -1649,7 +1793,6 @@
 
             </div>
 
-
           </section>
 
 
@@ -1657,7 +1800,6 @@
           <!-- ENTREGA -->
 
           <section class="checkout-card">
-
 
             <div class="checkout-card__header">
 
@@ -1678,7 +1820,6 @@
               </div>
 
             </div>
-
 
 
             <div class="delivery-options">
@@ -1716,7 +1857,6 @@
               </label>
 
 
-
               <label class="delivery-option">
 
                 <input
@@ -1751,7 +1891,6 @@
             </div>
 
 
-
             <div
               id="address-fields"
               class="form-grid"
@@ -1777,7 +1916,6 @@
               </div>
 
 
-
               <div class="form-group">
 
                 <label class="form-label">
@@ -1794,7 +1932,6 @@
                 >
 
               </div>
-
 
 
               <div class="form-group form-group--full">
@@ -1814,7 +1951,6 @@
               </div>
 
 
-
               <div class="form-group">
 
                 <label class="form-label">
@@ -1829,7 +1965,6 @@
                 >
 
               </div>
-
 
 
               <div class="form-group">
@@ -1855,7 +1990,6 @@
               </div>
 
 
-
               <div class="form-group">
 
                 <label class="form-label">
@@ -1870,7 +2004,6 @@
                 >
 
               </div>
-
 
 
               <div class="form-group">
@@ -1892,7 +2025,6 @@
 
             </div>
 
-
           </section>
 
 
@@ -1900,7 +2032,6 @@
           <!-- PAGAMENTO -->
 
           <section class="checkout-card">
-
 
             <div class="checkout-card__header">
 
@@ -1921,7 +2052,6 @@
               </div>
 
             </div>
-
 
 
             <div class="payment-options">
@@ -1959,7 +2089,6 @@
               </label>
 
 
-
               <label class="payment-option">
 
                 <input
@@ -1993,7 +2122,6 @@
 
             </div>
 
-
           </section>
 
 
@@ -2001,7 +2129,6 @@
           <!-- OBSERVAÇÃO -->
 
           <section class="checkout-card">
-
 
             <div class="checkout-card__header">
 
@@ -2035,7 +2162,6 @@
 
             </div>
 
-
           </section>
 
 
@@ -2066,6 +2192,46 @@
           ></div>
 
 
+          <!-- CUPOM -->
+
+          <div class="coupon-box">
+
+            <label
+              class="coupon-label"
+              for="coupon-code"
+            >
+              Cupom de desconto
+            </label>
+
+            <div class="coupon-row">
+
+              <input
+                id="coupon-code"
+                class="coupon-input"
+                type="text"
+                maxlength="50"
+                autocomplete="off"
+                placeholder="Digite seu cupom"
+              >
+
+              <button
+                type="button"
+                class="coupon-button"
+                id="coupon-button"
+              >
+                APLICAR
+              </button>
+
+            </div>
+
+            <div
+              class="coupon-message"
+              id="coupon-message"
+            ></div>
+
+          </div>
+
+
           <div class="summary-divider"></div>
 
 
@@ -2082,6 +2248,22 @@
           </div>
 
 
+          <div
+            class="summary-line summary-line--discount"
+            id="discount-summary-line"
+            style="display:none"
+          >
+
+            <span>
+              Desconto
+            </span>
+
+            <strong id="summary-discount">
+              - R$ 0,00
+            </strong>
+
+          </div>
+
 
           <div
             class="summary-line"
@@ -2097,7 +2279,6 @@
             </strong>
 
           </div>
-
 
 
           <div class="summary-line summary-line--total">
@@ -2117,11 +2298,8 @@
             class="shipping-note"
             id="shipping-note"
           >
-
             O valor da entrega será confirmado pela loja antes do pagamento.
-
           </p>
-
 
 
           <button
@@ -2129,9 +2307,7 @@
             class="place-order-button"
             id="place-order-button"
           >
-
             CONFIRMAR PEDIDO
-
           </button>
 
 
@@ -2147,7 +2323,6 @@
 
 
       </div>
-
 
     </div>
 
@@ -2165,7 +2340,6 @@
   >
 
     <div class="container">
-
 
       <div class="order-success__card">
 
@@ -2231,11 +2405,9 @@
 
       </div>
 
-
     </div>
 
   </section>
-
 
 
   <div id="toast"></div>
@@ -2249,7 +2421,6 @@
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
   ></script>
-
 
 
   <script>
@@ -2280,12 +2451,15 @@
       );
 
 
-
     let checkoutCart =
       [];
 
 
     let lastOrder =
+      null;
+
+
+    let appliedCoupon =
       null;
 
 
@@ -2301,11 +2475,9 @@
         );
 
 
-
     function escapeHtml(
       value
     ) {
-
 
       return String(
         value ?? ""
@@ -2336,20 +2508,16 @@
         "&#039;"
       );
 
-
     }
-
 
 
     function money(
       value
     ) {
 
-
       return Number(
         value || 0
       )
-
       .toLocaleString(
 
         "pt-BR",
@@ -2366,15 +2534,12 @@
 
       );
 
-
     }
-
 
 
     function showToast(
       message
     ) {
-
 
       const toast =
         $("toast");
@@ -2415,16 +2580,12 @@
 
         );
 
-
     }
-
 
 
     function getCart() {
 
-
       try {
-
 
         const value =
 
@@ -2453,26 +2614,20 @@
 
         [];
 
-
       }
 
       catch (_) {
 
-
         return [];
-
 
       }
 
-
     }
-
 
 
     function cartSubtotal(
       cart
     ) {
-
 
       return cart.reduce(
 
@@ -2499,27 +2654,465 @@
 
       );
 
-
     }
 
+
+    function currentDiscount() {
+
+      return Number(
+        appliedCoupon
+        ?.discount_amount
+        ||
+        0
+      );
+
+    }
 
 
     function formatOrderNumber(
       number
     ) {
 
-
       return String(
         number || ""
       )
-
       .padStart(
         6,
         "0"
       );
 
+    }
+
+
+
+    /* ========================================
+       CUPOM
+       ======================================== */
+
+    function setCouponMessage(
+      message = "",
+      type = ""
+    ) {
+
+      const element =
+        $("coupon-message");
+
+
+      if (!element) {
+        return;
+      }
+
+
+      element.textContent =
+        message;
+
+
+      element.className =
+        "coupon-message";
+
+
+      if (
+        message
+      ) {
+
+        element.classList.add(
+          "show"
+        );
+
+      }
+
+
+      if (
+        type
+      ) {
+
+        element.classList.add(
+          type
+        );
+
+      }
 
     }
+
+
+    function clearCoupon(
+      showMessage = false
+    ) {
+
+      appliedCoupon =
+        null;
+
+
+      $("coupon-button")
+        .textContent =
+        "APLICAR";
+
+
+      if (
+        showMessage
+      ) {
+
+        setCouponMessage(
+          "Cupom removido.",
+          ""
+        );
+
+      }
+
+      else {
+
+        setCouponMessage();
+
+      }
+
+
+      renderSummary();
+
+    }
+
+
+    async function applyCoupon() {
+
+      checkoutCart =
+        getCart();
+
+
+      if (
+        !checkoutCart.length
+      ) {
+
+        showEmptyCheckout();
+
+        return;
+
+      }
+
+
+      const input =
+        $("coupon-code");
+
+
+      const button =
+        $("coupon-button");
+
+
+      const code =
+
+        String(
+          input.value || ""
+        )
+        .trim()
+        .toUpperCase();
+
+
+      input.value =
+        code;
+
+
+      if (
+        appliedCoupon
+        &&
+        code === appliedCoupon.code
+      ) {
+
+        clearCoupon(
+          true
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !code
+      ) {
+
+        setCouponMessage(
+          "Digite um cupom.",
+          "error"
+        );
+
+        input.focus();
+
+        return;
+
+      }
+
+
+      const subtotal =
+
+        cartSubtotal(
+          checkoutCart
+        );
+
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "...";
+
+
+      setCouponMessage(
+        "Validando cupom..."
+      );
+
+
+      try {
+
+
+        const {
+          data,
+          error
+        } =
+
+          await supabaseClient
+
+          .rpc(
+
+            "validate_coupon",
+
+            {
+
+              p_code:
+                code,
+
+              p_subtotal:
+                subtotal
+
+            }
+
+          );
+
+
+        if (
+          error
+        ) {
+
+          throw error;
+
+        }
+
+
+        const result =
+
+          Array.isArray(
+            data
+          )
+
+          ?
+
+          data[0]
+
+          :
+
+          data;
+
+
+        if (
+          !result
+          ||
+          result.valid !== true
+        ) {
+
+          appliedCoupon =
+            null;
+
+
+          setCouponMessage(
+
+            result
+            ?.message
+
+            ||
+
+            "Cupom inválido.",
+
+            "error"
+
+          );
+
+
+          renderSummary();
+
+          return;
+
+        }
+
+
+        appliedCoupon = {
+
+          code:
+            String(
+              result.code || code
+            )
+            .toUpperCase(),
+
+          discount_amount:
+            Number(
+              result.discount_amount || 0
+            ),
+
+          final_total:
+            Number(
+              result.final_total || 0
+            )
+
+        };
+
+
+        input.value =
+          appliedCoupon.code;
+
+
+        button.textContent =
+          "REMOVER";
+
+
+        setCouponMessage(
+
+          `${appliedCoupon.code} aplicado: você economizou ${money(
+            appliedCoupon.discount_amount
+          )}.`,
+
+          "success"
+
+        );
+
+
+        renderSummary();
+
+
+      }
+
+      catch (
+        error
+      ) {
+
+        console.error(
+          "Erro ao validar cupom:",
+          error
+        );
+
+
+        appliedCoupon =
+          null;
+
+
+        setCouponMessage(
+          "Não foi possível validar o cupom.",
+          "error"
+        );
+
+
+        renderSummary();
+
+      }
+
+      finally {
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+
+          appliedCoupon
+
+          ?
+
+          "REMOVER"
+
+          :
+
+          "APLICAR";
+
+      }
+
+    }
+
+
+    $("coupon-button")
+      ?.addEventListener(
+
+        "click",
+
+        applyCoupon
+
+      );
+
+
+    $("coupon-code")
+      ?.addEventListener(
+
+        "keydown",
+
+        event => {
+
+          if (
+            event.key ===
+            "Enter"
+          ) {
+
+            event.preventDefault();
+
+            applyCoupon();
+
+          }
+
+        }
+
+      );
+
+
+    $("coupon-code")
+      ?.addEventListener(
+
+        "input",
+
+        event => {
+
+          const value =
+
+            String(
+              event.target.value || ""
+            )
+            .toUpperCase();
+
+
+          event.target.value =
+            value;
+
+
+          if (
+            appliedCoupon
+            &&
+            value.trim()
+            !==
+            appliedCoupon.code
+          ) {
+
+            appliedCoupon =
+              null;
+
+
+            $("coupon-button")
+              .textContent =
+              "APLICAR";
+
+
+            setCouponMessage();
+
+
+            renderSummary();
+
+          }
+
+        }
+
+      );
 
 
 
@@ -2528,7 +3121,6 @@
        ======================================== */
 
     function renderSummary() {
-
 
       const container =
         $("summary-items");
@@ -2539,24 +3131,19 @@
       }
 
 
-
       checkoutCart =
         getCart();
-
 
 
       if (
         !checkoutCart.length
       ) {
 
-
         showEmptyCheckout();
 
         return;
 
-
       }
-
 
 
       container.innerHTML =
@@ -2583,12 +3170,10 @@
 
             return `
 
-
               <div class="summary-item">
 
 
                 <div class="summary-item__image-wrap">
-
 
                   <img
                     src="${escapeHtml(
@@ -2600,7 +3185,6 @@
                     class="summary-item__image"
                   >
 
-
                   <span class="summary-item__quantity">
 
                     ${Number(
@@ -2609,13 +3193,10 @@
 
                   </span>
 
-
                 </div>
 
 
-
                 <div>
-
 
                   <div class="summary-item__name">
 
@@ -2626,9 +3207,7 @@
                   </div>
 
 
-
                   <div class="summary-item__meta">
-
 
                     ${
 
@@ -2637,16 +3216,12 @@
                       ?
 
                       `
-
                         <span>
-
                           Cor:
                           ${escapeHtml(
                             item.color
                           )}
-
                         </span>
-
                       `
 
                       :
@@ -2654,7 +3229,6 @@
                       ""
 
                     }
-
 
 
                     ${
@@ -2664,16 +3238,12 @@
                       ?
 
                       `
-
                         <span>
-
                           Tamanho:
                           ${escapeHtml(
                             item.size
                           )}
-
                         </span>
-
                       `
 
                       :
@@ -2682,12 +3252,9 @@
 
                     }
 
-
                   </div>
 
-
                 </div>
-
 
 
                 <div class="summary-item__price">
@@ -2698,11 +3265,9 @@
 
                 </div>
 
-
               </div>
 
             `;
-
 
           }
 
@@ -2713,11 +3278,26 @@
         );
 
 
-
       const subtotal =
 
         cartSubtotal(
           checkoutCart
+        );
+
+
+      const discount =
+
+        Math.min(
+          currentDiscount(),
+          subtotal
+        );
+
+
+      const total =
+
+        Math.max(
+          subtotal - discount,
+          0
         );
 
 
@@ -2728,12 +3308,34 @@
         );
 
 
+      $("summary-discount")
+        .textContent =
+
+        `- ${money(
+          discount
+        )}`;
+
+
+      $("discount-summary-line")
+        .style
+        .display =
+
+        discount > 0
+
+        ?
+
+        "flex"
+
+        :
+
+        "none";
+
+
       $("summary-total")
         .textContent =
         money(
-          subtotal
+          total
         );
-
 
     }
 
@@ -2744,7 +3346,6 @@
        ======================================== */
 
     function showEmptyCheckout() {
-
 
       const content =
         $("checkout-content");
@@ -2761,37 +3362,27 @@
 
           <div class="empty-checkout">
 
-
             <div class="empty-checkout__icon">
               🛍️
             </div>
-
 
             <h2>
               Sua sacola está vazia
             </h2>
 
-
             <p>
-
               Adicione produtos à sacola antes de finalizar sua compra.
-
             </p>
 
-
             <a href="index.html#hot-right-now">
-
               VER PRODUTOS
-
             </a>
-
 
           </div>
 
         </div>
 
       `;
-
 
     }
 
@@ -2802,7 +3393,6 @@
        ======================================== */
 
     function currentFulfillment() {
-
 
       return (
 
@@ -2818,16 +3408,12 @@
 
       );
 
-
     }
-
 
 
     function updateFulfillment() {
 
-
       const type =
-
         currentFulfillment();
 
 
@@ -2843,12 +3429,10 @@
         $("shipping-note");
 
 
-
       if (
         type ===
         "retirada"
       ) {
-
 
         address
           ?.classList
@@ -2857,7 +3441,9 @@
           );
 
 
-        if (shipping) {
+        if (
+          shipping
+        ) {
 
           shipping.textContent =
             "Grátis";
@@ -2865,18 +3451,18 @@
         }
 
 
-        if (shippingNote) {
+        if (
+          shippingNote
+        ) {
 
           shippingNote.textContent =
             "A loja entrará em contato para combinar a retirada.";
 
         }
 
-
       }
 
       else {
-
 
         address
           ?.classList
@@ -2885,7 +3471,9 @@
           );
 
 
-        if (shipping) {
+        if (
+          shipping
+        ) {
 
           shipping.textContent =
             "A confirmar";
@@ -2893,19 +3481,18 @@
         }
 
 
-        if (shippingNote) {
+        if (
+          shippingNote
+        ) {
 
           shippingNote.textContent =
             "O valor da entrega será confirmado pela loja antes do pagamento.";
 
         }
 
-
       }
 
-
     }
-
 
 
     document
@@ -2943,7 +3530,6 @@
 
         event => {
 
-
           let value =
 
             event.target.value
@@ -2959,11 +3545,9 @@
             );
 
 
-
           if (
             value.length > 10
           ) {
-
 
             value =
 
@@ -2975,13 +3559,11 @@
 
               );
 
-
           }
 
           else if (
             value.length > 6
           ) {
-
 
             value =
 
@@ -2993,19 +3575,15 @@
 
               );
 
-
           }
-
 
 
           event.target.value =
             value;
 
-
         }
 
       );
-
 
 
     $("postal-code")
@@ -3014,7 +3592,6 @@
         "input",
 
         event => {
-
 
           let value =
 
@@ -3035,7 +3612,6 @@
             value.length > 5
           ) {
 
-
             value =
 
               value.replace(
@@ -3046,13 +3622,11 @@
 
               );
 
-
           }
 
 
           event.target.value =
             value;
-
 
         }
 
@@ -3070,7 +3644,6 @@
         "blur",
 
         async event => {
-
 
           const cep =
 
@@ -3091,9 +3664,7 @@
           }
 
 
-
           try {
-
 
             const response =
 
@@ -3118,22 +3689,17 @@
               await response.json();
 
 
-
             if (
               data.erro
             ) {
-
 
               showToast(
                 "CEP não encontrado."
               );
 
-
               return;
 
-
             }
-
 
 
             if (
@@ -3176,10 +3742,8 @@
             }
 
 
-
             $("address-number")
               ?.focus();
-
 
           }
 
@@ -3187,15 +3751,12 @@
             error
           ) {
 
-
             console.error(
               "Erro ao consultar CEP:",
               error
             );
 
-
           }
-
 
         }
 
@@ -3208,7 +3769,6 @@
        ======================================== */
 
     function validateForm() {
-
 
       const name =
 
@@ -3224,9 +3784,9 @@
           .trim();
 
 
-
-      if (!name) {
-
+      if (
+        !name
+      ) {
 
         showToast(
           "Digite seu nome."
@@ -3239,9 +3799,7 @@
 
         return false;
 
-
       }
-
 
 
       const phoneNumbers =
@@ -3256,7 +3814,6 @@
         phoneNumbers.length < 10
       ) {
 
-
         showToast(
           "Digite um WhatsApp válido."
         );
@@ -3268,22 +3825,46 @@
 
         return false;
 
+      }
+
+
+      const email =
+
+        $("customer-email")
+          .value
+          .trim();
+
+
+      if (
+        email
+        &&
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+          email
+        )
+      ) {
+
+        showToast(
+          "Digite um e-mail válido."
+        );
+
+
+        $("customer-email")
+          .focus();
+
+
+        return false;
 
       }
 
 
-
       const type =
-
         currentFulfillment();
-
 
 
       if (
         type ===
         "entrega"
       ) {
-
 
         const required = [
 
@@ -3320,7 +3901,6 @@
         ];
 
 
-
         for (
           const [
             id,
@@ -3329,7 +3909,6 @@
           of required
         ) {
 
-
           const element =
             $(id);
 
@@ -3337,7 +3916,6 @@
           if (
             !element.value.trim()
           ) {
-
 
             showToast(
               message
@@ -3349,19 +3927,14 @@
 
             return false;
 
-
           }
 
-
         }
-
 
       }
 
 
-
       return true;
-
 
     }
 
@@ -3373,24 +3946,19 @@
 
     async function createOrder() {
 
-
       checkoutCart =
         getCart();
-
 
 
       if (
         !checkoutCart.length
       ) {
 
-
         showEmptyCheckout();
 
         return;
 
-
       }
-
 
 
       if (
@@ -3402,14 +3970,11 @@
       }
 
 
-
       const button =
-
         $("place-order-button");
 
 
       const originalText =
-
         button.textContent;
 
 
@@ -3421,11 +3986,8 @@
         "ENVIANDO PEDIDO...";
 
 
-
       const fulfillmentType =
-
         currentFulfillment();
-
 
 
       const paymentMethod =
@@ -3441,9 +4003,7 @@
         "pix";
 
 
-
       const orderPayload = {
-
 
         customer_name:
 
@@ -3596,13 +4156,6 @@
           paymentMethod,
 
 
-        /*
-         * Por enquanto:
-         *
-         * entrega = frete confirmado depois
-         * retirada = zero
-         */
-
         shipping_cost:
           0,
 
@@ -3610,9 +4163,7 @@
         discount:
           0
 
-
       };
-
 
 
       const itemsPayload =
@@ -3649,9 +4200,7 @@
         );
 
 
-
       try {
-
 
         const {
           data,
@@ -3660,30 +4209,39 @@
 
           await supabaseClient
 
-            .rpc(
+          .rpc(
 
-              "create_order",
+            "create_order_with_coupon",
 
-              {
+            {
 
-                p_order:
-                  orderPayload,
+              p_order:
+                orderPayload,
 
-                p_items:
-                  itemsPayload
+              p_items:
+                itemsPayload,
 
-              }
+              p_coupon_code:
 
-            );
+                appliedCoupon
+                ?.code
+
+                ||
+
+                null
+
+            }
+
+          );
 
 
-
-        if (error) {
+        if (
+          error
+        ) {
 
           throw error;
 
         }
-
 
 
         const result =
@@ -3701,25 +4259,19 @@
           data;
 
 
-
         if (
           !result
         ) {
-
 
           throw new Error(
             "O pedido não retornou confirmação."
           );
 
-
         }
 
 
-
         const orderNumber =
-
           result.order_number;
-
 
 
         const total =
@@ -3730,12 +4282,40 @@
 
             ??
 
-            cartSubtotal(
-              checkoutCart
+            (
+              cartSubtotal(
+                checkoutCart
+              )
+
+              -
+
+              currentDiscount()
             )
 
           );
 
+
+        const finalDiscount =
+
+          Number(
+            result.order_discount
+            ??
+            currentDiscount()
+          );
+
+
+        const finalCouponCode =
+
+          result.coupon_code
+
+          ||
+
+          appliedCoupon
+          ?.code
+
+          ||
+
+          null;
 
 
         lastOrder = {
@@ -3743,6 +4323,12 @@
           orderNumber,
 
           total,
+
+          discount:
+            finalDiscount,
+
+          couponCode:
+            finalCouponCode,
 
           fulfillmentType,
 
@@ -3766,17 +4352,14 @@
         };
 
 
-
         localStorage.removeItem(
           CART_KEY
         );
 
 
-
         showSuccess(
           lastOrder
         );
-
 
       }
 
@@ -3784,22 +4367,20 @@
         error
       ) {
 
-
         console.error(
           "Erro ao criar pedido:",
           error
         );
 
 
-
         let message =
 
-          error?.message
+          error
+          ?.message
 
           ||
 
           "Não foi possível enviar o pedido.";
-
 
 
         message =
@@ -3812,16 +4393,13 @@
           );
 
 
-
         showToast(
           message
         );
 
-
       }
 
       finally {
-
 
         button.disabled =
           false;
@@ -3830,12 +4408,9 @@
         button.textContent =
           originalText;
 
-
       }
 
-
     }
-
 
 
     $("place-order-button")
@@ -3857,7 +4432,6 @@
       order
     ) {
 
-
       $("checkout-content")
         .style
         .display =
@@ -3871,14 +4445,12 @@
         );
 
 
-
       $("success-order-number")
         .textContent =
 
         `Pedido #${formatOrderNumber(
           order.orderNumber
         )}`;
-
 
 
       window.scrollTo({
@@ -3891,7 +4463,6 @@
 
       });
 
-
     }
 
 
@@ -3902,7 +4473,6 @@
 
     function buildOrderText() {
 
-
       if (
         !lastOrder
       ) {
@@ -3912,44 +4482,32 @@
       }
 
 
-
       const order =
-
         lastOrder;
 
 
-
       const lines = [
-
 
         `🛍️ PEDIDO ESSENCE #${formatOrderNumber(
           order.orderNumber
         )}`,
 
-
         "",
-
 
         `Cliente: ${order.customerName}`,
 
-
         `WhatsApp: ${order.customerPhone}`,
-
 
         "",
 
-
         "ITENS:"
 
-
       ];
-
 
 
       order.items.forEach(
 
         item => {
-
 
           lines.push(
             ""
@@ -4003,16 +4561,41 @@
 
           );
 
-
         }
 
       );
 
 
-
       lines.push(
         ""
       );
+
+
+      if (
+        order.couponCode
+        &&
+        order.discount > 0
+      ) {
+
+        lines.push(
+          `Cupom: ${order.couponCode}`
+        );
+
+
+        lines.push(
+
+          `Desconto: -${money(
+            order.discount
+          )}`
+
+        );
+
+
+        lines.push(
+          ""
+        );
+
+      }
 
 
       lines.push(
@@ -4024,18 +4607,15 @@
       );
 
 
-
       lines.push(
         ""
       );
-
 
 
       if (
         order.fulfillmentType ===
         "entrega"
       ) {
-
 
         lines.push(
           "Forma de recebimento: Entrega"
@@ -4087,19 +4667,15 @@
           "Frete: a confirmar"
         );
 
-
       }
 
       else {
-
 
         lines.push(
           "Forma de recebimento: Retirada"
         );
 
-
       }
-
 
 
       lines.push(
@@ -4120,11 +4696,9 @@
       );
 
 
-
       if (
         order.notes
       ) {
-
 
         lines.push(
           ""
@@ -4137,15 +4711,12 @@
 
         );
 
-
       }
-
 
 
       return lines.join(
         "\n"
       );
-
 
     }
 
@@ -4157,20 +4728,20 @@
 
     async function copyOrder() {
 
-
       const text =
-
         buildOrderText();
 
 
-      if (!text) {
+      if (
+        !text
+      ) {
+
         return;
+
       }
 
 
-
       try {
-
 
         await navigator.clipboard.writeText(
           text
@@ -4181,11 +4752,9 @@
           "Resumo do pedido copiado! ✅"
         );
 
-
       }
 
       catch (_) {
-
 
         const textarea =
 
@@ -4226,12 +4795,9 @@
           "Resumo do pedido copiado! ✅"
         );
 
-
       }
 
-
     }
-
 
 
     $("copy-order-button")
