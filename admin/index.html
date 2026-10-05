@@ -2298,6 +2298,213 @@ body:not(.authed) .admin-main{
 
 </div>
 
+<!-- MODAL CUPOM -->
+
+<div
+  class="modal"
+  id="coupon-modal"
+>
+
+  <div class="modal__dialog">
+
+    <div class="modal__header">
+
+      <div>
+
+        <h2
+          class="modal__title"
+          id="coupon-title"
+        >
+          Novo Cupom
+        </h2>
+
+        <small>
+          Configure as regras do desconto
+        </small>
+
+      </div>
+
+      <button
+        class="btn btn--ghost btn--icon"
+        onclick="closeModal('coupon-modal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div class="modal__body">
+
+      <div class="form-grid">
+
+
+        <div class="form-group">
+
+          <label>
+            Código do cupom *
+          </label>
+
+          <input
+            id="coupon-code"
+            class="form-control"
+            placeholder="Ex: BEMVINDA10"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Tipo de desconto *
+          </label>
+
+          <select
+            id="coupon-type"
+            class="form-control"
+          >
+
+            <option value="percent">
+              Porcentagem (%)
+            </option>
+
+            <option value="fixed">
+              Valor fixo (R$)
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Valor do desconto *
+          </label>
+
+          <input
+            id="coupon-value"
+            class="form-control"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="Ex: 10"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Pedido mínimo
+          </label>
+
+          <input
+            id="coupon-min"
+            class="form-control"
+            type="number"
+            min="0"
+            step="0.01"
+            value="0"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Limite de usos
+          </label>
+
+          <input
+            id="coupon-max"
+            class="form-control"
+            type="number"
+            min="1"
+            placeholder="Sem limite"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Data de início
+          </label>
+
+          <input
+            id="coupon-start"
+            class="form-control"
+            type="datetime-local"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Data de validade
+          </label>
+
+          <input
+            id="coupon-expire"
+            class="form-control"
+            type="datetime-local"
+          >
+
+        </div>
+
+
+        <div class="form-group form-group--full">
+
+          <label class="size-check">
+
+            <input
+              id="coupon-active"
+              type="checkbox"
+              checked
+            >
+
+            Cupom ativo
+
+          </label>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="modal__footer">
+
+      <button
+        class="btn btn--outline"
+        onclick="closeModal('coupon-modal')"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="btn btn--primary"
+        onclick="saveCoupon()"
+      >
+        Salvar Cupom
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+  
 <div id="toast"></div>
 
 
