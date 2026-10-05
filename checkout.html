@@ -67,9 +67,7 @@
     input,
     textarea,
     select {
-
       font: inherit;
-
     }
 
 
@@ -526,9 +524,7 @@
 
 
     .delivery-option__icon {
-
       font-size: 22px;
-
     }
 
 
@@ -862,13 +858,7 @@
     }
 
 
-    .summary-line--discount {
-
-      color: #56744e;
-
-    }
-
-
+    .summary-line--discount,
     .summary-line--discount strong {
 
       color: #56744e;
@@ -898,9 +888,7 @@
 
 
     .summary-line--total strong {
-
       font-size: 19px;
-
     }
 
 
@@ -924,6 +912,24 @@
       font-size: 9px;
 
       line-height: 1.6;
+
+    }
+
+
+    .shipping-note.success {
+
+      background: #edf4eb;
+
+      color: #56744e;
+
+    }
+
+
+    .shipping-note.error {
+
+      background: #fff0f1;
+
+      color: #b42335;
 
     }
 
@@ -1500,17 +1506,12 @@
     @media (max-width: 900px) {
 
       .checkout-layout {
-
-        grid-template-columns:
-          1fr;
-
+        grid-template-columns: 1fr;
       }
 
 
       .checkout-summary {
-
         position: static;
-
       }
 
     }
@@ -1701,8 +1702,6 @@
       >
 
 
-        <!-- FORMULÁRIO -->
-
         <div>
 
 
@@ -1847,7 +1846,7 @@
                     </strong>
 
                     <span>
-                      Frete confirmado após o pedido.
+                      Calculamos o frete pela sua região.
                     </span>
 
                   </div>
@@ -1878,7 +1877,7 @@
                     </strong>
 
                     <span>
-                      Combine a retirada com a loja.
+                      Retirada sem custo de entrega.
                     </span>
 
                   </div>
@@ -2265,17 +2264,14 @@
           </div>
 
 
-          <div
-            class="summary-line"
-            id="shipping-summary-line"
-          >
+          <div class="summary-line">
 
             <span>
               Frete
             </span>
 
             <strong id="summary-shipping">
-              A confirmar
+              A calcular
             </strong>
 
           </div>
@@ -2284,7 +2280,7 @@
           <div class="summary-line summary-line--total">
 
             <span>
-              Total dos produtos
+              Total
             </span>
 
             <strong id="summary-total">
@@ -2298,7 +2294,7 @@
             class="shipping-note"
             id="shipping-note"
           >
-            O valor da entrega será confirmado pela loja antes do pagamento.
+            Informe seu CEP para calcular o frete.
           </p>
 
 
@@ -2365,8 +2361,8 @@
         <p class="order-success__text">
 
           Seu pedido foi registrado com sucesso.
-          A ESSENCE poderá confirmar disponibilidade,
-          entrega e pagamento antes da finalização.
+          A ESSENCE poderá confirmar disponibilidade
+          e pagamento antes da finalização.
 
         </p>
 
@@ -2463,6 +2459,18 @@
       null;
 
 
+    let shippingQuote =
+      null;
+
+
+    let shippingLoading =
+      false;
+
+
+    let shippingTimer =
+      null;
+
+
 
     /* ========================================
        UTILITÁRIOS
@@ -2545,8 +2553,12 @@
         $("toast");
 
 
-      if (!toast) {
+      if (
+        !toast
+      ) {
+
         return;
+
       }
 
 
@@ -2669,6 +2681,39 @@
     }
 
 
+    function currentShipping() {
+
+      if (
+        currentFulfillment()
+        ===
+        "retirada"
+      ) {
+
+        return 0;
+
+      }
+
+
+      if (
+        !shippingQuote
+        ||
+        shippingQuote.found !== true
+      ) {
+
+        return 0;
+
+      }
+
+
+      return Number(
+        shippingQuote.shipping_price
+        ||
+        0
+      );
+
+    }
+
+
     function formatOrderNumber(
       number
     ) {
@@ -2698,8 +2743,12 @@
         $("coupon-message");
 
 
-      if (!element) {
+      if (
+        !element
+      ) {
+
         return;
+
       }
 
 
@@ -2753,8 +2802,7 @@
       ) {
 
         setCouponMessage(
-          "Cupom removido.",
-          ""
+          "Cupom removido."
         );
 
       }
@@ -2861,7 +2909,6 @@
 
 
       try {
-
 
         const {
           data,
@@ -2983,7 +3030,6 @@
 
 
         renderSummary();
-
 
       }
 
@@ -3117,6 +3163,226 @@
 
 
     /* ========================================
+       FRETE
+       ======================================== */
+
+    function resetShippingQuote() {
+
+      shippingQuote =
+        null;
+
+
+      renderSummary();
+
+    }
+
+
+    function scheduleShippingQuote() {
+
+      clearTimeout(
+        shippingTimer
+      );
+
+
+      shippingTimer =
+
+        setTimeout(
+
+          () => {
+
+            quoteShipping();
+
+          },
+
+          500
+
+        );
+
+    }
+
+
+    async function quoteShipping() {
+
+      if (
+        currentFulfillment()
+        !==
+        "entrega"
+      ) {
+
+        shippingQuote = {
+
+          found:
+            true,
+
+          zone_id:
+            null,
+
+          zone_name:
+            "Retirada",
+
+          shipping_price:
+            0,
+
+          message:
+            "Retirada grátis."
+
+        };
+
+
+        renderSummary();
+
+        return;
+
+      }
+
+
+      const state =
+
+        $("state")
+        ?.value
+        .trim()
+        .toUpperCase();
+
+
+      const city =
+
+        $("city")
+        ?.value
+        .trim();
+
+
+      const neighborhood =
+
+        $("neighborhood")
+        ?.value
+        .trim();
+
+
+      if (
+        !state
+        ||
+        !city
+        ||
+        !neighborhood
+      ) {
+
+        shippingQuote =
+          null;
+
+
+        renderSummary();
+
+        return;
+
+      }
+
+
+      shippingLoading =
+        true;
+
+
+      renderSummary();
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+
+          await supabaseClient
+
+          .rpc(
+
+            "quote_shipping",
+
+            {
+
+              p_state:
+                state,
+
+              p_city:
+                city,
+
+              p_neighborhood:
+                neighborhood
+
+            }
+
+          );
+
+
+        if (
+          error
+        ) {
+
+          throw error;
+
+        }
+
+
+        const result =
+
+          Array.isArray(
+            data
+          )
+
+          ?
+
+          data[0]
+
+          :
+
+          data;
+
+
+        shippingQuote =
+          result || null;
+
+
+      }
+
+      catch (
+        error
+      ) {
+
+        console.error(
+          "Erro ao calcular frete:",
+          error
+        );
+
+
+        shippingQuote = {
+
+          found:
+            false,
+
+          shipping_price:
+            0,
+
+          message:
+            "Não foi possível calcular o frete."
+
+        };
+
+      }
+
+      finally {
+
+        shippingLoading =
+          false;
+
+
+        renderSummary();
+
+      }
+
+    }
+
+
+
+    /* ========================================
        RENDER DO RESUMO
        ======================================== */
 
@@ -3126,8 +3392,12 @@
         $("summary-items");
 
 
-      if (!container) {
+      if (
+        !container
+      ) {
+
         return;
+
       }
 
 
@@ -3153,7 +3423,6 @@
         .map(
 
           item => {
-
 
             const itemTotal =
 
@@ -3210,46 +3479,40 @@
                   <div class="summary-item__meta">
 
                     ${
-
                       item.color
 
                       ?
 
                       `
-                        <span>
-                          Cor:
-                          ${escapeHtml(
-                            item.color
-                          )}
-                        </span>
+                      <span>
+                        Cor: ${escapeHtml(
+                          item.color
+                        )}
+                      </span>
                       `
 
                       :
 
                       ""
-
                     }
 
 
                     ${
-
                       item.size
 
                       ?
 
                       `
-                        <span>
-                          Tamanho:
-                          ${escapeHtml(
-                            item.size
-                          )}
-                        </span>
+                      <span>
+                        Tamanho: ${escapeHtml(
+                          item.size
+                        )}
+                      </span>
                       `
 
                       :
 
                       ""
-
                     }
 
                   </div>
@@ -3264,6 +3527,7 @@
                   )}
 
                 </div>
+
 
               </div>
 
@@ -3293,49 +3557,190 @@
         );
 
 
+      const shipping =
+
+        currentShipping();
+
+
       const total =
 
         Math.max(
-          subtotal - discount,
+
+          subtotal
+
+          -
+
+          discount
+
+          +
+
+          shipping,
+
           0
+
         );
 
 
       $("summary-subtotal")
-        .textContent =
-        money(
-          subtotal
-        );
+      .textContent =
+      money(
+        subtotal
+      );
 
 
       $("summary-discount")
-        .textContent =
+      .textContent =
 
-        `- ${money(
-          discount
-        )}`;
+      `- ${money(
+        discount
+      )}`;
 
 
       $("discount-summary-line")
-        .style
-        .display =
+      .style
+      .display =
 
-        discount > 0
+      discount > 0
+
+      ?
+
+      "flex"
+
+      :
+
+      "none";
+
+
+      const shippingElement =
+        $("summary-shipping");
+
+
+      const note =
+        $("shipping-note");
+
+
+      note.className =
+        "shipping-note";
+
+
+      if (
+        currentFulfillment()
+        ===
+        "retirada"
+      ) {
+
+        shippingElement
+        .textContent =
+        "Grátis";
+
+
+        note.textContent =
+        "Retirada na loja sem custo de entrega.";
+
+
+        note.classList.add(
+          "success"
+        );
+
+      }
+
+      else if (
+        shippingLoading
+      ) {
+
+        shippingElement
+        .textContent =
+        "Calculando...";
+
+
+        note.textContent =
+        "Estamos verificando o frete para sua região.";
+
+      }
+
+      else if (
+        shippingQuote
+        &&
+        shippingQuote.found === true
+      ) {
+
+        shippingElement
+        .textContent =
+
+        shipping === 0
 
         ?
 
-        "flex"
+        "Grátis"
 
         :
 
-        "none";
+        money(
+          shipping
+        );
+
+
+        note.textContent =
+
+        `${shippingQuote.zone_name || "Região atendida"} • ${
+          shipping === 0
+          ?
+          "Frete grátis"
+          :
+          money(shipping)
+        }`;
+
+
+        note.classList.add(
+          "success"
+        );
+
+      }
+
+      else if (
+        shippingQuote
+        &&
+        shippingQuote.found === false
+      ) {
+
+        shippingElement
+        .textContent =
+        "Indisponível";
+
+
+        note.textContent =
+
+        shippingQuote.message
+
+        ||
+
+        "Ainda não entregamos nesta região.";
+
+
+        note.classList.add(
+          "error"
+        );
+
+      }
+
+      else {
+
+        shippingElement
+        .textContent =
+        "A calcular";
+
+
+        note.textContent =
+        "Informe seu CEP para calcular o frete.";
+
+      }
 
 
       $("summary-total")
-        .textContent =
-        money(
-          total
-        );
+      .textContent =
+      money(
+        total
+      );
 
     }
 
@@ -3351,8 +3756,12 @@
         $("checkout-content");
 
 
-      if (!content) {
+      if (
+        !content
+      ) {
+
         return;
+
       }
 
 
@@ -3421,74 +3830,59 @@
         $("address-fields");
 
 
-      const shipping =
-        $("summary-shipping");
-
-
-      const shippingNote =
-        $("shipping-note");
-
-
       if (
         type ===
         "retirada"
       ) {
 
         address
-          ?.classList
-          .add(
-            "hidden"
-          );
+        ?.classList
+        .add(
+          "hidden"
+        );
 
 
-        if (
-          shipping
-        ) {
+        shippingQuote = {
 
-          shipping.textContent =
-            "Grátis";
+          found:
+            true,
 
-        }
+          zone_id:
+            null,
+
+          zone_name:
+            "Retirada",
+
+          shipping_price:
+            0,
+
+          message:
+            "Retirada grátis."
+
+        };
 
 
-        if (
-          shippingNote
-        ) {
-
-          shippingNote.textContent =
-            "A loja entrará em contato para combinar a retirada.";
-
-        }
+        renderSummary();
 
       }
 
       else {
 
         address
-          ?.classList
-          .remove(
-            "hidden"
-          );
+        ?.classList
+        .remove(
+          "hidden"
+        );
 
 
-        if (
-          shipping
-        ) {
-
-          shipping.textContent =
-            "A confirmar";
-
-        }
+        shippingQuote =
+          null;
 
 
-        if (
-          shippingNote
-        ) {
+        renderSummary();
 
-          shippingNote.textContent =
-            "O valor da entrega será confirmado pela loja antes do pagamento.";
 
-        }
+        quoteShipping();
 
       }
 
@@ -3497,25 +3891,25 @@
 
     document
 
-      .querySelectorAll(
-        'input[name="fulfillment"]'
-      )
+    .querySelectorAll(
+      'input[name="fulfillment"]'
+    )
 
-      .forEach(
+    .forEach(
 
-        input => {
+      input => {
 
-          input.addEventListener(
+        input.addEventListener(
 
-            "change",
+          "change",
 
-            updateFulfillment
+          updateFulfillment
 
-          );
+        );
 
-        }
+      }
 
-      );
+    );
 
 
 
@@ -3524,113 +3918,120 @@
        ======================================== */
 
     $("customer-phone")
-      ?.addEventListener(
+    ?.addEventListener(
 
-        "input",
+      "input",
 
-        event => {
+      event => {
 
-          let value =
+        let value =
 
-            event.target.value
+          event.target.value
 
-            .replace(
-              /\D/g,
-              ""
-            )
+          .replace(
+            /\D/g,
+            ""
+          )
 
-            .slice(
-              0,
-              11
+          .slice(
+            0,
+            11
+          );
+
+
+        if (
+          value.length > 10
+        ) {
+
+          value =
+
+            value.replace(
+
+              /^(\d{2})(\d{5})(\d{4})$/,
+
+              "($1) $2-$3"
+
             );
-
-
-          if (
-            value.length > 10
-          ) {
-
-            value =
-
-              value.replace(
-
-                /^(\d{2})(\d{5})(\d{4})$/,
-
-                "($1) $2-$3"
-
-              );
-
-          }
-
-          else if (
-            value.length > 6
-          ) {
-
-            value =
-
-              value.replace(
-
-                /^(\d{2})(\d{4})(\d{0,4})$/,
-
-                "($1) $2-$3"
-
-              );
-
-          }
-
-
-          event.target.value =
-            value;
 
         }
 
-      );
+        else if (
+          value.length > 6
+        ) {
+
+          value =
+
+            value.replace(
+
+              /^(\d{2})(\d{4})(\d{0,4})$/,
+
+              "($1) $2-$3"
+
+            );
+
+        }
+
+
+        event.target.value =
+          value;
+
+      }
+
+    );
 
 
     $("postal-code")
-      ?.addEventListener(
+    ?.addEventListener(
 
-        "input",
+      "input",
 
-        event => {
+      event => {
 
-          let value =
+        let value =
 
-            event.target.value
+          event.target.value
 
-            .replace(
-              /\D/g,
-              ""
-            )
+          .replace(
+            /\D/g,
+            ""
+          )
 
-            .slice(
-              0,
-              8
+          .slice(
+            0,
+            8
+          );
+
+
+        if (
+          value.length > 5
+        ) {
+
+          value =
+
+            value.replace(
+
+              /^(\d{5})(\d{0,3})$/,
+
+              "$1-$2"
+
             );
-
-
-          if (
-            value.length > 5
-          ) {
-
-            value =
-
-              value.replace(
-
-                /^(\d{5})(\d{0,3})$/,
-
-                "$1-$2"
-
-              );
-
-          }
-
-
-          event.target.value =
-            value;
 
         }
 
-      );
+
+        event.target.value =
+          value;
+
+
+        shippingQuote =
+          null;
+
+
+        renderSummary();
+
+      }
+
+    );
 
 
 
@@ -3639,24 +4040,56 @@
        ======================================== */
 
     $("postal-code")
-      ?.addEventListener(
+    ?.addEventListener(
 
-        "blur",
+      "blur",
 
-        async event => {
+      async event => {
 
-          const cep =
+        const cep =
 
-            event.target.value
+          event.target.value
 
-            .replace(
-              /\D/g,
-              ""
+          .replace(
+            /\D/g,
+            ""
+          );
+
+
+        if (
+          cep.length !== 8
+        ) {
+
+          return;
+
+        }
+
+
+        const note =
+          $("shipping-note");
+
+
+        note.className =
+          "shipping-note";
+
+
+        note.textContent =
+          "Buscando endereço...";
+
+
+        try {
+
+          const response =
+
+            await fetch(
+
+              `https://viacep.com.br/ws/${cep}/json/`
+
             );
 
 
           if (
-            cep.length !== 8
+            !response.ok
           ) {
 
             return;
@@ -3664,103 +4097,152 @@
           }
 
 
-          try {
+          const data =
 
-            const response =
-
-              await fetch(
-
-                `https://viacep.com.br/ws/${cep}/json/`
-
-              );
+            await response.json();
 
 
-            if (
-              !response.ok
-            ) {
-
-              return;
-
-            }
-
-
-            const data =
-
-              await response.json();
-
-
-            if (
-              data.erro
-            ) {
-
-              showToast(
-                "CEP não encontrado."
-              );
-
-              return;
-
-            }
-
-
-            if (
-              data.logradouro
-            ) {
-
-              $("street").value =
-                data.logradouro;
-
-            }
-
-
-            if (
-              data.bairro
-            ) {
-
-              $("neighborhood").value =
-                data.bairro;
-
-            }
-
-
-            if (
-              data.localidade
-            ) {
-
-              $("city").value =
-                data.localidade;
-
-            }
-
-
-            if (
-              data.uf
-            ) {
-
-              $("state").value =
-                data.uf;
-
-            }
-
-
-            $("address-number")
-              ?.focus();
-
-          }
-
-          catch (
-            error
+          if (
+            data.erro
           ) {
 
-            console.error(
-              "Erro ao consultar CEP:",
-              error
+            showToast(
+              "CEP não encontrado."
             );
 
+
+            shippingQuote =
+              null;
+
+
+            renderSummary();
+
+            return;
+
           }
+
+
+          if (
+            data.logradouro
+          ) {
+
+            $("street").value =
+              data.logradouro;
+
+          }
+
+
+          if (
+            data.bairro
+          ) {
+
+            $("neighborhood").value =
+              data.bairro;
+
+          }
+
+
+          if (
+            data.localidade
+          ) {
+
+            $("city").value =
+              data.localidade;
+
+          }
+
+
+          if (
+            data.uf
+          ) {
+
+            $("state").value =
+              data.uf;
+
+          }
+
+
+          await quoteShipping();
+
+
+          $("address-number")
+          ?.focus();
 
         }
 
-      );
+        catch (
+          error
+        ) {
+
+          console.error(
+            "Erro ao consultar CEP:",
+            error
+          );
+
+
+          showToast(
+            "Não foi possível consultar o CEP."
+          );
+
+
+          renderSummary();
+
+        }
+
+      }
+
+    );
+
+
+
+    /* ========================================
+       RECALCULAR FRETE SE ENDEREÇO FOR EDITADO
+       ======================================== */
+
+    [
+      "state",
+      "city",
+      "neighborhood"
+    ]
+
+    .forEach(
+
+      id => {
+
+        $(id)
+        ?.addEventListener(
+
+          "input",
+
+          () => {
+
+            if (
+              currentFulfillment()
+              !==
+              "entrega"
+            ) {
+
+              return;
+
+            }
+
+
+            shippingQuote =
+              null;
+
+
+            renderSummary();
+
+
+            scheduleShippingQuote();
+
+          }
+
+        );
+
+      }
+
+    );
 
 
 
@@ -3773,15 +4255,15 @@
       const name =
 
         $("customer-name")
-          .value
-          .trim();
+        .value
+        .trim();
 
 
       const phone =
 
         $("customer-phone")
-          .value
-          .trim();
+        .value
+        .trim();
 
 
       if (
@@ -3794,7 +4276,7 @@
 
 
         $("customer-name")
-          .focus();
+        .focus();
 
 
         return false;
@@ -3820,7 +4302,7 @@
 
 
         $("customer-phone")
-          .focus();
+        .focus();
 
 
         return false;
@@ -3831,8 +4313,8 @@
       const email =
 
         $("customer-email")
-          .value
-          .trim();
+        .value
+        .trim();
 
 
       if (
@@ -3849,7 +4331,7 @@
 
 
         $("customer-email")
-          .focus();
+        .focus();
 
 
         return false;
@@ -3931,6 +4413,36 @@
 
         }
 
+
+        if (
+          shippingLoading
+        ) {
+
+          showToast(
+            "Aguarde o cálculo do frete."
+          );
+
+
+          return false;
+
+        }
+
+
+        if (
+          !shippingQuote
+          ||
+          shippingQuote.found !== true
+        ) {
+
+          showToast(
+            "Não encontramos uma opção de entrega para esta região."
+          );
+
+
+          return false;
+
+        }
+
       }
 
 
@@ -3957,6 +4469,17 @@
         showEmptyCheckout();
 
         return;
+
+      }
+
+
+      if (
+        currentFulfillment()
+        ===
+        "entrega"
+      ) {
+
+        await quoteShipping();
 
       }
 
@@ -4005,29 +4528,29 @@
 
       const orderPayload = {
 
+
         customer_name:
 
           $("customer-name")
-            .value
-            .trim(),
+          .value
+          .trim(),
 
 
         customer_phone:
 
           $("customer-phone")
-            .value
-            .trim(),
+          .value
+          .trim(),
 
 
         customer_email:
 
           $("customer-email")
-            .value
-            .trim(),
+          .value
+          .trim(),
 
 
         fulfillment_type:
-
           fulfillmentType,
 
 
@@ -4039,8 +4562,8 @@
           ?
 
           $("postal-code")
-            .value
-            .trim()
+          .value
+          .trim()
 
           :
 
@@ -4055,8 +4578,8 @@
           ?
 
           $("street")
-            .value
-            .trim()
+          .value
+          .trim()
 
           :
 
@@ -4071,8 +4594,8 @@
           ?
 
           $("address-number")
-            .value
-            .trim()
+          .value
+          .trim()
 
           :
 
@@ -4087,8 +4610,8 @@
           ?
 
           $("complement")
-            .value
-            .trim()
+          .value
+          .trim()
 
           :
 
@@ -4103,8 +4626,8 @@
           ?
 
           $("neighborhood")
-            .value
-            .trim()
+          .value
+          .trim()
 
           :
 
@@ -4119,8 +4642,8 @@
           ?
 
           $("city")
-            .value
-            .trim()
+          .value
+          .trim()
 
           :
 
@@ -4135,9 +4658,9 @@
           ?
 
           $("state")
-            .value
-            .trim()
-            .toUpperCase()
+          .value
+          .trim()
+          .toUpperCase()
 
           :
 
@@ -4147,14 +4670,18 @@
         notes:
 
           $("order-notes")
-            .value
-            .trim(),
+          .value
+          .trim(),
 
 
         payment_method:
-
           paymentMethod,
 
+
+        /*
+         * O servidor ignora qualquer tentativa
+         * do navegador de definir frete/desconto.
+         */
 
         shipping_cost:
           0,
@@ -4277,30 +4804,21 @@
         const total =
 
           Number(
-
-            result.order_total
-
-            ??
-
-            (
-              cartSubtotal(
-                checkoutCart
-              )
-
-              -
-
-              currentDiscount()
-            )
-
+            result.order_total || 0
           );
 
 
         const finalDiscount =
 
           Number(
-            result.order_discount
-            ??
-            currentDiscount()
+            result.order_discount || 0
+          );
+
+
+        const finalShipping =
+
+          Number(
+            result.order_shipping || 0
           );
 
 
@@ -4318,6 +4836,20 @@
           null;
 
 
+        const finalShippingZone =
+
+          result.shipping_zone_name
+
+          ||
+
+          shippingQuote
+          ?.zone_name
+
+          ||
+
+          null;
+
+
         lastOrder = {
 
           orderNumber,
@@ -4326,6 +4858,12 @@
 
           discount:
             finalDiscount,
+
+          shipping:
+            finalShipping,
+
+          shippingZone:
+            finalShippingZone,
 
           couponCode:
             finalCouponCode,
@@ -4414,13 +4952,13 @@
 
 
     $("place-order-button")
-      ?.addEventListener(
+    ?.addEventListener(
 
-        "click",
+      "click",
 
-        createOrder
+      createOrder
 
-      );
+    );
 
 
 
@@ -4433,24 +4971,24 @@
     ) {
 
       $("checkout-content")
-        .style
-        .display =
-        "none";
+      .style
+      .display =
+      "none";
 
 
       $("order-success")
-        .classList
-        .add(
-          "active"
-        );
+      .classList
+      .add(
+        "active"
+      );
 
 
       $("success-order-number")
-        .textContent =
+      .textContent =
 
-        `Pedido #${formatOrderNumber(
-          order.orderNumber
-        )}`;
+      `Pedido #${formatOrderNumber(
+        order.orderNumber
+      )}`;
 
 
       window.scrollTo({
@@ -4548,6 +5086,7 @@
           lines.push(
 
             `Valor: ${money(
+
               Number(
                 item.price || 0
               )
@@ -4557,6 +5096,7 @@
               Number(
                 item.quantity || 1
               )
+
             )}`
 
           );
@@ -4566,8 +5106,24 @@
       );
 
 
+      const productsSubtotal =
+
+        cartSubtotal(
+          order.items
+        );
+
+
       lines.push(
         ""
+      );
+
+
+      lines.push(
+
+        `Subtotal: ${money(
+          productsSubtotal
+        )}`
+
       );
 
 
@@ -4578,7 +5134,9 @@
       ) {
 
         lines.push(
+
           `Cupom: ${order.couponCode}`
+
         );
 
 
@@ -4590,17 +5148,47 @@
 
         );
 
+      }
+
+
+      if (
+        order.fulfillmentType ===
+        "entrega"
+      ) {
 
         lines.push(
-          ""
+
+          `Frete: ${
+            order.shipping === 0
+            ?
+            "Grátis"
+            :
+            money(
+              order.shipping
+            )
+          }`
+
         );
+
+
+        if (
+          order.shippingZone
+        ) {
+
+          lines.push(
+
+            `Região de entrega: ${order.shippingZone}`
+
+          );
+
+        }
 
       }
 
 
       lines.push(
 
-        `Total dos produtos: ${money(
+        `Total: ${money(
           order.total
         )}`
 
@@ -4625,25 +5213,15 @@
         lines.push(
 
           `Endereço: ${
-
             order.address.street
-
           }, ${
-
             order.address.address_number
-
           }${
-
             order.address.complement
-
             ?
-
             ` - ${order.address.complement}`
-
             :
-
             ""
-
           }`
 
         );
@@ -4662,17 +5240,17 @@
 
         );
 
-
-        lines.push(
-          "Frete: a confirmar"
-        );
-
       }
 
       else {
 
         lines.push(
           "Forma de recebimento: Retirada"
+        );
+
+
+        lines.push(
+          "Frete: Grátis"
         );
 
       }
@@ -4801,13 +5379,13 @@
 
 
     $("copy-order-button")
-      ?.addEventListener(
+    ?.addEventListener(
 
-        "click",
+      "click",
 
-        copyOrder
+      copyOrder
 
-      );
+    );
 
 
 
