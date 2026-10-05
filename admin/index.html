@@ -10144,6 +10144,10 @@ $("clients-search")
 .oninput =
 renderClients;
 
+$("coupons-search")
+.oninput =
+renderCoupons;
+
 $("orders-filter")
 .onchange =
 renderOrders;
@@ -10335,6 +10339,21 @@ showClient;
 
 window.clientWhatsApp =
 clientWhatsApp;
+
+window.loadCoupons =
+loadCoupons;
+
+window.newCoupon =
+newCoupon;
+
+window.editCouponForm =
+editCouponForm;
+
+window.saveCoupon =
+saveCoupon;
+
+window.deleteCoupon =
+deleteCoupon;
 
 
 boot();
