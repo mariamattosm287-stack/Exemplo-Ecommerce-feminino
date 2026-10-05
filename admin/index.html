@@ -10654,7 +10654,1045 @@ async function deleteCoupon(
   await loadCoupons();
 
 }
-  
+
+/* =========================================
+   FRETE
+   ========================================= */
+
+
+function shippingNeighborhoodList(
+  zone
+) {
+
+  return arr(
+    zone?.neighborhoods
+  );
+
+}
+
+
+
+function parseShippingNeighborhoods(
+  value
+) {
+
+  const list =
+
+  String(
+    value || ""
+  )
+
+  .split(
+    /[\n,;]+/
+  )
+
+  .map(
+    item =>
+    String(
+      item || ""
+    )
+    .trim()
+  )
+
+  .filter(
+    Boolean
+  );
+
+
+  return [
+    ...new Set(
+      list
+    )
+  ];
+
+}
+
+
+
+function renderShippingStats() {
+
+  const total =
+
+  shippingZones
+  .length;
+
+
+  const active =
+
+  shippingZones
+  .filter(
+    zone =>
+    zone.is_active !== false
+  )
+  .length;
+
+
+  const free =
+
+  shippingZones
+  .filter(
+    zone =>
+    Number(
+      zone.price || 0
+    )
+    ===
+    0
+  )
+  .length;
+
+
+  const cities =
+
+  new Set(
+
+    shippingZones
+    .map(
+
+      zone =>
+
+      `${String(
+        zone.city || ""
+      )
+      .trim()
+      .toLowerCase()}|${String(
+        zone.state || ""
+      )
+      .trim()
+      .toUpperCase()}`
+
+    )
+
+    .filter(
+      value =>
+      !value.startsWith(
+        "|"
+      )
+    )
+
+  )
+  .size;
+
+
+  $("shipping-total")
+  .textContent =
+  total;
+
+
+  $("shipping-active")
+  .textContent =
+  active;
+
+
+  $("shipping-cities")
+  .textContent =
+  cities;
+
+
+  $("shipping-free")
+  .textContent =
+  free;
+
+}
+
+
+
+function renderShippingZones() {
+
+  const body =
+  $("shipping-body");
+
+
+  if (
+    !body
+  ) {
+
+    return;
+
+  }
+
+
+  const query =
+
+  String(
+    $("shipping-search")
+    ?.value
+    ||
+    ""
+  )
+  .trim()
+  .toLowerCase();
+
+
+  const list =
+
+  shippingZones
+
+  .filter(
+
+    zone => {
+
+
+      const neighborhoods =
+
+      shippingNeighborhoodList(
+        zone
+      )
+      .join(
+        " "
+      );
+
+
+      const searchable =
+
+      `
+      ${zone.name || ""}
+      ${zone.city || ""}
+      ${zone.state || ""}
+      ${neighborhoods}
+      `
+      .toLowerCase();
+
+
+      return (
+
+        !query
+
+        ||
+
+        searchable.includes(
+          query
+        )
+
+      );
+
+    }
+
+  );
+
+
+  body.innerHTML =
+
+  list.length
+
+  ?
+
+  list
+  .map(
+
+    zone => {
+
+
+      const neighborhoods =
+
+      shippingNeighborhoodList(
+        zone
+      );
+
+
+      const neighborhoodsText =
+
+      neighborhoods.length
+
+      ?
+
+      neighborhoods.join(
+        ", "
+      )
+
+      :
+
+      "Todos os bairros";
+
+
+      const price =
+
+      Number(
+        zone.price || 0
+      );
+
+
+      const priceText =
+
+      price === 0
+
+      ?
+
+      `
+      <span
+        style="
+          color:#247a48;
+          font-weight:700;
+        "
+      >
+        Grátis
+      </span>
+      `
+
+      :
+
+      `
+      <strong>
+        ${money(price)}
+      </strong>
+      `;
+
+
+      const status =
+
+      zone.is_active !== false
+
+      ?
+
+      `
+      <span class="badge badge--green">
+        Ativa
+      </span>
+      `
+
+      :
+
+      `
+      <span class="badge badge--gray">
+        Inativa
+      </span>
+      `;
+
+
+      return `
+
+        <tr>
+
+
+          <td>
+
+            <strong>
+              ${esc(
+                zone.name || ""
+              )}
+            </strong>
+
+          </td>
+
+
+          <td>
+
+            <strong>
+              ${esc(
+                zone.city || ""
+              )}
+            </strong>
+
+            <div
+              style="
+                margin-top:3px;
+                font-size:10px;
+                color:#888;
+              "
+            >
+              ${esc(
+                String(
+                  zone.state || ""
+                )
+                .toUpperCase()
+              )}
+            </div>
+
+          </td>
+
+
+          <td>
+
+            <div
+              style="
+                max-width:320px;
+                font-size:11px;
+                line-height:1.6;
+                color:#666;
+              "
+            >
+              ${esc(
+                neighborhoodsText
+              )}
+            </div>
+
+          </td>
+
+
+          <td>
+
+            ${priceText}
+
+          </td>
+
+
+          <td>
+
+            ${status}
+
+          </td>
+
+
+          <td>
+
+            <div
+              style="
+                display:flex;
+                align-items:center;
+                gap:4px;
+              "
+            >
+
+              <button
+                class="btn btn--ghost btn--icon"
+                onclick="
+                  editShippingZoneForm(
+                    '${esc(zone.id)}'
+                  )
+                "
+                title="Editar região"
+              >
+                ✏️
+              </button>
+
+
+              <button
+                class="btn btn--ghost btn--icon"
+                onclick="
+                  deleteShippingZone(
+                    '${esc(zone.id)}'
+                  )
+                "
+                title="Excluir região"
+              >
+                🗑️
+              </button>
+
+            </div>
+
+          </td>
+
+
+        </tr>
+
+      `;
+
+    }
+
+  )
+
+  .join(
+    ""
+  )
+
+  :
+
+  `
+
+    <tr>
+
+      <td
+        colspan="6"
+        class="empty"
+      >
+        Nenhuma região encontrada.
+      </td>
+
+    </tr>
+
+  `;
+
+
+  $("shipping-summary")
+  .textContent =
+
+  `${list.length} de ${shippingZones.length} região(ões)`;
+
+
+  renderShippingStats();
+
+}
+
+
+
+async function loadShippingZones() {
+
+  const body =
+  $("shipping-body");
+
+
+  if (
+    body
+  ) {
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="6"
+          class="empty"
+        >
+          Carregando regiões...
+        </td>
+
+      </tr>
+
+    `;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+
+  await sb
+
+  .from(
+    "shipping_zones"
+  )
+
+  .select(
+    "*"
+  )
+
+  .order(
+    "created_at",
+    {
+      ascending:
+      false
+    }
+  );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Erro ao carregar fretes:",
+      error
+    );
+
+
+    toast(
+      "Não foi possível carregar as regiões de frete."
+    );
+
+
+    return;
+
+  }
+
+
+  shippingZones =
+  data || [];
+
+
+  renderShippingZones();
+
+}
+
+
+
+function newShippingZone() {
+
+  editShippingZone =
+  null;
+
+
+  $("shipping-title")
+  .textContent =
+  "Nova Região";
+
+
+  $("shipping-name")
+  .value =
+  "";
+
+
+  $("shipping-state")
+  .value =
+  "";
+
+
+  $("shipping-city")
+  .value =
+  "";
+
+
+  $("shipping-neighborhoods")
+  .value =
+  "";
+
+
+  $("shipping-price")
+  .value =
+  "";
+
+
+  $("shipping-active-input")
+  .checked =
+  true;
+
+
+  openModal(
+    "shipping-modal"
+  );
+
+
+  setTimeout(
+    () =>
+    $("shipping-name")
+    ?.focus(),
+    50
+  );
+
+}
+
+
+
+function editShippingZoneForm(
+  id
+) {
+
+  const zone =
+
+  shippingZones
+  .find(
+    item =>
+    String(
+      item.id
+    )
+    ===
+    String(
+      id
+    )
+  );
+
+
+  if (
+    !zone
+  ) {
+
+    return;
+
+  }
+
+
+  editShippingZone =
+  zone.id;
+
+
+  $("shipping-title")
+  .textContent =
+  "Editar Região";
+
+
+  $("shipping-name")
+  .value =
+  zone.name || "";
+
+
+  $("shipping-state")
+  .value =
+  String(
+    zone.state || ""
+  )
+  .toUpperCase();
+
+
+  $("shipping-city")
+  .value =
+  zone.city || "";
+
+
+  $("shipping-neighborhoods")
+  .value =
+
+  shippingNeighborhoodList(
+    zone
+  )
+
+  .join(
+    "\n"
+  );
+
+
+  $("shipping-price")
+  .value =
+
+  Number(
+    zone.price || 0
+  );
+
+
+  $("shipping-active-input")
+  .checked =
+
+  zone.is_active !== false;
+
+
+  openModal(
+    "shipping-modal"
+  );
+
+}
+
+
+
+async function saveShippingZone() {
+
+  const name =
+
+  $("shipping-name")
+  .value
+  .trim();
+
+
+  const state =
+
+  $("shipping-state")
+  .value
+  .trim()
+  .toUpperCase();
+
+
+  const city =
+
+  $("shipping-city")
+  .value
+  .trim();
+
+
+  const neighborhoods =
+
+  parseShippingNeighborhoods(
+
+    $("shipping-neighborhoods")
+    .value
+
+  );
+
+
+  const price =
+
+  Number(
+
+    String(
+      $("shipping-price")
+      .value
+      ||
+      "0"
+    )
+
+    .replace(
+      ",",
+      "."
+    )
+
+  );
+
+
+  const isActive =
+
+  $("shipping-active-input")
+  .checked;
+
+
+  if (
+    !name
+  ) {
+
+    toast(
+      "Informe o nome da região."
+    );
+
+
+    $("shipping-name")
+    .focus();
+
+
+    return;
+
+  }
+
+
+  if (
+    state.length !==
+    2
+  ) {
+
+    toast(
+      "Informe o estado com 2 letras. Ex: SP."
+    );
+
+
+    $("shipping-state")
+    .focus();
+
+
+    return;
+
+  }
+
+
+  if (
+    !city
+  ) {
+
+    toast(
+      "Informe a cidade."
+    );
+
+
+    $("shipping-city")
+    .focus();
+
+
+    return;
+
+  }
+
+
+  if (
+    !Number.isFinite(
+      price
+    )
+    ||
+    price < 0
+  ) {
+
+    toast(
+      "Informe um valor de frete válido."
+    );
+
+
+    $("shipping-price")
+    .focus();
+
+
+    return;
+
+  }
+
+
+  const payload = {
+
+    name,
+
+    state,
+
+    city,
+
+    neighborhoods,
+
+    price,
+
+    is_active:
+    isActive,
+
+    updated_at:
+    new Date()
+    .toISOString()
+
+  };
+
+
+  let query;
+
+
+  if (
+    editShippingZone
+  ) {
+
+    query =
+
+    sb
+
+    .from(
+      "shipping_zones"
+    )
+
+    .update(
+      payload
+    )
+
+    .eq(
+      "id",
+      editShippingZone
+    );
+
+  }
+
+  else {
+
+    query =
+
+    sb
+
+    .from(
+      "shipping_zones"
+    )
+
+    .insert(
+      payload
+    );
+
+  }
+
+
+  const {
+    error
+  } =
+
+  await query;
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Erro ao salvar frete:",
+      error
+    );
+
+
+    toast(
+      "Não foi possível salvar a região."
+    );
+
+
+    return;
+
+  }
+
+
+  closeModal(
+    "shipping-modal"
+  );
+
+
+  toast(
+
+    editShippingZone
+
+    ?
+
+    "Região atualizada ✅"
+
+    :
+
+    "Região criada ✅"
+
+  );
+
+
+  editShippingZone =
+  null;
+
+
+  await loadShippingZones();
+
+}
+
+
+
+async function deleteShippingZone(
+  id
+) {
+
+  const zone =
+
+  shippingZones
+  .find(
+    item =>
+    String(
+      item.id
+    )
+    ===
+    String(
+      id
+    )
+  );
+
+
+  if (
+    !zone
+  ) {
+
+    return;
+
+  }
+
+
+  const confirmed =
+
+  confirm(
+
+    `Excluir a região "${zone.name}"?`
+
+  );
+
+
+  if (
+    !confirmed
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+
+  await sb
+
+  .from(
+    "shipping_zones"
+  )
+
+  .delete()
+
+  .eq(
+    "id",
+    id
+  );
+
+
+  if (
+    error
+  ) {
+
+    console.error(
+      "Erro ao excluir frete:",
+      error
+    );
+
+
+    toast(
+      "Não foi possível excluir a região."
+    );
+
+
+    return;
+
+  }
+
+
+  toast(
+    "Região excluída."
+  );
+
+
+  await loadShippingZones();
+
+}
+
 /* EVENTOS */
 
 $("product-search")
