@@ -2827,6 +2827,202 @@ body:not(.authed) .admin-main{
   </div>
 
 </div>
+
+<!-- =========================================
+     MODAL FRETE
+     ========================================= -->
+
+<div
+  class="modal"
+  id="shipping-modal"
+>
+
+  <div class="modal__dialog">
+
+    <div class="modal__header">
+
+      <div>
+
+        <h2
+          class="modal__title"
+          id="shipping-title"
+        >
+          Nova Região
+        </h2>
+
+        <small>
+          Configure onde a loja entrega e o valor do frete.
+        </small>
+
+      </div>
+
+
+      <button
+        class="btn btn--ghost btn--icon"
+        onclick="closeModal('shipping-modal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div class="modal__body">
+
+
+      <div class="form-grid">
+
+
+        <div class="form-group form-group--full">
+
+          <label class="form-label">
+            Nome da região *
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            id="shipping-name"
+            placeholder="Ex: Sorocaba - Centro"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Estado *
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            id="shipping-state"
+            maxlength="2"
+            placeholder="SP"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Cidade *
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            id="shipping-city"
+            placeholder="Sorocaba"
+          >
+
+        </div>
+
+
+        <div class="form-group form-group--full">
+
+          <label class="form-label">
+            Bairros
+          </label>
+
+          <textarea
+            class="form-control"
+            id="shipping-neighborhoods"
+            rows="6"
+            placeholder="Centro, Mangal, Jardim Faculdade..."
+          ></textarea>
+
+          <small
+            style="
+              font-size:10px;
+              color:#888;
+              line-height:1.5;
+            "
+          >
+            Separe os bairros por vírgula ou coloque um por linha.
+            Se deixar vazio, esta região funcionará como regra geral da cidade.
+          </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Valor do frete *
+          </label>
+
+          <input
+            type="number"
+            class="form-control"
+            id="shipping-price"
+            min="0"
+            step="0.01"
+            placeholder="0,00"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Status
+          </label>
+
+          <label
+            style="
+              min-height:45px;
+              display:flex;
+              align-items:center;
+              gap:9px;
+              font-size:12px;
+              cursor:pointer;
+            "
+          >
+
+            <input
+              type="checkbox"
+              id="shipping-active-input"
+              checked
+            >
+
+            Região ativa
+
+          </label>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="modal__footer">
+
+      <button
+        class="btn btn--outline"
+        onclick="closeModal('shipping-modal')"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="btn btn--primary"
+        onclick="saveShippingZone()"
+      >
+        Salvar Região
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
   
 <div id="toast"></div>
 
