@@ -1640,7 +1640,149 @@ body:not(.authed) .admin-main{
 
 </div>
 
+<!-- =========================================
+     FRETE
+     ========================================= -->
 
+<div
+  class="page-content"
+  id="page-frete"
+>
+
+  <div class="page-header">
+
+    <div>
+
+      <h1 class="page-title">
+        Frete
+      </h1>
+
+      <p class="page-subtitle">
+        Configure regiões, bairros e valores de entrega.
+      </p>
+
+    </div>
+
+
+    <div class="page-actions">
+
+      <button
+        class="btn btn--outline"
+        onclick="loadShippingZones()"
+      >
+        🔄 Atualizar
+      </button>
+
+      <button
+        class="btn btn--primary"
+        onclick="newShippingZone()"
+      >
+        + Nova Região
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="order-stats">
+
+    <div class="order-stat">
+      <small>Regiões cadastradas</small>
+      <strong id="shipping-total">0</strong>
+    </div>
+
+    <div class="order-stat">
+      <small>Regiões ativas</small>
+      <strong id="shipping-active">0</strong>
+    </div>
+
+    <div class="order-stat">
+      <small>Cidades</small>
+      <strong id="shipping-cities">0</strong>
+    </div>
+
+    <div class="order-stat">
+      <small>Frete grátis</small>
+      <strong id="shipping-free">0</strong>
+    </div>
+
+  </div>
+
+
+  <div class="section-toolbar">
+
+    <div class="section-search">
+
+      <span>🔍</span>
+
+      <input
+        id="shipping-search"
+        type="text"
+        placeholder="Buscar região, cidade ou bairro..."
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="orders-table-wrap">
+
+      <table class="data-table">
+
+        <thead>
+
+          <tr>
+            <th>Região</th>
+            <th>Cidade</th>
+            <th>Bairros</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody id="shipping-body">
+
+          <tr>
+
+            <td
+              colspan="6"
+              class="empty"
+            >
+              Nenhuma região cadastrada.
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      id="shipping-summary"
+      style="
+        padding:12px 16px;
+        border-top:1px solid var(--border);
+        font-size:12px;
+        color:var(--text-light);
+      "
+    >
+      0 regiões
+    </div>
+
+  </div>
+
+</div>
+  
 <div
   class="page-content"
   id="page-analiticas"
